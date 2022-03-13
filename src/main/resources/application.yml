@@ -1,10 +1,13 @@
-spring.profiles.default: local
+spring.profiles.default: dev
 
 spring:
   r2dbc:
-    url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8
+    url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: wath
     password: teamsso
+auth:
+  jwt:
+    issuer: https://account-api-local.wafflestudio.com
 
 ---
 
@@ -17,3 +20,6 @@ spring:
     url:
     username:
     password:
+auth:
+  jwt:
+    issuer: https://account-api-dev.wafflestudio.com

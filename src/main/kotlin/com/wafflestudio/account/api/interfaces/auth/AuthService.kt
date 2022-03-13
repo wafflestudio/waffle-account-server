@@ -1,28 +1,70 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.user.User
-import com.wafflestudio.account.api.domain.user.UserRepository
-//import org.springframework.security.crypto.password.PasswordEncoder
+import com.wafflestudio.account.api.domain.account.RefreshToken
+import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
+import com.wafflestudio.account.api.domain.account.User
+import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.error.EmailAlreadyExistsException
+import com.wafflestudio.account.api.error.UserInactiveException
+import com.wafflestudio.account.api.extension.sha256
+import io.jsonwebtoken.Jwts
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.sql.Timestamp
+import java.time.LocalDateTime
 
 @Service
 class AuthService(
     private val userRepository: UserRepository,
-    //private val passwordEncoder: PasswordEncoder,
+    private val refreshTokenRepository: RefreshTokenRepository,
+    private val passwordEncoder: PasswordEncoder,
+    @Value("\${auth.jwt.issuer}") private val issuer: String,
 ) {
     suspend fun signup(signupRequest: SignupRequest): SignupResponse {
-        // check duplicated
+        if (userRepository.findByEmail(signupRequest.email) != null) {
+            throw EmailAlreadyExistsException
+        }
 
-        val user = User(
-            email = signupRequest.email,
-            password = signupRequest.password,
-            //password = passwordEncoder.encode(signupRequest.password),
+        val user = userRepository.save(
+            User(
+                email = signupRequest.email,
+                password = passwordEncoder.encode(signupRequest.password),
+            )
         )
-        userRepository.save(user)
+
+        if (!user.isActive) {
+            throw UserInactiveException
+        }
+
+        val now = LocalDateTime.now()
+        val accessTokenExpire = now.plusDays(1)
+        val refreshTokenExpire = now.plusDays(365)
+        val accessToken = buildJwtToken(user, now, accessTokenExpire)
+        val refreshToken = buildJwtToken(user, now, refreshTokenExpire)
+
+        refreshTokenRepository.save(
+            RefreshToken(
+                userId = user.id!!,
+                token = refreshToken,
+                tokenHash = refreshToken.sha256(),
+                expireAt = refreshTokenExpire,
+            )
+        )
 
         return SignupResponse(
-            accessToken = "",
-            refreshToken = "",
+            accessToken = accessToken,
+            refreshToken = refreshToken,
         )
+    }
+
+    private fun buildJwtToken(user: User, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
+        return Jwts.builder()
+            .setIssuer(issuer)
+            .setSubject(user.id!!.toString())
+            .setIssuedAt(Timestamp.valueOf(issuedAt))
+            .setExpiration(Timestamp.valueOf(expiration))
+            // signWith something
+            .compact()
     }
 }
