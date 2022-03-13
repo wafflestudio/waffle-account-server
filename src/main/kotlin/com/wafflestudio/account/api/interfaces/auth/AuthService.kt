@@ -33,10 +33,6 @@ class AuthService(
             )
         )
 
-        if (!user.isActive) {
-            throw UserInactiveException
-        }
-
         val now = LocalDateTime.now()
         val accessTokenExpire = now.plusDays(1)
         val refreshTokenExpire = now.plusDays(365)
@@ -59,6 +55,10 @@ class AuthService(
     }
 
     private fun buildJwtToken(user: User, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
+        if (!user.isActive) {
+            throw UserInactiveException
+        }
+
         return Jwts.builder()
             .setIssuer(issuer)
             .setSubject(user.id!!.toString())
