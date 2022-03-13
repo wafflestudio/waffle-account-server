@@ -16,15 +16,29 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    runtimeOnly("dev.miku:r2dbc-mysql")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+
     runtimeOnly("mysql:mysql-connector-java")
+    runtimeOnly("dev.miku:r2dbc-mysql")
+    implementation("org.flywaydb:flyway-core:7.15.0")
+
+    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.11.965")
+
+    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.2")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
 }
