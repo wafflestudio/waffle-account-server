@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ develop, feature/deploy ]
+    branches: [ develop ]
 
 jobs:
   deploy:
@@ -63,6 +63,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.1.2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: team-sso
           SLACK_TITLE: NEW RELEASE
           SLACK_USERNAME: waffle-account-server-dev
           SLACK_ICON: https://user-images.githubusercontent.com/35535636/158051666-322decf3-c7d9-414d-a9bd-ec172054ab96.png
