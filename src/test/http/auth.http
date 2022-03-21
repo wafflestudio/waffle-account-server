@@ -1,0 +1,7 @@
+POST http://{{host}}/v1/users
+Content-Type: application/json
+
+{
+  "email": "subeenpark@wafflestudio.com",
+  "password": "qlalfqjsgh"
+}
