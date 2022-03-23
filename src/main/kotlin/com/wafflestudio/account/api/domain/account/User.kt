@@ -22,4 +22,6 @@ class User (
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
     val updatedAt: LocalDateTime = LocalDateTime.now(),
+
+    val provider: AuthProvider = AuthProvider.LOCAL
 )

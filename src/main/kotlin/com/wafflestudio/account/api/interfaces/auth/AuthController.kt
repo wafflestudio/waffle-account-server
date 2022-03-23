@@ -15,4 +15,12 @@ class AuthController(
     ): SignupResponse {
         return authService.signup(signupRequest)
     }
+
+    // TODO: Endpoint 통과하고 싶은데 auth filtering 어떻게??
+    @PostMapping("/v1/auth/signin")
+    suspend fun signin(
+            @RequestBody @Valid signinRequest: SignupRequest
+    ): SignupResponse {
+        return authService.signin(signinRequest)
+    }
 }

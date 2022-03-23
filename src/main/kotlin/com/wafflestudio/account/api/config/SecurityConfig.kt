@@ -16,6 +16,8 @@ class SecurityConfig {
     ): SecurityWebFilterChain {
         return http.authorizeExchange()
             .pathMatchers("/health_check").permitAll()
+                // TODO : Endpoint 어떻게?
+            .pathMatchers(HttpMethod.POST, "/v1/auth/**", "/v1/oauth2/**").permitAll()
             .pathMatchers(HttpMethod.POST, "/v1/users").permitAll()
             .pathMatchers("/v1/**").authenticated()
             .and()

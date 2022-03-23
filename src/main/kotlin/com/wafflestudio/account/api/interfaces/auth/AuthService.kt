@@ -1,11 +1,10 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.RefreshToken
-import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
-import com.wafflestudio.account.api.domain.account.User
-import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.domain.account.*
 import com.wafflestudio.account.api.error.EmailAlreadyExistsException
+import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.UserInactiveException
+import com.wafflestudio.account.api.error.WrongPasswordException
 import com.wafflestudio.account.api.extension.sha256
 import io.jsonwebtoken.Jwts
 import org.springframework.beans.factory.annotation.Value
@@ -30,6 +29,7 @@ class AuthService(
             User(
                 email = signupRequest.email,
                 password = passwordEncoder.encode(signupRequest.password),
+                provider = AuthProvider.LOCAL
             )
         )
 
@@ -66,5 +66,40 @@ class AuthService(
             .setExpiration(Timestamp.valueOf(expiration))
             // signWith something
             .compact()
+    }
+
+    suspend fun signin(signinRequest: SignupRequest): SignupResponse {
+
+        val user = userRepository.findByEmail(signinRequest.email)
+
+        if (user == null) {
+            throw UserDoesNotExistsException
+        }
+
+        if (!passwordEncoder.matches(signinRequest.password, user.password)) {
+            throw WrongPasswordException
+        }
+
+        // TODO : 함수로 빼는게 깔끔할듯
+        val now = LocalDateTime.now()
+        val accessTokenExpire = now.plusDays(1)
+        val refreshTokenExpire = now.plusDays(365)
+        val accessToken = buildJwtToken(user, now, accessTokenExpire)
+        val refreshToken = buildJwtToken(user, now, refreshTokenExpire)
+
+        refreshTokenRepository.save(
+                RefreshToken(
+                        userId = user.id!!,
+                        token = refreshToken,
+                        tokenHash = refreshToken.sha256(),
+                        expireAt = refreshTokenExpire,
+                )
+        )
+
+        return SignupResponse(
+                accessToken = accessToken,
+                refreshToken = refreshToken,
+        )
+
     }
 }
