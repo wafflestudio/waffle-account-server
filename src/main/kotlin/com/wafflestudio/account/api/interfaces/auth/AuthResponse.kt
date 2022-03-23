@@ -9,3 +9,8 @@ data class SignupResponse(
     @JsonProperty("refresh_token")
     val refreshToken: String,
 )
+
+data class RefreshResponse(
+    @JsonProperty("access_token")
+    val accessToken: String,
+)

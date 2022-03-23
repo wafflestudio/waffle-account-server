@@ -13,3 +13,13 @@ data class SignupRequest(
     @field:Size(min = 6, max = 100)
     val password: String,
 )
+
+data class ValidateRequest(
+    @field:NotBlank
+    val accessToken: String,
+)
+
+data class RefreshRequest(
+    @field:NotBlank
+    val refreshToken: String,
+)

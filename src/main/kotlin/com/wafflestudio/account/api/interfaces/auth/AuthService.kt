@@ -5,6 +5,7 @@ import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
 import com.wafflestudio.account.api.error.EmailAlreadyExistsException
+import com.wafflestudio.account.api.error.TokenInvalidException
 import com.wafflestudio.account.api.error.UserInactiveException
 import com.wafflestudio.account.api.extension.sha256
 import io.jsonwebtoken.Jwts
@@ -51,6 +52,22 @@ class AuthService(
         return SignupResponse(
             accessToken = accessToken,
             refreshToken = refreshToken,
+        )
+    }
+
+    suspend fun validate(validateRequest: ValidateRequest): Unit {
+
+    }
+
+    suspend fun refresh(refreshRequest: RefreshRequest): RefreshResponse {
+        val refreshData: RefreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
+            ?: throw TokenInvalidException
+        val user: User? = userRepository.findById(refreshData.userId)
+        if (user == null || !user.isActive) throw UserInactiveException
+        val now: LocalDateTime = LocalDateTime.now()
+        val accessToken: String = buildJwtToken(user, now, now.plusDays(1))
+        return RefreshResponse(
+            accessToken = accessToken,
         )
     }
 
