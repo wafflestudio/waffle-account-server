@@ -8,6 +8,7 @@ import com.wafflestudio.account.api.error.EmailAlreadyExistsException
 import com.wafflestudio.account.api.error.TokenInvalidException
 import com.wafflestudio.account.api.error.UserInactiveException
 import com.wafflestudio.account.api.extension.sha256
+import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
@@ -16,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.sql.Timestamp
 import java.time.LocalDateTime
-import java.security.Key
+import javax.crypto.SecretKey
 
 
 @Service
@@ -40,19 +41,8 @@ class AuthService(
         )
 
         val now = LocalDateTime.now()
-        val accessTokenExpire = now.plusDays(1)
-        val refreshTokenExpire = now.plusDays(365)
-        val accessToken = buildJwtToken(user, now, accessTokenExpire)
-        val refreshToken = buildJwtToken(user, now, refreshTokenExpire)
-
-        refreshTokenRepository.save(
-            RefreshToken(
-                userId = user.id!!,
-                token = refreshToken,
-                tokenHash = refreshToken.sha256(),
-                expireAt = refreshTokenExpire,
-            )
-        )
+        val accessToken = buildAccessToken(user, now)
+        val refreshToken = buildRefreshToken(user, now)
 
         return SignupResponse(
             accessToken = accessToken,
@@ -68,28 +58,59 @@ class AuthService(
         checkTokenSigner(refreshRequest.refreshToken)
         val refreshData: RefreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
             ?: throw TokenInvalidException
+
         val user: User? = userRepository.findById(refreshData.userId)
         if (user == null || !user.isActive) throw UserInactiveException
-        val now: LocalDateTime = LocalDateTime.now()
-        val accessToken: String = buildJwtToken(user, now, now.plusDays(1))
+
+        val accessToken = buildAccessToken(user, LocalDateTime.now())
         return RefreshResponse(
             accessToken = accessToken,
         )
     }
 
-    private fun checkTokenSigner(token: String): Unit {
-        //check signer
-    }
-
-    private fun getJwtKey(): Key {
+    private fun getJwtKey(): SecretKey {
         val keyBytes: ByteArray = env.getRequiredProperty("auth.jwt.key.dev").toByteArray()
         return Keys.hmacShaKeyFor(keyBytes)
+    }
+
+    private fun checkTokenSigner(token: String): Claims {
+        val jwtParser = Jwts.parserBuilder()
+            .setSigningKey(getJwtKey())
+            .requireIssuer(issuer)
+            .build()
+
+        try {
+            return jwtParser.parseClaimsJws(token).body
+        } catch(e: Exception) {
+            throw TokenInvalidException
+        }
+    }
+
+    private fun buildAccessToken(user: User, now: LocalDateTime): String {
+        return buildJwtToken(user, now, now.plusDays(1))
+    }
+
+    suspend fun buildRefreshToken(user: User, now: LocalDateTime): String {
+        val expire = now.plusDays(365)
+        val refreshToken = buildJwtToken(user, now, expire)
+
+        refreshTokenRepository.save(
+            RefreshToken(
+                userId = user.id!!,
+                token = refreshToken,
+                tokenHash = refreshToken.sha256(),
+                expireAt = expire,
+            )
+        )
+
+        return refreshToken
     }
 
     private fun buildJwtToken(user: User, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
         if (!user.isActive) {
             throw UserInactiveException
         }
+
         return Jwts.builder()
             .setIssuer(issuer)
             .setSubject(user.id!!.toString())
