@@ -9,11 +9,15 @@ import com.wafflestudio.account.api.error.TokenInvalidException
 import com.wafflestudio.account.api.error.UserInactiveException
 import com.wafflestudio.account.api.extension.sha256
 import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.env.Environment
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.sql.Timestamp
 import java.time.LocalDateTime
+import java.security.Key
+
 
 @Service
 class AuthService(
@@ -21,6 +25,7 @@ class AuthService(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val passwordEncoder: PasswordEncoder,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
+    private val env: Environment,
 ) {
     suspend fun signup(signupRequest: SignupRequest): SignupResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
@@ -56,10 +61,11 @@ class AuthService(
     }
 
     suspend fun validate(validateRequest: ValidateRequest): Unit {
-
+        checkTokenSigner(validateRequest.accessToken)
     }
 
     suspend fun refresh(refreshRequest: RefreshRequest): RefreshResponse {
+        checkTokenSigner(refreshRequest.refreshToken)
         val refreshData: RefreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
             ?: throw TokenInvalidException
         val user: User? = userRepository.findById(refreshData.userId)
@@ -71,17 +77,25 @@ class AuthService(
         )
     }
 
+    private fun checkTokenSigner(token: String): Unit {
+        //check signer
+    }
+
+    private fun getJwtKey(): Key {
+        val keyBytes: ByteArray = env.getRequiredProperty("auth.jwt.key.dev").toByteArray()
+        return Keys.hmacShaKeyFor(keyBytes)
+    }
+
     private fun buildJwtToken(user: User, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
         if (!user.isActive) {
             throw UserInactiveException
         }
-
         return Jwts.builder()
             .setIssuer(issuer)
             .setSubject(user.id!!.toString())
             .setIssuedAt(Timestamp.valueOf(issuedAt))
             .setExpiration(Timestamp.valueOf(expiration))
-            // signWith something
+            .signWith(getJwtKey())
             .compact()
     }
 }

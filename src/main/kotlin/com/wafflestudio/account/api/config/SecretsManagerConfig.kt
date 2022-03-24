@@ -38,3 +38,35 @@ class SecretsManagerConfig : EnvironmentAware, BeanFactoryPostProcessor {
         return client.getSecretValue(request).secretString
     }
 }
+
+
+//TODO : 나중에 하나로 합치면 좋을 것 같습니다
+@Configuration
+@Profile("local")
+class SecretsManagerLocalConfig : EnvironmentAware, BeanFactoryPostProcessor {
+    private lateinit var env: Environment
+
+    override fun setEnvironment(environment: Environment) {
+        env = environment
+    }
+
+    override fun postProcessBeanFactory(beanFactory: ConfigurableListableBeanFactory) {
+        val secretNames = env.getProperty("secret-names", "").split(",")
+        val region = "ap-northeast-2"
+        val keyName = "auth.jwt.key.dev"
+        val objectMapper = jacksonObjectMapper()
+
+        secretNames.forEach { secretName ->
+            val secretString = getSecretString(secretName, region)
+            val map = objectMapper.readValue<Map<String, String>>(secretString)
+            val value = map[keyName]
+            if(value != null) System.setProperty(keyName, value)
+        }
+    }
+
+    fun getSecretString(secretName: String, region: String): String {
+        val client = AWSSecretsManagerClientBuilder.standard().withRegion(region).build()
+        val request = GetSecretValueRequest().withSecretId(secretName)
+        return client.getSecretValue(request).secretString
+    }
+}
