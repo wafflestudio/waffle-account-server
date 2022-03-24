@@ -1,5 +1,7 @@
 spring.profiles.default: dev
 
+secret-names: dev/waffle-account
+
 spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
