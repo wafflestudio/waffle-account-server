@@ -40,7 +40,7 @@ class SecretsManagerConfig : EnvironmentAware, BeanFactoryPostProcessor {
 }
 
 
-//TODO : 나중에 하나로 합치면 좋을 것 같습니다
+//TODO : 나중에 하나로 합치기
 @Configuration
 @Profile("local")
 class SecretsManagerLocalConfig : EnvironmentAware, BeanFactoryPostProcessor {
