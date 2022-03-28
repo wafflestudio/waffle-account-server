@@ -80,7 +80,6 @@ class AuthService(
             throw WrongPasswordException
         }
 
-        // TODO : 함수로 빼는게 깔끔할듯
         val now = LocalDateTime.now()
         val accessTokenExpire = now.plusDays(1)
         val refreshTokenExpire = now.plusDays(365)
@@ -89,10 +88,10 @@ class AuthService(
 
         refreshTokenRepository.save(
                 RefreshToken(
-                        userId = user.id!!,
-                        token = refreshToken,
-                        tokenHash = refreshToken.sha256(),
-                        expireAt = refreshTokenExpire,
+                    userId = user.id!!,
+                    token = refreshToken,
+                    tokenHash = refreshToken.sha256(),
+                    expireAt = refreshTokenExpire,
                 )
         )
 
