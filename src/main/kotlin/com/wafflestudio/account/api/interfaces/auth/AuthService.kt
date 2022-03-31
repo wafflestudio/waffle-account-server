@@ -69,7 +69,6 @@ class AuthService(
     }
 
     private fun getJwtKey(): SecretKey {
-        //TODO : dev, prod 구분
         val keyBytes: ByteArray = env.getRequiredProperty("auth.jwt.key.dev").toByteArray()
         return Keys.hmacShaKeyFor(keyBytes)
     }
@@ -83,7 +82,6 @@ class AuthService(
         try {
             return jwtParser.parseClaimsJws(token).body
         } catch(e: Exception) {
-            //TODO : 예외처리 세분화
             throw TokenInvalidException
         }
     }
@@ -96,7 +94,6 @@ class AuthService(
         val expire = now.plusDays(365)
         val refreshToken = buildJwtToken(user, now, expire)
 
-        //TODO : refreshToken blacklisting
         refreshTokenRepository.save(
             RefreshToken(
                 userId = user.id!!,

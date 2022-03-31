@@ -14,7 +14,6 @@ class SecurityConfig {
     fun securityWebFilterChain(
         http: ServerHttpSecurity,
     ): SecurityWebFilterChain {
-        //TODO : token 검증하는 filter 구현
         return http.authorizeExchange()
             .pathMatchers("/health_check").permitAll()
             .pathMatchers(HttpMethod.POST, "/v1/users").permitAll()
