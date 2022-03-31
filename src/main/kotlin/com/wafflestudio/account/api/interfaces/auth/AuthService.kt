@@ -12,7 +12,6 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.env.Environment
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.sql.Timestamp
@@ -26,7 +25,7 @@ class AuthService(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val passwordEncoder: PasswordEncoder,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
-    private val env: Environment,
+    @Value("\${auth.jwt.privateKey}") private val privateKey: String,
 ) {
     suspend fun signup(signupRequest: SignupRequest): SignupResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
@@ -69,7 +68,7 @@ class AuthService(
     }
 
     private fun getJwtKey(): SecretKey {
-        val keyBytes: ByteArray = env.getRequiredProperty("auth.jwt.key.dev").toByteArray()
+        val keyBytes: ByteArray = privateKey.toByteArray()
         return Keys.hmacShaKeyFor(keyBytes)
     }
 
