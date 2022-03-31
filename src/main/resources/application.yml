@@ -1,7 +1,5 @@
 spring.profiles.default: dev
 
-secret-names: dev/waffle-account
-
 spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
@@ -10,6 +8,7 @@ spring:
 auth:
   jwt:
     issuer: https://account-api-local.wafflestudio.com
+    privateKey: WhgckdYsDHVopvL2ID6QIDs0PqGpD3DB
 
 ---
 
@@ -25,3 +24,4 @@ spring:
 auth:
   jwt:
     issuer: https://account-api-dev.wafflestudio.com
+    privateKey:
