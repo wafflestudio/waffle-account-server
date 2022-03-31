@@ -8,7 +8,10 @@ spring:
 auth:
   jwt:
     issuer: https://account-api-local.wafflestudio.com
-    privateKey: WhgckdYsDHVopvL2ID6QIDs0PqGpD3DB
+    access:
+      privateKey: Kd47YhrOhGFy4HPljfCIJ9jzaFmSwylY
+    refresh:
+      privateKey: tRiGb4Brml6ytdcoRgOqV35Rh8bKgX9k
 
 ---
 
@@ -24,4 +27,7 @@ spring:
 auth:
   jwt:
     issuer: https://account-api-dev.wafflestudio.com
-    privateKey:
+    access:
+      privateKey:
+    refresh:
+      privateKey:

@@ -25,7 +25,8 @@ class AuthService(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val passwordEncoder: PasswordEncoder,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
-    @Value("\${auth.jwt.privateKey}") private val privateKey: String,
+    @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
+    @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
 ) {
     suspend fun signup(signupRequest: SignupRequest): SignupResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
@@ -50,11 +51,11 @@ class AuthService(
     }
 
     suspend fun validate(validateRequest: ValidateRequest): Unit {
-        checkTokenSigner(validateRequest.accessToken)
+        checkTokenSigner(validateRequest.accessToken, accessPrivateKey)
     }
 
     suspend fun refresh(refreshRequest: RefreshRequest): RefreshResponse {
-        checkTokenSigner(refreshRequest.refreshToken)
+        checkTokenSigner(refreshRequest.refreshToken, refreshPrivateKey)
         val refreshData: RefreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
             ?: throw TokenInvalidException
 
@@ -67,14 +68,13 @@ class AuthService(
         )
     }
 
-    private fun getJwtKey(): SecretKey {
-        val keyBytes: ByteArray = privateKey.toByteArray()
-        return Keys.hmacShaKeyFor(keyBytes)
+    private fun getJwtKey(key: String): SecretKey {
+        return Keys.hmacShaKeyFor(key.toByteArray())
     }
 
-    private fun checkTokenSigner(token: String): Claims {
+    private fun checkTokenSigner(token: String, key: String): Claims {
         val jwtParser = Jwts.parserBuilder()
-            .setSigningKey(getJwtKey())
+            .setSigningKey(getJwtKey(key))
             .requireIssuer(issuer)
             .build()
 
@@ -86,12 +86,12 @@ class AuthService(
     }
 
     private fun buildAccessToken(user: User, now: LocalDateTime): String {
-        return buildJwtToken(user, now, now.plusDays(1))
+        return buildJwtToken(user, accessPrivateKey, now, now.plusDays(1))
     }
 
     suspend fun buildRefreshToken(user: User, now: LocalDateTime): String {
         val expire = now.plusDays(365)
-        val refreshToken = buildJwtToken(user, now, expire)
+        val refreshToken = buildJwtToken(user, refreshPrivateKey, now, expire)
 
         refreshTokenRepository.save(
             RefreshToken(
@@ -105,7 +105,7 @@ class AuthService(
         return refreshToken
     }
 
-    private fun buildJwtToken(user: User, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
+    private fun buildJwtToken(user: User, key: String, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
         if (!user.isActive) {
             throw UserInactiveException
         }
@@ -115,7 +115,7 @@ class AuthService(
             .setSubject(user.id!!.toString())
             .setIssuedAt(Timestamp.valueOf(issuedAt))
             .setExpiration(Timestamp.valueOf(expiration))
-            .signWith(getJwtKey())
+            .signWith(getJwtKey(key))
             .compact()
     }
 }
