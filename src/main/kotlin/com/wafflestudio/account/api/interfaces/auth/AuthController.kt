@@ -1,6 +1,10 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
+
 import javax.validation.Valid
 
 @RestController
@@ -14,7 +18,7 @@ class AuthController(
         return authService.signup(signupRequest)
     }
 
-    @GetMapping("/v1/validate")
+    @PutMapping("/v1/validate")
     suspend fun tokenValidate(
         @RequestBody @Valid validateRequest: ValidateRequest,
     ): Unit {
