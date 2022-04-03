@@ -4,3 +4,4 @@ open class AccountException(val errorType: ErrorType): RuntimeException(errorTyp
 
 object UserInactiveException: AccountException(ErrorType.USER_INACTIVE)
 object EmailAlreadyExistsException: AccountException(ErrorType.EMAIL_ALREADY_EXISTS)
+object TokenInvalidException: AccountException(ErrorType.INVALID_TOKEN)
