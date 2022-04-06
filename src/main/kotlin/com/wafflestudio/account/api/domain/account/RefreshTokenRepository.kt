@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface RefreshTokenRepository: CoroutineCrudRepository<RefreshToken, Long> {
+    suspend fun findByToken(token: String): RefreshToken?
 }

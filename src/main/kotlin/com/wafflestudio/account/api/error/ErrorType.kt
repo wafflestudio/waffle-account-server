@@ -8,7 +8,8 @@ enum class ErrorType(
 ) {
 
     // 401
-    WRONG_PASSWORD(1401001, HttpStatus.UNAUTHORIZED),
+    INVALID_TOKEN(1401001, HttpStatus.UNAUTHORIZED),
+    WRONG_PASSWORD(1401002, HttpStatus.UNAUTHORIZED),
 
     // 403
     USER_INACTIVE(1403001, HttpStatus.FORBIDDEN),
