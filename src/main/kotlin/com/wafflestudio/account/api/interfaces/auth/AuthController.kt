@@ -13,7 +13,7 @@ class AuthController(
 ) {
     @PostMapping("/v1/users")
     suspend fun signup(
-        @RequestBody @Valid signupRequest: SignupRequest,
+        @RequestBody @Valid signupRequest: LocalAuthRequest,
     ): TokenResponse {
         return authService.signup(signupRequest)
     }
@@ -21,7 +21,7 @@ class AuthController(
 
     @PutMapping("/v1/auth/signin")
     suspend fun signin(
-        @RequestBody @Valid signinRequest: SignupRequest
+        @RequestBody @Valid signinRequest: LocalAuthRequest
     ): TokenResponse {
         return authService.signin(signinRequest)
     }

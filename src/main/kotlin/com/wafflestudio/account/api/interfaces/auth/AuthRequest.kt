@@ -4,7 +4,7 @@ import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
-data class SignupRequest(
+data class LocalAuthRequest(
     @field:NotBlank
     @field:Email
     val email: String,
