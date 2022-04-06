@@ -130,8 +130,8 @@ class AuthService(
         val now = LocalDateTime.now()
         val accessTokenExpire = now.plusDays(1)
         val refreshTokenExpire = now.plusDays(365)
-        val accessToken = buildJwtToken(user, now, accessTokenExpire)
-        val refreshToken = buildJwtToken(user, now, refreshTokenExpire)
+        val accessToken = buildAccessToken(user, now)
+        val refreshToken = buildRefreshToken(user, now)
 
         refreshTokenRepository.save(
             RefreshToken(
