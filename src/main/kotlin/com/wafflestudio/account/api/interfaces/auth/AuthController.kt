@@ -14,7 +14,7 @@ class AuthController(
     @PostMapping("/v1/users")
     suspend fun signup(
         @RequestBody @Valid signupRequest: SignupRequest,
-    ): SignupResponse {
+    ): TokenResponse {
         return authService.signup(signupRequest)
     }
 
@@ -24,6 +24,7 @@ class AuthController(
         @RequestBody @Valid signinRequest: SignupRequest
     ): TokenResponse {
         return authService.signin(signinRequest)
+    }
 
     @PutMapping("/v1/validate")
     suspend fun tokenValidate(
