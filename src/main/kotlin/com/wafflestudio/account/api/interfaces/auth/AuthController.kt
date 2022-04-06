@@ -37,6 +37,5 @@ class AuthController(
         @RequestBody @Valid refreshRequest: RefreshRequest,
     ): RefreshResponse {
         return authService.refresh(refreshRequest)
-
     }
 }
