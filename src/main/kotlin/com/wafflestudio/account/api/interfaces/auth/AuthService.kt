@@ -70,11 +70,7 @@ class AuthService(
 
     suspend fun signin(signinRequest: SignupRequest): SignupResponse {
 
-        val user = userRepository.findByEmail(signinRequest.email)
-
-        if (user == null) {
-            throw UserDoesNotExistsException
-        }
+        val user = userRepository.findByEmail(signinRequest.email)?: throw UserDoesNotExistsException
 
         if (!passwordEncoder.matches(signinRequest.password, user.password)) {
             throw WrongPasswordException
