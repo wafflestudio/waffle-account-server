@@ -27,7 +27,7 @@ class AuthService(
     @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
 ) {
-    suspend fun signup(signupRequest: SignupRequest): SignupResponse {
+    suspend fun signup(signupRequest: SignupRequest): TokenResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
             throw EmailAlreadyExistsException
         }
@@ -44,7 +44,7 @@ class AuthService(
         val accessToken = buildAccessToken(user, now)
         val refreshToken = buildRefreshToken(user, now)
 
-        return SignupResponse(
+        return TokenResponse(
             accessToken = accessToken,
             refreshToken = refreshToken,
         )
@@ -119,7 +119,7 @@ class AuthService(
             .compact()
     }
 
-    suspend fun signin(signinRequest: SignupRequest): SignupResponse {
+    suspend fun signin(signinRequest: SignupRequest): TokenResponse {
 
         val user = userRepository.findByEmail(signinRequest.email)?: throw UserDoesNotExistsException
 
@@ -142,7 +142,7 @@ class AuthService(
                 )
         )
 
-        return SignupResponse(
+        return TokenResponse(
                 accessToken = accessToken,
                 refreshToken = refreshToken,
         )
