@@ -9,5 +9,4 @@ class WaffleAccountServerApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }

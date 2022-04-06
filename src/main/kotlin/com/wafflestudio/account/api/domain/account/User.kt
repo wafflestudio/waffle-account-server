@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
 @Table("account_user")
-class User (
+class User(
     @Id
     var id: Long? = null,
 

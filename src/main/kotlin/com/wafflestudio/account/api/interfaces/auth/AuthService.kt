@@ -17,7 +17,6 @@ import java.sql.Timestamp
 import java.time.LocalDateTime
 import javax.crypto.SecretKey
 
-
 @Service
 class AuthService(
     private val userRepository: UserRepository,
@@ -50,7 +49,7 @@ class AuthService(
         )
     }
 
-    suspend fun validate(validateRequest: ValidateRequest): Unit {
+    suspend fun validate(validateRequest: ValidateRequest) {
         checkTokenSigner(validateRequest.accessToken, accessPrivateKey)
     }
 
@@ -80,7 +79,7 @@ class AuthService(
 
         try {
             return jwtParser.parseClaimsJws(token).body
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             throw TokenInvalidException
         }
     }
