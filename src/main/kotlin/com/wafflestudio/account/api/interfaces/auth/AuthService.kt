@@ -36,7 +36,7 @@ class AuthService(
             User(
                 email = signupRequest.email,
                 password = passwordEncoder.encode(signupRequest.password),
-                provider = AuthProvider.LOCAL
+                provider = AuthProvider.LOCAL,
             )
         )
 
