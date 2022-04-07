@@ -29,5 +29,9 @@ jobs:
       run: chmod +x ./gradlew
       
     - name: Check ktlint
-      run: ./gradlew ktlintCheck || cat ./build/reports/ktlint/**/*.txt
+      run: ./gradlew ktlintCheck
+
+    - if: ${{ failure() }}
+      name: Print ktlint report
+      run: cat ./build/reports/ktlint/**/*.txt
 
