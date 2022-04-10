@@ -1,18 +1,18 @@
 package com.wafflestudio.account.api.interfaces.auth
 
 import com.wafflestudio.account.api.domain.account.*
-import com.wafflestudio.account.api.error.EmailAlreadyExistsException
-import com.wafflestudio.account.api.error.UserDoesNotExistsException
-import com.wafflestudio.account.api.error.TokenInvalidException
-import com.wafflestudio.account.api.error.UserInactiveException
-import com.wafflestudio.account.api.error.WrongPasswordException
+import com.wafflestudio.account.api.error.*
 import com.wafflestudio.account.api.extension.sha256
+import com.wafflestudio.account.api.oauth2.userinfo.OAuth2UserInfoFactory.getOAuth2UserInfo
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.oauth2.core.oidc.OidcIdToken
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo
 import org.springframework.stereotype.Service
+import java.security.AuthProvider
 import java.sql.Timestamp
 import java.time.LocalDateTime
 import javax.crypto.SecretKey
@@ -36,7 +36,7 @@ class AuthService(
             User(
                 email = signupRequest.email,
                 password = passwordEncoder.encode(signupRequest.password),
-                provider = AuthProvider.LOCAL,
+                provider = SocialProvider.LOCAL,
             )
         )
 
@@ -148,4 +148,6 @@ class AuthService(
         )
 
     }
+
+
 }

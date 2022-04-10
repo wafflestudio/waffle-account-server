@@ -2,14 +2,20 @@ package com.wafflestudio.account.api.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpMethod
+import org.springframework.security.config.Customizer.withDefaults
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
 import org.springframework.security.web.server.SecurityWebFilterChain
+
 
 @EnableWebFluxSecurity
 class SecurityConfig {
+
+
+
     @Bean
     fun securityWebFilterChain(
         http: ServerHttpSecurity,
@@ -19,6 +25,9 @@ class SecurityConfig {
             .pathMatchers(HttpMethod.POST, "/v1/auth/signin").permitAll()
             .pathMatchers(HttpMethod.POST, "/v1/users").permitAll()
             .pathMatchers("/v1/**").authenticated()
+            .anyExchange().permitAll()
+            .and().oauth2Login(withDefaults())
+            .logout()
             .and()
             .csrf().disable()
             .build()

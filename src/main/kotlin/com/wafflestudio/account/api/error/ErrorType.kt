@@ -7,6 +7,9 @@ enum class ErrorType(
     val httpStatus: HttpStatus
 ) {
 
+    // 400
+    UNSUPPORTED_SOCIAL_PROVIDER(1400001, HttpStatus.BAD_REQUEST),
+
     // 401
     INVALID_TOKEN(1401001, HttpStatus.UNAUTHORIZED),
     WRONG_PASSWORD(1401002, HttpStatus.UNAUTHORIZED),
@@ -19,4 +22,7 @@ enum class ErrorType(
 
     // 409
     EMAIL_ALREADY_EXISTS(1409001, HttpStatus.CONFLICT),
+
+    // 422
+    USERNAME_NULL(1422001, HttpStatus.UNPROCESSABLE_ENTITY)
 }

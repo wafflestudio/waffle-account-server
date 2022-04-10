@@ -7,3 +7,6 @@ object EmailAlreadyExistsException: AccountException(ErrorType.EMAIL_ALREADY_EXI
 object UserDoesNotExistsException: AccountException(ErrorType.USER_NOT_FOUND)
 object WrongPasswordException: AccountException(ErrorType.WRONG_PASSWORD)
 object TokenInvalidException: AccountException(ErrorType.INVALID_TOKEN)
+object UsernameNullException: AccountException(ErrorType.USERNAME_NULL)
+object UnsupportedProviderException: AccountException(ErrorType.UNSUPPORTED_SOCIAL_PROVIDER)
+

@@ -1,10 +1,18 @@
 spring.profiles.default: dev
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 760558146658-s29dkmip6ktv4msbnlodqq61rdlm8qtu.apps.googleusercontent.com
+            client-secret: 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
   r2dbc:
     url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: wath
     password: teamsso
+
 auth:
   jwt:
     issuer: https://account-api-local.wafflestudio.com
@@ -20,6 +28,13 @@ spring.config.activate.on-profile: dev
 secret-names: dev/waffle-account
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 760558146658-s29dkmip6ktv4msbnlodqq61rdlm8qtu.apps.googleusercontent.com
+            client-secret: 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
   r2dbc:
     url:
     username:

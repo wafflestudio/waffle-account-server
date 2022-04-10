@@ -28,7 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
 
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     runtimeOnly("mysql:mysql-connector-java")
     runtimeOnly("dev.miku:r2dbc-mysql")
     implementation("org.flywaydb:flyway-core:7.15.0")
