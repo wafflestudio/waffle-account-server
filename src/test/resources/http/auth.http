@@ -1,0 +1,37 @@
+### local signup
+POST http://{{host}}/v1/users
+Content-Type: application/json
+
+{
+  "email": "subeenpark@wafflestudio.com",
+  "password": "qlalfqjsgh"
+}
+
+### local signin: 200
+POST http://{{host}}/v1/auth/signin
+Content-Type: application/json
+
+{
+  "email": "subeenpark@wafflestudio.com",
+  "password": "qlalfqjsgh"
+}
+
+### local signin: 401(wrong password)
+POST http://{{host}}/v1/auth/signin
+Content-Type: application/json
+
+{
+  "email": "subeenpark@wafflestudio.com",
+  "password": "qlalfqj"
+}
+
+### local signin: 404(user does not exists)
+POST http://{{host}}/v1/auth/signin
+Content-Type: application/json
+
+{
+  "email": "subeenp@wafflestudio.com",
+  "password": "qlalfqjsgh"
+}
+
+

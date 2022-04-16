@@ -1,12 +1,11 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.RefreshToken
-import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
-import com.wafflestudio.account.api.domain.account.User
-import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.domain.account.*
 import com.wafflestudio.account.api.error.EmailAlreadyExistsException
+import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.TokenInvalidException
 import com.wafflestudio.account.api.error.UserInactiveException
+import com.wafflestudio.account.api.error.WrongPasswordException
 import com.wafflestudio.account.api.extension.sha256
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -28,7 +27,7 @@ class AuthService(
     @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
 ) {
-    suspend fun signup(signupRequest: SignupRequest): SignupResponse {
+    suspend fun signup(signupRequest: LocalAuthRequest): TokenResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
             throw EmailAlreadyExistsException
         }
@@ -37,6 +36,7 @@ class AuthService(
             User(
                 email = signupRequest.email,
                 password = passwordEncoder.encode(signupRequest.password),
+                provider = AuthProvider.LOCAL,
             )
         )
 
@@ -44,7 +44,7 @@ class AuthService(
         val accessToken = buildAccessToken(user, now)
         val refreshToken = buildRefreshToken(user, now)
 
-        return SignupResponse(
+        return TokenResponse(
             accessToken = accessToken,
             refreshToken = refreshToken,
         )
@@ -117,5 +117,35 @@ class AuthService(
             .setExpiration(Timestamp.valueOf(expiration))
             .signWith(getJwtKey(key))
             .compact()
+    }
+
+    suspend fun signin(signinRequest: LocalAuthRequest): TokenResponse {
+
+        val user = userRepository.findByEmail(signinRequest.email)?: throw UserDoesNotExistsException
+
+        if (!passwordEncoder.matches(signinRequest.password, user.password)) {
+            throw WrongPasswordException
+        }
+
+        val now = LocalDateTime.now()
+        val accessTokenExpire = now.plusDays(1)
+        val refreshTokenExpire = now.plusDays(365)
+        val accessToken = buildAccessToken(user, now)
+        val refreshToken = buildRefreshToken(user, now)
+
+        refreshTokenRepository.save(
+            RefreshToken(
+                userId = user.id!!,
+                token = refreshToken,
+                tokenHash = refreshToken.sha256(),
+                expireAt = refreshTokenExpire,
+            )
+        )
+
+        return TokenResponse(
+            accessToken = accessToken,
+            refreshToken = refreshToken,
+        )
+
     }
 }
