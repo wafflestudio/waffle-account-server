@@ -1,9 +1,13 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.*
+import com.wafflestudio.account.api.domain.account.AuthProvider
+import com.wafflestudio.account.api.domain.account.RefreshToken
+import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
+import com.wafflestudio.account.api.domain.account.User
+import com.wafflestudio.account.api.domain.account.UserRepository
 import com.wafflestudio.account.api.error.EmailAlreadyExistsException
-import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.TokenInvalidException
+import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.UserInactiveException
 import com.wafflestudio.account.api.error.WrongPasswordException
 import com.wafflestudio.account.api.extension.sha256
@@ -16,7 +20,6 @@ import org.springframework.stereotype.Service
 import java.sql.Timestamp
 import java.time.LocalDateTime
 import javax.crypto.SecretKey
-
 
 @Service
 class AuthService(
@@ -50,7 +53,7 @@ class AuthService(
         )
     }
 
-    suspend fun validate(validateRequest: ValidateRequest): Unit {
+    suspend fun validate(validateRequest: ValidateRequest) {
         checkTokenSigner(validateRequest.accessToken, accessPrivateKey)
     }
 
@@ -80,7 +83,7 @@ class AuthService(
 
         try {
             return jwtParser.parseClaimsJws(token).body
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             throw TokenInvalidException
         }
     }
@@ -121,7 +124,7 @@ class AuthService(
 
     suspend fun signin(signinRequest: LocalAuthRequest): TokenResponse {
 
-        val user = userRepository.findByEmail(signinRequest.email)?: throw UserDoesNotExistsException
+        val user = userRepository.findByEmail(signinRequest.email) ?: throw UserDoesNotExistsException
 
         if (!passwordEncoder.matches(signinRequest.password, user.password)) {
             throw WrongPasswordException
@@ -146,6 +149,5 @@ class AuthService(
             accessToken = accessToken,
             refreshToken = refreshToken,
         )
-
     }
 }
