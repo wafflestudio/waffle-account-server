@@ -17,7 +17,6 @@ class AuthController(
         return authService.signup(signupRequest)
     }
 
-
     @PutMapping("/v1/auth/signin")
     suspend fun signin(
         @RequestBody @Valid signinRequest: LocalAuthRequest
