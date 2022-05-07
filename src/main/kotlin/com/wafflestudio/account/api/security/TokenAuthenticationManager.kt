@@ -10,11 +10,11 @@ import reactor.core.publisher.Mono
 @Component
 class TokenAuthenticationManager(
     private val jwtAccessTokenVerifier: JwtAccessTokenVerifier,
-): ReactiveAuthenticationManager {
+) : ReactiveAuthenticationManager {
     override fun authenticate(authentication: Authentication): Mono<Authentication> = mono {
         authentication as CurrentUser
 
-        val userId =  jwtAccessTokenVerifier.getUserId(authentication.token) ?: throw BadCredentialsException("")
+        val userId = jwtAccessTokenVerifier.getUserId(authentication.token) ?: throw BadCredentialsException("")
         authentication.id = userId
         authentication
     }

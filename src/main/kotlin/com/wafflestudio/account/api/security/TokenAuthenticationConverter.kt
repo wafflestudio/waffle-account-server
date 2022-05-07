@@ -8,7 +8,7 @@ import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
 
 @Component
-class TokenAuthenticationConverter: ServerAuthenticationConverter {
+class TokenAuthenticationConverter : ServerAuthenticationConverter {
     private val authorization = "authorization"
     private val authorizationBearerPrefix = "Bearer "
 
