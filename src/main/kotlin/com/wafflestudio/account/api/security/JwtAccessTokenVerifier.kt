@@ -20,7 +20,6 @@ class JwtAccessTokenVerifier(
             val claims = jwtParser.parseClaimsJws(token).body
             claims["sub"].toString().toLong()
         } catch (e: Exception) {
-            print("error! $e")
             return null
         }
     }
