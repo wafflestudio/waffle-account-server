@@ -29,6 +29,7 @@ class SecurityConfig {
             .pathMatchers("/v1/**").authenticated()
             .and()
             .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+            .cors().disable()
             .csrf().disable()
             .build()
     }
