@@ -150,4 +150,15 @@ class AuthService(
             refreshToken = refreshToken,
         )
     }
+
+    suspend fun unregister(userId: Long) {
+        val user = userRepository.findById(userId) ?: throw UserDoesNotExistsException
+        if (!checkUnregistrable(user)) {
+
+        }
+    }
+
+    private suspend fun checkUnregistrable(user: User): Boolean {
+        return true
+    }
 }
