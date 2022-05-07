@@ -20,6 +20,7 @@ class SecurityConfig {
             .pathMatchers(HttpMethod.POST, "/v1/users").permitAll()
             .pathMatchers("/v1/**").authenticated()
             .and()
+            .cors().disable()
             .csrf().disable()
             .build()
     }
