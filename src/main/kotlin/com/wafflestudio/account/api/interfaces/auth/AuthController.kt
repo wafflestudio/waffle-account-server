@@ -1,5 +1,6 @@
 package com.wafflestudio.account.api.interfaces.auth
 
+import com.wafflestudio.account.api.security.CurrentUser
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -26,11 +27,10 @@ class AuthController(
     }
 
     @DeleteMapping("/v1/users/me")
-    suspend fun unregister() {
-        val userId: Long = 1
+    suspend fun unregister(currentUser: CurrentUser): UnregisterResponse {
+        val userId = currentUser.id
         return authService.unregister(userId)
     }
-
 
     @PutMapping("/v1/validate")
     suspend fun tokenValidate(
