@@ -1,7 +1,15 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.*
-import com.wafflestudio.account.api.error.*
+import com.wafflestudio.account.api.domain.account.AuthProvider
+import com.wafflestudio.account.api.domain.account.RefreshToken
+import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
+import com.wafflestudio.account.api.domain.account.User
+import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.error.EmailAlreadyExistsException
+import com.wafflestudio.account.api.error.TokenInvalidException
+import com.wafflestudio.account.api.error.UserDoesNotExistsException
+import com.wafflestudio.account.api.error.UserInactiveException
+import com.wafflestudio.account.api.error.WrongPasswordException
 import com.wafflestudio.account.api.extension.sha256
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -16,7 +24,6 @@ import java.security.spec.X509EncodedKeySpec
 import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.util.Base64
-
 
 @Service
 class AuthService(
@@ -52,6 +59,14 @@ class AuthService(
         )
     }
 
+    suspend fun getUserID(userIDRequest: UserIDRequest): UserIDResponse {
+        if (userRepository.existsById(userIDRequest.userId)) {
+            return UserIDResponse(
+                userId = userIDRequest.userId,
+            )
+        } else throw UserDoesNotExistsException
+    }
+
     suspend fun validate(validateRequest: ValidateRequest) {
         checkTokenSigner(validateRequest.accessToken, accessPublicKey)
     }
@@ -73,7 +88,7 @@ class AuthService(
     private fun getJwtKey(key: String, isPublic: Boolean): Key {
         val factory = KeyFactory.getInstance("RSA")
         val decodedKey = Base64.getDecoder().decode(key)
-        return if(isPublic) {
+        return if (isPublic) {
             factory.generatePublic(X509EncodedKeySpec(decodedKey))
         } else {
             factory.generatePrivate(PKCS8EncodedKeySpec(decodedKey))

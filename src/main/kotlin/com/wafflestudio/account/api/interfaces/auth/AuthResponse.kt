@@ -14,3 +14,8 @@ data class RefreshResponse(
     @JsonProperty("access_token")
     val accessToken: String,
 )
+
+data class UserIDResponse(
+    @JsonProperty("user_id")
+    val userId: Long,
+)

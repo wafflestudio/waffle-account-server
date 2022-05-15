@@ -1,5 +1,6 @@
 package com.wafflestudio.account.api.interfaces.auth
 
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,6 +16,13 @@ class AuthController(
         @RequestBody @Valid signupRequest: LocalAuthRequest,
     ): TokenResponse {
         return authService.signup(signupRequest)
+    }
+
+    @GetMapping("/v1/users/me")
+    suspend fun getUserID(
+        @RequestBody @Valid userIDRequest: UserIDRequest,
+    ): UserIDResponse {
+        return authService.getUserID(userIDRequest)
     }
 
     @PutMapping("/v1/auth/signin")

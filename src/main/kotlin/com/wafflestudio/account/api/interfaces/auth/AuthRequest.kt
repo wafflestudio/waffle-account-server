@@ -23,3 +23,8 @@ data class RefreshRequest(
     @field:NotBlank
     val refreshToken: String,
 )
+
+data class UserIDRequest(
+    @field:NotBlank
+    val userId: Long,
+)
