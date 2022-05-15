@@ -1,25 +1,22 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.AuthProvider
-import com.wafflestudio.account.api.domain.account.RefreshToken
-import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
-import com.wafflestudio.account.api.domain.account.User
-import com.wafflestudio.account.api.domain.account.UserRepository
-import com.wafflestudio.account.api.error.EmailAlreadyExistsException
-import com.wafflestudio.account.api.error.TokenInvalidException
-import com.wafflestudio.account.api.error.UserDoesNotExistsException
-import com.wafflestudio.account.api.error.UserInactiveException
-import com.wafflestudio.account.api.error.WrongPasswordException
+import com.wafflestudio.account.api.domain.account.*
+import com.wafflestudio.account.api.error.*
 import com.wafflestudio.account.api.extension.sha256
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.security.Keys
+import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.security.Key
+import java.security.KeyFactory
+import java.security.spec.PKCS8EncodedKeySpec
+import java.security.spec.X509EncodedKeySpec
 import java.sql.Timestamp
 import java.time.LocalDateTime
-import javax.crypto.SecretKey
+import java.util.Base64
+
 
 @Service
 class AuthService(
@@ -27,7 +24,9 @@ class AuthService(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val passwordEncoder: PasswordEncoder,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
+    @Value("\${auth.jwt.access.publicKey}") private val accessPublicKey: String,
     @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
+    @Value("\${auth.jwt.refresh.publicKey}") private val refreshPublicKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
 ) {
     suspend fun signup(signupRequest: LocalAuthRequest): TokenResponse {
@@ -54,11 +53,11 @@ class AuthService(
     }
 
     suspend fun validate(validateRequest: ValidateRequest) {
-        checkTokenSigner(validateRequest.accessToken, accessPrivateKey)
+        checkTokenSigner(validateRequest.accessToken, accessPublicKey)
     }
 
     suspend fun refresh(refreshRequest: RefreshRequest): RefreshResponse {
-        checkTokenSigner(refreshRequest.refreshToken, refreshPrivateKey)
+        checkTokenSigner(refreshRequest.refreshToken, refreshPublicKey)
         val refreshData: RefreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
             ?: throw TokenInvalidException
 
@@ -71,13 +70,19 @@ class AuthService(
         )
     }
 
-    private fun getJwtKey(key: String): SecretKey {
-        return Keys.hmacShaKeyFor(key.toByteArray())
+    private fun getJwtKey(key: String, isPublic: Boolean): Key {
+        val factory = KeyFactory.getInstance("RSA")
+        val decodedKey = Base64.getDecoder().decode(key)
+        return if(isPublic) {
+            factory.generatePublic(X509EncodedKeySpec(decodedKey))
+        } else {
+            factory.generatePrivate(PKCS8EncodedKeySpec(decodedKey))
+        }
     }
 
     private fun checkTokenSigner(token: String, key: String): Claims {
         val jwtParser = Jwts.parserBuilder()
-            .setSigningKey(getJwtKey(key))
+            .setSigningKey(getJwtKey(key, true))
             .requireIssuer(issuer)
             .build()
 
@@ -118,7 +123,7 @@ class AuthService(
             .setSubject(user.id!!.toString())
             .setIssuedAt(Timestamp.valueOf(issuedAt))
             .setExpiration(Timestamp.valueOf(expiration))
-            .signWith(getJwtKey(key))
+            .signWith(getJwtKey(key, false), SignatureAlgorithm.RS512)
             .compact()
     }
 
@@ -131,7 +136,6 @@ class AuthService(
         }
 
         val now = LocalDateTime.now()
-        val accessTokenExpire = now.plusDays(1)
         val refreshTokenExpire = now.plusDays(365)
         val accessToken = buildAccessToken(user, now)
         val refreshToken = buildRefreshToken(user, now)
