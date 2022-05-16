@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
@@ -20,9 +21,13 @@ class AuthController(
 
     @GetMapping("/v1/users/me")
     suspend fun getUserID(
-        @RequestBody @Valid userIDRequest: UserIDRequest,
+        @RequestParam @Valid userId: Long,
     ): UserIDResponse {
-        return authService.getUserID(userIDRequest)
+        return authService.getUserID(
+            UserIDRequest(
+                userId = userId,
+            )
+        )
     }
 
     @PutMapping("/v1/auth/signin")

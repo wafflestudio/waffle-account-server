@@ -60,9 +60,10 @@ class AuthService(
     }
 
     suspend fun getUserID(userIDRequest: UserIDRequest): UserIDResponse {
-        if (userRepository.existsById(userIDRequest.userId)) {
+        val userId: Long = userIDRequest.userId
+        if (userRepository.existsById(userId)) {
             return UserIDResponse(
-                userId = userIDRequest.userId,
+                userId = userId,
             )
         } else throw UserDoesNotExistsException
     }
