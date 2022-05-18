@@ -14,3 +14,7 @@ data class RefreshResponse(
     @JsonProperty("access_token")
     val accessToken: String,
 )
+
+data class UnregisterResponse(
+    val unregistered: Boolean
+)
