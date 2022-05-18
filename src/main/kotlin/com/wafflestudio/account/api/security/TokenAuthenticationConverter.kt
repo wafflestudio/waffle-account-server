@@ -9,11 +9,11 @@ import reactor.core.publisher.Mono
 
 @Component
 class TokenAuthenticationConverter : ServerAuthenticationConverter {
-    private val authorization = "authorization"
+    private val authorizationHeader = "authorization"
     private val authorizationBearerPrefix = "Bearer "
 
     override fun convert(exchange: ServerWebExchange?): Mono<Authentication> = mono {
-        val authorization = exchange?.getHeader(authorization) ?: return@mono null
+        val authorization = exchange?.getHeader(authorizationHeader) ?: return@mono null
         val token = authorization.removePrefix(authorizationBearerPrefix)
 
         return@mono CurrentUser(
