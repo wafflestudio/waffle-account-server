@@ -15,6 +15,9 @@ import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserServiceFactory
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
+import kotlinx.coroutines.reactor.awaitSingle
+import kotlinx.coroutines.reactor.awaitSingleOrNull
+import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
@@ -187,38 +190,35 @@ class AuthService(
         val oAuth2Token = oAuth2Request.accessToken
 
         // FIX ME: RAISE EXCEPTION
-        val email = oAuth2UserService.getMe(oAuth2Token)
-            .map { it.email }
-            .block() ?: throw Exception()
+        return oAuth2UserService.getMe(oAuth2Token)
+            .flatMap { response ->
+                val email = response.email
+                mono {
+                    var user = userRepository.findByEmail(email)
+                    if (user == null) {
+                        user = userRepository.save(
+                            User(
+                                email = email,
+                                provider = provider,
+                            )
+                        )
+                    }
+                    return@mono user
+                }
+            }
+            .flatMap { user ->
+                val now = LocalDateTime.now()
+                val accessToken = buildAccessToken(user, now)
 
-        var user = userRepository.findByEmail(email)
-        if (user == null) {
-            user = userRepository.save(
-                User(
-                    email = email,
-                    provider = provider,
-                )
-            )
-        }
+                mono {
+                    val refreshToken = buildRefreshToken(user, now)
+                    return@mono TokenResponse(
+                        accessToken = accessToken,
+                        refreshToken = refreshToken,
+                    )
+                }
+            }.awaitSingle()
 
-        val now = LocalDateTime.now()
-        val refreshTokenExpire = now.plusDays(365)
-        val accessToken = buildAccessToken(user, now)
-        val refreshToken = buildRefreshToken(user, now)
-
-        refreshTokenRepository.save(
-            RefreshToken(
-                userId = user.id!!,
-                token = refreshToken,
-                tokenHash = refreshToken.sha256(),
-                expireAt = refreshTokenExpire,
-            )
-        )
-
-        return TokenResponse(
-            accessToken = accessToken,
-            refreshToken = refreshToken,
-        )
     }
 
 
