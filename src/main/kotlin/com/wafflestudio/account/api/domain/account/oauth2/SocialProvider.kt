@@ -1,10 +1,5 @@
 package com.wafflestudio.account.api.domain.account.oauth2
 
-import org.springframework.web.client.RestTemplate
-
-
-
-
 enum class SocialProvider(
     val registrationId: String
 ) {
@@ -12,3 +7,4 @@ enum class SocialProvider(
     LOCAL("local"),
     GOOGLE("google"),
 }
+

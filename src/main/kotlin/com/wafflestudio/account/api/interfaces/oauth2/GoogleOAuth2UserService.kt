@@ -15,21 +15,26 @@ import java.net.URI
 
 
 @Service
-class GoogleOAuth2UserService(): OAuth2UserService {
-
-    @Autowired lateinit var clientRegistrationRepository: ReactiveClientRegistrationRepository
-    @Autowired lateinit var webClient: WebClient
+class GoogleOAuth2UserService(
+    val clientRegistrationRepository: ReactiveClientRegistrationRepository,
+    val webClient: WebClient
+): OAuth2UserService {
 
     override suspend fun getMe(
         accessToken: String
     ): Mono<OAuth2UserResponse> {
 
-
         val clientRegistration = getClientRegistration()
 
         return clientRegistration
             .flatMap { clientRegistration ->
-                webClient.get().uri(clientRegistration.providerDetails.userInfoEndpoint.uri).retrieve().bodyToMono<OAuth2UserResponse>()
+                webClient
+                    .get()
+                    .uri(clientRegistration.providerDetails.userInfoEndpoint.uri)
+                    .headers {
+                        it.setBearerAuth(accessToken)
+                    }
+                    .retrieve().bodyToMono<OAuth2UserResponse>()
             }
 
     }

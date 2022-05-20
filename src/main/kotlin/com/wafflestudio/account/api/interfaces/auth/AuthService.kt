@@ -35,7 +35,6 @@ class AuthService(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val passwordEncoder: PasswordEncoder,
     private val oAuth2UserServiceFactory: OAuth2UserServiceFactory,
-    private val clientRegistrationRepository: ReactiveClientRegistrationRepository,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
     @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
@@ -200,6 +199,7 @@ class AuthService(
                             User(
                                 email = email,
                                 provider = provider,
+                                password = "",
                             )
                         )
                     }
