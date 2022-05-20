@@ -22,7 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient
 
 
 @EnableWebFluxSecurity
-class SecurityConfig {git a
+class SecurityConfig {
 
     @Autowired private lateinit var clientRegistrationRepository: ReactiveClientRegistrationRepository
 
