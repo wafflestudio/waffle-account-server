@@ -190,7 +190,6 @@ class AuthService(
 
         // FIX ME: RAISE EXCEPTION
         // TODO: 로컬 계정으로 가입된 이메일과 일치할 때
-        // TODO: USER SUB 저장
         // TODO: FIND BY EMAIL -> FINB BY PROVIDER ADD USER SUB? 이메일이 없는 Provider가 있다는 소리가 있음.
         return oAuth2UserService.getMe(oAuth2Token)
             .flatMap { response ->

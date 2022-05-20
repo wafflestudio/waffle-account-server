@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile
 import org.springframework.core.env.Environment
 
 @Configuration
-@Profile("dev | prod")
+@Profile("local | dev | prod")
 class SecretsManagerConfig : EnvironmentAware, BeanFactoryPostProcessor {
     private lateinit var env: Environment
 

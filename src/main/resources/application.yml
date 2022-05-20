@@ -4,8 +4,8 @@ spring:
             client:
                 registration:
                     google:
-                        client-id: 760558146658-s29dkmip6ktv4msbnlodqq61rdlm8qtu.apps.googleusercontent.com
-                        client-secret: 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
+                        client-id:
+                        client-secret:
                         scole: email
     r2dbc:
         url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
@@ -37,3 +37,18 @@ auth:
             privateKey:
         refresh:
             privateKey:
+
+---
+
+spring.config.activate.on-profile: local
+
+secret-names: local/waffle-account
+
+spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id:
+                        client-secret:
