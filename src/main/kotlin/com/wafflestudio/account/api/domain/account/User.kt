@@ -24,5 +24,7 @@ class User(
 
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
-    val provider: SocialProvider = SocialProvider.LOCAL
+    val provider: SocialProvider = SocialProvider.LOCAL,
+
+    val sub: String? = null
 )

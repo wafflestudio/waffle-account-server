@@ -34,7 +34,7 @@ class GoogleOAuth2UserService(
                     .headers {
                         it.setBearerAuth(accessToken)
                     }
-                    .retrieve().bodyToMono<OAuth2UserResponse>()
+                    .retrieve().bodyToMono<GoogleOAuth2UserResponse>()
             }
 
     }
