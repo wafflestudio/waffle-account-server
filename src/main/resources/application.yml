@@ -26,6 +26,14 @@ spring.config.activate.on-profile: dev
 secret-names: dev/waffle-account
 
 spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id:
+                        client-secret:
+                        scole: email
     r2dbc:
         url:
         username:
