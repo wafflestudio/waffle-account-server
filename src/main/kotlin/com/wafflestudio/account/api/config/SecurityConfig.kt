@@ -1,9 +1,10 @@
-package com.wafflestudio.account.api.security
+package com.wafflestudio.account.api.config
 
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserService
-import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserServiceFactory
+import com.wafflestudio.account.api.security.TokenAuthenticationConverter
+import com.wafflestudio.account.api.security.TokenAuthenticationManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpHeaders
@@ -21,7 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient
 
 
 @EnableWebFluxSecurity
-class SecurityConfig {
+class SecurityConfig {git a
 
     @Autowired private lateinit var clientRegistrationRepository: ReactiveClientRegistrationRepository
 
