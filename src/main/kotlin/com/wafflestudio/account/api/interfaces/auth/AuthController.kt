@@ -1,8 +1,8 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import org.springframework.web.bind.annotation.GetMapping
 import com.wafflestudio.account.api.security.CurrentUser
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
