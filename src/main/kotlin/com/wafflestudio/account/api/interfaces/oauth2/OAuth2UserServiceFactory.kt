@@ -1,9 +1,7 @@
 package com.wafflestudio.account.api.interfaces.oauth2
 
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
-import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Component
-
 
 @Component
 class OAuth2UserServiceFactory(

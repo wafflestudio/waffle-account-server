@@ -1,10 +1,10 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.domain.account.RefreshToken
 import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.error.EmailAlreadyExistsException
 import com.wafflestudio.account.api.error.TokenInvalidException
 import com.wafflestudio.account.api.error.UserDoesNotExistsException
@@ -16,14 +16,9 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import kotlinx.coroutines.reactor.awaitSingle
-import kotlinx.coroutines.reactor.awaitSingleOrNull
 import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
-import org.springframework.security.oauth2.client.userinfo.ReactiveOAuth2UserService
-import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Service
 import java.sql.Timestamp
 import java.time.LocalDateTime
@@ -221,8 +216,5 @@ class AuthService(
                     )
                 }
             }.awaitSingle()
-
     }
-
-
 }

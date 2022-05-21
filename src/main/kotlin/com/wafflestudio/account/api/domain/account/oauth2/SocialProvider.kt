@@ -6,4 +6,3 @@ enum class SocialProvider(
     LOCAL("local"),
     GOOGLE("google"),
 }
-

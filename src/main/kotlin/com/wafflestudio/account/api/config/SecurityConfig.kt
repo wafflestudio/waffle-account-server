@@ -20,7 +20,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter
 import org.springframework.web.reactive.function.client.WebClient
 
-
 @EnableWebFluxSecurity
 class SecurityConfig {
 
@@ -53,7 +52,6 @@ class SecurityConfig {
         return BCryptPasswordEncoder()
     }
 
-
     @Bean
     fun oAuth2UserServiceMap(): Map<SocialProvider, OAuth2UserService> {
         return hashMapOf<SocialProvider, OAuth2UserService>().apply {
@@ -67,5 +65,4 @@ class SecurityConfig {
             .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .build()
     }
-
 }

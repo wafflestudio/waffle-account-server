@@ -52,7 +52,7 @@ class AuthController(
     suspend fun authenticateSocialLogin(
         @PathVariable provider: String,
         @RequestBody oAuth2Request: OAuth2Request,
-    ):  TokenResponse {
+    ): TokenResponse {
 
         // FIXME NOW: provider path validation - local의 경우 제외해야함
         return authService.signup(

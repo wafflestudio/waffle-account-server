@@ -15,4 +15,4 @@ data class GoogleOAuth2UserResponse(
 
     @JsonProperty("sub")
     override val sub: String,
-): OAuth2UserResponse {}
+) : OAuth2UserResponse
