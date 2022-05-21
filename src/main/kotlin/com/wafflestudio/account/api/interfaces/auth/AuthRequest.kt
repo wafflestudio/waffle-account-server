@@ -1,5 +1,6 @@
 package com.wafflestudio.account.api.interfaces.auth
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
@@ -16,11 +17,13 @@ data class LocalAuthRequest(
 
 data class ValidateRequest(
     @field:NotBlank
+    @JsonProperty("access_token")
     val accessToken: String,
 )
 
 data class RefreshRequest(
     @field:NotBlank
+    @JsonProperty("refresh_token")
     val refreshToken: String,
 )
 

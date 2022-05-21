@@ -19,3 +19,7 @@ data class UserIDResponse(
     @JsonProperty("user_id")
     val userId: Long,
 )
+
+data class UnregisterResponse(
+    val unregistered: Boolean
+)

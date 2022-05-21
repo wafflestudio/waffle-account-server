@@ -77,8 +77,8 @@ class AuthService(
         val refreshData: RefreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
             ?: throw TokenInvalidException
 
-        val user: User? = userRepository.findById(refreshData.userId)
-        if (user == null || !user.isActive) throw UserInactiveException
+        val user = userRepository.findById(refreshData.userId) ?: throw UserDoesNotExistsException
+        if (!user.isActive) throw UserInactiveException
 
         val accessToken = buildAccessToken(user, LocalDateTime.now())
         return RefreshResponse(
@@ -169,5 +169,28 @@ class AuthService(
             accessToken = accessToken,
             refreshToken = refreshToken,
         )
+    }
+
+    suspend fun unregister(userId: Long): UnregisterResponse {
+        val user = userRepository.findById(userId) ?: throw UserDoesNotExistsException
+
+        if (!user.isActive || !checkUnregistrable(user)) {
+            return UnregisterResponse(unregistered = false)
+        }
+
+        val now = LocalDateTime.now()
+
+        user.isActive = false
+        user.updatedAt = now
+        userRepository.save(user)
+
+        refreshTokenRepository.updateExpireAtByUserId(userId, now)
+
+        return UnregisterResponse(unregistered = true)
+    }
+
+    private suspend fun checkUnregistrable(user: User): Boolean {
+        // ask to other services to check if the user is unregistrable
+        return true
     }
 }

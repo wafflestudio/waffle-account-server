@@ -15,13 +15,13 @@ class User(
 
     val password: String? = null,
 
-    val isActive: Boolean = true,
+    var isActive: Boolean = true,
 
-    val isBanned: Boolean = false,
+    var isBanned: Boolean = false,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
-    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
 
     val provider: AuthProvider = AuthProvider.LOCAL
 )
