@@ -54,7 +54,6 @@ class AuthController(
         @RequestBody oAuth2Request: OAuth2Request,
     ): TokenResponse {
 
-        // FIXME NOW: provider path validation - local의 경우 제외해야함
         return authService.signup(
             enumValueOf<SocialProvider>(provider.uppercase()),
             oAuth2Request

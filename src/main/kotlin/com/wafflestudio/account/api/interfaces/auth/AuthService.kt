@@ -5,11 +5,7 @@ import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
-import com.wafflestudio.account.api.error.EmailAlreadyExistsException
-import com.wafflestudio.account.api.error.TokenInvalidException
-import com.wafflestudio.account.api.error.UserDoesNotExistsException
-import com.wafflestudio.account.api.error.UserInactiveException
-import com.wafflestudio.account.api.error.WrongPasswordException
+import com.wafflestudio.account.api.error.*
 import com.wafflestudio.account.api.extension.sha256
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserServiceFactory
 import io.jsonwebtoken.Claims
@@ -179,13 +175,9 @@ class AuthService(
 
     suspend fun signup(provider: SocialProvider, oAuth2Request: OAuth2Request): TokenResponse {
 
-        // FIXME: throw INVALID PROVIDER EXCEPTION
-        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(provider) ?: throw Exception()
+        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(provider) ?: throw SocialProviderInvalidException
         val oAuth2Token = oAuth2Request.accessToken
 
-        // FIX ME: RAISE EXCEPTION
-        // TODO: 로컬 계정으로 가입된 이메일과 일치할 때
-        // TODO: FIND BY EMAIL -> FINB BY PROVIDER ADD USER SUB? 이메일이 없는 Provider가 있다는 소리가 있음.
         return oAuth2UserService.getMe(oAuth2Token)
             .flatMap { response ->
                 val email = response.email
@@ -196,11 +188,12 @@ class AuthService(
                             User(
                                 email = email,
                                 provider = provider,
-                                password = "", // FIXME: password 어떻게 처리할건지? Nullable?
+                                password = "",
                                 sub = response.sub
                             )
                         )
                     }
+                    if (user.provider == SocialProvider.LOCAL) throw WrongProviderException
                     return@mono user
                 }
             }
