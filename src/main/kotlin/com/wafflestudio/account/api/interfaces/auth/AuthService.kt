@@ -181,7 +181,8 @@ class AuthService(
 
     suspend fun signup(provider: SocialProvider, oAuth2Request: OAuth2Request): TokenResponse {
 
-        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(provider) ?: throw SocialProviderInvalidException
+        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(provider)
+            ?: throw SocialProviderInvalidException
         val oAuth2Token = oAuth2Request.accessToken
 
         return oAuth2UserService.getMe(oAuth2Token)
