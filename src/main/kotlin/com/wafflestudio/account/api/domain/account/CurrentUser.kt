@@ -1,4 +1,4 @@
-package com.wafflestudio.account.api.security
+package com.wafflestudio.account.api.domain.account
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.SimpleGrantedAuthority
