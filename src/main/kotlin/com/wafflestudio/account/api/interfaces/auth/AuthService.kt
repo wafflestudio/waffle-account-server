@@ -17,13 +17,13 @@ import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import java.security.Key
 import java.security.KeyFactory
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.util.Base64
+import java.util.Base64.Decoder
 
 @Service
 class AuthService(
@@ -36,6 +36,9 @@ class AuthService(
     @Value("\${auth.jwt.refresh.publicKey}") private val refreshPublicKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
 ) {
+    val decoder: Decoder = Base64.getDecoder()
+    val factory: KeyFactory = KeyFactory.getInstance("RSA")
+
     suspend fun signup(signupRequest: LocalAuthRequest): TokenResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
             throw EmailAlreadyExistsException
@@ -86,19 +89,11 @@ class AuthService(
         )
     }
 
-    private fun getJwtKey(key: String, isPublic: Boolean): Key {
-        val factory = KeyFactory.getInstance("RSA")
-        val decodedKey = Base64.getDecoder().decode(key)
-        return if (isPublic) {
-            factory.generatePublic(X509EncodedKeySpec(decodedKey))
-        } else {
-            factory.generatePrivate(PKCS8EncodedKeySpec(decodedKey))
-        }
-    }
-
     private fun checkTokenSigner(token: String, key: String): Claims {
+        val factory = KeyFactory.getInstance("RSA")
+        val generatedKey = factory.generatePublic(X509EncodedKeySpec(decoder.decode(key)))
         val jwtParser = Jwts.parserBuilder()
-            .setSigningKey(getJwtKey(key, true))
+            .setSigningKey(generatedKey)
             .requireIssuer(issuer)
             .build()
 
@@ -134,17 +129,17 @@ class AuthService(
             throw UserInactiveException
         }
 
+        val generatedKey = factory.generatePrivate(PKCS8EncodedKeySpec(decoder.decode(key)))
         return Jwts.builder()
             .setIssuer(issuer)
             .setSubject(user.id!!.toString())
             .setIssuedAt(Timestamp.valueOf(issuedAt))
             .setExpiration(Timestamp.valueOf(expiration))
-            .signWith(getJwtKey(key, false), SignatureAlgorithm.RS512)
+            .signWith(generatedKey, SignatureAlgorithm.RS512)
             .compact()
     }
 
     suspend fun signin(signinRequest: LocalAuthRequest): TokenResponse {
-
         val user = userRepository.findByEmail(signinRequest.email) ?: throw UserDoesNotExistsException
 
         if (!passwordEncoder.matches(signinRequest.password, user.password)) {
