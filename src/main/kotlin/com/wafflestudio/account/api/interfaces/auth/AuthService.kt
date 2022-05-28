@@ -31,7 +31,6 @@ class AuthService(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val passwordEncoder: PasswordEncoder,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
-    @Value("\${auth.jwt.access.publicKey}") private val accessPublicKey: String,
     @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
     @Value("\${auth.jwt.refresh.publicKey}") private val refreshPublicKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
@@ -62,17 +61,17 @@ class AuthService(
         )
     }
 
-    suspend fun getUserID(userIDRequest: UserIDRequest): UserIDResponse {
-        val userId: Long = userIDRequest.userId
-        if (userRepository.existsById(userId)) {
-            return UserIDResponse(
-                userId = userId,
-            )
-        } else throw UserDoesNotExistsException
-    }
-
-    suspend fun validate(validateRequest: ValidateRequest) {
-        checkTokenSigner(validateRequest.accessToken, accessPublicKey)
+    suspend fun getUser(userIDRequest: UserIDRequest): UserResponse {
+        val userId = userIDRequest.userId
+        val user = userRepository.findById(userId) ?: throw UserDoesNotExistsException
+        return UserResponse(
+            userId = userId,
+            username = user.username,
+            email = user.email,
+            isActive = user.isActive,
+            isBanned = user.isBanned,
+            provider = user.provider.name,
+        )
     }
 
     suspend fun refresh(refreshRequest: RefreshRequest): RefreshResponse {
