@@ -14,7 +14,15 @@ import javax.validation.Valid
 class AuthController(
     private val authService: AuthService,
 ) {
-    @PostMapping("/v1/users")
+
+    @PutMapping("/v1/auth/signin")
+    suspend fun signin(
+        @RequestBody @Valid signinRequest: LocalAuthRequest
+    ): TokenResponse {
+        return authService.signin(signinRequest)
+    }
+
+    @PostMapping("/v1/users/me")
     suspend fun signup(
         @RequestBody @Valid signupRequest: LocalAuthRequest,
     ): TokenResponse {
@@ -22,21 +30,14 @@ class AuthController(
     }
 
     @GetMapping("/v1/users/me")
-    suspend fun getUserID(
+    suspend fun getUserInformation(
         @RequestHeader @Valid userId: Long,
-    ): UserIDResponse {
-        return authService.getUserID(
+    ): UserResponse {
+        return authService.getUser(
             UserIDRequest(
                 userId = userId,
             )
         )
-    }
-
-    @PutMapping("/v1/auth/signin")
-    suspend fun signin(
-        @RequestBody @Valid signinRequest: LocalAuthRequest
-    ): TokenResponse {
-        return authService.signin(signinRequest)
     }
 
     @DeleteMapping("/v1/users/me")
