@@ -15,12 +15,6 @@ data class LocalAuthRequest(
     val password: String,
 )
 
-data class ValidateRequest(
-    @field:NotBlank
-    @JsonProperty("access_token")
-    val accessToken: String,
-)
-
 data class RefreshRequest(
     @field:NotBlank
     @JsonProperty("refresh_token")
