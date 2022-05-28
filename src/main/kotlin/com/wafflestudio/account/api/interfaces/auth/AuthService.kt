@@ -89,7 +89,6 @@ class AuthService(
     }
 
     private fun checkTokenSigner(token: String, key: String): Claims {
-        val factory = KeyFactory.getInstance("RSA")
         val generatedKey = factory.generatePublic(X509EncodedKeySpec(decoder.decode(key)))
         val jwtParser = Jwts.parserBuilder()
             .setSigningKey(generatedKey)
