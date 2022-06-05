@@ -22,7 +22,7 @@ class AuthController(
         return authService.signin(signinRequest)
     }
 
-    @PostMapping("/v1/users/me")
+    @PostMapping("/v1/users")
     suspend fun signup(
         @RequestBody @Valid signupRequest: LocalAuthRequest,
     ): TokenResponse {

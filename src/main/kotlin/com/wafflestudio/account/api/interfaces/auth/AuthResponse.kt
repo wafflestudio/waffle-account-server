@@ -19,10 +19,8 @@ data class UserResponse(
     @JsonProperty("user_id")
     val userId: Long,
 
-    @JsonProperty("name")
     val username: String?,
 
-    @JsonProperty("email")
     val email: String?,
 
     @JsonProperty("is_active")
@@ -31,7 +29,6 @@ data class UserResponse(
     @JsonProperty("is_banned")
     val isBanned: Boolean,
 
-    @JsonProperty("provider")
     val provider: String,
 )
 
