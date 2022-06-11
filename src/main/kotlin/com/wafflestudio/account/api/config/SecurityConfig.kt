@@ -5,25 +5,20 @@ import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserService
 import com.wafflestudio.account.api.security.TokenAuthenticationConverter
 import com.wafflestudio.account.api.security.TokenAuthenticationManager
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
-import org.springframework.http.MediaType
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter
-import org.springframework.web.reactive.function.client.WebClient
 
 @EnableWebFluxSecurity
-class SecurityConfig {
-
-    @Autowired private lateinit var clientRegistrationRepository: ReactiveClientRegistrationRepository
+class SecurityConfig(
+    private val googleOAuth2UserService: GoogleOAuth2UserService
+) {
 
     @Bean
     fun securityWebFilterChain(
@@ -54,15 +49,8 @@ class SecurityConfig {
 
     @Bean
     fun oAuth2UserServiceMap(): Map<SocialProvider, OAuth2UserService> {
-        return hashMapOf<SocialProvider, OAuth2UserService>().apply {
-            this[SocialProvider.GOOGLE] = GoogleOAuth2UserService(clientRegistrationRepository, webClient())
-        }
-    }
-
-    @Bean
-    fun webClient(): WebClient {
-        return WebClient.builder()
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-            .build()
+        return hashMapOf<SocialProvider, OAuth2UserService>(
+            SocialProvider.GOOGLE to googleOAuth2UserService
+        )
     }
 }

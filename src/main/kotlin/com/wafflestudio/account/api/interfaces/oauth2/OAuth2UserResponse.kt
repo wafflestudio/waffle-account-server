@@ -5,7 +5,7 @@ import javax.validation.constraints.Email
 
 interface OAuth2UserResponse {
     val email: String
-    val sub: String
+    val socialId: String
 }
 
 data class GoogleOAuth2UserResponse(
@@ -14,5 +14,5 @@ data class GoogleOAuth2UserResponse(
     override val email: String,
 
     @JsonProperty("sub")
-    override val sub: String,
+    override val socialId: String,
 ) : OAuth2UserResponse

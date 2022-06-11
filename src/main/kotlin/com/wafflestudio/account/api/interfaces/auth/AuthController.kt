@@ -1,6 +1,5 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.security.CurrentUser
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -55,7 +54,7 @@ class AuthController(
     ): TokenResponse {
 
         return authService.signup(
-            enumValueOf<SocialProvider>(provider.uppercase()),
+            provider,
             oAuth2Request
         )
     }

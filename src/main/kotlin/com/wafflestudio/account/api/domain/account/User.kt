@@ -26,5 +26,5 @@ class User(
 
     val provider: SocialProvider = SocialProvider.LOCAL,
 
-    val sub: String? = null
+    val socialId: String? = null
 )

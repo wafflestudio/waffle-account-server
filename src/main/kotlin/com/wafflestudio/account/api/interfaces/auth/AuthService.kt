@@ -179,9 +179,11 @@ class AuthService(
         return true
     }
 
-    suspend fun signup(provider: SocialProvider, oAuth2Request: OAuth2Request): TokenResponse {
+    suspend fun signup(provider: String, oAuth2Request: OAuth2Request): TokenResponse {
 
-        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(provider)
+        val socialProvider = enumValueOf<SocialProvider>(provider.uppercase())
+
+        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(socialProvider)
             ?: throw SocialProviderInvalidException
         val oAuth2Token = oAuth2Request.accessToken
 
@@ -189,17 +191,15 @@ class AuthService(
             .flatMap { response ->
                 val email = response.email
                 mono {
-                    var user = userRepository.findByEmail(email)
-                    if (user == null) {
-                        user = userRepository.save(
-                            User(
-                                email = email,
-                                provider = provider,
-                                password = "",
-                                sub = response.sub
-                            )
+                    val user = userRepository.findByEmail(email) ?: userRepository.save(
+                        User(
+                            email = email,
+                            provider = socialProvider,
+                            password = "",
+                            socialId = response.socialId
                         )
-                    }
+                    )
+
                     if (user.provider == SocialProvider.LOCAL) throw WrongProviderException
                     return@mono user
                 }
