@@ -16,7 +16,7 @@ class GoogleOAuth2UserService(
     val webClientBuilder: WebClient.Builder
 ) : OAuth2UserService {
 
-    override suspend fun getMe(
+    override fun getMe(
         accessToken: String
     ): Mono<OAuth2UserResponse> {
 

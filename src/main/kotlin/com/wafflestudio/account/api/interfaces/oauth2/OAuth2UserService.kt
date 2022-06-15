@@ -4,6 +4,6 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import reactor.core.publisher.Mono
 
 interface OAuth2UserService {
-    suspend fun getMe(accessToken: String): Mono<OAuth2UserResponse>
+    fun getMe(accessToken: String): Mono<OAuth2UserResponse>
     fun getClientRegistration(): Mono<ClientRegistration>
 }
