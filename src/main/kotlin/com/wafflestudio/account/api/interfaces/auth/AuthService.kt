@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.security.KeyFactory
+import java.security.PrivateKey
+import java.security.PublicKey
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 import java.sql.Timestamp
@@ -37,6 +39,14 @@ class AuthService(
 ) {
     val decoder: Decoder = Base64.getDecoder()
     val factory: KeyFactory = KeyFactory.getInstance("RSA")
+
+    val accessPrivateKeyEncoded = PKCS8EncodedKeySpec(decoder.decode(accessPrivateKey))
+    val refreshPublicKeyEncoded = X509EncodedKeySpec(decoder.decode(refreshPublicKey))
+    val refreshPrivateKeyEncoded = PKCS8EncodedKeySpec(decoder.decode(refreshPrivateKey))
+
+    val accessPrivateKeyGenerated = factory.generatePrivate(accessPrivateKeyEncoded)
+    val refreshPublicKeyGenerated = factory.generatePublic(refreshPublicKeyEncoded)
+    val refreshPrivateKeyGenerated = factory.generatePrivate(refreshPrivateKeyEncoded)
 
     suspend fun signup(signupRequest: LocalAuthRequest): TokenResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
@@ -75,7 +85,7 @@ class AuthService(
     }
 
     suspend fun refresh(refreshRequest: RefreshRequest): RefreshResponse {
-        checkTokenSigner(refreshRequest.refreshToken, refreshPublicKey)
+        checkTokenSigner(refreshRequest.refreshToken, refreshPublicKeyGenerated)
         val refreshData: RefreshToken = refreshTokenRepository.findByToken(refreshRequest.refreshToken)
             ?: throw TokenInvalidException
 
@@ -88,10 +98,9 @@ class AuthService(
         )
     }
 
-    private fun checkTokenSigner(token: String, key: String): Claims {
-        val generatedKey = factory.generatePublic(X509EncodedKeySpec(decoder.decode(key)))
+    private fun checkTokenSigner(token: String, key: PublicKey): Claims {
         val jwtParser = Jwts.parserBuilder()
-            .setSigningKey(generatedKey)
+            .setSigningKey(key)
             .requireIssuer(issuer)
             .build()
 
@@ -103,12 +112,12 @@ class AuthService(
     }
 
     private fun buildAccessToken(user: User, now: LocalDateTime): String {
-        return buildJwtToken(user, accessPrivateKey, now, now.plusDays(1))
+        return buildJwtToken(user, accessPrivateKeyGenerated, now, now.plusDays(1))
     }
 
     suspend fun buildRefreshToken(user: User, now: LocalDateTime): String {
         val expire = now.plusDays(365)
-        val refreshToken = buildJwtToken(user, refreshPrivateKey, now, expire)
+        val refreshToken = buildJwtToken(user, refreshPrivateKeyGenerated, now, expire)
 
         refreshTokenRepository.save(
             RefreshToken(
@@ -122,18 +131,17 @@ class AuthService(
         return refreshToken
     }
 
-    private fun buildJwtToken(user: User, key: String, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
+    private fun buildJwtToken(user: User, key: PrivateKey, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
         if (!user.isActive) {
             throw UserInactiveException
         }
 
-        val generatedKey = factory.generatePrivate(PKCS8EncodedKeySpec(decoder.decode(key)))
         return Jwts.builder()
             .setIssuer(issuer)
             .setSubject(user.id!!.toString())
             .setIssuedAt(Timestamp.valueOf(issuedAt))
             .setExpiration(Timestamp.valueOf(expiration))
-            .signWith(generatedKey, SignatureAlgorithm.RS512)
+            .signWith(key, SignatureAlgorithm.RS512)
             .compact()
     }
 
