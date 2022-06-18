@@ -37,16 +37,16 @@ class AuthService(
     @Value("\${auth.jwt.refresh.publicKey}") private val refreshPublicKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
 ) {
-    val decoder: Decoder = Base64.getDecoder()
-    val factory: KeyFactory = KeyFactory.getInstance("RSA")
+    private final val decoder: Decoder = Base64.getDecoder()
+    private final val factory: KeyFactory = KeyFactory.getInstance("RSA")
 
-    val accessPrivateKeyEncoded = PKCS8EncodedKeySpec(decoder.decode(accessPrivateKey))
-    val refreshPublicKeyEncoded = X509EncodedKeySpec(decoder.decode(refreshPublicKey))
-    val refreshPrivateKeyEncoded = PKCS8EncodedKeySpec(decoder.decode(refreshPrivateKey))
+    private final val accessPrivateKeyEncoded = PKCS8EncodedKeySpec(decoder.decode(accessPrivateKey))
+    private final val refreshPublicKeyEncoded = X509EncodedKeySpec(decoder.decode(refreshPublicKey))
+    private final val refreshPrivateKeyEncoded = PKCS8EncodedKeySpec(decoder.decode(refreshPrivateKey))
 
-    val accessPrivateKeyGenerated = factory.generatePrivate(accessPrivateKeyEncoded)
-    val refreshPublicKeyGenerated = factory.generatePublic(refreshPublicKeyEncoded)
-    val refreshPrivateKeyGenerated = factory.generatePrivate(refreshPrivateKeyEncoded)
+    private final val accessPrivateKeyGenerated: PrivateKey = factory.generatePrivate(accessPrivateKeyEncoded)
+    private final val refreshPublicKeyGenerated: PublicKey = factory.generatePublic(refreshPublicKeyEncoded)
+    private final val refreshPrivateKeyGenerated: PrivateKey = factory.generatePrivate(refreshPrivateKeyEncoded)
 
     suspend fun signup(signupRequest: LocalAuthRequest): TokenResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
