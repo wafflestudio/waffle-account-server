@@ -15,15 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.server.SecurityWebFilterChain
 
 @EnableWebFluxSecurity
-class SecurityConfig(
-    private val googleOAuth2UserService: GoogleOAuth2UserService
-) {
-
+class SecurityConfig {
     @Bean
     fun securityWebFilterChain(
         http: ServerHttpSecurity,
-        tokenAuthenticationConverter: TokenAuthenticationConverter,
-        tokenAuthenticationManager: TokenAuthenticationManager
     ): SecurityWebFilterChain {
         return http.authorizeExchange()
             .pathMatchers("/health_check").permitAll()
