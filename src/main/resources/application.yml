@@ -1,4 +1,12 @@
 spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id:
+                        client-secret:
+                        scope: email
     r2dbc:
         url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
         username: wath
@@ -19,6 +27,14 @@ spring.config.activate.on-profile: dev
 secret-names: dev/waffle-account
 
 spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id:
+                        client-secret:
+                        scole: email
     r2dbc:
         url:
         username:

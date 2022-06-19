@@ -2,6 +2,7 @@ package com.wafflestudio.account.api.interfaces.auth
 
 import com.wafflestudio.account.api.domain.account.CurrentUser
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -60,5 +61,17 @@ class AuthController(
         @RequestBody @Valid refreshRequest: RefreshRequest,
     ): RefreshResponse {
         return authService.refresh(refreshRequest)
+    }
+
+    @PostMapping("/v1/oauth/{provider}")
+    suspend fun authenticateSocialLogin(
+        @PathVariable provider: String,
+        @RequestBody oAuth2Request: OAuth2Request,
+    ): TokenResponse {
+
+        return authService.signup(
+            provider,
+            oAuth2Request
+        )
     }
 }
