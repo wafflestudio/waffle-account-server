@@ -25,9 +25,3 @@ data class UserIDRequest(
     @field:NotBlank
     val userId: Long,
 )
-
-data class OAuth2Request(
-    @field:NotBlank
-    @JsonProperty("access_token")
-    val accessToken: String,
-)
