@@ -1,5 +1,6 @@
 package com.wafflestudio.account.api.domain.account
 
+import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
@@ -23,5 +24,7 @@ class User(
 
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
-    val provider: AuthProvider = AuthProvider.LOCAL
+    val provider: SocialProvider = SocialProvider.LOCAL,
+
+    val socialId: String? = null
 )

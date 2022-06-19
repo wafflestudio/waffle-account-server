@@ -1,19 +1,24 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.AuthProvider
 import com.wafflestudio.account.api.domain.account.RefreshToken
 import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.error.EmailAlreadyExistsException
+import com.wafflestudio.account.api.error.SocialProviderInvalidException
 import com.wafflestudio.account.api.error.TokenInvalidException
 import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.UserInactiveException
 import com.wafflestudio.account.api.error.WrongPasswordException
+import com.wafflestudio.account.api.error.WrongProviderException
 import com.wafflestudio.account.api.extension.sha256
+import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserServiceFactory
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
+import kotlinx.coroutines.reactor.awaitSingle
+import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -26,6 +31,7 @@ class AuthService(
     private val userRepository: UserRepository,
     private val refreshTokenRepository: RefreshTokenRepository,
     private val passwordEncoder: PasswordEncoder,
+    private val oAuth2UserServiceFactory: OAuth2UserServiceFactory,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
     @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
     @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
@@ -39,7 +45,7 @@ class AuthService(
             User(
                 email = signupRequest.email,
                 password = passwordEncoder.encode(signupRequest.password),
-                provider = AuthProvider.LOCAL,
+                provider = SocialProvider.LOCAL,
             )
         )
 
@@ -171,5 +177,44 @@ class AuthService(
     private suspend fun checkUnregistrable(user: User): Boolean {
         // ask to other services to check if the user is unregistrable
         return true
+    }
+
+    suspend fun signup(provider: String, oAuth2Request: OAuth2Request): TokenResponse {
+
+        val socialProvider = enumValueOf<SocialProvider>(provider.uppercase())
+
+        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(socialProvider)
+            ?: throw SocialProviderInvalidException
+        val oAuth2Token = oAuth2Request.accessToken
+
+        return oAuth2UserService.getMe(oAuth2Token)
+            .flatMap { response ->
+                val email = response.email
+                mono {
+                    val user = userRepository.findByEmail(email) ?: userRepository.save(
+                        User(
+                            email = email,
+                            provider = socialProvider,
+                            password = "",
+                            socialId = response.socialId
+                        )
+                    )
+
+                    if (user.provider == SocialProvider.LOCAL) throw WrongProviderException
+                    return@mono user
+                }
+            }
+            .flatMap { user ->
+                val now = LocalDateTime.now()
+                val accessToken = buildAccessToken(user, now)
+
+                mono {
+                    val refreshToken = buildRefreshToken(user, now)
+                    return@mono TokenResponse(
+                        accessToken = accessToken,
+                        refreshToken = refreshToken,
+                    )
+                }
+            }.awaitSingle()
     }
 }

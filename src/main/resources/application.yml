@@ -1,15 +1,23 @@
 spring:
-  r2dbc:
-    url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
-    username: wath
-    password: teamsso
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id:
+                        client-secret:
+                        scope: email
+    r2dbc:
+        url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+        username: wath
+        password: teamsso
 auth:
-  jwt:
-    issuer: https://account-api-local.wafflestudio.com
-    access:
-      privateKey: Kd47YhrOhGFy4HPljfCIJ9jzaFmSwylY
-    refresh:
-      privateKey: tRiGb4Brml6ytdcoRgOqV35Rh8bKgX9k
+    jwt:
+        issuer: https://account-api-local.wafflestudio.com
+        access:
+            privateKey: Kd47YhrOhGFy4HPljfCIJ9jzaFmSwylY
+        refresh:
+            privateKey: tRiGb4Brml6ytdcoRgOqV35Rh8bKgX9k
 
 ---
 
@@ -18,14 +26,37 @@ spring.config.activate.on-profile: dev
 secret-names: dev/waffle-account
 
 spring:
-  r2dbc:
-    url:
-    username:
-    password:
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id:
+                        client-secret:
+                        scole: email
+    r2dbc:
+        url:
+        username:
+        password:
 auth:
-  jwt:
-    issuer: https://account-api-dev.wafflestudio.com
-    access:
-      privateKey:
-    refresh:
-      privateKey:
+    jwt:
+        issuer: https://account-api-dev.wafflestudio.com
+        access:
+            privateKey:
+        refresh:
+            privateKey:
+
+---
+
+spring.config.activate.on-profile: local
+
+secret-names: local/waffle-account
+
+spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id:
+                        client-secret:

@@ -26,3 +26,9 @@ data class RefreshRequest(
     @JsonProperty("refresh_token")
     val refreshToken: String,
 )
+
+data class OAuth2Request(
+    @field:NotBlank
+    @JsonProperty("access_token")
+    val accessToken: String,
+)
