@@ -15,16 +15,15 @@ data class LocalAuthRequest(
     val password: String,
 )
 
-data class ValidateRequest(
-    @field:NotBlank
-    @JsonProperty("access_token")
-    val accessToken: String,
-)
-
 data class RefreshRequest(
     @field:NotBlank
     @JsonProperty("refresh_token")
     val refreshToken: String,
+)
+
+data class UserIDRequest(
+    @field:NotBlank
+    val userId: Long,
 )
 
 data class OAuth2Request(

@@ -1,11 +1,13 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.security.CurrentUser
+import com.wafflestudio.account.api.domain.account.CurrentUser
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
@@ -13,6 +15,14 @@ import javax.validation.Valid
 class AuthController(
     private val authService: AuthService,
 ) {
+
+    @PutMapping("/v1/auth/signin")
+    suspend fun signin(
+        @RequestBody @Valid signinRequest: LocalAuthRequest
+    ): TokenResponse {
+        return authService.signin(signinRequest)
+    }
+
     @PostMapping("/v1/users")
     suspend fun signup(
         @RequestBody @Valid signupRequest: LocalAuthRequest,
@@ -20,11 +30,15 @@ class AuthController(
         return authService.signup(signupRequest)
     }
 
-    @PutMapping("/v1/auth/signin")
-    suspend fun signin(
-        @RequestBody @Valid signinRequest: LocalAuthRequest
-    ): TokenResponse {
-        return authService.signin(signinRequest)
+    @GetMapping("/v1/users/me")
+    suspend fun getUserInformation(
+        @RequestHeader @Valid userId: Long,
+    ): UserResponse {
+        return authService.getUser(
+            UserIDRequest(
+                userId = userId,
+            )
+        )
     }
 
     @DeleteMapping("/v1/users/me")
@@ -35,9 +49,11 @@ class AuthController(
 
     @PutMapping("/v1/validate")
     suspend fun tokenValidate(
-        @RequestBody @Valid validateRequest: ValidateRequest,
-    ) {
-        return authService.validate(validateRequest)
+        @RequestHeader @Valid userId: Long,
+    ): UserIDResponse {
+        return UserIDResponse(
+            userId = userId,
+        )
     }
 
     @PutMapping("/v1/refresh")

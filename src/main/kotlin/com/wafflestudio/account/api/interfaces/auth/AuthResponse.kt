@@ -15,6 +15,28 @@ data class RefreshResponse(
     val accessToken: String,
 )
 
+data class UserResponse(
+    @JsonProperty("user_id")
+    val userId: Long,
+
+    val username: String?,
+
+    val email: String?,
+
+    @JsonProperty("is_active")
+    val isActive: Boolean,
+
+    @JsonProperty("is_banned")
+    val isBanned: Boolean,
+
+    val provider: String,
+)
+
+data class UserIDResponse(
+    @JsonProperty("user_id")
+    val userId: Long,
+)
+
 data class UnregisterResponse(
     val unregistered: Boolean
 )
