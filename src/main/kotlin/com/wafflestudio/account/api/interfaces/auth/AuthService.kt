@@ -17,7 +17,6 @@ import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserServiceFactory
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import io.jsonwebtoken.security.Keys
 import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.annotation.Value
