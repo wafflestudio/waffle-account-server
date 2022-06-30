@@ -1,3 +1,7 @@
+spring.profiles.default: local
+
+secret-names: local/waffle-account
+
 spring:
     security:
         oauth2:
@@ -35,7 +39,7 @@ spring:
                     google:
                         client-id:
                         client-secret:
-                        scole: email
+                        scope: email
     r2dbc:
         url:
         username:
@@ -49,18 +53,3 @@ auth:
         refresh:
             publicKey: MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwm/OGv7872n0TQrHhS/PBNURBLVPDmuRpGT5IG/bhv44rSdCQVMGhqerlckSvPEJyFNYnuqrIlK8XjhaQnpf6P2gPy/qrSoKZ/0+ZvKkaWUb8sv5zLsztTWbpxd1xTQ33WWsMtdfbhl5k38K+0DLJdh4xWin08vLZE5hCmWe6i9SZU10WY0ARw2FpYIzdMbLPvm/NYdlL7FyIDW7YATuIaW/uTLa6Hy7o0viz6sL2ysWmC0GPSHqsOQoAFlNnR4vhBqXlAiLfSH3ufCmPU6AcEOoXL1n0w9HOnVP0wStWdC6tFyRimJjElbRpTpu6vjLzEQslQ5bKGgyM6CUqXHwFkisQDPWWqC411f2TBGrBPF8HUqh+WEEiatnsMaDt4Keo3LfqLF4QLY9eCM8CTgbuyJ+ChMVepCi79AXsySjQVFkbM3Jm7H/s+MoLRsspa+wX726zX+ozFv+kb9xS6CdvNKJ5hWYKG0tiQIHV8M3iz3XHuz825BgOTC4QQ4+R1He512PJnBkYj5jirPDS4Q/LgKEmS+2KmtYjh3nXW4u54fbhWSqyPvQ97MWPcO62UOPsiZnAFaNbp0fOpqXnEm4f74NKfgKIpznDE/knYXUjyrax8MStSTOy+gnalhJzldlWLqDne6KLcDyyCSdydar4EApayKPAnmQmgArf0uwQZkCAwEAAQ==
             privateKey:
-
----
-
-spring.config.activate.on-profile: local
-
-secret-names: local/waffle-account
-
-spring:
-    security:
-        oauth2:
-            client:
-                registration:
-                    google:
-                        client-id:
-                        client-secret:
