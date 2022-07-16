@@ -1,0 +1,1 @@
+operation::health[snippets='curl-request,http-request,http-response,request-body,response-body']
