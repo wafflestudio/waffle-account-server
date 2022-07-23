@@ -1,0 +1,10 @@
+= My API Reference
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Health]]
+== Health API
+include::health.adoc[]
