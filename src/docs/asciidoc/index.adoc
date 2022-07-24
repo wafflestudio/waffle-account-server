@@ -8,3 +8,7 @@
 [[Health]]
 == Health API
 include::health.adoc[]
+
+[[Auth]]
+== Auth API
+include::auth.adoc[]
