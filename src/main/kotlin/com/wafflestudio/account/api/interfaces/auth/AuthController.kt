@@ -68,7 +68,6 @@ class AuthController(
         @PathVariable provider: String,
         @RequestBody oAuth2Request: OAuth2Request,
     ): TokenResponse {
-
         return authService.signup(
             provider,
             oAuth2Request
