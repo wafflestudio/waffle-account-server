@@ -10,5 +10,5 @@ None
 .200 OK
 [%collapsible]
 ====
-operation::health[snippets='curl-request,http-request,http-response,request-body,response-body']
+operation::health[snippets='curl-request,http-request,http-response']
 ====
