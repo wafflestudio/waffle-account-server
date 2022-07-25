@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>My API Reference</title>
+<title>API Reference For Waffle Account Server</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>My API Reference</h1>
+<h1>API Reference For Waffle Account Server</h1>
 <div class="details">
 <span id="revnumber">version 0.0.1</span>
 </div>
@@ -447,20 +447,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#Health">Health API</a>
 <ul class="sectlevel2">
-<li><a href="#Health_curl_request">Curl request</a></li>
-<li><a href="#Health_http_request">HTTP request</a></li>
-<li><a href="#Health_http_response">HTTP response</a></li>
-<li><a href="#Health_request_body">Request body</a></li>
-<li><a href="#Health_response_body">Response body</a></li>
+<li><a href="#_get_health_check">GET /health_check</a></li>
 </ul>
 </li>
 <li><a href="#Auth">Auth API</a>
 <ul class="sectlevel2">
-<li><a href="#Auth_curl_request">Curl request</a></li>
-<li><a href="#Auth_http_request">HTTP request</a></li>
-<li><a href="#Auth_http_response">HTTP response</a></li>
-<li><a href="#Auth_request_body">Request body</a></li>
-<li><a href="#Auth_response_body">Response body</a></li>
+<li><a href="#_put_v1authsignin">PUT /v1/auth/signin</a></li>
+<li><a href="#_put_v1authrefresh">PUT /v1/auth/refresh</a></li>
 </ul>
 </li>
 </ul>
@@ -471,15 +464,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="Health"><a class="link" href="#Health">Health API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="Health_curl_request"><a class="link" href="#Health_curl_request">Curl request</a></h3>
+<h3 id="_get_health_check"><a class="link" href="#_get_health_check">GET /health_check</a></h3>
+<div class="sect3">
+<h4 id="_request"><a class="link" href="#_request">Request</a></h4>
+<div class="paragraph">
+<p>None</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response"><a class="link" href="#_response">Response</a></h4>
+<div class="paragraph">
+<p>None</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_examples"><a class="link" href="#_examples">Examples</a></h4>
+<details>
+<summary class="title">200 OK</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/health_check' -i -X GET</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="Health_http_request"><a class="link" href="#Health_http_request">HTTP request</a></h3>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /health_check HTTP/1.1
@@ -487,8 +499,8 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="Health_http_response"><a class="link" href="#Health_http_response">HTTP response</a></h3>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
@@ -496,20 +508,24 @@ Content-Type: application/json</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="Health_request_body"><a class="link" href="#Health_request_body">Request body</a></h3>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="Health_response_body"><a class="link" href="#Health_response_body">Response body</a></h3>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
 </div>
+</div>
+</div>
+</div>
+</details>
 </div>
 </div>
 </div>
@@ -518,44 +534,538 @@ Content-Type: application/json</code></pre>
 <h2 id="Auth"><a class="link" href="#Auth">Auth API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="Auth_curl_request"><a class="link" href="#Auth_curl_request">Curl request</a></h3>
+<h3 id="_put_v1authsignin"><a class="link" href="#_put_v1authsignin">PUT /v1/auth/signin</a></h3>
+<div class="sect3">
+<h4 id="_request_2"><a class="link" href="#_request_2">Request</a></h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Body
+</td>
+<td class="hdlist2">
+<p>email, password</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_2"><a class="link" href="#_response_2">Response</a></h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Body
+</td>
+<td class="hdlist2">
+<p>access_token, refresh_token</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_examples_2"><a class="link" href="#_examples_2">Examples</a></h4>
+<details>
+<summary class="title">200 OK</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "email" : "test@test.com",
+  "password" : "testpassword"
+}'</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="Auth_http_request"><a class="link" href="#Auth_http_request">HTTP request</a></h3>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /v1/auth/signin HTTP/1.1
-Host: localhost:8080</code></pre>
+Content-Type: application/json
+Content-Length: 65
+Host: localhost:8080
+
+{
+  "email" : "test@test.com",
+  "password" : "testpassword"
+}</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="Auth_http_response"><a class="link" href="#Auth_http_response">HTTP response</a></h3>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 1718
+
+{
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2NTg4MjY1NDF9.cR4bo2vFWPFOBbGR81kmTzRBbRUsJeyi1w4oFZ9RKdjyMUQUrfjrD5r-KNt4guZghHkMQSOnYFWiNp2VM7Sea5EZr6DDNEADf9FmHdNtOeTx3dLt63PXDoDRil0cF23dPMCtDPf-3w29UcSr02lZ1PEeicGAA-BRpya_s9GQjosVqDORxNn53pXcUGy4xKxxjw8Nw8I26WE2DYhue4AuTtR6m1t9FbtDfHQpJHMCPuIJ6_T_diDpnvRNLwRzCk-QH3Y-hVbiLol4k4iSmBrTM3mH6zFCrQh-K_OXZnza68RTxkPxyDzhE-PYikngYC_0Debvcmew2bFFf-IVjUbiMXcFMJMEKyS8j3LDp_Rkoz0_IhzPOYv6kreWFxkUc6IN7ioMD85JNe-DCjPqf0-GjwoZe63VVUOU6jYlqL12wxdXoU-tduh70_4fsqGc_YhD6sFaUOS020n3nCrvINWoGy5rpjaTWvROMCLA4FWtMxKSqSxr6vli0oR2dNVKnF6-NKw7pZtr2_uTrMBSqzt2XBw_Z09EGk2rRUx3_JX6WMrBcUyR_jW0OBXjGz3z0Vz6OVkCuisPc5K39fc4ilBQ4GMdi22WNkrsOtlwOvDefVNVUVjnHfKn_kaoMje49Fb5KTSLzmhvpgCBDnK_yQ51WgZGnGzE9jHh4Z2UlvvWRt8",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2OTAyNzYxNDF9.GENpTMqsPo70v2jlb51UyVcYQrXPj0FA3Y7uon0K7G66S_RZiajdbQjbcviv9DvNwZOshy81Wkix3IRfjE39SY3CykXhzbC0yZtyOfBwTa1oKm7efAUVpxzUE0e-drGJpX0IYe3vBpQ26cXffO9ck5qMujLX3BLe4Lr_v9kh4ihn22_1Gr9pdWzte2TFZuXeFRFZjSmyCnqUTILkHlPIyQG0YHluOdxYi5uXLxXfi7K4UZ9WX3rfwpZxIgNPiqKn1cqpriKGOFweTR0hru44TO7yCXoMrinkfsmifE94-h4STCFdiLNAthi3hHY3tDDWDzMERdIWbO3r4MYGvMNxSDoudqGfuHQCDNo5Uw75QTXe843G-cy6TAvMJX1qVC0VrkryVew2NltfObke787gPXO1TZLxLpB3anmRTvfnrMkw1q19N_uXKWzD_wyRBRreaJD3PM9QJ2-_qC_iVcbh2SgdzGz2-H_-2BLPM5sujC196BX9ELr4mTWD3Pe3hNybqcqJ4cswzLv5kuBNUKEv3M4isRk1qN8u4Q7rDlbMPlDksTgZH44xGvb_s8Ndff-GFgNYAVjIyiFDmJxQlw4N4-LiMkVx8iv3d9R3iEHJGvYbVtK2mXLPV87KmqJSA2PUhctBFHelFQg4bxZKHeVugAVu2gKkPjCeEoWoruSxMHU"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "email" : "test@test.com",
+  "password" : "testpassword"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2NTg4MjY1NDF9.cR4bo2vFWPFOBbGR81kmTzRBbRUsJeyi1w4oFZ9RKdjyMUQUrfjrD5r-KNt4guZghHkMQSOnYFWiNp2VM7Sea5EZr6DDNEADf9FmHdNtOeTx3dLt63PXDoDRil0cF23dPMCtDPf-3w29UcSr02lZ1PEeicGAA-BRpya_s9GQjosVqDORxNn53pXcUGy4xKxxjw8Nw8I26WE2DYhue4AuTtR6m1t9FbtDfHQpJHMCPuIJ6_T_diDpnvRNLwRzCk-QH3Y-hVbiLol4k4iSmBrTM3mH6zFCrQh-K_OXZnza68RTxkPxyDzhE-PYikngYC_0Debvcmew2bFFf-IVjUbiMXcFMJMEKyS8j3LDp_Rkoz0_IhzPOYv6kreWFxkUc6IN7ioMD85JNe-DCjPqf0-GjwoZe63VVUOU6jYlqL12wxdXoU-tduh70_4fsqGc_YhD6sFaUOS020n3nCrvINWoGy5rpjaTWvROMCLA4FWtMxKSqSxr6vli0oR2dNVKnF6-NKw7pZtr2_uTrMBSqzt2XBw_Z09EGk2rRUx3_JX6WMrBcUyR_jW0OBXjGz3z0Vz6OVkCuisPc5K39fc4ilBQ4GMdi22WNkrsOtlwOvDefVNVUVjnHfKn_kaoMje49Fb5KTSLzmhvpgCBDnK_yQ51WgZGnGzE9jHh4Z2UlvvWRt8",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2OTAyNzYxNDF9.GENpTMqsPo70v2jlb51UyVcYQrXPj0FA3Y7uon0K7G66S_RZiajdbQjbcviv9DvNwZOshy81Wkix3IRfjE39SY3CykXhzbC0yZtyOfBwTa1oKm7efAUVpxzUE0e-drGJpX0IYe3vBpQ26cXffO9ck5qMujLX3BLe4Lr_v9kh4ihn22_1Gr9pdWzte2TFZuXeFRFZjSmyCnqUTILkHlPIyQG0YHluOdxYi5uXLxXfi7K4UZ9WX3rfwpZxIgNPiqKn1cqpriKGOFweTR0hru44TO7yCXoMrinkfsmifE94-h4STCFdiLNAthi3hHY3tDDWDzMERdIWbO3r4MYGvMNxSDoudqGfuHQCDNo5Uw75QTXe843G-cy6TAvMJX1qVC0VrkryVew2NltfObke787gPXO1TZLxLpB3anmRTvfnrMkw1q19N_uXKWzD_wyRBRreaJD3PM9QJ2-_qC_iVcbh2SgdzGz2-H_-2BLPM5sujC196BX9ELr4mTWD3Pe3hNybqcqJ4cswzLv5kuBNUKEv3M4isRk1qN8u4Q7rDlbMPlDksTgZH44xGvb_s8Ndff-GFgNYAVjIyiFDmJxQlw4N4-LiMkVx8iv3d9R3iEHJGvYbVtK2mXLPV87KmqJSA2PUhctBFHelFQg4bxZKHeVugAVu2gKkPjCeEoWoruSxMHU"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">400 Bad Request</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -d '{ }'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /v1/auth/signin HTTP/1.1
+Content-Type: application/json
+Content-Length: 3
+Host: localhost:8080
+
+{ }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="Auth_request_body"><a class="link" href="#Auth_request_body">Request body</a></h3>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{ }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
 </div>
 </div>
 </div>
+</div>
+</details>
+<details>
+<summary class="title">401 Unauthorized</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "email" : "test@test.com",
+  "password" : "wrongpassword"
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /v1/auth/signin HTTP/1.1
+Content-Type: application/json
+Content-Length: 66
+Host: localhost:8080
+
+{
+  "email" : "test@test.com",
+  "password" : "wrongpassword"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+Content-Length: 81
+
+{
+  "error" : {
+    "code" : 1401002,
+    "message" : "WRONG_PASSWORD"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "email" : "test@test.com",
+  "password" : "wrongpassword"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "error" : {
+    "code" : 1401002,
+    "message" : "WRONG_PASSWORD"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">404 Not Found</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "email" : "wrong@test.com",
+  "password" : "wrongpassword"
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /v1/auth/signin HTTP/1.1
+Content-Type: application/json
+Content-Length: 67
+Host: localhost:8080
+
+{
+  "email" : "wrong@test.com",
+  "password" : "wrongpassword"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 404 Not Found
+Content-Type: application/json
+Content-Length: 81
+
+{
+  "error" : {
+    "code" : 1404001,
+    "message" : "USER_NOT_FOUND"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "email" : "wrong@test.com",
+  "password" : "wrongpassword"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "error" : {
+    "code" : 1404001,
+    "message" : "USER_NOT_FOUND"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
 <div class="sect2">
-<h3 id="Auth_response_body"><a class="link" href="#Auth_response_body">Response body</a></h3>
+<h3 id="_put_v1authrefresh"><a class="link" href="#_put_v1authrefresh">PUT /v1/auth/refresh</a></h3>
+<div class="sect3">
+<h4 id="_request_3"><a class="link" href="#_request_3">Request</a></h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Body
+</td>
+<td class="hdlist2">
+<p>refresh_token</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_3"><a class="link" href="#_response_3">Response</a></h4>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Body
+</td>
+<td class="hdlist2">
+<p>access_token</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_examples_3"><a class="link" href="#_examples_3">Examples</a></h4>
+<details>
+<summary class="title">200 OK</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2OTAyNzYxNDF9.GENpTMqsPo70v2jlb51UyVcYQrXPj0FA3Y7uon0K7G66S_RZiajdbQjbcviv9DvNwZOshy81Wkix3IRfjE39SY3CykXhzbC0yZtyOfBwTa1oKm7efAUVpxzUE0e-drGJpX0IYe3vBpQ26cXffO9ck5qMujLX3BLe4Lr_v9kh4ihn22_1Gr9pdWzte2TFZuXeFRFZjSmyCnqUTILkHlPIyQG0YHluOdxYi5uXLxXfi7K4UZ9WX3rfwpZxIgNPiqKn1cqpriKGOFweTR0hru44TO7yCXoMrinkfsmifE94-h4STCFdiLNAthi3hHY3tDDWDzMERdIWbO3r4MYGvMNxSDoudqGfuHQCDNo5Uw75QTXe843G-cy6TAvMJX1qVC0VrkryVew2NltfObke787gPXO1TZLxLpB3anmRTvfnrMkw1q19N_uXKWzD_wyRBRreaJD3PM9QJ2-_qC_iVcbh2SgdzGz2-H_-2BLPM5sujC196BX9ELr4mTWD3Pe3hNybqcqJ4cswzLv5kuBNUKEv3M4isRk1qN8u4Q7rDlbMPlDksTgZH44xGvb_s8Ndff-GFgNYAVjIyiFDmJxQlw4N4-LiMkVx8iv3d9R3iEHJGvYbVtK2mXLPV87KmqJSA2PUhctBFHelFQg4bxZKHeVugAVu2gKkPjCeEoWoruSxMHU"
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /v1/refresh HTTP/1.1
+Content-Type: application/json
+Content-Length: 861
+Host: localhost:8080
+
+{
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2OTAyNzYxNDF9.GENpTMqsPo70v2jlb51UyVcYQrXPj0FA3Y7uon0K7G66S_RZiajdbQjbcviv9DvNwZOshy81Wkix3IRfjE39SY3CykXhzbC0yZtyOfBwTa1oKm7efAUVpxzUE0e-drGJpX0IYe3vBpQ26cXffO9ck5qMujLX3BLe4Lr_v9kh4ihn22_1Gr9pdWzte2TFZuXeFRFZjSmyCnqUTILkHlPIyQG0YHluOdxYi5uXLxXfi7K4UZ9WX3rfwpZxIgNPiqKn1cqpriKGOFweTR0hru44TO7yCXoMrinkfsmifE94-h4STCFdiLNAthi3hHY3tDDWDzMERdIWbO3r4MYGvMNxSDoudqGfuHQCDNo5Uw75QTXe843G-cy6TAvMJX1qVC0VrkryVew2NltfObke787gPXO1TZLxLpB3anmRTvfnrMkw1q19N_uXKWzD_wyRBRreaJD3PM9QJ2-_qC_iVcbh2SgdzGz2-H_-2BLPM5sujC196BX9ELr4mTWD3Pe3hNybqcqJ4cswzLv5kuBNUKEv3M4isRk1qN8u4Q7rDlbMPlDksTgZH44xGvb_s8Ndff-GFgNYAVjIyiFDmJxQlw4N4-LiMkVx8iv3d9R3iEHJGvYbVtK2mXLPV87KmqJSA2PUhctBFHelFQg4bxZKHeVugAVu2gKkPjCeEoWoruSxMHU"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 860
+
+{
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2NTg4MjY1NDF9.cR4bo2vFWPFOBbGR81kmTzRBbRUsJeyi1w4oFZ9RKdjyMUQUrfjrD5r-KNt4guZghHkMQSOnYFWiNp2VM7Sea5EZr6DDNEADf9FmHdNtOeTx3dLt63PXDoDRil0cF23dPMCtDPf-3w29UcSr02lZ1PEeicGAA-BRpya_s9GQjosVqDORxNn53pXcUGy4xKxxjw8Nw8I26WE2DYhue4AuTtR6m1t9FbtDfHQpJHMCPuIJ6_T_diDpnvRNLwRzCk-QH3Y-hVbiLol4k4iSmBrTM3mH6zFCrQh-K_OXZnza68RTxkPxyDzhE-PYikngYC_0Debvcmew2bFFf-IVjUbiMXcFMJMEKyS8j3LDp_Rkoz0_IhzPOYv6kreWFxkUc6IN7ioMD85JNe-DCjPqf0-GjwoZe63VVUOU6jYlqL12wxdXoU-tduh70_4fsqGc_YhD6sFaUOS020n3nCrvINWoGy5rpjaTWvROMCLA4FWtMxKSqSxr6vli0oR2dNVKnF6-NKw7pZtr2_uTrMBSqzt2XBw_Z09EGk2rRUx3_JX6WMrBcUyR_jW0OBXjGz3z0Vz6OVkCuisPc5K39fc4ilBQ4GMdi22WNkrsOtlwOvDefVNVUVjnHfKn_kaoMje49Fb5KTSLzmhvpgCBDnK_yQ51WgZGnGzE9jHh4Z2UlvvWRt8"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2OTAyNzYxNDF9.GENpTMqsPo70v2jlb51UyVcYQrXPj0FA3Y7uon0K7G66S_RZiajdbQjbcviv9DvNwZOshy81Wkix3IRfjE39SY3CykXhzbC0yZtyOfBwTa1oKm7efAUVpxzUE0e-drGJpX0IYe3vBpQ26cXffO9ck5qMujLX3BLe4Lr_v9kh4ihn22_1Gr9pdWzte2TFZuXeFRFZjSmyCnqUTILkHlPIyQG0YHluOdxYi5uXLxXfi7K4UZ9WX3rfwpZxIgNPiqKn1cqpriKGOFweTR0hru44TO7yCXoMrinkfsmifE94-h4STCFdiLNAthi3hHY3tDDWDzMERdIWbO3r4MYGvMNxSDoudqGfuHQCDNo5Uw75QTXe843G-cy6TAvMJX1qVC0VrkryVew2NltfObke787gPXO1TZLxLpB3anmRTvfnrMkw1q19N_uXKWzD_wyRBRreaJD3PM9QJ2-_qC_iVcbh2SgdzGz2-H_-2BLPM5sujC196BX9ELr4mTWD3Pe3hNybqcqJ4cswzLv5kuBNUKEv3M4isRk1qN8u4Q7rDlbMPlDksTgZH44xGvb_s8Ndff-GFgNYAVjIyiFDmJxQlw4N4-LiMkVx8iv3d9R3iEHJGvYbVtK2mXLPV87KmqJSA2PUhctBFHelFQg4bxZKHeVugAVu2gKkPjCeEoWoruSxMHU"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4NzQwMTQxLCJleHAiOjE2NTg4MjY1NDF9.cR4bo2vFWPFOBbGR81kmTzRBbRUsJeyi1w4oFZ9RKdjyMUQUrfjrD5r-KNt4guZghHkMQSOnYFWiNp2VM7Sea5EZr6DDNEADf9FmHdNtOeTx3dLt63PXDoDRil0cF23dPMCtDPf-3w29UcSr02lZ1PEeicGAA-BRpya_s9GQjosVqDORxNn53pXcUGy4xKxxjw8Nw8I26WE2DYhue4AuTtR6m1t9FbtDfHQpJHMCPuIJ6_T_diDpnvRNLwRzCk-QH3Y-hVbiLol4k4iSmBrTM3mH6zFCrQh-K_OXZnza68RTxkPxyDzhE-PYikngYC_0Debvcmew2bFFf-IVjUbiMXcFMJMEKyS8j3LDp_Rkoz0_IhzPOYv6kreWFxkUc6IN7ioMD85JNe-DCjPqf0-GjwoZe63VVUOU6jYlqL12wxdXoU-tduh70_4fsqGc_YhD6sFaUOS020n3nCrvINWoGy5rpjaTWvROMCLA4FWtMxKSqSxr6vli0oR2dNVKnF6-NKw7pZtr2_uTrMBSqzt2XBw_Z09EGk2rRUx3_JX6WMrBcUyR_jW0OBXjGz3z0Vz6OVkCuisPc5K39fc4ilBQ4GMdi22WNkrsOtlwOvDefVNVUVjnHfKn_kaoMje49Fb5KTSLzmhvpgCBDnK_yQ51WgZGnGzE9jHh4Z2UlvvWRt8"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">400 Bad Request</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -d '{ }'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /v1/refresh HTTP/1.1
+Content-Type: application/json
+Content-Length: 3
+Host: localhost:8080
+
+{ }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{ }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
 </div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">401 Unauthorized</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "refresh_token" : "WrongToken"
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /v1/refresh HTTP/1.1
+Content-Type: application/json
+Content-Length: 38
+Host: localhost:8080
+
+{
+  "refresh_token" : "WrongToken"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+Content-Length: 80
+
+{
+  "error" : {
+    "code" : 1401001,
+    "message" : "INVALID_TOKEN"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_request_body"><a class="link" href="#_request_body">Request body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "refresh_token" : "WrongToken"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_body"><a class="link" href="#_response_body">Response body</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "error" : {
+    "code" : 1401001,
+    "message" : "INVALID_TOKEN"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
 </div>
 </div>
 </div>
@@ -564,7 +1074,7 @@ Host: localhost:8080</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2022-07-24 22:28:08 +0900
+Last updated 2022-07-25 12:54:56 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

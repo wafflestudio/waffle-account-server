@@ -1,1 +1,14 @@
+=== GET /health_check
+
+==== Request
+None
+
+==== Response
+None
+
+==== Examples
+.200 OK
+[%collapsible]
+====
 operation::health[snippets='curl-request,http-request,http-response,request-body,response-body']
+====

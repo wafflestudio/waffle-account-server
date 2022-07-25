@@ -1,4 +1,5 @@
-= My API Reference
+= API Reference For Waffle Account Server
+:version:
 :doctype: book
 :source-highlighter: highlightjs
 :toc: left

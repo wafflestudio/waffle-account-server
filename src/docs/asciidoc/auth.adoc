@@ -1,1 +1,58 @@
-operation::signin[snippets='curl-request,http-request,http-response,request-body,response-body']
+=== PUT /v1/auth/signin
+
+==== Request
+[horizontal]
+Body:: email, password
+
+==== Response
+[horizontal]
+Body:: access_token, refresh_token
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::signin-200[snippets='curl-request,http-request,http-response,request-body,response-body']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::signin-400[snippets='curl-request,http-request,http-response,request-body,response-body']
+====
+.401 Unauthorized
+[%collapsible]
+====
+operation::signin-401[snippets='curl-request,http-request,http-response,request-body,response-body']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::signin-404[snippets='curl-request,http-request,http-response,request-body,response-body']
+====
+
+=== PUT /v1/auth/refresh
+
+==== Request
+[horizontal]
+Body:: refresh_token
+
+==== Response
+[horizontal]
+Body:: access_token
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::refresh-200[snippets='curl-request,http-request,http-response,request-body,response-body']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::refresh-400[snippets='curl-request,http-request,http-response,request-body,response-body']
+====
+.401 Unauthorized
+[%collapsible]
+====
+operation::refresh-401[snippets='curl-request,http-request,http-response,request-body,response-body']
+====

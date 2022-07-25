@@ -1,3 +1,4 @@
+secret-names: local/waffle-account
 spring:
     security:
         oauth2:
