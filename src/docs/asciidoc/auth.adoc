@@ -30,6 +30,28 @@ operation::signin-401[snippets='curl-request,http-request,http-response']
 operation::signin-404[snippets='curl-request,http-request,http-response']
 ====
 
+=== PUT /v1/auth/validate
+
+==== Request
+[horizontal]
+Header:: userId
+
+==== Response
+[horizontal]
+Body:: user_id
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::validate-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::validate-400[snippets='curl-request,http-request,http-response']
+====
+
 === PUT /v1/auth/refresh
 
 ==== Request

@@ -7,16 +7,14 @@ import com.wafflestudio.account.api.interfaces.auth.RefreshRequest
 import com.wafflestudio.account.api.interfaces.auth.TokenResponse
 import io.kotest.core.spec.style.WordSpec
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.MediaType
 import org.springframework.restdocs.ManualRestDocumentation
 import org.springframework.restdocs.operation.preprocess.Preprocessors
 import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation
-import org.springframework.test.web.reactive.server.EntityExchangeResult
+import org.springframework.test.web.reactive.server.StatusAssertions
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpec
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.reactive.server.expectBody
-import java.util.function.Consumer
 
 @SpringBootTest
 class AuthTest(val authController: AuthController) : WordSpec({
@@ -50,63 +48,78 @@ class AuthTest(val authController: AuthController) : WordSpec({
     }
 
     "request v1/auth/signin" should {
-        val requestBase = webTestClient.put().uri("/v1/auth/signin").contentType(MediaType.APPLICATION_JSON)
+        fun getRequest(body: Any): StatusAssertions {
+            return webTestClient.put().uri("/v1/auth/signin").bodyValue(body).exchange().expectStatus()
+        }
 
-        "response ok" {
-            val okRequest = LocalAuthRequest(email = "test@test.com", password = "testpassword")
-            val request = requestBase.bodyValue(okRequest).exchange().expectStatus().isOk
+        "signin ok" {
+            val request = getRequest(LocalAuthRequest(email = "test@test.com", password = "testpassword")).isOk
             val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
             accessToken = response.accessToken
             refreshToken = response.refreshToken
             consume(request, "signin-200")
         }
 
-        "response badrequest" {
+        "signin badrequest" {
             consume(
-                requestBase.bodyValue(Unit).exchange().expectStatus().isBadRequest,
+                getRequest(Unit).isBadRequest,
                 "signin-400"
             )
         }
 
-        "response unauthorized" {
-            val unauthorizedRequest = LocalAuthRequest(email = "test@test.com", password = "wrongpassword")
+        "signin unauthorized" {
             consume(
-                requestBase.bodyValue(unauthorizedRequest).exchange().expectStatus().isUnauthorized,
+                getRequest(LocalAuthRequest(email = "test@test.com", password = "wrongpassword")).isUnauthorized,
                 "signin-401"
             )
         }
 
-        "response notfound" {
-            val notFoundRequest = LocalAuthRequest(email = "wrong@test.com", password = "wrongpassword")
+        "signin notfound" {
             consume(
-                requestBase.bodyValue(notFoundRequest).exchange().expectStatus().isNotFound,
+                getRequest(LocalAuthRequest(email = "wrong@test.com", password = "wrongpassword")).isNotFound,
                 "signin-404"
             )
         }
     }
 
-    "request v1/refresh" should {
-        val requestBase = webTestClient.put().uri("/v1/refresh").contentType(MediaType.APPLICATION_JSON)
-
-        "response ok" {
-            val okRequest = RefreshRequest(refreshToken = refreshToken)
+    "request v1/validate" should {
+        "validate ok" {
             consume(
-                requestBase.bodyValue(okRequest).exchange().expectStatus().isOk,
+                webTestClient.put().uri("/v1/validate").header("userId", "1").exchange().expectStatus().isOk,
+                "validate-200"
+            )
+        }
+
+        "validate badrequest" {
+            consume(
+                webTestClient.put().uri("/v1/validate").exchange().expectStatus().isBadRequest,
+                "validate-400"
+            )
+        }
+    }
+
+    "request v1/refresh" should {
+        fun getRequest(body: Any): StatusAssertions {
+            return webTestClient.put().uri("/v1/refresh").bodyValue(body).exchange().expectStatus()
+        }
+
+        "refresh ok" {
+            consume(
+                getRequest(RefreshRequest(refreshToken = refreshToken)).isOk,
                 "refresh-200"
             )
         }
 
-        "response badrequest" {
+        "refresh badrequest" {
             consume(
-                requestBase.bodyValue(Unit).exchange().expectStatus().isBadRequest,
+                getRequest(Unit).isBadRequest,
                 "refresh-400"
             )
         }
 
-        "response unauthorized" {
-            val unauthorizedRequest = RefreshRequest(refreshToken = "WrongToken")
+        "refresh unauthorized" {
             consume(
-                requestBase.bodyValue(unauthorizedRequest).exchange().expectStatus().isUnauthorized,
+                getRequest(RefreshRequest(refreshToken = "WrongToken")).isUnauthorized,
                 "refresh-401"
             )
         }
