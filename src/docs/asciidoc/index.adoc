@@ -6,6 +6,18 @@
 :toclevels: 2
 :sectlinks:
 
+[IMPORTANT]
+====
+본 API 문서는 API Gateway를 통과하지 않는, Internal API 기준으로 작성되었습니다.
+====
+
+[CAUTION]
+====
+외부에서 `Header.userId` 필드가 있는 API를 접근할 경우,
+`Header.userId` 필드 대신 `Header.Authorization` 필드가 필요하며
+`Header.Authorization` 필드에는 올바른 Access Token이 있어야 합니다.
+====
+
 [[Health]]
 == Health API
 include::health.adoc[]
