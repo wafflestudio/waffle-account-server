@@ -42,8 +42,9 @@ class AuthController(
     }
 
     @DeleteMapping("/v1/users/me")
-    suspend fun unregister(currentUser: CurrentUser): UnregisterResponse {
-        val userId = currentUser.id
+    suspend fun unregister(
+        @RequestHeader @Valid userId: Long,
+    ): UnregisterResponse {
         return authService.unregister(userId)
     }
 
