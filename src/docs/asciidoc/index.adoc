@@ -1,6 +1,4 @@
 = API Reference For Waffle Account Server
-v 1.0
-:version-label: Version
 :doctype: book
 :source-highlighter: highlightjs
 :toc: left

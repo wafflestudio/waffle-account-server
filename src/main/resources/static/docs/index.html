@@ -5,7 +5,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="author" content="v 1.0">
 <title>API Reference For Waffle Account Server</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -442,7 +441,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>API Reference For Waffle Account Server</h1>
 <div class="details">
-<span id="author" class="author">v 1.0</span><br>
 <span id="revnumber">version 0.0.1</span>
 </div>
 <div id="toc" class="toc2">
@@ -573,7 +571,7 @@ Content-Type: application/json</code></pre>
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
-  "email" : "249812@test.com",
+  "email" : "765753@test.com",
   "password" : "testpassword"
 }'</code></pre>
 </div>
@@ -589,7 +587,7 @@ Content-Length: 67
 Host: localhost:8080
 
 {
-  "email" : "249812@test.com",
+  "email" : "765753@test.com",
   "password" : "testpassword"
 }</code></pre>
 </div>
@@ -604,8 +602,8 @@ Content-Type: application/json
 Content-Length: 1722
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMSIsImlhdCI6MTY1ODg0MjAzNiwiZXhwIjoxNjU4OTI4NDM2fQ.pxp-T2Q-DNQiTVX2-QzkmLfZAtAjXcxXsZktRo8dhHqy0rU9ZTB5RVYiYDJt0cCOv62bcijCRjObjwJ7G5p-cFc59WXaJggMKZo1Qyq_vfSrEd_okvGJXmHhUnaXOq3Iv3psnJWLoZou-OslO8ggV2__zUHcb1wKRHHsxmMI7jPvQegzJwjZbiFD6rxqEioMKaFfaBXldsxjZubbsxPmCMCVXAAnuIRABLVyBd5onD-RewTCqIsAl2RU0y9_Fr7YAiAwvzK4ExXd3xMZUoMNjnTrao2w5ckOfSzTTFfWr2I3vZHDQ50GIfKKcKQa5G5A19suqgQ7S9LcjOgxX8w3ZWfdMjk5OeVmSXvpShYEWddcn7-18AtjGa_Sjf7hQiMp-8rf_Eec8_VvdFPKw7H5aJNEsjRxulb56q4vsUyDjtd3R9PrqxLGtR9ap5GPYLacSKQXhYdWOQ9Ikjsfa8NhImmVN4cGudiaWYWYXxL9-cvCkAbO8lonR5YEJ9Xietx_RoyOfNIaz8iJBT04QzpfuZoNFhPrrEJT_zmb4NsL6bqvGT1YYw0AtHsTdENOHyPaUD_OeKz5h_PkexjZSgMFYVQqpCGsuJCfNZiQhhG66lB_H4kEZ59cFxbTGol4TRBpVXuwgW9YIDglgyJkASICpzZYpOVDQOWjP_C1IwnDMMw",
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMSIsImlhdCI6MTY1ODg0MjAzNiwiZXhwIjoxNjkwMzc4MDM2fQ.qXgIBCU6BJP5jZt0cy2idNR7pKNC6L4tlIxyqfTrbcniL4TC6Gz70tj3LbQBKRQaBg60kxVP3C_ogQ7YBB3rqvzJ2eYAZsJK-4GV6FJP_9OPVBXJEYSotdSgpNlWesbeSTDo-RlkqUaYddTLsvQy4t7tEYeORisIAAg7R0r96NtTRbqwTAY1A8pUpYT7-b0xZJstm_kQ1TJURjzMizfuadwuGIyZDNwkC8XkJgKPxGHGiMa9ioILLP3GZexyV0UcGX8Rl7efaZhv0SJoMkX7ZvZeaK3HzS2TXSQAQfhpPqrc7RoZTUvksZ0WdXH8OP67iDKRPO0P90duBlWVqL7AveXpEpUomHPnUzwqDbyVQO8N0pfoXF_t9oouw9Uss6aQGk9XJULVjHtE-eDtlqSH5wk_YX35tfDyyqkrNORF8-w3KSzLA_3JY8Goin_muFPmcILWeL3ET_Y1HOR6bbSrJ6kmZ-CppSEsrAZRZJiqEL50g3AWvqOTuIAI7JbpL4VnNOHk8gvn7kiWAEk6nx80P-siR65yg4Qo5vnCdKdYaDCWKX1mftGsN78n1aSfEGyPp6wWeR4e-8zmA9iVeLKfESwFqFE7btnqmTFDrViuUkFq89rsC4DKYKkzDJBr3sKrd-PwHt1vzGaytCwbLVWkjY3WNcvuKHGrPd2_gVX802A"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMyIsImlhdCI6MTY1ODg0MjU3NSwiZXhwIjoxNjU4OTI4OTc1fQ.6XMHkEO7SlOv6-8ESv55P_eo5Bhq5V1aNFG1E2QHzPG_Bwzb4obTzJ5ISsaKhHSCXTSjoQBLtWV-R-SK8l5wyS0DNso6SlbuDwohJA_Thf6_K1tnzMJgjS9sAky-u6Y6oLsyTcveHoylVAzfttksoZw00FVMru0Szbv8mnyLE-FP2eVh35AV5--9kcjnCm0k_vXErz-tUpd85imH4jnTrvvXWq5RKQCKkqm_ApOP1Ncfed-moo1XbvXmm9qWSPyY6GZjs2UmsXpG6ulzmo-2ET5ugXQiSTaSxFby8eP87of1PYlk5D4jIXmsMb8ICuYbjx2h7BBtkDAlR-cmanyzVT1zPJQJDl45UjZ4U17Q2TAgoaUadVPMsy2byjfSBCOBVPv0q4Or_A4gqcfIee72t4ty1b-vbXOSwLsdhGfHk53ZQPtB1eUPbY36xyqaS2cFcUnyyJiHhMR6-Fga8NCFvIFyj8WuzfgQDZ_BBen7ZbhaMpJxmE3bmMXuk_S44JCz6oX-oA-lJQhLykOrnw6iWK8WECjy0t7s5R8r5Z6FsiwfjUSi0omdZdnK5RgkkUio8tgnxjB9Qe-662MWeXAdKBKDM0BOIsqL3uIr4y__-nia90DwgdgSuCM4ROGuTGxVzvwL7Mxe29kxlGup1uua4P74i94SpjlrS5u9vygfRhw",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMyIsImlhdCI6MTY1ODg0MjU3NSwiZXhwIjoxNjkwMzc4NTc1fQ.dH6XdbObZ2hMLcU5-WV_X5TDRAQ3KeyKIPMxYmVFBnQ54xY7jkSyQckqhTG5gY0x2bZAlKwixoF61K4DXpDN54Y2nsMf9y_BEVCVhOIcpt87oofU8u6VVNFZ2OFAcGlE_a3gfqtfmfQNJoY-YwTsmY0E0eod6HkImMt1XQnTxuUmZfQd2Q-xy_dBGlkYN4jVQX1JJzy9FNeLv7bWsuBCHWxQENQb_FOb9wIzkp5byYC5TAc3HN28Tikgti2uEJrDO9CLCtTHOLEqSsnML1R3RSPpTc9BL2c6Wpncngvj6aLZJY2OR4gsmZpDVUpvDtPBa0h3WtUsZ4MEcJX-nHA5k33kmLwwwZ58NsMy_FOJRRpN6-rSSFSHvlmmM17KoNy-wTvfqlhE4D8YQ7yokUnbWbqtrKqtdER2Gn2DiX7Q3_D-kKp9EdQSbfJD4jDBtEHf4kO7OhXMV1yGP4teSJD_EDrDYhaOK2La1x7mTHIIwT3IMDarEawWzratw0bP4-X2Wbbh1M1zUBfQ33RpjsssJsQlgL2fmHql9qq0zDTRflQ9uhZbbu37e5XdwJi9Ebw7Iw5z82En7dhMI-8XUTdP3PDKYsSIZPRSP_M5PbtReF1xD3tKSRj9CnwUXa3yO0zZnj3iiyDGYHt13iHnC4__9eSEDPYS4emuBhAF_xztsuI"
 }</code></pre>
 </div>
 </div>
@@ -721,7 +719,7 @@ Content-Length: 87
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X GET \
-    -H 'userId: 21'</code></pre>
+    -H 'userId: 23'</code></pre>
 </div>
 </div>
 </div>
@@ -730,7 +728,7 @@ Content-Length: 87
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /v1/users/me HTTP/1.1
-userId: 21
+userId: 23
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -744,9 +742,9 @@ Content-Type: application/json
 Content-Length: 148
 
 {
-  "user_id" : 21,
+  "user_id" : 23,
   "username" : null,
-  "email" : "249812@test.com",
+  "email" : "765753@test.com",
   "is_active" : true,
   "is_banned" : false,
   "provider" : "LOCAL"
@@ -851,7 +849,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
-    -H 'userId: 21'</code></pre>
+    -H 'userId: 23'</code></pre>
 </div>
 </div>
 </div>
@@ -860,7 +858,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
-userId: 21
+userId: 23
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -892,7 +890,7 @@ Content-Length: 29
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
-    -H 'userId: 21'</code></pre>
+    -H 'userId: 23'</code></pre>
 </div>
 </div>
 </div>
@@ -901,7 +899,7 @@ Content-Length: 29
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
-userId: 21
+userId: 23
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1077,8 +1075,8 @@ Content-Type: application/json
 Content-Length: 1718
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyMDM1LCJleHAiOjE2NTg5Mjg0MzV9.tpuT4icGeXfDjfdb3cX97rNNMGr7zKYndjXLhMWF2a3rDLK-6O3RKJG9IPT0foL8T9A3jnlIU4b8QXKsJG5vWdKrdvYST5YQHaBIqmc82XcIuB1YaTCmGvsnjQmPX2XSKDMMxey1CXBMRALrn6ErV4Aa0EAN1MMONKv_HHJ7xqnNHpx8itUGDUQIfmslkw9h1eiF1ZNYcgb5Q3cXtFrk5-FZRTSLxR3u_OuHYfVgEn6hwvP7NQJkV64KiEnxJZdiNtoBGVIqlTlMKipZ-BPjsyZj6_QTYlPWaN1SHy8uSru9YP93vTqcjKaWMw24YYTjtulcLbzye40xuXii1_X8WeH0Rx52yN42w-dWdNem15F4d9GCmbLl7DHjsxkH7lrM-WEcmhmwxj9U8ok4anuUs60m_UYG6Y60TYVt5h8w1lt6YdnG1LgFYnE5GgfJ5q8iQEyDZLZPlFNp7UyLclp340pE6y58Mc1Tp4vGKLyxIqMrJjGRP4eCgooSDpcIAggAFQJTwRZhzbsms9jGIuWgSyLQWTLWrIi7cdZ3MBDSKHJjMhqD7Hz4PoPRlDPoiUPSLRwXz1ChNESJG0sfVSMX_aE3_42RjBVEOzKxJw-0dfaL1H0JBRjeRas6lsP6ydiERblXbUOMV21gq_1sdVtEPfO4YnRTXaI6tOLyKyd88kA",
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyMDM1LCJleHAiOjE2OTAzNzgwMzV9.KWMAsee-Tzy8XdPAdKNNQrHR_QJAjy9MZqG1YzS-TnpGUZkoM1LoBsQbgQdpOtDGn-3i61NCFHTs6gmFc4BdHyHsaq913eslD66thdzUvo3Di51XfvuUb1nb_gIjOPCdS5FumeUVqhVAq8a0n3ribAPKj8rDp7vnXH-QyVmlWJvz-UhFvt0YfgsdOXcVtnT2Wq_B4tdBgo4Iam9VMbV5OBlzVYJddV6tZQCNhItQocs7TH7V-8YqdPh4hD7pRsqn6cVqFxbrLROmRYdOp4aS_GLkyro9Ax0-DBCLXzjUFg34XfLkIKmTZTY1U9qcBDxhREgj26vbNkDcGC3EUl7onGbR9UM6wQ4g_6sC8Vii8daPd-_Lz5keICokAmLpni4p-oJ5B93eVHSo1jTyW-MuhpwvRWMKY0_CrLLxXq4wGEUvPTMRSpgFIISWP6qtz1lZXIkPod_J5XaUBzpyMV8danChipTT7Y8ppGH6Qvk5QxosqNvmkksetGhKKnqB3aJJ-3eF9j6cO-M4PQ3UKct9HMWW47sa54FEic7s-2PVXrN8oAcr-EgwQvEFwMJhfQ6ptRg-XJr8vgX0bw28l24-L2wvXQNeRXR1Sw0QKHNQQtmfOZc5lfkIEX4nSNQMjCKVeFyWHsqdZFQL0c8sM9o1zpC0piRBHLP4Ovpe498bTvE"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyNTc0LCJleHAiOjE2NTg5Mjg5NzR9.qWyDUj-yZ1Ax6wrh-LNYqILKXvEvuzFSlhOkRJ2EWn0AkDTdYFxyKTr8Qpc4NvEg2M_kfHA19ExalJ0yqNAeKR5pQcYLDl1uSaaGAnGR5Y_PeAL0oX9jjhrknHENmlLuF4QAYJIHJmn-LGocQnlUXgQpcUFbFoMkfCveZkqSUPxVDEldvXShh2dM1rFGXsU9tV5seZqXug0Q8R1xiHLIHir2iOithlyyspW3VEAQ_ozWR_a7vkPvc3qKkNBQX8TphyJsshWDSbMzRSCWjAJXu4_5LDnqWTJcCRsT96KpK9F6n0jFxlyaWApXFaZpP6C1Fov2AGOXc6CFdVGT675ik_w4a4gpgg5w9Ztr1fexi0Z2wt9oDKns1-dRiaH3QLsphX2Nw9tbpSnTsnoly2s9XvABKcpYBRRANFFcLzyojomGv40WlOKR8hpzGKdL8KcZPdrZ9U0v_SlvzysDgFr_Cw_zAFV1YT2OV0GcBB8TszymPnHYVMnd3ymFuhOgAjSNGREp3ysohtUUjMb9upz_s2sYUw1fujaiPZgE2DJ4D-QRKQfWF6zrQ9rTNlk-6myTQMAJe2iuvxIf--0NOBiFUaSqefmXd1Kohx5_1AUUXI13U1Ex0eHHDWFLKHFsVkGkfZnS9xzlDFDpSMwfh8ELpSgwaamHbibdk7d7QiGnwp0",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyNTc0LCJleHAiOjE2OTAzNzg1NzR9.YVJaJ-9SwngCOs541d5KdapxAaXW0EneB297J4hXKZIkq9QQ3L1vg3BQOK0B4v42BskJ-m2VriIfOrqHhWuRIykekpV00fK7tvIsvdOITYTiJzcB5OtbsZuJqHYVCa5GFzoalgRQMPMdTXQWuSgCipI6za-ty4frfZ6M-7dlu9D_7TksVLZyML1ukHVOUdENbJ_qOmabrQe0lm07nWTeHFiCqwm4Ts3Xc9znF2BTl7O3lZSRP0EtxqmSoOHK-Yhlp9eecbl9viQbxYOXyNaDw9lMmcyu90SW_LmG1RuT9y4zE2TdeeAGMPHcXwIQprAW5AviMpF8MLNc5FKFqKmuv6RJvgsyBCa3SWaYvTraG6TsF0tDAcp-NtHbzvAZDuYw9h6MmRm2QzaFHDXtD3LY7NYKZeT_bdHUxoE3KXvetwFjtn8fPjWbnirApd1j8R03Rz5xr-SETv8AjO8-SzsyHWYNjr9aIfyKkqeNL9e69Rc3ZvLbKEl_Kb54PV2m1radDNTDcGCfa5yPQL9en90v4-wYquPX93jC7oaQbR77l24VRLnMy-z7xjWDhBj3PT7DrBaOK6-iCaaFwEf1xCrBw3YCvDAmMAMLkoOu3R9D8_iAg8Bt8oWoxpQpa1j0Pk5kf0uIi7LM-5ENUszHd9E43c6Fopro1oeMCnwUOhqiIyU"
 }</code></pre>
 </div>
 </div>
@@ -1441,7 +1439,7 @@ Body
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyMDM1LCJleHAiOjE2OTAzNzgwMzV9.KWMAsee-Tzy8XdPAdKNNQrHR_QJAjy9MZqG1YzS-TnpGUZkoM1LoBsQbgQdpOtDGn-3i61NCFHTs6gmFc4BdHyHsaq913eslD66thdzUvo3Di51XfvuUb1nb_gIjOPCdS5FumeUVqhVAq8a0n3ribAPKj8rDp7vnXH-QyVmlWJvz-UhFvt0YfgsdOXcVtnT2Wq_B4tdBgo4Iam9VMbV5OBlzVYJddV6tZQCNhItQocs7TH7V-8YqdPh4hD7pRsqn6cVqFxbrLROmRYdOp4aS_GLkyro9Ax0-DBCLXzjUFg34XfLkIKmTZTY1U9qcBDxhREgj26vbNkDcGC3EUl7onGbR9UM6wQ4g_6sC8Vii8daPd-_Lz5keICokAmLpni4p-oJ5B93eVHSo1jTyW-MuhpwvRWMKY0_CrLLxXq4wGEUvPTMRSpgFIISWP6qtz1lZXIkPod_J5XaUBzpyMV8danChipTT7Y8ppGH6Qvk5QxosqNvmkksetGhKKnqB3aJJ-3eF9j6cO-M4PQ3UKct9HMWW47sa54FEic7s-2PVXrN8oAcr-EgwQvEFwMJhfQ6ptRg-XJr8vgX0bw28l24-L2wvXQNeRXR1Sw0QKHNQQtmfOZc5lfkIEX4nSNQMjCKVeFyWHsqdZFQL0c8sM9o1zpC0piRBHLP4Ovpe498bTvE"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyNTc0LCJleHAiOjE2OTAzNzg1NzR9.YVJaJ-9SwngCOs541d5KdapxAaXW0EneB297J4hXKZIkq9QQ3L1vg3BQOK0B4v42BskJ-m2VriIfOrqHhWuRIykekpV00fK7tvIsvdOITYTiJzcB5OtbsZuJqHYVCa5GFzoalgRQMPMdTXQWuSgCipI6za-ty4frfZ6M-7dlu9D_7TksVLZyML1ukHVOUdENbJ_qOmabrQe0lm07nWTeHFiCqwm4Ts3Xc9znF2BTl7O3lZSRP0EtxqmSoOHK-Yhlp9eecbl9viQbxYOXyNaDw9lMmcyu90SW_LmG1RuT9y4zE2TdeeAGMPHcXwIQprAW5AviMpF8MLNc5FKFqKmuv6RJvgsyBCa3SWaYvTraG6TsF0tDAcp-NtHbzvAZDuYw9h6MmRm2QzaFHDXtD3LY7NYKZeT_bdHUxoE3KXvetwFjtn8fPjWbnirApd1j8R03Rz5xr-SETv8AjO8-SzsyHWYNjr9aIfyKkqeNL9e69Rc3ZvLbKEl_Kb54PV2m1radDNTDcGCfa5yPQL9en90v4-wYquPX93jC7oaQbR77l24VRLnMy-z7xjWDhBj3PT7DrBaOK6-iCaaFwEf1xCrBw3YCvDAmMAMLkoOu3R9D8_iAg8Bt8oWoxpQpa1j0Pk5kf0uIi7LM-5ENUszHd9E43c6Fopro1oeMCnwUOhqiIyU"
 }'</code></pre>
 </div>
 </div>
@@ -1456,7 +1454,7 @@ Content-Length: 861
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyMDM1LCJleHAiOjE2OTAzNzgwMzV9.KWMAsee-Tzy8XdPAdKNNQrHR_QJAjy9MZqG1YzS-TnpGUZkoM1LoBsQbgQdpOtDGn-3i61NCFHTs6gmFc4BdHyHsaq913eslD66thdzUvo3Di51XfvuUb1nb_gIjOPCdS5FumeUVqhVAq8a0n3ribAPKj8rDp7vnXH-QyVmlWJvz-UhFvt0YfgsdOXcVtnT2Wq_B4tdBgo4Iam9VMbV5OBlzVYJddV6tZQCNhItQocs7TH7V-8YqdPh4hD7pRsqn6cVqFxbrLROmRYdOp4aS_GLkyro9Ax0-DBCLXzjUFg34XfLkIKmTZTY1U9qcBDxhREgj26vbNkDcGC3EUl7onGbR9UM6wQ4g_6sC8Vii8daPd-_Lz5keICokAmLpni4p-oJ5B93eVHSo1jTyW-MuhpwvRWMKY0_CrLLxXq4wGEUvPTMRSpgFIISWP6qtz1lZXIkPod_J5XaUBzpyMV8danChipTT7Y8ppGH6Qvk5QxosqNvmkksetGhKKnqB3aJJ-3eF9j6cO-M4PQ3UKct9HMWW47sa54FEic7s-2PVXrN8oAcr-EgwQvEFwMJhfQ6ptRg-XJr8vgX0bw28l24-L2wvXQNeRXR1Sw0QKHNQQtmfOZc5lfkIEX4nSNQMjCKVeFyWHsqdZFQL0c8sM9o1zpC0piRBHLP4Ovpe498bTvE"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyNTc0LCJleHAiOjE2OTAzNzg1NzR9.YVJaJ-9SwngCOs541d5KdapxAaXW0EneB297J4hXKZIkq9QQ3L1vg3BQOK0B4v42BskJ-m2VriIfOrqHhWuRIykekpV00fK7tvIsvdOITYTiJzcB5OtbsZuJqHYVCa5GFzoalgRQMPMdTXQWuSgCipI6za-ty4frfZ6M-7dlu9D_7TksVLZyML1ukHVOUdENbJ_qOmabrQe0lm07nWTeHFiCqwm4Ts3Xc9znF2BTl7O3lZSRP0EtxqmSoOHK-Yhlp9eecbl9viQbxYOXyNaDw9lMmcyu90SW_LmG1RuT9y4zE2TdeeAGMPHcXwIQprAW5AviMpF8MLNc5FKFqKmuv6RJvgsyBCa3SWaYvTraG6TsF0tDAcp-NtHbzvAZDuYw9h6MmRm2QzaFHDXtD3LY7NYKZeT_bdHUxoE3KXvetwFjtn8fPjWbnirApd1j8R03Rz5xr-SETv8AjO8-SzsyHWYNjr9aIfyKkqeNL9e69Rc3ZvLbKEl_Kb54PV2m1radDNTDcGCfa5yPQL9en90v4-wYquPX93jC7oaQbR77l24VRLnMy-z7xjWDhBj3PT7DrBaOK6-iCaaFwEf1xCrBw3YCvDAmMAMLkoOu3R9D8_iAg8Bt8oWoxpQpa1j0Pk5kf0uIi7LM-5ENUszHd9E43c6Fopro1oeMCnwUOhqiIyU"
 }</code></pre>
 </div>
 </div>
@@ -1470,7 +1468,7 @@ Content-Type: application/json
 Content-Length: 860
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyMDM2LCJleHAiOjE2NTg5Mjg0MzZ9.ZdYG3K3JQ8UoyL_vFrbTpRkSJgTzirZg2pxwFKfvxSs6eNvzbjNNZklTFGzWEH0h6nk9DK1PvswM1I6jUcxWuqb4njyJLV28gJtD-T2U0PwjcGaHpF3l-jlyumUEWDNsiJ_U4ctH462R94_5Le4S3AVN5HNtgO-q3Tgv948Cu1WLIWk_1UYLcebKBb9OPbCaOctCivmlRsmU7WSKbbVpe5iOyphQKKrVRXtDBz4dTjXMt07JP3kOH4mfq6HQ6CHioS0jJjz5qvOQzmtz3bqzx3DTCq9PyxoZzNqey_MPdzV7ZEykQ8N87spT12ABRDydbnp-lmgEU6vlUTXfhrlFgDixaWR94tKmqDIblMbeaRsHKfIs29Hh28FSysHEwx3sZQQ50xl0z7ScKVm1llF_8lSqE-QtBC-PbGQfCrFuWfQ7dpFQC07wi_COLz97clyJy52pGQTPFGFbr9RiPM-rlwI_BFTiZ0usALd70f_xP_ZA2SHmWoGzpnjHoghQAAzMxto5giWWfQKk_fRKz_ZJYINVgE9Agi4KgBKYKs-46eLW82Q4jyQSRxQN4uQJiFXhnnHKw2lv_fFbmwNMbDHXnJ5EcIKX537cLRbBH1_swUR96ws_IbMXPrZv5kVMhKlYwYZI6PqSpjmldlks-S5OnTW6XAeGas8CGJ6oj15sUfg"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODQyNTc1LCJleHAiOjE2NTg5Mjg5NzV9.lhoCo141UpC-uFXCRFrlngy_Ib4FBYZNL6JWwEF71TUBEwPRBEmYmIwMdA7s6Oltz_TJe2EvqNj6vTlOxbqNntgx9CsIgidGmlshvIGAjgd9tJ_lM93azUg5_4v0dKTlGQ8WArNFqX5aawQyRWovJIDbJ-xYcdonQcoXUBuDZENiz9-sFRacUcz1R_YyeZBJlC6CsvECBpsa4Xa2PFr_Atj4I9PfE_WP5M3Dc-T_57D_bn5qtHE3f7GJXnl6Ye4MT7mO9i5qVu73SFoHPuc0BJgGRS4MylCA2Q3qlzCJYghwX-CvD-tqb0LuwjtfDrORMvbxnU5xpEhxawmsDwTE1ZW7sMdLQqe6qRlOcVhssGRZ6Dhcfrk2Qby_4oXuCa4mJamhpyDJv8kL3L3ZPb5i8acK2KRMgiTLrfannhlTj8Dlr1sReEfPFp0IzRENOR0moIbo-qQZflSY406H6bTWt51OumIGArTH-qpnCnR-Btcu-OX4wzNZ43e_s2G5FeLKQx7vCVP4LxH5XcOEeqNKXNjtzUEwtBpfQP1F9VzgqDx1QEKpHkH-IwCVo4KF2tq3dM1ryazvfW-r0P7a3aW2MtdvwgthwRKaJz1OJ3QIuH6d13jEm0GK5JDZTFAb5jVx0UzbuRrIPllFp0N_VSjC1bxRVvAaMQW7SBSwbvyNeTc"
 }</code></pre>
 </div>
 </div>
@@ -1572,7 +1570,7 @@ Content-Length: 80
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMSIsImlhdCI6MTY1ODg0MjAzNiwiZXhwIjoxNjkwMzc4MDM2fQ.qXgIBCU6BJP5jZt0cy2idNR7pKNC6L4tlIxyqfTrbcniL4TC6Gz70tj3LbQBKRQaBg60kxVP3C_ogQ7YBB3rqvzJ2eYAZsJK-4GV6FJP_9OPVBXJEYSotdSgpNlWesbeSTDo-RlkqUaYddTLsvQy4t7tEYeORisIAAg7R0r96NtTRbqwTAY1A8pUpYT7-b0xZJstm_kQ1TJURjzMizfuadwuGIyZDNwkC8XkJgKPxGHGiMa9ioILLP3GZexyV0UcGX8Rl7efaZhv0SJoMkX7ZvZeaK3HzS2TXSQAQfhpPqrc7RoZTUvksZ0WdXH8OP67iDKRPO0P90duBlWVqL7AveXpEpUomHPnUzwqDbyVQO8N0pfoXF_t9oouw9Uss6aQGk9XJULVjHtE-eDtlqSH5wk_YX35tfDyyqkrNORF8-w3KSzLA_3JY8Goin_muFPmcILWeL3ET_Y1HOR6bbSrJ6kmZ-CppSEsrAZRZJiqEL50g3AWvqOTuIAI7JbpL4VnNOHk8gvn7kiWAEk6nx80P-siR65yg4Qo5vnCdKdYaDCWKX1mftGsN78n1aSfEGyPp6wWeR4e-8zmA9iVeLKfESwFqFE7btnqmTFDrViuUkFq89rsC4DKYKkzDJBr3sKrd-PwHt1vzGaytCwbLVWkjY3WNcvuKHGrPd2_gVX802A"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMyIsImlhdCI6MTY1ODg0MjU3NSwiZXhwIjoxNjkwMzc4NTc1fQ.dH6XdbObZ2hMLcU5-WV_X5TDRAQ3KeyKIPMxYmVFBnQ54xY7jkSyQckqhTG5gY0x2bZAlKwixoF61K4DXpDN54Y2nsMf9y_BEVCVhOIcpt87oofU8u6VVNFZ2OFAcGlE_a3gfqtfmfQNJoY-YwTsmY0E0eod6HkImMt1XQnTxuUmZfQd2Q-xy_dBGlkYN4jVQX1JJzy9FNeLv7bWsuBCHWxQENQb_FOb9wIzkp5byYC5TAc3HN28Tikgti2uEJrDO9CLCtTHOLEqSsnML1R3RSPpTc9BL2c6Wpncngvj6aLZJY2OR4gsmZpDVUpvDtPBa0h3WtUsZ4MEcJX-nHA5k33kmLwwwZ58NsMy_FOJRRpN6-rSSFSHvlmmM17KoNy-wTvfqlhE4D8YQ7yokUnbWbqtrKqtdER2Gn2DiX7Q3_D-kKp9EdQSbfJD4jDBtEHf4kO7OhXMV1yGP4teSJD_EDrDYhaOK2La1x7mTHIIwT3IMDarEawWzratw0bP4-X2Wbbh1M1zUBfQ33RpjsssJsQlgL2fmHql9qq0zDTRflQ9uhZbbu37e5XdwJi9Ebw7Iw5z82En7dhMI-8XUTdP3PDKYsSIZPRSP_M5PbtReF1xD3tKSRj9CnwUXa3yO0zZnj3iiyDGYHt13iHnC4__9eSEDPYS4emuBhAF_xztsuI"
 }'</code></pre>
 </div>
 </div>
@@ -1587,7 +1585,7 @@ Content-Length: 863
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMSIsImlhdCI6MTY1ODg0MjAzNiwiZXhwIjoxNjkwMzc4MDM2fQ.qXgIBCU6BJP5jZt0cy2idNR7pKNC6L4tlIxyqfTrbcniL4TC6Gz70tj3LbQBKRQaBg60kxVP3C_ogQ7YBB3rqvzJ2eYAZsJK-4GV6FJP_9OPVBXJEYSotdSgpNlWesbeSTDo-RlkqUaYddTLsvQy4t7tEYeORisIAAg7R0r96NtTRbqwTAY1A8pUpYT7-b0xZJstm_kQ1TJURjzMizfuadwuGIyZDNwkC8XkJgKPxGHGiMa9ioILLP3GZexyV0UcGX8Rl7efaZhv0SJoMkX7ZvZeaK3HzS2TXSQAQfhpPqrc7RoZTUvksZ0WdXH8OP67iDKRPO0P90duBlWVqL7AveXpEpUomHPnUzwqDbyVQO8N0pfoXF_t9oouw9Uss6aQGk9XJULVjHtE-eDtlqSH5wk_YX35tfDyyqkrNORF8-w3KSzLA_3JY8Goin_muFPmcILWeL3ET_Y1HOR6bbSrJ6kmZ-CppSEsrAZRZJiqEL50g3AWvqOTuIAI7JbpL4VnNOHk8gvn7kiWAEk6nx80P-siR65yg4Qo5vnCdKdYaDCWKX1mftGsN78n1aSfEGyPp6wWeR4e-8zmA9iVeLKfESwFqFE7btnqmTFDrViuUkFq89rsC4DKYKkzDJBr3sKrd-PwHt1vzGaytCwbLVWkjY3WNcvuKHGrPd2_gVX802A"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMyIsImlhdCI6MTY1ODg0MjU3NSwiZXhwIjoxNjkwMzc4NTc1fQ.dH6XdbObZ2hMLcU5-WV_X5TDRAQ3KeyKIPMxYmVFBnQ54xY7jkSyQckqhTG5gY0x2bZAlKwixoF61K4DXpDN54Y2nsMf9y_BEVCVhOIcpt87oofU8u6VVNFZ2OFAcGlE_a3gfqtfmfQNJoY-YwTsmY0E0eod6HkImMt1XQnTxuUmZfQd2Q-xy_dBGlkYN4jVQX1JJzy9FNeLv7bWsuBCHWxQENQb_FOb9wIzkp5byYC5TAc3HN28Tikgti2uEJrDO9CLCtTHOLEqSsnML1R3RSPpTc9BL2c6Wpncngvj6aLZJY2OR4gsmZpDVUpvDtPBa0h3WtUsZ4MEcJX-nHA5k33kmLwwwZ58NsMy_FOJRRpN6-rSSFSHvlmmM17KoNy-wTvfqlhE4D8YQ7yokUnbWbqtrKqtdER2Gn2DiX7Q3_D-kKp9EdQSbfJD4jDBtEHf4kO7OhXMV1yGP4teSJD_EDrDYhaOK2La1x7mTHIIwT3IMDarEawWzratw0bP4-X2Wbbh1M1zUBfQ33RpjsssJsQlgL2fmHql9qq0zDTRflQ9uhZbbu37e5XdwJi9Ebw7Iw5z82En7dhMI-8XUTdP3PDKYsSIZPRSP_M5PbtReF1xD3tKSRj9CnwUXa3yO0zZnj3iiyDGYHt13iHnC4__9eSEDPYS4emuBhAF_xztsuI"
 }</code></pre>
 </div>
 </div>
@@ -1619,7 +1617,7 @@ Content-Length: 80
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2022-07-26 21:53:32 +0900
+Last updated 2022-07-26 22:35:37 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
