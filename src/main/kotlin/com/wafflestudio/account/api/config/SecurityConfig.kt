@@ -1,21 +1,14 @@
 package com.wafflestudio.account.api.config
 
-import com.wafflestudio.account.api.domain.account.oauth2.CustomOAuth2Provider
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.KakaoOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserService
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.oauth2.client.registration.ClientRegistration
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository
-import org.springframework.security.oauth2.client.registration.InMemoryReactiveClientRegistrationRepository
-import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
 import org.springframework.security.web.server.SecurityWebFilterChain
 
 @EnableWebFluxSecurity
@@ -48,5 +41,4 @@ class SecurityConfig(
             SocialProvider.KAKAO to kakaoOAuth2UserService,
         )
     }
-
 }
