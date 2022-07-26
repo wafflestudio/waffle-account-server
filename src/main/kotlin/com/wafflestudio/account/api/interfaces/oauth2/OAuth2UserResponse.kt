@@ -35,4 +35,3 @@ class KakaoOAuth2UserResponseBody(
         socialId = email.split("@").first()
     }
 }
-

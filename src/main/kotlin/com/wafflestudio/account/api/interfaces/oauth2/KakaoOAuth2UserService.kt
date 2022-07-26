@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.core.publisher.Mono
 
 @Service
-class KakaoOAuth2UserService (
+class KakaoOAuth2UserService(
     val clientRegistrationRepository: ReactiveClientRegistrationRepository,
     val webClientBuilder: WebClient.Builder
 ) : OAuth2UserService {

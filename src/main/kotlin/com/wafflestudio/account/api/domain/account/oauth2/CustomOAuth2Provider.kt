@@ -1,11 +1,15 @@
 package com.wafflestudio.account.api.domain.account.oauth2
 
+import org.springframework.security.oauth2.client.registration.ClientRegistration
+import org.springframework.security.oauth2.core.AuthorizationGrantType
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod
+
 enum class CustomOAuth2Provider {
     KAKAO {
-        override fun getBuilder(registrationId: String): ReactiveClientRegistration.Builder {
-            val builder: ReactiveClientRegistration.Builder = getBuilder(
+        override fun getBuilder(registrationId: String): ClientRegistration.Builder {
+            val builder: ClientRegistration.Builder = getBuilder(
                 registrationId,
-                ClientAuthenticationMethod.POST,
+                ClientAuthenticationMethod.CLIENT_SECRET_POST,
                 DEFAULT_LOGIN_REDIRECT_URL
             )
 
@@ -15,22 +19,26 @@ enum class CustomOAuth2Provider {
                 .tokenUri("https://kauth.kakao.com/oauth/token")
                 .userInfoUri("https://kapi.kakao.com/v2/user/me")
                 .userNameAttributeName("id")
-                .builder.clientName("Kakao")
+                .clientName("Kakao")
         }
+    };
+
+    companion object {
+        private const val DEFAULT_LOGIN_REDIRECT_URL = "{baseUrl}/login/oauth2/code/{registrationId}"
     }
 
-    private static val DEFAULT_LOGIN_REDIRECT_URL = "{baseUrl}/login/oauth2/code/{registrationId}"
-
     protected fun getBuilder(
-        registrationId: String, method: ClientAuthenticationMethod, redirectUri: String
-    ) : ReactiveClientRegistration.Builder {
-        val builder: ReactiveClientRegistration.Builder = ReactiveClientRegistration.withRegistrationId(registrationId)
+        registrationId: String,
+        method: ClientAuthenticationMethod,
+        redirectUri: String
+    ): ClientRegistration.Builder {
+        val builder: ClientRegistration.Builder = ClientRegistration.withRegistrationId(registrationId)
 
         return builder
             .clientAuthenticationMethod(method)
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-            .redirectUriTemplate(redirectUri)
+            .redirectUri(redirectUri)
     }
 
-    public abstract ReactiveClientRegistration.Builder getBulider(registrationId: String)
+    public abstract fun getBuilder(registrationId: String): ClientRegistration.Builder
 }
