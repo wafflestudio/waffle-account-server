@@ -20,7 +20,7 @@ import java.util.Base64
 import java.util.concurrent.ThreadLocalRandom
 
 @SpringBootTest
-class UsersTest(val authController: AuthController): WordSpec({
+class UsersTest(val authController: AuthController) : WordSpec({
     val restDocumentation = ManualRestDocumentation()
 
     val webTestClient = WebTestClient.bindToController(authController)
@@ -74,7 +74,7 @@ class UsersTest(val authController: AuthController): WordSpec({
         }
 
         "users post conflict" {
-            consume( //NO isConflict
+            consume( // NO isConflict
                 getRequest(LocalAuthRequest(email = "exists@test.com", password = "existing-email")).is4xxClientError,
                 "users-post-409"
             )
