@@ -56,7 +56,9 @@ operation::users-me-get-404[snippets='curl-request,http-request,http-response']
 ====
 operation::users-me-delete-200-true[snippets='curl-request,http-request,http-response']
 ====
+
 이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, `unregistered` 필드의 값이 `false` 가 됩니다.
+
 .200 OK FALSE
 [%collapsible]
 ====
