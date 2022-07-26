@@ -1,0 +1,74 @@
+=== POST /v1/users
+
+==== Request
+
+==== Response
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::users-post-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-post-400[snippets='curl-request,http-request,http-response']
+====
+.409 Conflict
+[%collapsible]
+====
+operation::users-post-409[snippets='curl-request,http-request,http-response']
+====
+
+=== GET /v1/users/me
+
+==== Request
+
+==== Response
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::users-me-get-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-me-get-400[snippets='curl-request,http-request,http-response']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::users-me-get-404[snippets='curl-request,http-request,http-response']
+====
+
+=== DELETE /v1/users/me
+
+==== Request
+
+==== Response
+
+==== Examples
+.200 OK TRUE
+[%collapsible]
+====
+operation::users-me-delete-200-true[snippets='curl-request,http-request,http-response']
+====
+이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, `unregistered` 필드의 값이 `false` 가 됩니다.
+.200 OK FALSE
+[%collapsible]
+====
+operation::users-me-delete-200-false[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-me-delete-400[snippets='curl-request,http-request,http-response']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::users-me-delete-404[snippets='curl-request,http-request,http-response']
+====

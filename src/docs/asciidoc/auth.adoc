@@ -24,13 +24,26 @@ operation::signin-400[snippets='curl-request,http-request,http-response']
 ====
 operation::signin-401[snippets='curl-request,http-request,http-response']
 ====
+.403 Forbidden
+[%collapsible]
+====
+operation::signin-403[snippets='curl-request,http-request,http-response']
+====
 .404 Not Found
 [%collapsible]
 ====
 operation::signin-404[snippets='curl-request,http-request,http-response']
 ====
 
-=== PUT /v1/auth/validate
+=== POST /v1/oauth/{provider}
+
+==== Request
+
+==== Response
+
+==== Examples
+
+=== PUT /v1/validate
 
 ==== Request
 [horizontal]
@@ -52,7 +65,7 @@ operation::validate-200[snippets='curl-request,http-request,http-response']
 operation::validate-400[snippets='curl-request,http-request,http-response']
 ====
 
-=== PUT /v1/auth/refresh
+=== PUT /v1/refresh
 
 ==== Request
 [horizontal]
@@ -77,4 +90,9 @@ operation::refresh-400[snippets='curl-request,http-request,http-response']
 [%collapsible]
 ====
 operation::refresh-401[snippets='curl-request,http-request,http-response']
+====
+.403 Forbidden
+[%collapsible]
+====
+operation::refresh-403[snippets='curl-request,http-request,http-response']
 ====

@@ -26,8 +26,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
         .filter(WebTestClientRestDocumentation.documentationConfiguration(restDocumentation))
         .build()
 
-    var accessToken: String = "WRONG_ACCESS_TOKEN"
-    var refreshToken: String = "WRONG_REFRESH_TOKEN"
+    var refreshToken = "WRONG_REFRESH_TOKEN"
 
     beforeEach {
         restDocumentation.beforeTest(javaClass, "AuthTest")
@@ -55,7 +54,6 @@ class AuthTest(val authController: AuthController) : WordSpec({
         "signin ok" {
             val request = getRequest(LocalAuthRequest(email = "test@test.com", password = "testpassword")).isOk
             val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
-            accessToken = response.accessToken
             refreshToken = response.refreshToken
             consume(request, "signin-200")
         }
@@ -71,6 +69,13 @@ class AuthTest(val authController: AuthController) : WordSpec({
             consume(
                 getRequest(LocalAuthRequest(email = "test@test.com", password = "wrongpassword")).isUnauthorized,
                 "signin-401"
+            )
+        }
+
+        "signin forbidden" {
+            consume(
+                getRequest(LocalAuthRequest(email = "unregistered@test.com", password = "testpassword")).isForbidden,
+                "signin-403"
             )
         }
 
@@ -119,7 +124,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
 
         "refresh unauthorized" {
             consume(
-                getRequest(RefreshRequest(refreshToken = "WrongToken")).isUnauthorized,
+                getRequest(RefreshRequest(refreshToken = "WRONG_REFRESH_TOKEN")).isUnauthorized,
                 "refresh-401"
             )
         }
