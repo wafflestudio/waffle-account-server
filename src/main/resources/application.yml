@@ -7,6 +7,10 @@ spring:
                         client-id:
                         client-secret:
                         scope: email
+                    kakao:
+                        client-id:
+                        client-secret:
+
     r2dbc:
         url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
         username: wath
@@ -35,7 +39,10 @@ spring:
                     google:
                         client-id:
                         client-secret:
-                        scole: email
+                        scope: email
+                    kakao:
+                        client-id:
+                        client-secret:
     r2dbc:
         url:
         username:
@@ -62,5 +69,8 @@ spring:
             client:
                 registration:
                     google:
+                        client-id:
+                        client-secret:
+                    kakao:
                         client-id:
                         client-secret:
