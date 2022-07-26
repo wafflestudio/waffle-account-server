@@ -451,19 +451,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_get_health_check">GET /health_check</a></li>
 </ul>
 </li>
+<li><a href="#_users_api">Users API</a>
+<ul class="sectlevel2">
+<li><a href="#_post_v1users">POST /v1/users</a></li>
+<li><a href="#_get_v1usersme">GET /v1/users/me</a></li>
+<li><a href="#_delete_v1usersme">DELETE /v1/users/me</a></li>
+</ul>
+</li>
 <li><a href="#_auth_api">Auth API</a>
 <ul class="sectlevel2">
 <li><a href="#_put_v1authsignin">PUT /v1/auth/signin</a></li>
 <li><a href="#_post_v1oauthprovider">POST /v1/oauth/{provider}</a></li>
 <li><a href="#_put_v1validate">PUT /v1/validate</a></li>
 <li><a href="#_put_v1refresh">PUT /v1/refresh</a></li>
-</ul>
-</li>
-<li><a href="#_users_api">Users API</a>
-<ul class="sectlevel2">
-<li><a href="#_post_v1users">POST /v1/users</a></li>
-<li><a href="#_get_v1usersme">GET /v1/users/me</a></li>
-<li><a href="#_delete_v1usersme">DELETE /v1/users/me</a></li>
 </ul>
 </li>
 </ul>
@@ -547,12 +547,459 @@ Content-Type: application/json</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_users_api"><a class="link" href="#_users_api">Users API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_post_v1users"><a class="link" href="#_post_v1users">POST /v1/users</a></h3>
+<div class="sect3">
+<h4 id="_request_2"><a class="link" href="#_request_2">Request</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="_response_2"><a class="link" href="#_response_2">Response</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="_examples_2"><a class="link" href="#_examples_2">Examples</a></h4>
+<details>
+<summary class="title">200 OK</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users' -i -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "email" : "800943@test.com",
+  "password" : "testpassword"
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /v1/users HTTP/1.1
+Content-Type: application/json
+Content-Length: 67
+Host: localhost:8080
+
+{
+  "email" : "800943@test.com",
+  "password" : "testpassword"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 1722
+
+{
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNyIsImlhdCI6MTY1ODgzODg0NywiZXhwIjoxNjU4OTI1MjQ3fQ.VyT0kyFNWoku6FxmxW31nmdQiBObJ_b8Ec6QIgWuTmNiaLSlFVKOennaD8L3ARlj9dM0AkcB5SEZZhNq0WZQITpBrdLqs-UhdrAVBD-IxCcH6sl3zd1o6c1MU-QOF7gkUpOVis7bY6DM4Y_RO-6oe2DTJXB4FLiv51YpOwRFF0FFS3_eK3S9FBmC1Mr1GH8OJoLV4cLEgoV1UDWTSjjrGeH_Pgq_mkcINWvNRArQuevI65ksphMlWcp7Tuu7KdlcDepX2i2eQCPr1CXVRpM73V5s9BGV0SgQELfZDxz8e1exjEFZJLfuxGkPKpEzeH1lnRwzvQmDQ0SH0ycdP-YpGR4z8p5fTBlfgq_qpo04_XJT_agnHuAwPnBbtMXBG0ioxMFMvG4H8IhkAN5-jrzoqpAkezl0zJAQt1l5wdFphUL2HBKeyuoACpCRkHb13kXNHxX_fC13Q3PRMdm-Xw_9kpVqEBd5qPJQCe7aG5G7eFOG_VMEhrcAfuw9QWFkcSisN30IIzN_KscDTTaagx_c6-pscYti5G-t9AN_Ij-O1Tt-br-YjkbRcHUyyFn86zZ6NI4xnUOFhnLRINL0xapk0pMsirt5neOFsoQ89ONWGea5zHGDb6ltLkBEHCYEf2RG_lfkYJREX3eixD7wcKM6bQzIDr1FgkY8Oa4Gc5NhfOg",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNyIsImlhdCI6MTY1ODgzODg0NywiZXhwIjoxNjkwMzc0ODQ3fQ.Rn9FYbnWmvZRfjwMceqA3ctbLjol_UE6BAIMjjA_EELrwiyAEvkEluECoJspOpw6v5oPwP-7goBrjwWTFOfF9oBXhFzKXoX6c151R9_635IsJAC9OoZe1qgdUAIlw2maCg2r6PhmZEJIt5WsiLt4ygwWWtsOEghuBB9VHooVWH-4KKlp4_MRVpkobI4k7iG9zUJkJ2i_tAh9B239SSRRViZ9uFkpBUS7-5eA9MEv2ISqtDf1aNizsltkaV8ivAJLrcwLRE7F6n4ZGPWvFWOufrthFh4Ri2hVlTyjd3H895BBStvTuBM6XSYQMYQUECAeaCzXEA3zapbrA4K4TfD4t_27ndVS55z2Q4nZLbavTFlKXArk55r5MKmVdX6fA937GzZNsYaRedE24y7ONMAfJy7IKiNzIMehoDIvuutwh4AtKnOhfTtjPWnIAd04qqiC0EBR1Pfryr0s7WXPbmUh7tYkfgCskgnFAuCkXcu_FteH4Y90Xm8Rzvzbf7PO6ISsj8mRFvquzWZU3fGOs_0wBM1tVIRACgWric0Nihqo8SitcywlGVpgrRepuSs7MS3c8dtgYpkKYPW1riZbLyTthmGd08MBOV7OEwcyhCX_QgEEt0XOdAWdcL3NnRNftWBjxtkLABbhT1NvLKS2qTKvE8JLVtwnqlaAkRy1Aclhen8"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">400 Bad Request</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users' -i -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{ }'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /v1/users HTTP/1.1
+Content-Type: application/json
+Content-Length: 3
+Host: localhost:8080
+
+{ }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">409 Conflict</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users' -i -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "email" : "exists@test.com",
+  "password" : "existing-email"
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /v1/users HTTP/1.1
+Content-Type: application/json
+Content-Length: 69
+Host: localhost:8080
+
+{
+  "email" : "exists@test.com",
+  "password" : "existing-email"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 409 Conflict
+Content-Type: application/json
+Content-Length: 87
+
+{
+  "error" : {
+    "code" : 1409001,
+    "message" : "EMAIL_ALREADY_EXISTS"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_v1usersme"><a class="link" href="#_get_v1usersme">GET /v1/users/me</a></h3>
+<div class="sect3">
+<h4 id="_request_3"><a class="link" href="#_request_3">Request</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="_response_3"><a class="link" href="#_response_3">Response</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="_examples_3"><a class="link" href="#_examples_3">Examples</a></h4>
+<details>
+<summary class="title">200 OK</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X GET \
+    -H 'userId: 17'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /v1/users/me HTTP/1.1
+userId: 17
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 148
+
+{
+  "user_id" : 17,
+  "username" : null,
+  "email" : "800943@test.com",
+  "is_active" : true,
+  "is_banned" : false,
+  "provider" : "LOCAL"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">400 Bad Request</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X GET</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /v1/users/me HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">404 Not Found</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X GET \
+    -H 'userId: 0'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /v1/users/me HTTP/1.1
+userId: 0
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 404 Not Found
+Content-Type: application/json
+Content-Length: 81
+
+{
+  "error" : {
+    "code" : 1404001,
+    "message" : "USER_NOT_FOUND"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_delete_v1usersme"><a class="link" href="#_delete_v1usersme">DELETE /v1/users/me</a></h3>
+<div class="sect3">
+<h4 id="_request_4"><a class="link" href="#_request_4">Request</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="_response_4"><a class="link" href="#_response_4">Response</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="_examples_4"><a class="link" href="#_examples_4">Examples</a></h4>
+<details>
+<summary class="title">200 OK TRUE</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
+    -H 'userId: 17'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
+userId: 17
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 29
+
+{
+  "unregistered" : true
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, <code>unregistered</code> 필드의 값이 <code>false</code> 가 됩니다.</p>
+</div>
+<details>
+<summary class="title">200 OK FALSE</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
+    -H 'userId: 17'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
+userId: 17
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 30
+
+{
+  "unregistered" : false
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">400 Bad Request</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">404 Not Found</summary>
+<div class="content">
+<div class="sect4">
+<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
+    -H 'userId: 0'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
+userId: 0
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 404 Not Found
+Content-Type: application/json
+Content-Length: 81
+
+{
+  "error" : {
+    "code" : 1404001,
+    "message" : "USER_NOT_FOUND"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_auth_api"><a class="link" href="#_auth_api">Auth API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_put_v1authsignin"><a class="link" href="#_put_v1authsignin">PUT /v1/auth/signin</a></h3>
 <div class="sect3">
-<h4 id="_request_2"><a class="link" href="#_request_2">Request</a></h4>
+<h4 id="_request_5"><a class="link" href="#_request_5">Request</a></h4>
 <div class="hdlist">
 <table>
 <tr>
@@ -567,7 +1014,7 @@ Body
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_2"><a class="link" href="#_response_2">Response</a></h4>
+<h4 id="_response_5"><a class="link" href="#_response_5">Response</a></h4>
 <div class="hdlist">
 <table>
 <tr>
@@ -582,7 +1029,7 @@ Body
 </div>
 </div>
 <div class="sect3">
-<h4 id="_examples_2"><a class="link" href="#_examples_2">Examples</a></h4>
+<h4 id="_examples_5"><a class="link" href="#_examples_5">Examples</a></h4>
 <details>
 <summary class="title">200 OK</summary>
 <div class="content">
@@ -624,8 +1071,8 @@ Content-Type: application/json
 Content-Length: 1718
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4NTMxLCJleHAiOjE2NTg5MjQ5MzF9.OSYdOf9jLS7Ir0txy4Aet9zlG8I2mKYN0xHNN-QZfmqgSI8BICYuuhLwlWHOJZ1N74yZhoxBD3p7AQydaoAWt2_wvZ6hxxJb2b0PTc0LNwdx80yVyIrAi7AjIOdiaEvghYO66gxRP_-4x5pF4QX7HAMEnRVBHfQ2ac3NgJjTkYC0Xyi6G2p5MqxX-c_zfYMi62fOYR5fnMxiu42G_ksqKiQvoKN0fgn0fde_I9V5gXrUyb1INSnz8KZTltaYcJC13J8Gn8uGUFnQMUlcPC8rRg2Q_NG_vZ0APoN7437E1aVp3_C29qMkv5y4nk-xIYmR6ROPyyrr6XxLNkwt2kmTb6aY5znuM8aSMXRCm_Bis2dvQeHfTrqP3_pXDwuqGaZOJnd7PcQ8GlNeE7Q4sRBij28DSjpDwlox4fi-rsXCcQTBCAD7T7k2fy6x5HsfoZWAAjWGkqAkcGosxq7ei1XVMk9HOSP4j-cOjLVg0D2_EidvpxPN2afGhKUg0FI27Mw2hRY261goTjJ4XYNOsiIalhbdsZUxazA5TFJntJdHCJXGahkzkVd_khZNCtZ5qdhHWPR15SsgOyGuCRuBsxQJma1tiHS3AZLpBi4CzMWWdCFskapRFqlJh-zu6JPJx3w_JB6whTbpGXVGGJ_bF7OpWk8s7cx1NPu4clnD5QBH-9E",
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4NTMxLCJleHAiOjE2OTAzNzQ1MzF9.qG94Ixk5aOoIgpOmjmcFO6awaxQYdxkSxXul8WTeRyGS-LCJc1gSwgEMpT57nTR1WSmcQ2hhLW5e3FCTAFqiHElv_aAmi66jkVjRzlwvrLxf2RAglMnlsqGHVLmnSxTx-puXdlstMB2JY2me8C1tdZ_k44pg_259izE4qOvMYeGG7RQW-IeGakBJ28MHQcusNnkvAIpmTuoCscagUU9KmzAQTta9s5dEYn23ANmM8godI-temh02n7YG4PMoEBhg7foy3xe0cT1S3mVIFjvfamdVFNhBmKvkl3qPrYt7oeBW3Db_KFHweYoSUHY0N0kwGyhtMyOxfMXPbfRr9fsUfixvM2-KBaLc30LaKEP-3JHGeOONNdGJ0cVUoYQ_5aGWbZz2Ri7u6vQodzlVAm6xUenCPGSijb28F5n_nMzVXQBYx7clQznYMz51eavCe9DgVCE8iSRDBHk77BUW4xbJnIpXHH6_PUaroUL4s8Gr-eZwQQQIFxLpdqHZ7CJEUtKiNz_E5xufAXwSdtrCgTuEN5itikeFrlnD0TJW6T6O2_5ElMVfqddNOHLFQxKqpExfe_DPodWyLhgegB4x9XCpwSfxItxAK_HWlGok1FcQavcJ9OK6HI11z10nWmSV0Veto6ALotsBFyNeOfcFyELe9HE7etWhvGzFHU1jToD2SHU"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4ODQzLCJleHAiOjE2NTg5MjUyNDN9.tq0OG8MVj8wNoLmMYx_2tsx8XFT2bwmowBzwvz6iI4aR--4ct0vbQhiLcUowxjDYrZGKggmnq7rsAGN91QrpTugkkliE1vrvzct5LzPBBlmIjKq4cDkKTOh5iEjZZT2T71GqvUyOa3cJ9wwA_EB8aG6b9EO-cwJX959SiGGSHarNMMtUS-wBLG2DXkqLg2H495w1e514KA5-sVAWBBj5u4cBPJ6-5kcRrYsEtJYLZdMP-Ftx3UZDdjT22m2c0-A_Edspp7FLXkgILYr_hhbH9BSCrJ28elFUzEBKR8Eq1FepPlrWcuEy3bVC6m18OJ0q6Gn7OzKMMDj14sje_hDk3YpRFiv_5yVG0IN3-d9-Zt6MOFNyWJ0MxyGgiLnKdQhg9zHdOWMdxvET2UA4LXOX-wX5H9ZZMQReIPLuOjB43y5JVAO3d26kcKEMXX_DK76bTqzjXMg7BC9a4kJ880iQmDu6pDwyPBf09yU_WrHpcyEWgQeCqpz0e-Ef7lu1YOquakZkYvIem49IcY1PqmWekr61AbjjPrnAWenNHJ3-1ONtFTomvcdRDJV7jkrHQkLlEwNqrWA9mW2OSK_W6Pw63-hw9XCiWB6SzIvTt1KPag7DrpW2U89HveDLzLsYYBzrY_43yeLhb0gnP8UOU0f7c81koZmX_nC2Vpd8bg9NEQo",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4ODQzLCJleHAiOjE2OTAzNzQ4NDN9.rfRXZIOSa5vcyjGEg8czlcoATA1vTsNmTDpZ57WCme23-w9CFAB4ZxuK1pVxwo7CN9rxtds0IDG-ocIRYLsO03AajFxJVpDhDZojPLtdTtcWGl8fity04OsoVapn5h1qabeFyiw3af6e85v-KNlenMKgU4lCaAhXaD6Bp8D1zFN9mjEMG4tO6l0HHtVZ7NGDfZac-_iTkQsBdkQeAwwiXK4L-v1wrfsk52_n7dS7OTDazRKRuo1ry0d33eKauGUbjoRUlkEgMpyo66vvytfJuSpfNqmM-y3aaF3b1wkHZJ8HAV2fD5lUiURM690bB0x_NCXwz5ylVG4rbHhuUgxOVbKyBgXgmTrUCx0izxQEb-2R6zCamf1YJeC3JnetJRO2l1nVrF5RZQYXL9QvOsEyj3pdQlcRHGiOkfK2aPgQXfnxzSGcdWrTB-U1tNKk6zJeRthKpD5C0AUSt5ZBNPVifJu1cvFOWRtnHUmz0xw4MOM-SEuPbGzeG2yNqsuhqpuRyu0FEDoC-DRg_m08HPbxezRi2HlU9uNU8z-VVyARRsQxw_s84oK1xXF3r6R57JUnBLprQGUcTecSRXhdk-eIv7c7E1NmwA-CK_95FdsqtYJ-hbx1zAugm8KM-1PtOiCPd6GAhLpbp-DT4wQvBR5xWU3SpgefnN9KEKZVzxkxHW4"
 }</code></pre>
 </div>
 </div>
@@ -826,22 +1273,22 @@ Content-Length: 81
 <div class="sect2">
 <h3 id="_post_v1oauthprovider"><a class="link" href="#_post_v1oauthprovider">POST /v1/oauth/{provider}</a></h3>
 <div class="sect3">
-<h4 id="_request_3"><a class="link" href="#_request_3">Request</a></h4>
+<h4 id="_request_6"><a class="link" href="#_request_6">Request</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_response_3"><a class="link" href="#_response_3">Response</a></h4>
+<h4 id="_response_6"><a class="link" href="#_response_6">Response</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_examples_3"><a class="link" href="#_examples_3">Examples</a></h4>
+<h4 id="_examples_6"><a class="link" href="#_examples_6">Examples</a></h4>
 
 </div>
 </div>
 <div class="sect2">
 <h3 id="_put_v1validate"><a class="link" href="#_put_v1validate">PUT /v1/validate</a></h3>
 <div class="sect3">
-<h4 id="_request_4"><a class="link" href="#_request_4">Request</a></h4>
+<h4 id="_request_7"><a class="link" href="#_request_7">Request</a></h4>
 <div class="hdlist">
 <table>
 <tr>
@@ -856,7 +1303,7 @@ Header
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_4"><a class="link" href="#_response_4">Response</a></h4>
+<h4 id="_response_7"><a class="link" href="#_response_7">Response</a></h4>
 <div class="hdlist">
 <table>
 <tr>
@@ -871,7 +1318,7 @@ Body
 </div>
 </div>
 <div class="sect3">
-<h4 id="_examples_4"><a class="link" href="#_examples_4">Examples</a></h4>
+<h4 id="_examples_7"><a class="link" href="#_examples_7">Examples</a></h4>
 <details>
 <summary class="title">200 OK</summary>
 <div class="content">
@@ -945,7 +1392,7 @@ Host: localhost:8080</code></pre>
 <div class="sect2">
 <h3 id="_put_v1refresh"><a class="link" href="#_put_v1refresh">PUT /v1/refresh</a></h3>
 <div class="sect3">
-<h4 id="_request_5"><a class="link" href="#_request_5">Request</a></h4>
+<h4 id="_request_8"><a class="link" href="#_request_8">Request</a></h4>
 <div class="hdlist">
 <table>
 <tr>
@@ -960,7 +1407,7 @@ Body
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_5"><a class="link" href="#_response_5">Response</a></h4>
+<h4 id="_response_8"><a class="link" href="#_response_8">Response</a></h4>
 <div class="hdlist">
 <table>
 <tr>
@@ -975,7 +1422,7 @@ Body
 </div>
 </div>
 <div class="sect3">
-<h4 id="_examples_5"><a class="link" href="#_examples_5">Examples</a></h4>
+<h4 id="_examples_8"><a class="link" href="#_examples_8">Examples</a></h4>
 <details>
 <summary class="title">200 OK</summary>
 <div class="content">
@@ -986,7 +1433,7 @@ Body
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4NTMxLCJleHAiOjE2OTAzNzQ1MzF9.qG94Ixk5aOoIgpOmjmcFO6awaxQYdxkSxXul8WTeRyGS-LCJc1gSwgEMpT57nTR1WSmcQ2hhLW5e3FCTAFqiHElv_aAmi66jkVjRzlwvrLxf2RAglMnlsqGHVLmnSxTx-puXdlstMB2JY2me8C1tdZ_k44pg_259izE4qOvMYeGG7RQW-IeGakBJ28MHQcusNnkvAIpmTuoCscagUU9KmzAQTta9s5dEYn23ANmM8godI-temh02n7YG4PMoEBhg7foy3xe0cT1S3mVIFjvfamdVFNhBmKvkl3qPrYt7oeBW3Db_KFHweYoSUHY0N0kwGyhtMyOxfMXPbfRr9fsUfixvM2-KBaLc30LaKEP-3JHGeOONNdGJ0cVUoYQ_5aGWbZz2Ri7u6vQodzlVAm6xUenCPGSijb28F5n_nMzVXQBYx7clQznYMz51eavCe9DgVCE8iSRDBHk77BUW4xbJnIpXHH6_PUaroUL4s8Gr-eZwQQQIFxLpdqHZ7CJEUtKiNz_E5xufAXwSdtrCgTuEN5itikeFrlnD0TJW6T6O2_5ElMVfqddNOHLFQxKqpExfe_DPodWyLhgegB4x9XCpwSfxItxAK_HWlGok1FcQavcJ9OK6HI11z10nWmSV0Veto6ALotsBFyNeOfcFyELe9HE7etWhvGzFHU1jToD2SHU"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4ODQzLCJleHAiOjE2OTAzNzQ4NDN9.rfRXZIOSa5vcyjGEg8czlcoATA1vTsNmTDpZ57WCme23-w9CFAB4ZxuK1pVxwo7CN9rxtds0IDG-ocIRYLsO03AajFxJVpDhDZojPLtdTtcWGl8fity04OsoVapn5h1qabeFyiw3af6e85v-KNlenMKgU4lCaAhXaD6Bp8D1zFN9mjEMG4tO6l0HHtVZ7NGDfZac-_iTkQsBdkQeAwwiXK4L-v1wrfsk52_n7dS7OTDazRKRuo1ry0d33eKauGUbjoRUlkEgMpyo66vvytfJuSpfNqmM-y3aaF3b1wkHZJ8HAV2fD5lUiURM690bB0x_NCXwz5ylVG4rbHhuUgxOVbKyBgXgmTrUCx0izxQEb-2R6zCamf1YJeC3JnetJRO2l1nVrF5RZQYXL9QvOsEyj3pdQlcRHGiOkfK2aPgQXfnxzSGcdWrTB-U1tNKk6zJeRthKpD5C0AUSt5ZBNPVifJu1cvFOWRtnHUmz0xw4MOM-SEuPbGzeG2yNqsuhqpuRyu0FEDoC-DRg_m08HPbxezRi2HlU9uNU8z-VVyARRsQxw_s84oK1xXF3r6R57JUnBLprQGUcTecSRXhdk-eIv7c7E1NmwA-CK_95FdsqtYJ-hbx1zAugm8KM-1PtOiCPd6GAhLpbp-DT4wQvBR5xWU3SpgefnN9KEKZVzxkxHW4"
 }'</code></pre>
 </div>
 </div>
@@ -1001,7 +1448,7 @@ Content-Length: 861
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4NTMxLCJleHAiOjE2OTAzNzQ1MzF9.qG94Ixk5aOoIgpOmjmcFO6awaxQYdxkSxXul8WTeRyGS-LCJc1gSwgEMpT57nTR1WSmcQ2hhLW5e3FCTAFqiHElv_aAmi66jkVjRzlwvrLxf2RAglMnlsqGHVLmnSxTx-puXdlstMB2JY2me8C1tdZ_k44pg_259izE4qOvMYeGG7RQW-IeGakBJ28MHQcusNnkvAIpmTuoCscagUU9KmzAQTta9s5dEYn23ANmM8godI-temh02n7YG4PMoEBhg7foy3xe0cT1S3mVIFjvfamdVFNhBmKvkl3qPrYt7oeBW3Db_KFHweYoSUHY0N0kwGyhtMyOxfMXPbfRr9fsUfixvM2-KBaLc30LaKEP-3JHGeOONNdGJ0cVUoYQ_5aGWbZz2Ri7u6vQodzlVAm6xUenCPGSijb28F5n_nMzVXQBYx7clQznYMz51eavCe9DgVCE8iSRDBHk77BUW4xbJnIpXHH6_PUaroUL4s8Gr-eZwQQQIFxLpdqHZ7CJEUtKiNz_E5xufAXwSdtrCgTuEN5itikeFrlnD0TJW6T6O2_5ElMVfqddNOHLFQxKqpExfe_DPodWyLhgegB4x9XCpwSfxItxAK_HWlGok1FcQavcJ9OK6HI11z10nWmSV0Veto6ALotsBFyNeOfcFyELe9HE7etWhvGzFHU1jToD2SHU"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4ODQzLCJleHAiOjE2OTAzNzQ4NDN9.rfRXZIOSa5vcyjGEg8czlcoATA1vTsNmTDpZ57WCme23-w9CFAB4ZxuK1pVxwo7CN9rxtds0IDG-ocIRYLsO03AajFxJVpDhDZojPLtdTtcWGl8fity04OsoVapn5h1qabeFyiw3af6e85v-KNlenMKgU4lCaAhXaD6Bp8D1zFN9mjEMG4tO6l0HHtVZ7NGDfZac-_iTkQsBdkQeAwwiXK4L-v1wrfsk52_n7dS7OTDazRKRuo1ry0d33eKauGUbjoRUlkEgMpyo66vvytfJuSpfNqmM-y3aaF3b1wkHZJ8HAV2fD5lUiURM690bB0x_NCXwz5ylVG4rbHhuUgxOVbKyBgXgmTrUCx0izxQEb-2R6zCamf1YJeC3JnetJRO2l1nVrF5RZQYXL9QvOsEyj3pdQlcRHGiOkfK2aPgQXfnxzSGcdWrTB-U1tNKk6zJeRthKpD5C0AUSt5ZBNPVifJu1cvFOWRtnHUmz0xw4MOM-SEuPbGzeG2yNqsuhqpuRyu0FEDoC-DRg_m08HPbxezRi2HlU9uNU8z-VVyARRsQxw_s84oK1xXF3r6R57JUnBLprQGUcTecSRXhdk-eIv7c7E1NmwA-CK_95FdsqtYJ-hbx1zAugm8KM-1PtOiCPd6GAhLpbp-DT4wQvBR5xWU3SpgefnN9KEKZVzxkxHW4"
 }</code></pre>
 </div>
 </div>
@@ -1015,7 +1462,7 @@ Content-Type: application/json
 Content-Length: 860
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4NTMyLCJleHAiOjE2NTg5MjQ5MzJ9.FpNyRq_xNSQoRrCl7llBrWShhNfOvw4iDT4K-XNxctAYv81pZ8yGj3DnUSAcAZSciJh6PHrXRGkm2Cg9ecTZnCT3sPFq6TFxtTi48Bt8qouGjd6DGyL-ZSTUWPwKjs38HJOOKmYth6yUC_5nuFYuYIHpekPR6yllzi-3UdwOLAtAOKmexjp1triKgOrZCQuuNT8J8rHGX3HRN_EaD6mX9ubEWvXU6ugfo-8BZC4vvOsuKbCtj8IhTnkJAyRds0m1i7YjMzL_0D_Y6jF13aG_z_ufETxsLiFswUC2RPSkXbpYq2nN4SW_VNcRuzuoYhz1ikzkgEO13T5r4aAv4NU1vaxUPzyJX7x2uviEFyWPGR90vqxgYeTBozMvGA7WS6BWrT0bS9PAH9jZnltFTOi34_AImAi2HqyS51_e2hgvnjmbQ184NfWAMc8kwHwakBSDei4af6kCkW6qjoePCoZDAzAmnd-PiMoWE1KAPRX4ADIqjFX_j6RResz3gLEcQO52gfqYZjGX__vVmP2Y-VYOmUNBPrpl7axeW9p1xOuTkqhefngss2QCMBXwGJ13dzQs4nDTC1qsPIz6-2Yf389O-KulUo6ZK1veNmUAwtXeqCnfL7XKQu3NTbuHY7uS06vW0OooLG6H5QOXmcjhP8oUjy53SK71iXlq8lZGGdm1i1o"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU4ODM4ODQ2LCJleHAiOjE2NTg5MjUyNDZ9.BiY1yJfty99frTdR7X0MwvnH39vBiEGjsZRQZBbvvNGbPWu-YMRJ6hU2gHmdKCo7aNuTmb2J57KXzCm-rP3AR_9JfovJ7WwaosSdNFgY2UZp1Nj5iLCRp3EW8HdtNpllU2bhp1hDAe1i_oXgMOkw3qzUD_r8LMED60VVXIdjhzKv2QNIPBO-zAudITHyXsik0VDV8FiXpHnEIIAE4bxVWk2eOxXp3sZzlrvWx7hLH5HpG6CkpPwSR0x2Qw_NdHn9gq76jALDGq-OQgMREjeaUsVsAPUtK-cou7jb5FU9hL8hUyAGqE_IucS_j2Nz-p32p7IelBL4hJjEbr3Spw0wc-w7SC_mfkD6C1b-xoOWn9Vnr-Pv-fplDijRjXCX4RML4kWOdz3gY0m3l1Txijb0bpeQMrzJrAoIsmQVFAt5qiHvmMABGcNy1jvKaXrkTWqI8YKcjbY11fKfuqD_HLe9KaZ0wOpMGruCMJ_KwY2xmfcREhF4vvIkHbUEFLY5AWx03eEAsjlaXE90anqdN0VWsxDor2GIFEvPjAZOtvLHjG4c8sdB3qbayufRkD12F_u2CmhH7EqW9eCpSmyU9bpJTDouL3x_rr9u823nlvXt1ojsivX1guun3uaPlotCUwNqJ2HTC0lNupyLgrUt0v6LYXUq2Dnu5gcx0GEakFhv158"
 }</code></pre>
 </div>
 </div>
@@ -1117,7 +1564,7 @@ Content-Length: 80
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNiIsImlhdCI6MTY1ODgzODUzMiwiZXhwIjoxNjkwMzc0NTMyfQ.iOGMDQZEBI6u0cWv3-Nutb0JL0PCDKj4LizZexgQNs4XzQjIfVaITGlAgGRJ6KOnpcBBYhitnPSrL8rQD7MGnBGt1zuVFiN4Bda8OdQp9p8QG9zZwlA1MHTxuh96Po2-tEHFf9SyitnysdpW88t4XDngm_bYt8flmPG2lXPtdh801-PoSNDZeZsbwcID-qM7a2ZCFimS7ZllTJqoYFtVkZr9AonUChHJoRjNAg3XyXy6Hl_kMKJ2C_pSBiHGu9U8GD198rjV9Homjc4bhYPP4NnsRKN3gzwoQkaeNnpJpk1o-6BGo2cfIJMqoBcLqz7ZsuuCXtUX4As4Bl7EIH270x0C67ECLTkablYfnm1FRChWjay3A_6ZERGFZzLOmlmHF3eJ9umjEWY1QlyjezoUFspD-XjlVUW46u3gR8pBTuxswQsZpp6b-qHq82_GNJL3hm066znwDfBzyJDzBSDmotTfFsLT782r2ed0broGhCcu9WB6rb875d0f8YoxyIc1K4n3hryp5n7ftKskU0jr6CCm5NYvENkZ8ua6LY8Sdh_jq2jzydVTnTmV1deIs7vsO-5ehTYz6mrcc-b23DHptBPK1yVmW6UHTCXh9CkKI1bOJ9T0NDO38rT9bP4Bao70f9Bxb929vQw-UGVbQSjGyYxx_FF6VvF7AIKjeB1Vqdo"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNyIsImlhdCI6MTY1ODgzODg0NywiZXhwIjoxNjkwMzc0ODQ3fQ.Rn9FYbnWmvZRfjwMceqA3ctbLjol_UE6BAIMjjA_EELrwiyAEvkEluECoJspOpw6v5oPwP-7goBrjwWTFOfF9oBXhFzKXoX6c151R9_635IsJAC9OoZe1qgdUAIlw2maCg2r6PhmZEJIt5WsiLt4ygwWWtsOEghuBB9VHooVWH-4KKlp4_MRVpkobI4k7iG9zUJkJ2i_tAh9B239SSRRViZ9uFkpBUS7-5eA9MEv2ISqtDf1aNizsltkaV8ivAJLrcwLRE7F6n4ZGPWvFWOufrthFh4Ri2hVlTyjd3H895BBStvTuBM6XSYQMYQUECAeaCzXEA3zapbrA4K4TfD4t_27ndVS55z2Q4nZLbavTFlKXArk55r5MKmVdX6fA937GzZNsYaRedE24y7ONMAfJy7IKiNzIMehoDIvuutwh4AtKnOhfTtjPWnIAd04qqiC0EBR1Pfryr0s7WXPbmUh7tYkfgCskgnFAuCkXcu_FteH4Y90Xm8Rzvzbf7PO6ISsj8mRFvquzWZU3fGOs_0wBM1tVIRACgWric0Nihqo8SitcywlGVpgrRepuSs7MS3c8dtgYpkKYPW1riZbLyTthmGd08MBOV7OEwcyhCX_QgEEt0XOdAWdcL3NnRNftWBjxtkLABbhT1NvLKS2qTKvE8JLVtwnqlaAkRy1Aclhen8"
 }'</code></pre>
 </div>
 </div>
@@ -1132,7 +1579,7 @@ Content-Length: 863
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNiIsImlhdCI6MTY1ODgzODUzMiwiZXhwIjoxNjkwMzc0NTMyfQ.iOGMDQZEBI6u0cWv3-Nutb0JL0PCDKj4LizZexgQNs4XzQjIfVaITGlAgGRJ6KOnpcBBYhitnPSrL8rQD7MGnBGt1zuVFiN4Bda8OdQp9p8QG9zZwlA1MHTxuh96Po2-tEHFf9SyitnysdpW88t4XDngm_bYt8flmPG2lXPtdh801-PoSNDZeZsbwcID-qM7a2ZCFimS7ZllTJqoYFtVkZr9AonUChHJoRjNAg3XyXy6Hl_kMKJ2C_pSBiHGu9U8GD198rjV9Homjc4bhYPP4NnsRKN3gzwoQkaeNnpJpk1o-6BGo2cfIJMqoBcLqz7ZsuuCXtUX4As4Bl7EIH270x0C67ECLTkablYfnm1FRChWjay3A_6ZERGFZzLOmlmHF3eJ9umjEWY1QlyjezoUFspD-XjlVUW46u3gR8pBTuxswQsZpp6b-qHq82_GNJL3hm066znwDfBzyJDzBSDmotTfFsLT782r2ed0broGhCcu9WB6rb875d0f8YoxyIc1K4n3hryp5n7ftKskU0jr6CCm5NYvENkZ8ua6LY8Sdh_jq2jzydVTnTmV1deIs7vsO-5ehTYz6mrcc-b23DHptBPK1yVmW6UHTCXh9CkKI1bOJ9T0NDO38rT9bP4Bao70f9Bxb929vQw-UGVbQSjGyYxx_FF6VvF7AIKjeB1Vqdo"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNyIsImlhdCI6MTY1ODgzODg0NywiZXhwIjoxNjkwMzc0ODQ3fQ.Rn9FYbnWmvZRfjwMceqA3ctbLjol_UE6BAIMjjA_EELrwiyAEvkEluECoJspOpw6v5oPwP-7goBrjwWTFOfF9oBXhFzKXoX6c151R9_635IsJAC9OoZe1qgdUAIlw2maCg2r6PhmZEJIt5WsiLt4ygwWWtsOEghuBB9VHooVWH-4KKlp4_MRVpkobI4k7iG9zUJkJ2i_tAh9B239SSRRViZ9uFkpBUS7-5eA9MEv2ISqtDf1aNizsltkaV8ivAJLrcwLRE7F6n4ZGPWvFWOufrthFh4Ri2hVlTyjd3H895BBStvTuBM6XSYQMYQUECAeaCzXEA3zapbrA4K4TfD4t_27ndVS55z2Q4nZLbavTFlKXArk55r5MKmVdX6fA937GzZNsYaRedE24y7ONMAfJy7IKiNzIMehoDIvuutwh4AtKnOhfTtjPWnIAd04qqiC0EBR1Pfryr0s7WXPbmUh7tYkfgCskgnFAuCkXcu_FteH4Y90Xm8Rzvzbf7PO6ISsj8mRFvquzWZU3fGOs_0wBM1tVIRACgWric0Nihqo8SitcywlGVpgrRepuSs7MS3c8dtgYpkKYPW1riZbLyTthmGd08MBOV7OEwcyhCX_QgEEt0XOdAWdcL3NnRNftWBjxtkLABbhT1NvLKS2qTKvE8JLVtwnqlaAkRy1Aclhen8"
 }</code></pre>
 </div>
 </div>
@@ -1160,458 +1607,11 @@ Content-Length: 80
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_users_api"><a class="link" href="#_users_api">Users API</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_post_v1users"><a class="link" href="#_post_v1users">POST /v1/users</a></h3>
-<div class="sect3">
-<h4 id="_request_6"><a class="link" href="#_request_6">Request</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_response_6"><a class="link" href="#_response_6">Response</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_examples_6"><a class="link" href="#_examples_6">Examples</a></h4>
-<details>
-<summary class="title">200 OK</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users' -i -X POST \
-    -H 'Content-Type: application/json' \
-    -d '{
-  "email" : "637037@test.com",
-  "password" : "testpassword"
-}'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /v1/users HTTP/1.1
-Content-Type: application/json
-Content-Length: 67
-Host: localhost:8080
-
-{
-  "email" : "637037@test.com",
-  "password" : "testpassword"
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 1722
-
-{
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNiIsImlhdCI6MTY1ODgzODUzMiwiZXhwIjoxNjU4OTI0OTMyfQ.ETRmeaVKuPYt5ZciInhMMCzUXSa2lreqOJa__aU7yw-gCLKg74ntLAeJc3kZjwc8l6d9lq84ik_2vo-ilaXrzTev13zxFZy_1mTDoDow2raYbNZjFzMS6s9-Q1LHfAkvRFtxgRawu7EIzQ48_1nvnZRWrYKbULujXYZ51IYzAY0ATMiVTFesOuFauvcRE5I-z5fkZHBmY-ZVSgc-PW9CpOw19AC82ypevHKOZg0BsvTjFlblzfHJ1dO5XErMbBY0EKL3b-YWo9x7P9EQhwTogjWeZWEmLJczj32TGm4uMlj9BClchIltW6sJdBFltdzxJOZz1fXWhkeB2D6igA-UOlIaEtByz-izEx4g53FGIEZvSDzOFDwFmkEbndwmjTZW7a6fzlK4hRFCCKL25gVH6ia3DvmOcLHzt6JDbG5yIsuxuusBxS3NvGVnrHIhQ2eBU17H1kvMRQgdMWeMHTEORarNn7FbCKs55EybZpFDelFqogj5r-cBoYIN4rHdKXbyEDMX6gxSe6-9HN_FbdR7xkJRBwc_XAS0Trbe99sKw0pwUe5ydio5YziPA6GEuSZyDFnB1utngEOtgsi6So8HH7YQCdXy_R143c15S_LbKvkSJFG7ZIbd6Sqck8cqyRpXRTio-LaY57D3ns8JdKB0Djb66_0YpMVT-XYC7nz6tT4",
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxNiIsImlhdCI6MTY1ODgzODUzMiwiZXhwIjoxNjkwMzc0NTMyfQ.iOGMDQZEBI6u0cWv3-Nutb0JL0PCDKj4LizZexgQNs4XzQjIfVaITGlAgGRJ6KOnpcBBYhitnPSrL8rQD7MGnBGt1zuVFiN4Bda8OdQp9p8QG9zZwlA1MHTxuh96Po2-tEHFf9SyitnysdpW88t4XDngm_bYt8flmPG2lXPtdh801-PoSNDZeZsbwcID-qM7a2ZCFimS7ZllTJqoYFtVkZr9AonUChHJoRjNAg3XyXy6Hl_kMKJ2C_pSBiHGu9U8GD198rjV9Homjc4bhYPP4NnsRKN3gzwoQkaeNnpJpk1o-6BGo2cfIJMqoBcLqz7ZsuuCXtUX4As4Bl7EIH270x0C67ECLTkablYfnm1FRChWjay3A_6ZERGFZzLOmlmHF3eJ9umjEWY1QlyjezoUFspD-XjlVUW46u3gR8pBTuxswQsZpp6b-qHq82_GNJL3hm066znwDfBzyJDzBSDmotTfFsLT782r2ed0broGhCcu9WB6rb875d0f8YoxyIc1K4n3hryp5n7ftKskU0jr6CCm5NYvENkZ8ua6LY8Sdh_jq2jzydVTnTmV1deIs7vsO-5ehTYz6mrcc-b23DHptBPK1yVmW6UHTCXh9CkKI1bOJ9T0NDO38rT9bP4Bao70f9Bxb929vQw-UGVbQSjGyYxx_FF6VvF7AIKjeB1Vqdo"
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-<details>
-<summary class="title">400 Bad Request</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users' -i -X POST \
-    -H 'Content-Type: application/json' \
-    -d '{ }'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /v1/users HTTP/1.1
-Content-Type: application/json
-Content-Length: 3
-Host: localhost:8080
-
-{ }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-<details>
-<summary class="title">409 Conflict</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users' -i -X POST \
-    -H 'Content-Type: application/json' \
-    -d '{
-  "email" : "exists@test.com",
-  "password" : "existing-email"
-}'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /v1/users HTTP/1.1
-Content-Type: application/json
-Content-Length: 69
-Host: localhost:8080
-
-{
-  "email" : "exists@test.com",
-  "password" : "existing-email"
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 409 Conflict
-Content-Type: application/json
-Content-Length: 87
-
-{
-  "error" : {
-    "code" : 1409001,
-    "message" : "EMAIL_ALREADY_EXISTS"
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_get_v1usersme"><a class="link" href="#_get_v1usersme">GET /v1/users/me</a></h3>
-<div class="sect3">
-<h4 id="_request_7"><a class="link" href="#_request_7">Request</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_response_7"><a class="link" href="#_response_7">Response</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_examples_7"><a class="link" href="#_examples_7">Examples</a></h4>
-<details>
-<summary class="title">200 OK</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X GET \
-    -H 'userId: 16'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /v1/users/me HTTP/1.1
-userId: 16
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 148
-
-{
-  "user_id" : 16,
-  "username" : null,
-  "email" : "637037@test.com",
-  "is_active" : true,
-  "is_banned" : false,
-  "provider" : "LOCAL"
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-<details>
-<summary class="title">400 Bad Request</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X GET</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /v1/users/me HTTP/1.1
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-<details>
-<summary class="title">404 Not Found</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X GET \
-    -H 'userId: 0'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /v1/users/me HTTP/1.1
-userId: 0
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 404 Not Found
-Content-Type: application/json
-Content-Length: 81
-
-{
-  "error" : {
-    "code" : 1404001,
-    "message" : "USER_NOT_FOUND"
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_delete_v1usersme"><a class="link" href="#_delete_v1usersme">DELETE /v1/users/me</a></h3>
-<div class="sect3">
-<h4 id="_request_8"><a class="link" href="#_request_8">Request</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_response_8"><a class="link" href="#_response_8">Response</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_examples_8"><a class="link" href="#_examples_8">Examples</a></h4>
-<details>
-<summary class="title">200 OK TRUE</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
-    -H 'userId: 16'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
-userId: 16
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 29
-
-{
-  "unregistered" : true
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-<div class="paragraph">
-<p>이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, <code>unregistered</code> 필드의 값이 <code>false</code> 가 됩니다.</p>
-</div>
-<details>
-<summary class="title">200 OK FALSE</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
-    -H 'userId: 16'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
-userId: 16
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 30
-
-{
-  "unregistered" : false
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-<details>
-<summary class="title">400 Bad Request</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 400 Bad Request</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-<details>
-<summary class="title">404 Not Found</summary>
-<div class="content">
-<div class="sect4">
-<h5 id="_curl_request"><a class="link" href="#_curl_request">Curl request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
-    -H 'userId: 0'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /v1/users/me HTTP/1.1
-userId: 0
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_http_response"><a class="link" href="#_http_response">HTTP response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 404 Not Found
-Content-Type: application/json
-Content-Length: 81
-
-{
-  "error" : {
-    "code" : 1404001,
-    "message" : "USER_NOT_FOUND"
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2022-07-26 21:22:19 +0900
+Last updated 2022-07-26 21:33:35 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

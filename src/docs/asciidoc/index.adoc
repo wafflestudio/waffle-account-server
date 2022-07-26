@@ -18,8 +18,8 @@
 == Health API
 include::health.adoc[]
 
-== Auth API
-include::auth.adoc[]
-
 == Users API
 include::users.adoc[]
+
+== Auth API
+include::auth.adoc[]
