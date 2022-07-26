@@ -88,16 +88,20 @@ class AuthTest(val authController: AuthController) : WordSpec({
     }
 
     "request v1/validate" should {
+        fun getRequest(name: String, value: String): StatusAssertions {
+            return webTestClient.put().uri("/v1/validate").header(name, value).exchange().expectStatus()
+        }
+
         "validate ok" {
             consume(
-                webTestClient.put().uri("/v1/validate").header("userId", "1").exchange().expectStatus().isOk,
+                getRequest("userId", "1").isOk,
                 "validate-200"
             )
         }
 
         "validate badrequest" {
             consume(
-                webTestClient.put().uri("/v1/validate").exchange().expectStatus().isBadRequest,
+                getRequest("userId", "STRING").isBadRequest,
                 "validate-400"
             )
         }

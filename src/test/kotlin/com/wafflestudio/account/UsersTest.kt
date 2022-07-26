@@ -82,53 +82,61 @@ class UsersTest(val authController: AuthController) : WordSpec({
     }
 
     "request get v1/users/me" should {
+        fun getRequest(name: String, value: String): StatusAssertions {
+            return webTestClient.get().uri("/v1/users/me").header(name, value).exchange().expectStatus()
+        }
+
         "users me get ok" {
             consume(
-                webTestClient.get().uri("/v1/users/me").header("userId", userId).exchange().expectStatus().isOk,
+                getRequest("userId", userId).isOk,
                 "users-me-get-200"
             )
         }
 
         "users me get badrequest" {
             consume(
-                webTestClient.get().uri("/v1/users/me").exchange().expectStatus().isBadRequest,
+                getRequest("userId", "STRING").isBadRequest,
                 "users-me-get-400"
             )
         }
 
         "users me get notfound" {
             consume(
-                webTestClient.get().uri("/v1/users/me").header("userId", "0").exchange().expectStatus().isNotFound,
+                getRequest("userId", "0").isNotFound,
                 "users-me-get-404"
             )
         }
     }
 
     "request delete v1/users/me" should {
+        fun getRequest(name: String, value: String): StatusAssertions {
+            return webTestClient.delete().uri("/v1/users/me").header(name, value).exchange().expectStatus()
+        }
+
         "users me delete ok true" {
             consume(
-                webTestClient.delete().uri("/v1/users/me").header("userId", userId).exchange().expectStatus().isOk,
+                getRequest("userId", userId).isOk,
                 "users-me-delete-200-true"
             )
         }
 
         "users me delete ok false" {
             consume(
-                webTestClient.delete().uri("/v1/users/me").header("userId", userId).exchange().expectStatus().isOk,
+                getRequest("userId", userId).isOk,
                 "users-me-delete-200-false"
             )
         }
 
         "users me delete badrequest" {
             consume(
-                webTestClient.delete().uri("/v1/users/me").exchange().expectStatus().isBadRequest,
+                getRequest("userId", "STRING").isBadRequest,
                 "users-me-delete-400"
             )
         }
 
         "users me delete notfound" {
             consume(
-                webTestClient.delete().uri("/v1/users/me").header("userId", "0").exchange().expectStatus().isNotFound,
+                getRequest("userId", "0").isNotFound,
                 "users-me-delete-404"
             )
         }

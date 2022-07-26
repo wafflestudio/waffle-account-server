@@ -1,5 +1,6 @@
 = API Reference For Waffle Account Server
-:version: 1.0
+v 1.0
+:version-label: Version
 :doctype: book
 :source-highlighter: highlightjs
 :toc: left
