@@ -444,11 +444,98 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_post_v1users">POST /v1/users</h3>
 <div class="sect3">
 <h4 id="_request">Request</h4>
-
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Body</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 이메일 주소입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 비밀번호입니다.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_response">Response</h4>
-
+<div class="paragraph">
+<p>다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Possible Responses</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Status Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원가입이 정상적으로 완료되었습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청의 형식이 잘못되었습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409 Conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 존재하는 이메일 주소입니다.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>다음은 응답이 <code>200 OK</code> 일 때 API가 반환하는 값들입니다.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Body</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">access_token</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 access token입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">refresh_token</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 refresh token입니다.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_examples">Examples</h4>
@@ -462,7 +549,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
-  "email" : "765753@test.com",
+  "email" : "973430@test.com",
   "password" : "testpassword"
 }'</code></pre>
 </div>
@@ -478,7 +565,7 @@ Content-Length: 67
 Host: localhost:8080
 
 {
-  "email" : "765753@test.com",
+  "email" : "973430@test.com",
   "password" : "testpassword"
 }</code></pre>
 </div>
@@ -493,8 +580,8 @@ Content-Type: application/json
 Content-Length: 1722
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMyIsImlhdCI6MTY1ODg0MjU3NSwiZXhwIjoxNjU4OTI4OTc1fQ.6XMHkEO7SlOv6-8ESv55P_eo5Bhq5V1aNFG1E2QHzPG_Bwzb4obTzJ5ISsaKhHSCXTSjoQBLtWV-R-SK8l5wyS0DNso6SlbuDwohJA_Thf6_K1tnzMJgjS9sAky-u6Y6oLsyTcveHoylVAzfttksoZw00FVMru0Szbv8mnyLE-FP2eVh35AV5--9kcjnCm0k_vXErz-tUpd85imH4jnTrvvXWq5RKQCKkqm_ApOP1Ncfed-moo1XbvXmm9qWSPyY6GZjs2UmsXpG6ulzmo-2ET5ugXQiSTaSxFby8eP87of1PYlk5D4jIXmsMb8ICuYbjx2h7BBtkDAlR-cmanyzVT1zPJQJDl45UjZ4U17Q2TAgoaUadVPMsy2byjfSBCOBVPv0q4Or_A4gqcfIee72t4ty1b-vbXOSwLsdhGfHk53ZQPtB1eUPbY36xyqaS2cFcUnyyJiHhMR6-Fga8NCFvIFyj8WuzfgQDZ_BBen7ZbhaMpJxmE3bmMXuk_S44JCz6oX-oA-lJQhLykOrnw6iWK8WECjy0t7s5R8r5Z6FsiwfjUSi0omdZdnK5RgkkUio8tgnxjB9Qe-662MWeXAdKBKDM0BOIsqL3uIr4y__-nia90DwgdgSuCM4ROGuTGxVzvwL7Mxe29kxlGup1uua4P74i94SpjlrS5u9vygfRhw",
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyMyIsImlhdCI6MTY1ODg0MjU3NSwiZXhwIjoxNjkwMzc4NTc1fQ.dH6XdbObZ2hMLcU5-WV_X5TDRAQ3KeyKIPMxYmVFBnQ54xY7jkSyQckqhTG5gY0x2bZAlKwixoF61K4DXpDN54Y2nsMf9y_BEVCVhOIcpt87oofU8u6VVNFZ2OFAcGlE_a3gfqtfmfQNJoY-YwTsmY0E0eod6HkImMt1XQnTxuUmZfQd2Q-xy_dBGlkYN4jVQX1JJzy9FNeLv7bWsuBCHWxQENQb_FOb9wIzkp5byYC5TAc3HN28Tikgti2uEJrDO9CLCtTHOLEqSsnML1R3RSPpTc9BL2c6Wpncngvj6aLZJY2OR4gsmZpDVUpvDtPBa0h3WtUsZ4MEcJX-nHA5k33kmLwwwZ58NsMy_FOJRRpN6-rSSFSHvlmmM17KoNy-wTvfqlhE4D8YQ7yokUnbWbqtrKqtdER2Gn2DiX7Q3_D-kKp9EdQSbfJD4jDBtEHf4kO7OhXMV1yGP4teSJD_EDrDYhaOK2La1x7mTHIIwT3IMDarEawWzratw0bP4-X2Wbbh1M1zUBfQ33RpjsssJsQlgL2fmHql9qq0zDTRflQ9uhZbbu37e5XdwJi9Ebw7Iw5z82En7dhMI-8XUTdP3PDKYsSIZPRSP_M5PbtReF1xD3tKSRj9CnwUXa3yO0zZnj3iiyDGYHt13iHnC4__9eSEDPYS4emuBhAF_xztsuI"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyOSIsImlhdCI6MTY1ODkyNDA5MywiZXhwIjoxNjU5MDEwNDkzfQ.Py599n46d6MKA4ZURyqJQrhSyq80XnfmVYYGV9051uVVLioRarrXcvofVBYSma1_4D5vKghrqcQLyJ6eDSCUe_J4JD5cTvvlJCy2dZnSe7Pq77nxoHYKNLZ3o88kg-g7j-CdzBHKn47RiYG8oE-A5bkaBoUJRnEfJFOQ1OS5X72wCTSYSn2_g0hyDMN14yoMdcLEyMGjLQRiBRULDdd1HDnhgTW9O31wpmLurYoNbufbqmxjHyI3nOqAl4lARrEhUq3S5CS0FzI0LKqiIvHLfAW9iqXxvTNdTeS0v6ROJIoZrna9dd4z_Vt1zOamzovdbTtyRqH0yzsr-nfvcdEa--Iigp_eOdtwRXKl-XQozHDb9WQyjWBaSMwi1NRhCZay5Vx1vu_8GlPETsJya97eiNx550vTBIcQnSvVsNKU8-8gXO4xIr-UJFWTmBCt6Bh1M7RDhMtlI_J9kzLI6kzfViD3unvdmYgzK_KSUeHSBOu4h_fv1vx9m40DWcF5cPQAoTOa2aIv5KpaFG4VMnolZsmV7WcLjIHqgai2TXd5_pRTrLXxPOQgH4Bw2GvGppHGgG5HH1OAmF1YAUQczp9DM87I35MqOfgVyyUjFZAtraJjH1fNR1dHDeEpZc7aN4luOwncsIijuI5KpC9a0yXn72p-AsBsCDQ9XE5fDqivfqI",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyOSIsImlhdCI6MTY1ODkyNDA5MywiZXhwIjoxNjkwNDYwMDkzfQ.DniqGJHQX2PEzZ1oIw8MOwCC7hFa52ZFCMvj21vPp1Tb-gnJo-oMDZdWfAnylabA_dh6lhJZjk7PCn2bQgqEcLehHXc66ZDwlHaFUSDxSLt5PrqCjBSCG81pO4kYCrGIC4bcngflW5cGaewBxu1J3IhZqvE_pIDzsyN4w1meeLHhDr1p2G8E02ASqsrZaTufPe2g38_SvV3noNtBMLOaq097geYr2KogjBryQlXK3MsAxG__kiZ-SJveZJ7P64nQYid8w-VnKf-kKxIE9VHT9iWOGSukxDJEa5LyVXCbW22NgIJGr4g0e9hNmvTYvxOJ_kExe2kVQawTf4v-xmAaD_SFYVs45ZG7Cs74ldYlLGIXogoSGEPCuluum3sGQNY6wdKcnRhMtQX8Ej1imVwM5WfoPZpEFe8cwY_PNDyFHsKzW-P52h7KB89tTImrU3f-aPHCId_qRuCMvs-_r2vjEBM4sf-jCfbIemm5NknHxGJjCwNgIJApWMP8N8OoC2TF5NguHcZ5lPZbC_R7W0FfRd85uP8vYOfk8kRUZ96kiHtmeRH5Gd_iybYXLeax1SqjKyjiKxg6MlPlC9tl8v1eAziHr9C8qIpydTCReMEJDJfN0yLZPXNt4DCJAxjfkayzF9nKTzI79jlCzry9t8VRXrOpbegQkg_SQUjxzokFQFY"
 }</code></pre>
 </div>
 </div>
@@ -594,11 +681,116 @@ Content-Length: 87
 <h3 id="_get_v1usersme">GET /v1/users/me</h3>
 <div class="sect3">
 <h4 id="_request_2">Request</h4>
-
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Header</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 고유 ID입니다.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_response_2">Response</h4>
-
+<div class="paragraph">
+<p>다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. Possible Responses</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Status Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원가입이 정상적으로 완료되었습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청의 형식이 잘못되었습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404 Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">존재하지 않는 사용자입니다.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>다음은 응답이 <code>200 OK</code> 일 때 API가 반환하는 값들입니다.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 6. Body</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user_id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 고유 ID입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">username</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 이름 또는 닉네임입니다. 만약 존재하지 않을 경우 null을 반환합니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 이메일입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is_active</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 활성 상태 여부입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is_banned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 제재 상태 여부입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 로그인 방법을 나타냅니다.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_examples_2">Examples</h4>
@@ -610,7 +802,7 @@ Content-Length: 87
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/me' -i -X GET \
-    -H 'userId: 23'</code></pre>
+    -H 'userId: 29'</code></pre>
 </div>
 </div>
 </div>
@@ -619,7 +811,7 @@ Content-Length: 87
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /v1/users/me HTTP/1.1
-userId: 23
+userId: 29
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -633,9 +825,9 @@ Content-Type: application/json
 Content-Length: 148
 
 {
-  "user_id" : 23,
+  "user_id" : 29,
   "username" : null,
-  "email" : "765753@test.com",
+  "email" : "973430@test.com",
   "is_active" : true,
   "is_banned" : false,
   "provider" : "LOCAL"
@@ -724,11 +916,89 @@ Content-Length: 81
 <h3 id="_delete_v1usersme">DELETE /v1/users/me</h3>
 <div class="sect3">
 <h4 id="_request_3">Request</h4>
-
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 7. Header</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 고유 ID입니다.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_response_3">Response</h4>
-
+<div class="paragraph">
+<p>다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 8. Possible Responses</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Status Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 탈퇴가 성공적으로 요청되었습니다. 단, 정상적으로 처리되었는지는 응답의 <code>unregistered</code> 필드에 나타납니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청의 형식이 잘못되었습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404 Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">존재하지 않는 사용자입니다.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>다음은 응답이 <code>200 OK</code> 일 때 API가 반환하는 값들입니다.</p>
+</div>
+<div class="paragraph">
+<p>이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, <code>unregistered</code> 필드의 값이 <code>false</code> 가 됩니다.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 9. Body</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unregistered</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 탈퇴가 성공적으로 처리되었는지 여부를 나타냅니다.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_examples_3">Examples</h4>
@@ -740,7 +1010,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
-    -H 'userId: 23'</code></pre>
+    -H 'userId: 29'</code></pre>
 </div>
 </div>
 </div>
@@ -749,7 +1019,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/me HTTP/1.1
-userId: 23
+userId: 29
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -770,9 +1040,6 @@ Content-Length: 29
 </div>
 </div>
 </details>
-<div class="paragraph">
-<p>이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, <code>unregistered</code> 필드의 값이 <code>false</code> 가 됩니다.</p>
-</div>
 <details>
 <summary class="title">200 OK FALSE</summary>
 <div class="content">
@@ -781,7 +1048,7 @@ Content-Length: 29
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/me' -i -X DELETE \
-    -H 'userId: 23'</code></pre>
+    -H 'userId: 29'</code></pre>
 </div>
 </div>
 </div>
@@ -790,7 +1057,7 @@ Content-Length: 29
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /v1/users/me HTTP/1.1
-userId: 23
+userId: 29
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -890,7 +1157,7 @@ Content-Length: 81
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2022-07-26 21:28:18 +0900
+Last updated 2022-07-27 21:13:11 +0900
 </div>
 </div>
 </body>

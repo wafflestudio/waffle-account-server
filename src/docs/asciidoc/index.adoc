@@ -5,6 +5,7 @@
 :toclevels: 2
 :sectlinks:
 :icons: font
+:table-caption!:
 
 [IMPORTANT]
 ====
