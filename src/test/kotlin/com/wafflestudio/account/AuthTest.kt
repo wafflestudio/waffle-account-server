@@ -23,9 +23,16 @@ class AuthTest(val authController: AuthController) : WordSpec({
     val webTestClient = WebTestClient.bindToController(authController)
         .controllerAdvice(ErrorHandler())
         .configureClient()
-        .filter(WebTestClientRestDocumentation.documentationConfiguration(restDocumentation))
+        .filter(
+            WebTestClientRestDocumentation
+                .documentationConfiguration(restDocumentation)
+                .operationPreprocessors()
+                .withRequestDefaults(Preprocessors.removeHeaders("userId"), Preprocessors.prettyPrint())
+                .withResponseDefaults(Preprocessors.prettyPrint())
+        )
         .build()
 
+    var accessToken = "WRONG_ACCESS_TOKEN"
     var refreshToken = "WRONG_REFRESH_TOKEN"
 
     beforeEach {
@@ -37,13 +44,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
     }
 
     fun consume(req: ResponseSpec, identifier: String): BodyContentSpec {
-        return req.expectBody().consumeWith(
-            WebTestClientRestDocumentation.document(
-                identifier,
-                Preprocessors.preprocessRequest(Preprocessors.prettyPrint()),
-                Preprocessors.preprocessResponse(Preprocessors.prettyPrint())
-            )
-        )
+        return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier))
     }
 
     "request v1/auth/signin" should {
@@ -54,6 +55,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
         "signin ok" {
             val request = getRequest(LocalAuthRequest(email = "test@test.com", password = "testpassword")).isOk
             val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
+            accessToken = response.accessToken
             refreshToken = response.refreshToken
             consume(request, "signin-200")
         }
@@ -88,20 +90,17 @@ class AuthTest(val authController: AuthController) : WordSpec({
     }
 
     "request v1/validate" should {
-        fun getRequest(name: String, value: String): StatusAssertions {
-            return webTestClient.put().uri("/v1/validate").header(name, value).exchange().expectStatus()
-        }
-
         "validate ok" {
             consume(
-                getRequest("userId", "1").isOk,
+                webTestClient.put().uri("/v1/validate").header("userId", "1")
+                    .header("Authorization", accessToken).exchange().expectStatus().isOk,
                 "validate-200"
             )
         }
 
         "validate badrequest" {
             consume(
-                getRequest("userId", "STRING").isBadRequest,
+                webTestClient.put().uri("/v1/validate").exchange().expectStatus().isBadRequest,
                 "validate-400"
             )
         }
