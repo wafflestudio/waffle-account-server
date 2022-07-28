@@ -16,3 +16,12 @@ data class GoogleOAuth2UserResponse(
     @JsonProperty("sub")
     override val socialId: String,
 ) : OAuth2UserResponse
+
+data class NaverOAuth2UserResponse(
+    @JsonProperty("email")
+    @field:Email
+    override val email: String,
+
+    @JsonProperty("id")
+    override val socialId: String,
+) : OAuth2UserResponse
