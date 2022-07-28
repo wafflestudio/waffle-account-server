@@ -34,7 +34,7 @@ class KakaoOAuth2UserService(
                     .retrieve().bodyToMono<KakaoOAuth2UserResponseBody>()
             }
             .flatMap { rawResponse ->
-                Mono.just(KakaoOAuth2UserResponse(rawResponse.email, rawResponse.socialId))
+                Mono.just(KakaoOAuth2UserResponse(rawResponse.email, rawResponse.socialId.toString()))
             }
     }
 

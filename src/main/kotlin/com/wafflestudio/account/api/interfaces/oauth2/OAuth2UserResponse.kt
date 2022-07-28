@@ -26,12 +26,13 @@ data class KakaoOAuth2UserResponse(
 
 class KakaoOAuth2UserResponseBody(
     var email: String = "",
-    var socialId: String = "",
+
+    @JsonProperty("id")
+    val socialId: Long,
 ) {
 
     @JsonProperty("kakao_account")
     private fun unpackKakaoAccount(kakaoAccount: Map<String, Any>) {
         email = kakaoAccount["email"] as String
-        socialId = email.split("@").first()
     }
 }
