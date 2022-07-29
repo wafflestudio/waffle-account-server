@@ -15,6 +15,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpec
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.reactive.server.expectBody
+import java.time.Duration
 
 @SpringBootTest
 class AuthTest(val authController: AuthController) : WordSpec({
@@ -30,6 +31,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
                 .withRequestDefaults(Preprocessors.removeHeaders("userId"), Preprocessors.prettyPrint())
                 .withResponseDefaults(Preprocessors.prettyPrint())
         )
+        .responseTimeout(Duration.ofMillis(30000))
         .build()
 
     var accessToken = "WRONG_ACCESS_TOKEN"
