@@ -64,6 +64,9 @@ spring:
                         client-id:
                         client-secret:
                         scope: email
+                    naver:
+                        client-id:
+                        client-secret:
                     kakao:
                         client-id:
                         client-secret:
@@ -93,6 +96,9 @@ spring:
             client:
                 registration:
                     google:
+                        client-id:
+                        client-secret:
+                    naver:
                         client-id:
                         client-secret:
                     kakao:
