@@ -76,7 +76,7 @@ TBD
 .Header
 |===
 |Name |Type |Required |Description
-|userId |Integer |O |사용자의 고유 ID입니다.
+|Authorization |String |O |사용자의 access token입니다.
 |===
 
 ==== Response
