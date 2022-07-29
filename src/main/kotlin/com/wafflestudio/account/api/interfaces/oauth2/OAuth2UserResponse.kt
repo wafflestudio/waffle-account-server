@@ -25,3 +25,23 @@ data class NaverOAuth2UserResponse(
     @JsonProperty("id")
     override val socialId: String,
 ) : OAuth2UserResponse
+
+data class KakaoOAuth2UserResponse(
+    @field:Email
+    override val email: String,
+
+    override val socialId: String
+) : OAuth2UserResponse
+
+class KakaoOAuth2UserResponseBody(
+    var email: String = "",
+
+    @JsonProperty("id")
+    val socialId: Long,
+) {
+
+    @JsonProperty("kakao_account")
+    private fun unpackKakaoAccount(kakaoAccount: Map<String, Any>) {
+        email = kakaoAccount["email"] as String
+    }
+}

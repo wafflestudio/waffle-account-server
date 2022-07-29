@@ -5,5 +5,6 @@ enum class SocialProvider(
 ) {
     LOCAL("local"),
     GOOGLE("google"),
-    NAVER("naver")
+    NAVER("naver"),
+    KAKAO("kakao"),
 }
