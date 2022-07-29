@@ -64,10 +64,10 @@ spring:
                         client-id:
                         client-secret:
                         scope: email
-                    naver:
+                    kakao:
                         client-id:
                         client-secret:
-                    kakao:
+                    naver:
                         client-id:
                         client-secret:
     r2dbc:
@@ -98,9 +98,9 @@ spring:
                     google:
                         client-id:
                         client-secret:
-                    naver:
+                    kakao:
                         client-id:
                         client-secret:
-                    kakao:
+                    naver:
                         client-id:
                         client-secret:
