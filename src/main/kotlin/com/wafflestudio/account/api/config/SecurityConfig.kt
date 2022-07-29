@@ -2,8 +2,8 @@ package com.wafflestudio.account.api.config
 
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserService
-import com.wafflestudio.account.api.interfaces.oauth2.NaverOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.KakaoOAuth2UserService
+import com.wafflestudio.account.api.interfaces.oauth2.NaverOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserService
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity

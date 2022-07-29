@@ -45,4 +45,3 @@ class KakaoOAuth2UserResponseBody(
         email = kakaoAccount["email"] as String
     }
 }
-
