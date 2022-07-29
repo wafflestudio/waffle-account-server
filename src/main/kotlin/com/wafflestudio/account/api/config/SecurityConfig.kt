@@ -3,6 +3,7 @@ package com.wafflestudio.account.api.config
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.NaverOAuth2UserService
+import com.wafflestudio.account.api.interfaces.oauth2.KakaoOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserService
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
@@ -15,6 +16,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain
 class SecurityConfig(
     private val googleOAuth2UserService: GoogleOAuth2UserService,
     private val naverOAuth2UserService: NaverOAuth2UserService,
+    private val kakaoOAuth2UserService: KakaoOAuth2UserService,
 ) {
     @Bean
     fun securityWebFilterChain(
@@ -39,6 +41,7 @@ class SecurityConfig(
         return hashMapOf<SocialProvider, OAuth2UserService>(
             SocialProvider.GOOGLE to googleOAuth2UserService,
             SocialProvider.NAVER to naverOAuth2UserService,
+            SocialProvider.KAKAO to kakaoOAuth2UserService,
         )
     }
 }

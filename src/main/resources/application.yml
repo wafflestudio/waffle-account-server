@@ -7,6 +7,14 @@ spring:
                         client-id:
                         client-secret:
                         scope: email
+                    kakao:
+                        client-id:
+                        client-secret:
+                        client-name: kakao
+                        scope: account_email
+                        redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+                        authorization-grant-type: authorization_code
+                        client-authentication-method: client_secret_post
                     naver:
                         client-id:
                         client-secret:
@@ -15,6 +23,11 @@ spring:
                         authorization-grant-type: authorization_code
                         client-authentication-method: client_secret_post
                 provider:
+                    kakao:
+                        authorization-uri: https://kauth.kakao.com/oauth/authorize
+                        token-uri: https://kauth.kakao.com/oauth/token
+                        user-info-uri: https://kapi.kakao.com/v2/user/me
+                        user-name-attribute: id
                     naver:
                         authorization-uri: https://nid.naver.com/oauth2.0/authorize
                         token-uri: https://nid.naver.com/oauth2.0/token
@@ -54,6 +67,9 @@ spring:
                     naver:
                         client-id:
                         client-secret:
+                    kakao:
+                        client-id:
+                        client-secret:
     r2dbc:
         url:
         username:
@@ -83,5 +99,8 @@ spring:
                         client-id:
                         client-secret:
                     naver:
+                        client-id:
+                        client-secret:
+                    kakao:
                         client-id:
                         client-secret:
