@@ -81,7 +81,7 @@ tasks.withType<Test> {
 
 tasks.bootJar {
     dependsOn(tasks.asciidoctor)
-    from("src/main/resources/static/docs"){
+    from("src/main/resources/static/docs") {
         into("static/docs")
     }
 }

@@ -111,7 +111,8 @@ class UsersTest(val authController: AuthController) : WordSpec({
                 ),
                 responseFields(
                     fieldWithPath("user_id").type(JsonFieldType.NUMBER).description("사용자의 고유 ID입니다."),
-                    fieldWithPath("username").type(JsonFieldType.STRING).description("사용자의 이름 또는 닉네임입니다. 만약 존재하지 않을 경우 null을 반환합니다.").optional(),
+                    fieldWithPath("username").type(JsonFieldType.STRING)
+                        .description("사용자의 이름 또는 닉네임입니다. 만약 존재하지 않을 경우 null을 반환합니다.").optional(),
                     fieldWithPath("email").type(JsonFieldType.STRING).description("사용자의 이메일입니다."),
                     fieldWithPath("is_active").type(JsonFieldType.BOOLEAN).description("사용자의 활성 상태 여부입니다."),
                     fieldWithPath("is_banned").type(JsonFieldType.BOOLEAN).description("사용자의 제재 상태 여부입니다."),
