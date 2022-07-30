@@ -159,18 +159,8 @@ class AuthService(
         }
 
         val now = LocalDateTime.now()
-        val refreshTokenExpire = now.plusDays(365)
         val accessToken = buildAccessToken(user, now)
         val refreshToken = buildRefreshToken(user, now)
-
-        refreshTokenRepository.save(
-            RefreshToken(
-                userId = user.id!!,
-                token = refreshToken,
-                tokenHash = refreshToken.sha256(),
-                expireAt = refreshTokenExpire,
-            )
-        )
 
         return TokenResponse(
             accessToken = accessToken,

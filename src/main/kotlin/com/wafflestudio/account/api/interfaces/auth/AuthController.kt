@@ -1,6 +1,5 @@
 package com.wafflestudio.account.api.interfaces.auth
 
-import com.wafflestudio.account.api.domain.account.CurrentUser
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -42,8 +41,9 @@ class AuthController(
     }
 
     @DeleteMapping("/v1/users/me")
-    suspend fun unregister(currentUser: CurrentUser): UnregisterResponse {
-        val userId = currentUser.id
+    suspend fun unregister(
+        @RequestHeader @Valid userId: Long,
+    ): UnregisterResponse {
         return authService.unregister(userId)
     }
 
@@ -68,7 +68,6 @@ class AuthController(
         @PathVariable provider: String,
         @RequestBody oAuth2Request: OAuth2Request,
     ): TokenResponse {
-
         return authService.signup(
             provider,
             oAuth2Request

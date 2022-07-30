@@ -23,6 +23,7 @@ class SecurityConfig(
         http: ServerHttpSecurity,
     ): SecurityWebFilterChain {
         return http.authorizeExchange()
+            .pathMatchers("/docs/index.html").permitAll()
             .pathMatchers("/health_check").permitAll()
             .pathMatchers("/v1/**").permitAll()
             .and()

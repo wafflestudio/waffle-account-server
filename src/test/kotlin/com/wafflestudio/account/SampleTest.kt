@@ -20,11 +20,11 @@ class SampleTest(val healthCheckController: HealthCheckController) : WordSpec({
         .filter(documentationConfiguration(restDocumentation))
         .build()
     beforeEach {
-        restDocumentation.beforeTest(javaClass, "SampleTest") // 2
+        restDocumentation.beforeTest(javaClass, "SampleTest")
     }
 
     afterEach {
-        restDocumentation.afterTest() // 2
+        restDocumentation.afterTest()
     }
 
     "request health_check" should {
