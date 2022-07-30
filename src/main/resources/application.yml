@@ -70,9 +70,6 @@ spring:
                     kakao:
                         client-id:
                         client-secret:
-                    naver:
-                        client-id:
-                        client-secret:
     r2dbc:
         url:
         username:
@@ -105,8 +102,5 @@ spring:
                         client-id:
                         client-secret:
                     kakao:
-                        client-id:
-                        client-secret:
-                    naver:
                         client-id:
                         client-secret:

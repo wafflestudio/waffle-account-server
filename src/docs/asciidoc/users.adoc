@@ -1,5 +1,7 @@
 === POST /v1/users
 
+OAuth가 아닌, 이메일과 비밀번호로 회원가입하는 API입니다.
+
 ==== Request
 
 .Body

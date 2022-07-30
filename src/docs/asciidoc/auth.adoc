@@ -1,5 +1,7 @@
 === PUT /v1/auth/signin
 
+OAuth가 아닌, 이메일과 비밀번호로 로그인하는 API입니다.
+
 ==== Request
 
 .Body
