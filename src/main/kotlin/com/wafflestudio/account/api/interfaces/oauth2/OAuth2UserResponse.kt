@@ -34,7 +34,7 @@ data class KakaoOAuth2UserResponse(
 ) : OAuth2UserResponse
 
 class KakaoOAuth2UserResponseBody(
-    var email: String = "", //TODO Email is nullable
+    var email: String = "", // TODO Email is nullable
 
     @JsonProperty("id")
     val socialId: Long,
@@ -55,7 +55,7 @@ data class GithubOAuth2UserResponse(
 
 class GithubOAuth2UserResponseBody(
     @JsonProperty("email")
-    var email: String = "", //TODO Email is nullable
+    var email: String = "", // TODO Email is nullable
 
     @JsonProperty("id")
     val socialId: Long,
