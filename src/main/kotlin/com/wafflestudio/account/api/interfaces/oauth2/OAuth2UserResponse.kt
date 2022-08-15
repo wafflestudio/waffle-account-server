@@ -34,7 +34,7 @@ data class KakaoOAuth2UserResponse(
 ) : OAuth2UserResponse
 
 class KakaoOAuth2UserResponseBody(
-    var email: String = "",
+    var email: String = "", //TODO Email is nullable
 
     @JsonProperty("id")
     val socialId: Long,
@@ -45,3 +45,18 @@ class KakaoOAuth2UserResponseBody(
         email = kakaoAccount["email"] as String
     }
 }
+
+data class GithubOAuth2UserResponse(
+    @field:Email
+    override val email: String,
+
+    override val socialId: String
+) : OAuth2UserResponse
+
+class GithubOAuth2UserResponseBody(
+    @JsonProperty("email")
+    var email: String = "", //TODO Email is nullable
+
+    @JsonProperty("id")
+    val socialId: Long,
+)
