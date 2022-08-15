@@ -8,7 +8,13 @@ import com.wafflestudio.account.api.interfaces.auth.TokenResponse
 import io.kotest.core.spec.style.WordSpec
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.restdocs.ManualRestDocumentation
+import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
+import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.operation.preprocess.Preprocessors
+import org.springframework.restdocs.payload.JsonFieldType
+import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
+import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
+import org.springframework.restdocs.snippet.Snippet
 import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation
 import org.springframework.test.web.reactive.server.StatusAssertions
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -45,8 +51,8 @@ class AuthTest(val authController: AuthController) : WordSpec({
         restDocumentation.afterTest()
     }
 
-    fun consume(req: ResponseSpec, identifier: String): BodyContentSpec {
-        return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier))
+    fun consume(req: ResponseSpec, identifier: String, vararg snippet: Snippet): BodyContentSpec {
+        return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier, *snippet))
     }
 
     "request v1/auth/signin" should {
@@ -59,7 +65,19 @@ class AuthTest(val authController: AuthController) : WordSpec({
             val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
             accessToken = response.accessToken
             refreshToken = response.refreshToken
-            consume(request, "signin-200")
+            consume(
+                request, "signin-200",
+                requestHeaders(
+                    headerWithName("access_token").description("사용자의 access token입니다."),
+                    headerWithName("refresh_token").description("사용자의 refresh token입니다."),
+                ),
+                responseFields(
+                    fieldWithPath("access_token").type(JsonFieldType.STRING)
+                        .description("사용자의 access token입니다."),
+                    fieldWithPath("refresh_token").type(JsonFieldType.STRING)
+                        .description("사용자의 refresh token입니다.")
+                )
+            )
         }
 
         "signin badrequest" {

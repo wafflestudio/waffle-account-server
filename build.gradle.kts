@@ -57,18 +57,13 @@ dependencies {
 
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
+    setBaseDir(file("src/docs/asciidoc"))
+    setOutputDir(file("src/main/resources/static/docs"))
     dependsOn(tasks.test)
     configurations(asciidoctorExtensions.name)
-    setBaseDir(file("src/docs/asciidoc"))
     doFirst {
         delete {
             file("src/main/resources/static/docs")
-        }
-    }
-    doLast {
-        copy {
-            from(outputDir)
-            into("src/main/resources/static/docs")
         }
     }
 }
@@ -82,4 +77,11 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.bootJar {
+    dependsOn(tasks.asciidoctor)
+    from("src/main/resources/static/docs") {
+        into("static/docs")
+    }
 }
