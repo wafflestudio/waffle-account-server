@@ -9,6 +9,7 @@ enum class ErrorType(
 
     // 400
     INVALID_SOCIAL_PROVIDER(1400001, HttpStatus.BAD_REQUEST),
+    TOO_MANY_USER_IDS(1400002, HttpStatus.BAD_REQUEST),
 
     // 401
     INVALID_TOKEN(1401001, HttpStatus.UNAUTHORIZED),
