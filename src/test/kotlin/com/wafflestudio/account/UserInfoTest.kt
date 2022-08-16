@@ -70,7 +70,7 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
     }
 
     afterSpec {
-
+        userRepository.deleteAll(savedUsers)
     }
 
     beforeEach {
@@ -89,7 +89,10 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
         "ok" {
             consume(
                 webTestClient.get().uri { urlBuilder ->
-                    urlBuilder.path("v1/users/infos").queryParam("userIds", savedUsers.map { it.id }.joinToString(",")).build()
+                    urlBuilder
+                        .path("v1/users/infos")
+                        .queryParam("userIds", savedUsers.map { it.id }.joinToString(","))
+                        .build()
                 }.exchange().expectStatus().isOk,
                 "users-info-get-200",
                 pathParameters(
@@ -112,7 +115,7 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
     "request get v1/users/{userId}/infos" should {
         "return user info" {
             consume(
-                webTestClient.get().uri{urlBuilder ->
+                webTestClient.get().uri { urlBuilder ->
                     urlBuilder.path("v1/users/${savedUsers.first().id}/infos").build()
                 }.exchange().expectStatus().isOk,
                 "user-info-get-200",
