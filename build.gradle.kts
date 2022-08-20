@@ -35,8 +35,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 
     runtimeOnly("mysql:mysql-connector-java")
-    runtimeOnly("dev.miku:r2dbc-mysql")
-    implementation("org.flywaydb:flyway-core:9.0.4")
+    runtimeOnly("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
+    implementation("org.flywaydb:flyway-core:8.2.0")
 
     implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.272")
 
