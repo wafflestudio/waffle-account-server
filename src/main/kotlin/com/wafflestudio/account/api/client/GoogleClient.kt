@@ -3,9 +3,7 @@ package com.wafflestudio.account.api.client
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserResponse
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserResponse
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
-import org.springframework.security.oauth2.client.registration.ClientRegistration
+import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.bodyToMono
@@ -13,31 +11,28 @@ import reactor.core.publisher.Mono
 
 @Component
 class GoogleClient(
-    private val webClientHelper: WebClientHelper,
-    private val clientRegistrationRepository: ReactiveClientRegistrationRepository,
+    webClientHelper: WebClientHelper,
+    clientRegistrationRepository: ReactiveClientRegistrationRepository,
 ) : OAuth2Client {
 
-    private val resourceWebClient = webClientHelper.buildWebClient()
+    private val webClient = webClientHelper.buildWebClient()
+    private val clientRegistration = clientRegistrationRepository.findByRegistrationId(
+        SocialProvider.GOOGLE.registrationId
+    ).block()!!
 
-    override fun getMe(
+    override suspend fun getMe(
         accessToken: String
-    ): Mono<OAuth2UserResponse> {
-
-        val clientRegistration = getClientRegistration()
-
-        return clientRegistration
-            .flatMap { clientRegistration ->
-                resourceWebClient
-                    .get()
-                    .uri(clientRegistration.providerDetails.userInfoEndpoint.uri)
-                    .headers {
-                        it.setBearerAuth(accessToken)
-                    }
-                    .retrieve().bodyToMono<GoogleOAuth2UserResponse>()
+    ): OAuth2UserResponse? {
+        return webClient
+            .get()
+            .uri(clientRegistration.providerDetails.userInfoEndpoint.uri)
+            .headers {
+                it.setBearerAuth(accessToken)
             }
-    }
-
-    override fun getClientRegistration(): Mono<ClientRegistration> {
-        return clientRegistrationRepository.findByRegistrationId(SocialProvider.GOOGLE.registrationId)
+            .retrieve()
+            .bodyToMono<GoogleOAuth2UserResponse>()
+            .onErrorResume {
+                Mono.empty()
+            }.awaitSingleOrNull()
     }
 }
