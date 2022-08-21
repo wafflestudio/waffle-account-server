@@ -13,20 +13,33 @@ import javax.validation.Valid
 @RestController
 class AuthController(
     private val authService: AuthService,
+    private val emailAuthService: EmailAuthService,
+    private val socialAuthService: SocialAuthService,
 ) {
 
-    @PutMapping("/v1/auth/signin")
-    suspend fun signin(
-        @RequestBody @Valid signinRequest: LocalAuthRequest
+    @PostMapping("/v1/users")
+    suspend fun emailSignup(
+        @RequestBody @Valid emailSignupRequest: LocalAuthRequest,
     ): TokenResponse {
-        return authService.signin(signinRequest)
+        return emailAuthService.emailSignup(emailSignupRequest)
     }
 
-    @PostMapping("/v1/users")
-    suspend fun signup(
-        @RequestBody @Valid signupRequest: LocalAuthRequest,
+    @PostMapping("/v1/users/me/login/email")
+    suspend fun emailLogin(
+        @RequestBody @Valid emailLoginRequest: LocalAuthRequest
     ): TokenResponse {
-        return authService.signup(signupRequest)
+        return emailAuthService.emailLogin(emailLoginRequest)
+    }
+
+    @PostMapping("/v1/users/me/login/{provider}")
+    suspend fun socialLogin(
+        @PathVariable provider: String,
+        @RequestBody oAuth2Request: OAuth2Request,
+    ): TokenResponse {
+        return socialAuthService.socialLogin(
+            provider,
+            oAuth2Request
+        )
     }
 
     @GetMapping("/v1/users/me")
@@ -61,16 +74,5 @@ class AuthController(
         @RequestBody @Valid refreshRequest: RefreshRequest,
     ): RefreshResponse {
         return authService.refresh(refreshRequest)
-    }
-
-    @PostMapping("/v1/oauth/{provider}")
-    suspend fun authenticateSocialLogin(
-        @PathVariable provider: String,
-        @RequestBody oAuth2Request: OAuth2Request,
-    ): TokenResponse {
-        return authService.signup(
-            provider,
-            oAuth2Request
-        )
     }
 }
