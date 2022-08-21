@@ -24,14 +24,14 @@ class AuthController(
         return emailAuthService.emailSignup(emailSignupRequest)
     }
 
-    @PostMapping("/v1/users/me/login/email")
+    @PostMapping("/v1/users/login/email")
     suspend fun emailLogin(
         @RequestBody @Valid emailLoginRequest: LocalAuthRequest
     ): TokenResponse {
         return emailAuthService.emailLogin(emailLoginRequest)
     }
 
-    @PostMapping("/v1/users/me/login/{provider}")
+    @PostMapping("/v1/users/login/{provider}")
     suspend fun socialLogin(
         @PathVariable provider: String,
         @RequestBody oAuth2Request: OAuth2Request,
