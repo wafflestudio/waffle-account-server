@@ -103,7 +103,12 @@ class AuthService(
         return refreshToken
     }
 
-    private suspend fun buildJwtToken(user: User, key: PrivateKey, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
+    private suspend fun buildJwtToken(
+        user: User,
+        key: PrivateKey,
+        issuedAt: LocalDateTime,
+        expiration: LocalDateTime,
+    ): String {
         if (!user.isActive) {
             throw UserInactiveException
         }
