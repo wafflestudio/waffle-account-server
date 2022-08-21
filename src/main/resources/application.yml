@@ -22,6 +22,9 @@ spring:
                         redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
                         authorization-grant-type: authorization_code
                         client-authentication-method: client_secret_post
+                    github:
+                        client-id:
+                        client-secret:
                 provider:
                     kakao:
                         authorization-uri: https://kauth.kakao.com/oauth/authorize
@@ -70,6 +73,9 @@ spring:
                     kakao:
                         client-id:
                         client-secret:
+                    github:
+                        client-id:
+                        client-secret:
     r2dbc:
         url:
         username:
@@ -102,5 +108,8 @@ spring:
                         client-id:
                         client-secret:
                     kakao:
+                        client-id:
+                        client-secret:
+                    github:
                         client-id:
                         client-secret:
