@@ -17,7 +17,7 @@ class AuthController(
     private val socialAuthService: SocialAuthService,
 ) {
 
-    @PostMapping("/v1/users")
+    @PostMapping("/v1/users/signup/email")
     suspend fun emailSignup(
         @RequestBody @Valid emailSignupRequest: LocalAuthRequest,
     ): TokenResponse {
