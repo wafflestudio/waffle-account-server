@@ -1,17 +1,17 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.6.4"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.spring") version "1.6.10"
+    id("org.springframework.boot") version "2.7.2"
+    id("io.spring.dependency-management") version "1.0.12.RELEASE"
+    kotlin("jvm") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.21"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     id("org.asciidoctor.jvm.convert") version "3.3.2"
 }
 
 group = "com.wafflestudio"
-version = "0.0.1"
-java.sourceCompatibility = JavaVersion.VERSION_11
+version = "1.0.0"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -35,21 +35,21 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 
     runtimeOnly("mysql:mysql-connector-java")
-    runtimeOnly("dev.miku:r2dbc-mysql")
-    implementation("org.flywaydb:flyway-core:7.15.0")
+    runtimeOnly("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
+    implementation("org.flywaydb:flyway-core:8.2.0")
 
-    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.11.965")
+    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.272")
 
-    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
-    implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
-    implementation("io.jsonwebtoken:jjwt-jackson:0.11.2")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
-    testImplementation("io.mockk:mockk:1.12.4")
-    testImplementation("io.kotest:kotest-runner-junit5:5.3.0")
-    testImplementation("io.kotest:kotest-assertions-core:5.3.0")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
+    testImplementation("io.mockk:mockk:1.12.5")
+    testImplementation("io.kotest:kotest-runner-junit5:5.4.1")
+    testImplementation("io.kotest:kotest-assertions-core:5.4.1")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
 
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
@@ -71,7 +71,7 @@ tasks.asciidoctor {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
