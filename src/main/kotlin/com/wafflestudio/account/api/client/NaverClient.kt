@@ -32,6 +32,7 @@ class NaverClient(
             .retrieve()
             .bodyToMono<NaverOAuth2UserResponse>()
             .onErrorResume {
+                WebClientHelper.logger.error(it.message, it)
                 Mono.empty()
             }
             .awaitSingleOrNull()

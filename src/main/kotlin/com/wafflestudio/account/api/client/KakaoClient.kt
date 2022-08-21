@@ -33,6 +33,7 @@ class KakaoClient(
             .retrieve()
             .bodyToMono<KakaoOAuth2UserResponseBody>()
             .onErrorResume {
+                WebClientHelper.logger.error(it.message, it)
                 Mono.empty()
             }
             .flatMap {

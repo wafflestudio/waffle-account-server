@@ -1,5 +1,7 @@
 package com.wafflestudio.account.api.client
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
@@ -14,6 +16,10 @@ class WebClientHelper(
     private val webClientBuilder: WebClient.Builder,
     @Value("\${http.responseTimeout}") private val responseTimeout: Duration,
 ) {
+
+    companion object {
+        val logger: Logger = LoggerFactory.getLogger(this::class.java)
+    }
 
     fun buildWebClient(): WebClient {
         val httpClient = HttpClient.create().responseTimeout(responseTimeout)

@@ -33,6 +33,7 @@ class GithubClient(
             .retrieve()
             .bodyToMono<GithubOAuth2UserResponseBody>()
             .onErrorResume {
+                WebClientHelper.logger.error(it.message, it)
                 Mono.empty()
             }
             .flatMap {
