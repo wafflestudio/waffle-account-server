@@ -24,7 +24,6 @@ import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpe
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.reactive.server.expectBody
 import java.util.Base64
-import java.util.concurrent.ThreadLocalRandom
 
 @SpringBootTest
 class UsersTest(val authController: AuthController) : WordSpec({
@@ -45,7 +44,7 @@ class UsersTest(val authController: AuthController) : WordSpec({
     var userId = "WRONG_USER_ID"
     var accessToken = "WRONG_ACCESS_TOKEN"
     var refreshToken = "WRONG_REFRESH_TOKEN"
-    val email = ThreadLocalRandom.current().nextInt(100000, 1000000).toString() + "@test.com"
+    val email = "new@test.com"
 
     beforeEach {
         restDocumentation.beforeTest(javaClass, "UsersTest")
@@ -138,7 +137,14 @@ class UsersTest(val authController: AuthController) : WordSpec({
         "users me delete ok true" {
             consume(
                 getRequest(userId, accessToken).isOk,
-                "users-me-delete-200-true"
+                "users-me-delete-200-true",
+                requestHeaders(
+                    headerWithName("Authorization").description("사용자의 access token입니다.")
+                ),
+                responseFields(
+                    fieldWithPath("unregistered").type(JsonFieldType.BOOLEAN)
+                        .description("회원 탈퇴가 성공적으로 처리되었는지 여부를 나타냅니다."),
+                )
             )
         }
 

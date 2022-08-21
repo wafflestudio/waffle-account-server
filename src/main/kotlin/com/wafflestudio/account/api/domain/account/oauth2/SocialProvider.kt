@@ -7,4 +7,5 @@ enum class SocialProvider(
     GOOGLE("google"),
     NAVER("naver"),
     KAKAO("kakao"),
+    GITHUB("github"),
 }

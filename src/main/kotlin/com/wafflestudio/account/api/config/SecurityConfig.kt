@@ -1,6 +1,7 @@
 package com.wafflestudio.account.api.config
 
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
+import com.wafflestudio.account.api.interfaces.oauth2.GithubOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.KakaoOAuth2UserService
 import com.wafflestudio.account.api.interfaces.oauth2.NaverOAuth2UserService
@@ -17,6 +18,7 @@ class SecurityConfig(
     private val googleOAuth2UserService: GoogleOAuth2UserService,
     private val naverOAuth2UserService: NaverOAuth2UserService,
     private val kakaoOAuth2UserService: KakaoOAuth2UserService,
+    private val githubOAuth2UserService: GithubOAuth2UserService,
 ) {
     @Bean
     fun securityWebFilterChain(
@@ -43,6 +45,7 @@ class SecurityConfig(
             SocialProvider.GOOGLE to googleOAuth2UserService,
             SocialProvider.NAVER to naverOAuth2UserService,
             SocialProvider.KAKAO to kakaoOAuth2UserService,
+            SocialProvider.GITHUB to githubOAuth2UserService,
         )
     }
 }
