@@ -1,20 +1,21 @@
-package com.wafflestudio.account.api.interfaces.oauth2
+package com.wafflestudio.account.api.client
 
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
+import com.wafflestudio.account.api.interfaces.oauth2.NaverOAuth2UserResponse
+import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserResponse
 import org.springframework.security.oauth2.client.registration.ClientRegistration
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
-import org.springframework.stereotype.Service
-import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.core.publisher.Mono
 
-@Service
-class NaverOAuth2UserService(
-    val clientRegistrationRepository: ReactiveClientRegistrationRepository,
-    val webClientBuilder: WebClient.Builder
-) : OAuth2UserService {
+@Component
+class NaverClient(
+    private val webClientHelper: WebClientHelper,
+    private val clientRegistrationRepository: ReactiveClientRegistrationRepository,
+) : OAuth2Client {
+
+    private val resourceWebClient = webClientHelper.buildWebClient()
 
     override fun getMe(
         accessToken: String
@@ -24,9 +25,7 @@ class NaverOAuth2UserService(
 
         return clientRegistration
             .flatMap { clientRegistration ->
-                webClientBuilder
-                    .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                    .build()
+                resourceWebClient
                     .get()
                     .uri(clientRegistration.providerDetails.userInfoEndpoint.uri)
                     .headers {

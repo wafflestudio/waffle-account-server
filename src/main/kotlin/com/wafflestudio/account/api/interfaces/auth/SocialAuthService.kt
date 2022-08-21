@@ -5,7 +5,11 @@ import com.wafflestudio.account.api.domain.account.UserRepository
 import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
 import com.wafflestudio.account.api.error.SocialProviderInvalidException
 import com.wafflestudio.account.api.error.WrongProviderException
-import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserServiceFactory
+import com.wafflestudio.account.api.client.GithubClient
+import com.wafflestudio.account.api.client.GoogleClient
+import com.wafflestudio.account.api.client.KakaoClient
+import com.wafflestudio.account.api.client.NaverClient
+import com.wafflestudio.account.api.client.OAuth2Client
 import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.mono
 import org.springframework.stereotype.Service
@@ -15,18 +19,20 @@ import java.time.LocalDateTime
 class SocialAuthService(
     private val authService: AuthService,
     private val userRepository: UserRepository,
-    private val oAuth2UserServiceFactory: OAuth2UserServiceFactory,
+    private val googleClient: GoogleClient,
+    private val kakaoClient: KakaoClient,
+    private val naverClient: NaverClient,
+    private val githubClient: GithubClient,
 ) {
 
     suspend fun socialLogin(provider: String, oAuth2Request: OAuth2Request): TokenResponse {
 
         val socialProvider = enumValueOf<SocialProvider>(provider.uppercase())
 
-        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(socialProvider)
-            ?: throw SocialProviderInvalidException
+        val oAuth2Client = getOAuth2Client(socialProvider)
         val oAuth2Token = oAuth2Request.accessToken
 
-        return oAuth2UserService.getMe(oAuth2Token)
+        return oAuth2Client.getMe(oAuth2Token)
             .flatMap { response ->
                 val email = response.email
                 mono {
@@ -55,5 +61,18 @@ class SocialAuthService(
                     )
                 }
             }.awaitSingle()
+    }
+
+    private fun getOAuth2Client(
+        socialProvider: SocialProvider,
+    ): OAuth2Client {
+        return when (socialProvider) {
+            SocialProvider.GOOGLE -> googleClient
+            SocialProvider.KAKAO -> kakaoClient
+            SocialProvider.NAVER -> naverClient
+            SocialProvider.GITHUB -> githubClient
+            SocialProvider.LOCAL ->
+                throw SocialProviderInvalidException
+        }
     }
 }
