@@ -52,7 +52,7 @@ class SocialAuthService(
         )
     }
 
-    private fun getOAuth2Client(
+    private suspend fun getOAuth2Client(
         socialProvider: SocialProvider,
     ): OAuth2Client {
         return when (socialProvider) {

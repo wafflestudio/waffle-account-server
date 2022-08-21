@@ -83,7 +83,7 @@ class AuthService(
         }
     }
 
-    fun buildAccessToken(user: User, now: LocalDateTime): String {
+    suspend fun buildAccessToken(user: User, now: LocalDateTime): String {
         return buildJwtToken(user, accessPrivateKeyGenerated, now, now.plusDays(1))
     }
 
@@ -103,7 +103,7 @@ class AuthService(
         return refreshToken
     }
 
-    private fun buildJwtToken(user: User, key: PrivateKey, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
+    private suspend fun buildJwtToken(user: User, key: PrivateKey, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
         if (!user.isActive) {
             throw UserInactiveException
         }
@@ -136,7 +136,7 @@ class AuthService(
     }
 
     private suspend fun checkUnregistrable(user: User): Boolean {
-        // ask to other services to check if the user is unregistrable
+        // ask other services to check if the user is unregistrable
         return true
     }
 }
