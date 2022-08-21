@@ -447,35 +447,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="sect3">
 <h4 id="_request">Request</h4>
+<div class="sect4">
+<h5 id="_request_request_fields">Request fields</h5>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Body</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 이메일입니다.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 이메일 주소입니다.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 비밀번호입니다.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_response">Response</h4>
@@ -483,7 +487,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Possible Responses</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -518,35 +521,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>다음은 응답이 <code>200 OK</code> 일 때 API가 반환하는 값들입니다.</p>
 </div>
+<div class="sect4">
+<h5 id="_response_response_fields">Response fields</h5>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Body</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">access_token</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>access_token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 access token입니다.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">refresh_token</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>refresh_token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 refresh token입니다.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_examples">Examples</h4>
@@ -591,8 +598,8 @@ Content-Type: application/json
 Content-Length: 1718
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU5MTQ2MTcyLCJleHAiOjE2NTkyMzI1NzJ9.1UN-AeZOxSvgvxaDWyoF6ajl_i1AaAF9mcjQVHi7bTKqJwNxQq4757lBl3TktvlGFe6wM_NKI9SJceQVhuPPI1Z_I2C11IDmmjBbDbeMqgGscV2Rcd5Gv3HMd5a9ngBrJ4OmtDRal_I0HszBzk8UyzhDOSoBc_VU_FKyUU5dcQcq42etTRJmiQHaxUt_tfL_MDbfW7t4vZKqzwQGuy-wNqLxPfeQpZN9cmWroxEz8OBeNZv21wtIx7CxpYboNoykOgB-dyEvDGugAPymNzdeb3ZnYJ3chzLYMIAolnFlS1XqC6eJXM9tK34Pcx8SbHntFmrdm1Torr9QTM7V52jVN-Dov6ZZkV_fULnAgwg1SjukDHdtUUFHWL9yS7oL21t0a3vX2p59C15lzywT_IRxKWUY6daZxXGhQ67ZDdKNGAuno-aDa5bIl7wXTciFTnYScMrHRzsB4PTN0h04sCyBw0_4sNfB8P_jQC06wT6gxtQ8Lf8nYZHfC9ASFRguva2FcDNDmkJVWBZptxXVl0yC11VUCCJ0FgySTSD5ugUZSDQ1hjEOa9-uIZja1d1fulsUUYeNN7wJSuga2TsswZ6Hv-aUtNmp59kNR-2hhjUosg4n7RpjdnuGGv7UEzyinj5S8gU4QI7kfJPldovAIxVPdiVLvDlq6YzkMJY-TZBBhlg",
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU5MTQ2MTcyLCJleHAiOjE2OTA2ODIxNzJ9.iUVDhqoQsLHj4DNGMjE5zEGsUfb_Msa18_B5REdfK6Kp0Lid9rzc8FIjabHeNA4U-aXzgvfNlRgq40vdlwHd6q7i4QzgvZkLcAUQERzMZUDSx3KbJ-l-63MtKkrlSnmq_S71Ueou3DMfXmKBP9m6TBbydELCCfYq_zoyEP24fBSDOPVDdNPzWRFG_SnfdnFt9F6tqI2IeztocSMcMlaVC405Y2P__93zOZM47LMzCxsntriqA6q8TA70_cqT5e5UBNtcZY08rp4AXgUSYZ1FImWRqybj855Sf6UVaxzdqADkMY2UMrA-eE9db1090nFkF4GFlIQnXl0wmbuKcjsKWe6ZKbX1Yp7VKHtNVzBNBt-ICS8Lwr2V2mPKglNx148UahGvB-lwC3f3klSidEyL9GMwEoFQR6YMQjIioDtONOfdUeh4_6XFvidSIiJp220mxCXZ8w5vvIbSPeo4FiCT1D6xD0Hdpj4QmbT2eAIDTDiO2fTojJWtqGCLWGwC31KSQi8lSDpFHmmeBYA8jrni71SgJLJ5xBOwWnFMKvFZcgfSzNoeUTGQYpEUFKSuvvY65X0S4PuVR_7BPO0ksXAIiW_TLXvE8gDZpE2c3PL8WpasIpYDdmuceerBwbPUNBAY55GcMSN6_2mIOclPibKJxqBkxgG6b1jVRkz89m9rups"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2NjEwNTIyMzJ9.4AJtjxAQewJAvU-LICO8WIgfoF99zbbWmTrTiiaw-PDPSsHCXq0MMB3f_Oqe6oi6z4_MdM9JW17DNwP5Rh7lXE7nUuWiAgiisYq5o0nuJI1a2rVUe0eyxCeUUVt1IAFJtA-cbTqHZMKISmpL5gWXAf27bsqv5NwL3VKjpANYgWtlr1GETBuLtOhGob_me0PpNtad0J6hVu67UoeL1aZ3qZ9mDvuBFRu52OlRYSTfF6hXgAUP-f4sM8bw9mHRHuj4p11x3LHXLXAhr023quO8OPpoZcklbIeu5M-EcqyrVTlFuCwfcwvFjrUYeRhO97Xc9zIrEqAtiqgwho4uMniVV6qtz88Qcnhn59OjQ4LWMSES2TeMtJpCD0prsMESlOLiuXJlJfN5OudcXd_j8gFDM6hZuR3hQ04Ei7sSE_lZ3nSiWudCATtyRpmVBGthYAJs916GhWPVW0A401nYpd5rRCcmcZPZQyycmLsezplvPd5cZwTZrtuYYzrp9EBMdjHbYZja0Wt26AXLtARO8t5Rq0CyIbYId1KsGPKu3EZXC5EAkHana0UjW6u5cCqKCpdhFASkv1zH6srz6NWmFfLn3C7UEhU2dc-DKTeLCSAUgxp8IqtzwLgsqcK3XpwZbpGFR-ypRPkrHiCR2DeclVLzKNTVjWQUPU1W6_jZjV5L1gM",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2OTI1MDE4MzJ9.evEfzkIZ-7wfRmu3_3nEBQFfITPz0QHWszKCtwHbMVtSBUumKT8ALc2z96C1Z1B3quBTxnH9BDwehbHb-O99Dxif7kahzm61a8Q1Ja6bRS1cAi1iJ98nRejKA4WCoIe-9Yo8Qw21w--lmGjQLlavC7-GyGqFx1oJ80Y_D1cWkuxb8ajcljQckgReNTSaViCxq3fLneTA0BYx9shQR103oy3LTQksXm6DP5rmwePlS0GWotGgydXfuA6fInVC0y0TYo9W1WHg0OH38CVyWoJGVws3rAdJ4ri6AFV5wy8Xyb9M2Iz5-qBS-ul0jGDvniq_KyGaIN8Zl81oRZkVdihj8D05vytWNTAQpdQPq6mAelp02q1d2nGcUxmk8GbJN4SHUzffIZYAZMzItplxAbYaXaFMUUsLylZVfHiPuoHC6gEXB-Y_43hd0NVq8rZ5aCPo3UEXjgUoc4GBQxydnFvo6OYfjwgGYbudtNie0tKaiE26_Ml--IGz8_vR00zShAmI1Ef5IlIW59xXfLlMfyOGxSM9DKluBKMsBoNjQb3_Cyca_ik2HMVxLbSZzq-I_MyO58FoQjl3iAE7TaifbnNTqtw7hNgflqpemcYj25ftS4Y26BpiNE5xX6Ir4TX972X4fv7hyLWDGb_CalVJ920QqHRj_zGer1SmiPTgERXPB00"
 }</code></pre>
 </div>
 </div>
@@ -812,29 +819,30 @@ Content-Length: 81
 <h3 id="_put_v1validate">PUT /v1/validate</h3>
 <div class="sect3">
 <h4 id="_request_3">Request</h4>
+<div class="sect4">
+<h5 id="_request_3_request_headers">Request headers</h5>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Header</caption>
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Authorization</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 access token입니다.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_response_3">Response</h4>
@@ -842,7 +850,6 @@ Content-Length: 81
 <p>다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. Possible Responses</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -865,29 +872,33 @@ Content-Length: 81
 <div class="paragraph">
 <p>다음은 응답이 <code>200 OK</code> 일 때 API가 반환하는 값들입니다.</p>
 </div>
+<div class="sect4">
+<h5 id="_response_3_response_fields">Response fields</h5>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. Body</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user_id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 고유 ID입니다.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_examples_3">Examples</h4>
@@ -899,7 +910,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/validate' -i -X PUT \
-    -H 'Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU5MTQ2MTcyLCJleHAiOjE2NTkyMzI1NzJ9.1UN-AeZOxSvgvxaDWyoF6ajl_i1AaAF9mcjQVHi7bTKqJwNxQq4757lBl3TktvlGFe6wM_NKI9SJceQVhuPPI1Z_I2C11IDmmjBbDbeMqgGscV2Rcd5Gv3HMd5a9ngBrJ4OmtDRal_I0HszBzk8UyzhDOSoBc_VU_FKyUU5dcQcq42etTRJmiQHaxUt_tfL_MDbfW7t4vZKqzwQGuy-wNqLxPfeQpZN9cmWroxEz8OBeNZv21wtIx7CxpYboNoykOgB-dyEvDGugAPymNzdeb3ZnYJ3chzLYMIAolnFlS1XqC6eJXM9tK34Pcx8SbHntFmrdm1Torr9QTM7V52jVN-Dov6ZZkV_fULnAgwg1SjukDHdtUUFHWL9yS7oL21t0a3vX2p59C15lzywT_IRxKWUY6daZxXGhQ67ZDdKNGAuno-aDa5bIl7wXTciFTnYScMrHRzsB4PTN0h04sCyBw0_4sNfB8P_jQC06wT6gxtQ8Lf8nYZHfC9ASFRguva2FcDNDmkJVWBZptxXVl0yC11VUCCJ0FgySTSD5ugUZSDQ1hjEOa9-uIZja1d1fulsUUYeNN7wJSuga2TsswZ6Hv-aUtNmp59kNR-2hhjUosg4n7RpjdnuGGv7UEzyinj5S8gU4QI7kfJPldovAIxVPdiVLvDlq6YzkMJY-TZBBhlg'</code></pre>
+    -H 'Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2NjEwNTIyMzJ9.4AJtjxAQewJAvU-LICO8WIgfoF99zbbWmTrTiiaw-PDPSsHCXq0MMB3f_Oqe6oi6z4_MdM9JW17DNwP5Rh7lXE7nUuWiAgiisYq5o0nuJI1a2rVUe0eyxCeUUVt1IAFJtA-cbTqHZMKISmpL5gWXAf27bsqv5NwL3VKjpANYgWtlr1GETBuLtOhGob_me0PpNtad0J6hVu67UoeL1aZ3qZ9mDvuBFRu52OlRYSTfF6hXgAUP-f4sM8bw9mHRHuj4p11x3LHXLXAhr023quO8OPpoZcklbIeu5M-EcqyrVTlFuCwfcwvFjrUYeRhO97Xc9zIrEqAtiqgwho4uMniVV6qtz88Qcnhn59OjQ4LWMSES2TeMtJpCD0prsMESlOLiuXJlJfN5OudcXd_j8gFDM6hZuR3hQ04Ei7sSE_lZ3nSiWudCATtyRpmVBGthYAJs916GhWPVW0A401nYpd5rRCcmcZPZQyycmLsezplvPd5cZwTZrtuYYzrp9EBMdjHbYZja0Wt26AXLtARO8t5Rq0CyIbYId1KsGPKu3EZXC5EAkHana0UjW6u5cCqKCpdhFASkv1zH6srz6NWmFfLn3C7UEhU2dc-DKTeLCSAUgxp8IqtzwLgsqcK3XpwZbpGFR-ypRPkrHiCR2DeclVLzKNTVjWQUPU1W6_jZjV5L1gM'</code></pre>
 </div>
 </div>
 </div>
@@ -908,7 +919,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/validate HTTP/1.1
-Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU5MTQ2MTcyLCJleHAiOjE2NTkyMzI1NzJ9.1UN-AeZOxSvgvxaDWyoF6ajl_i1AaAF9mcjQVHi7bTKqJwNxQq4757lBl3TktvlGFe6wM_NKI9SJceQVhuPPI1Z_I2C11IDmmjBbDbeMqgGscV2Rcd5Gv3HMd5a9ngBrJ4OmtDRal_I0HszBzk8UyzhDOSoBc_VU_FKyUU5dcQcq42etTRJmiQHaxUt_tfL_MDbfW7t4vZKqzwQGuy-wNqLxPfeQpZN9cmWroxEz8OBeNZv21wtIx7CxpYboNoykOgB-dyEvDGugAPymNzdeb3ZnYJ3chzLYMIAolnFlS1XqC6eJXM9tK34Pcx8SbHntFmrdm1Torr9QTM7V52jVN-Dov6ZZkV_fULnAgwg1SjukDHdtUUFHWL9yS7oL21t0a3vX2p59C15lzywT_IRxKWUY6daZxXGhQ67ZDdKNGAuno-aDa5bIl7wXTciFTnYScMrHRzsB4PTN0h04sCyBw0_4sNfB8P_jQC06wT6gxtQ8Lf8nYZHfC9ASFRguva2FcDNDmkJVWBZptxXVl0yC11VUCCJ0FgySTSD5ugUZSDQ1hjEOa9-uIZja1d1fulsUUYeNN7wJSuga2TsswZ6Hv-aUtNmp59kNR-2hhjUosg4n7RpjdnuGGv7UEzyinj5S8gU4QI7kfJPldovAIxVPdiVLvDlq6YzkMJY-TZBBhlg
+Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2NjEwNTIyMzJ9.4AJtjxAQewJAvU-LICO8WIgfoF99zbbWmTrTiiaw-PDPSsHCXq0MMB3f_Oqe6oi6z4_MdM9JW17DNwP5Rh7lXE7nUuWiAgiisYq5o0nuJI1a2rVUe0eyxCeUUVt1IAFJtA-cbTqHZMKISmpL5gWXAf27bsqv5NwL3VKjpANYgWtlr1GETBuLtOhGob_me0PpNtad0J6hVu67UoeL1aZ3qZ9mDvuBFRu52OlRYSTfF6hXgAUP-f4sM8bw9mHRHuj4p11x3LHXLXAhr023quO8OPpoZcklbIeu5M-EcqyrVTlFuCwfcwvFjrUYeRhO97Xc9zIrEqAtiqgwho4uMniVV6qtz88Qcnhn59OjQ4LWMSES2TeMtJpCD0prsMESlOLiuXJlJfN5OudcXd_j8gFDM6hZuR3hQ04Ei7sSE_lZ3nSiWudCATtyRpmVBGthYAJs916GhWPVW0A401nYpd5rRCcmcZPZQyycmLsezplvPd5cZwTZrtuYYzrp9EBMdjHbYZja0Wt26AXLtARO8t5Rq0CyIbYId1KsGPKu3EZXC5EAkHana0UjW6u5cCqKCpdhFASkv1zH6srz6NWmFfLn3C7UEhU2dc-DKTeLCSAUgxp8IqtzwLgsqcK3XpwZbpGFR-ypRPkrHiCR2DeclVLzKNTVjWQUPU1W6_jZjV5L1gM
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -965,29 +976,33 @@ Host: localhost:8080</code></pre>
 <h3 id="_put_v1refresh">PUT /v1/refresh</h3>
 <div class="sect3">
 <h4 id="_request_4">Request</h4>
+<div class="sect4">
+<h5 id="_request_4_request_fields">Request fields</h5>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. Body</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">refresh_token</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>refresh_token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 refresh token입니다.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_response_4">Response</h4>
@@ -995,7 +1010,6 @@ Host: localhost:8080</code></pre>
 <p>다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. Possible Responses</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1026,29 +1040,33 @@ Host: localhost:8080</code></pre>
 <div class="paragraph">
 <p>다음은 응답이 <code>200 OK</code> 일 때 API가 반환하는 값들입니다.</p>
 </div>
+<div class="sect4">
+<h5 id="_response_4_response_fields">Response fields</h5>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. Body</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 <col style="width: 25%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">access_token</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>access_token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자의 access token입니다.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_examples_4">Examples</h4>
@@ -1062,7 +1080,7 @@ Host: localhost:8080</code></pre>
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU5MTQ2MTcyLCJleHAiOjE2OTA2ODIxNzJ9.iUVDhqoQsLHj4DNGMjE5zEGsUfb_Msa18_B5REdfK6Kp0Lid9rzc8FIjabHeNA4U-aXzgvfNlRgq40vdlwHd6q7i4QzgvZkLcAUQERzMZUDSx3KbJ-l-63MtKkrlSnmq_S71Ueou3DMfXmKBP9m6TBbydELCCfYq_zoyEP24fBSDOPVDdNPzWRFG_SnfdnFt9F6tqI2IeztocSMcMlaVC405Y2P__93zOZM47LMzCxsntriqA6q8TA70_cqT5e5UBNtcZY08rp4AXgUSYZ1FImWRqybj855Sf6UVaxzdqADkMY2UMrA-eE9db1090nFkF4GFlIQnXl0wmbuKcjsKWe6ZKbX1Yp7VKHtNVzBNBt-ICS8Lwr2V2mPKglNx148UahGvB-lwC3f3klSidEyL9GMwEoFQR6YMQjIioDtONOfdUeh4_6XFvidSIiJp220mxCXZ8w5vvIbSPeo4FiCT1D6xD0Hdpj4QmbT2eAIDTDiO2fTojJWtqGCLWGwC31KSQi8lSDpFHmmeBYA8jrni71SgJLJ5xBOwWnFMKvFZcgfSzNoeUTGQYpEUFKSuvvY65X0S4PuVR_7BPO0ksXAIiW_TLXvE8gDZpE2c3PL8WpasIpYDdmuceerBwbPUNBAY55GcMSN6_2mIOclPibKJxqBkxgG6b1jVRkz89m9rups"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2OTI1MDE4MzJ9.evEfzkIZ-7wfRmu3_3nEBQFfITPz0QHWszKCtwHbMVtSBUumKT8ALc2z96C1Z1B3quBTxnH9BDwehbHb-O99Dxif7kahzm61a8Q1Ja6bRS1cAi1iJ98nRejKA4WCoIe-9Yo8Qw21w--lmGjQLlavC7-GyGqFx1oJ80Y_D1cWkuxb8ajcljQckgReNTSaViCxq3fLneTA0BYx9shQR103oy3LTQksXm6DP5rmwePlS0GWotGgydXfuA6fInVC0y0TYo9W1WHg0OH38CVyWoJGVws3rAdJ4ri6AFV5wy8Xyb9M2Iz5-qBS-ul0jGDvniq_KyGaIN8Zl81oRZkVdihj8D05vytWNTAQpdQPq6mAelp02q1d2nGcUxmk8GbJN4SHUzffIZYAZMzItplxAbYaXaFMUUsLylZVfHiPuoHC6gEXB-Y_43hd0NVq8rZ5aCPo3UEXjgUoc4GBQxydnFvo6OYfjwgGYbudtNie0tKaiE26_Ml--IGz8_vR00zShAmI1Ef5IlIW59xXfLlMfyOGxSM9DKluBKMsBoNjQb3_Cyca_ik2HMVxLbSZzq-I_MyO58FoQjl3iAE7TaifbnNTqtw7hNgflqpemcYj25ftS4Y26BpiNE5xX6Ir4TX972X4fv7hyLWDGb_CalVJ920QqHRj_zGer1SmiPTgERXPB00"
 }'</code></pre>
 </div>
 </div>
@@ -1077,7 +1095,7 @@ Content-Length: 861
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU5MTQ2MTcyLCJleHAiOjE2OTA2ODIxNzJ9.iUVDhqoQsLHj4DNGMjE5zEGsUfb_Msa18_B5REdfK6Kp0Lid9rzc8FIjabHeNA4U-aXzgvfNlRgq40vdlwHd6q7i4QzgvZkLcAUQERzMZUDSx3KbJ-l-63MtKkrlSnmq_S71Ueou3DMfXmKBP9m6TBbydELCCfYq_zoyEP24fBSDOPVDdNPzWRFG_SnfdnFt9F6tqI2IeztocSMcMlaVC405Y2P__93zOZM47LMzCxsntriqA6q8TA70_cqT5e5UBNtcZY08rp4AXgUSYZ1FImWRqybj855Sf6UVaxzdqADkMY2UMrA-eE9db1090nFkF4GFlIQnXl0wmbuKcjsKWe6ZKbX1Yp7VKHtNVzBNBt-ICS8Lwr2V2mPKglNx148UahGvB-lwC3f3klSidEyL9GMwEoFQR6YMQjIioDtONOfdUeh4_6XFvidSIiJp220mxCXZ8w5vvIbSPeo4FiCT1D6xD0Hdpj4QmbT2eAIDTDiO2fTojJWtqGCLWGwC31KSQi8lSDpFHmmeBYA8jrni71SgJLJ5xBOwWnFMKvFZcgfSzNoeUTGQYpEUFKSuvvY65X0S4PuVR_7BPO0ksXAIiW_TLXvE8gDZpE2c3PL8WpasIpYDdmuceerBwbPUNBAY55GcMSN6_2mIOclPibKJxqBkxgG6b1jVRkz89m9rups"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2OTI1MDE4MzJ9.evEfzkIZ-7wfRmu3_3nEBQFfITPz0QHWszKCtwHbMVtSBUumKT8ALc2z96C1Z1B3quBTxnH9BDwehbHb-O99Dxif7kahzm61a8Q1Ja6bRS1cAi1iJ98nRejKA4WCoIe-9Yo8Qw21w--lmGjQLlavC7-GyGqFx1oJ80Y_D1cWkuxb8ajcljQckgReNTSaViCxq3fLneTA0BYx9shQR103oy3LTQksXm6DP5rmwePlS0GWotGgydXfuA6fInVC0y0TYo9W1WHg0OH38CVyWoJGVws3rAdJ4ri6AFV5wy8Xyb9M2Iz5-qBS-ul0jGDvniq_KyGaIN8Zl81oRZkVdihj8D05vytWNTAQpdQPq6mAelp02q1d2nGcUxmk8GbJN4SHUzffIZYAZMzItplxAbYaXaFMUUsLylZVfHiPuoHC6gEXB-Y_43hd0NVq8rZ5aCPo3UEXjgUoc4GBQxydnFvo6OYfjwgGYbudtNie0tKaiE26_Ml--IGz8_vR00zShAmI1Ef5IlIW59xXfLlMfyOGxSM9DKluBKMsBoNjQb3_Cyca_ik2HMVxLbSZzq-I_MyO58FoQjl3iAE7TaifbnNTqtw7hNgflqpemcYj25ftS4Y26BpiNE5xX6Ir4TX972X4fv7hyLWDGb_CalVJ920QqHRj_zGer1SmiPTgERXPB00"
 }</code></pre>
 </div>
 </div>
@@ -1091,7 +1109,7 @@ Content-Type: application/json
 Content-Length: 860
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjU5MTQ2MTczLCJleHAiOjE2NTkyMzI1NzN9.x6h2-aHw-LaKMjNqg9Oh-LmEOA61e_NwP-7K5eILDcWVvLx4wMz0u5usxOewz5bOD57OlR2IXBJwbe-0D3qq0TZCHdBK7JfeMvV4wdAFWASRZRJuCsukmiVFTOOaFtD3u1g4mjjbN-sLxrn-J2VXFZt2xMT1NO-LzT4JtD8QfzUEFS5z-KyQcdyYgnuuwLzHdI_txLp9DZzKTByu9YvWxZyvJGc_wq80i2EPx33dyv4s2t9-o558UoYaiigDnAoE45qCxDqnQQpcQ3RZlPLd_WjllOF_rAQGqf6o5lgYyAJCgDgkSr5MagMg-CcZBY3gJz1KS0rcbo9ekyBnBJNdH82Y31StX1v-pq0NHavHxUlbuCy9igrewFT4rF45Gr_hb0m1v3JvtzEUgZVbs27KxBD4KaAq4jZSjnormDWt8FurTrXNjLC3Y-IAwkDkZIE2QD_WtVg9ThEYEU0JBIT8aRT_-yyF-7szPcnAZZmMQID0rck3mwgX9s7RzK2Ks6d18xSlRfJvWkTzGM4A3foIDStPEeqqvQSbSBrQpx10w9jrSzmxPjbDhBdzVMyIT4M1CUHnBW4tqHCDvbq6PJqPL0YNtqoFyCB9N0JKw2lYVVPKM3VJvDmPBjrkiqVdh3xSXWz3JLuH9RcMc1cA4pUl9YGUr-61YAmMMKh6DPXWwMQ"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMzLCJleHAiOjE2NjEwNTIyMzN9.NT75yHQXe_lWRqZkGYAO3j2VkFSoniVrTfA862Vp-ICZbvCOE9yodSHuHMXgTvPLbaKZ7kMGXNILeps0i2R0Dx_i7sMedXRjLHz9DuAjjmBbsP2YAIiqGuk1MX8undS1GbHFyD4PGIGme5zxrNjRaDOA_JfRjD0TzS-wyI9_nqFj_YzS6dMBQFjq3pHCwhQaxWixuvjsxK0rE2TcVqzvtm1fknqTbgtz9DQV6zOFYrg2a2SCHWu1tOTYsFUHDwuBe_hVIZ52XoqPa63liMPalj3xUKLbI_C86vpLQ72BQ_DEvC3W0BUdK2HAh_VQjfI1wl4B6OzHPynxLNqtK7j2iB5bCww8Spg24NifxsVT9jFxLsTpasWf1-ZMRbcnk7kli44zoFHgedS1iIhaC2uHSOsS0ClnQXk31K4Ww5mc4YOURCo8U1mtIok8Zlv4_NwWnLzEAFq-vKuE1vWx5aVBy1cE0CF4h-qBURCEzZ08fiDLILy2VwG7H3WfWwQghrVo5-vN7TTDDIBDE0SD0ngy1z7ZWxd8wjTaTnbsiJ5tIma3Y_YfdtQf-lyBJVII1N9SwPn_ngMn-gcf_ZXVLJqUualw8lR85VPpP6byZ5poVn36lZ2JvxGDYeYHPEohWGdG5X-9U1fJvfHO88P1lQgdT5s0A7XqdXHM-ohUALOsVmI"
 }</code></pre>
 </div>
 </div>
@@ -1193,7 +1211,7 @@ Content-Length: 80
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyOCIsImlhdCI6MTY1OTE0NjE3MywiZXhwIjoxNjkwNjgyMTczfQ.S_IRd0uglpA3axM7bCaZ7HRI_HmPpgg923NDM8BvFihwKfxvuYP7mxJZuoYm_-PN6CtqSjr8CZd5WNmDPZdvXBmIJB7Qq7oWazRz8yVAo_3H8tC-Y68Ka38tE-MWmjmf5KOKjxTn8IiItfeId845X4FpnGHt7ZPG2bxt-fuENBFKSc49eElG0dwe_IW_3-Prdi9wQJ77N1HnaemYuzxRgwsnKuBigXDWnVIBhg4ljox1YBro5GZGewKCuYK1f_asi1UTTAfBzaGI4s6sO9qx2C5D1EnPy7esbo3ZnwQZ5A7-bRgbUurB_M55IRuoLCo15qnGymDYUxyHxcvZRacCnmQtRmx2OZHapfne-XfFCfAOoPmWeML2o8EKKElo3TWS-zFt1k1MdpDsBTyFZd1SawIlqrSJ6jDD-cTLCm2o8qUopUmXmFC90l9y0168MnPlAonVXwFmgxsjKHP8rsSbfDaRCDl0wJC5xmWkHSzJnxkjm1_1NQoq98ixfBwUFoSaKqU5Zhs1ozseapKXbmXJWq1BMvAUoWeWc3top45emjMAc5RzD8x_Wrl6a1VIlXSAdoxDNuDnXDfUBtsDxPwMz3fNHvhZvEyG1Khcl45YQMBRnA5X_kTgG2RycorFwqaHx5X0JzASMyoA6IfeIRr14Bh8LUESTnnuCeUScQlicc0"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiI0IiwiaWF0IjoxNjYwOTY1ODMzLCJleHAiOjE2OTI1MDE4MzN9.nWI2yzTpT1fAUTaRt8y9TFZtUMcLJtYRN7jcoIA7uxce2MY8V5FtSRw0OmfZ39rPgjwI4FVbxNUK7z4MwmmNnz_ClsEj8EfvWpN7JxKKKD-3mtIm0MjIZyYB5txR3GuBIGMxTUKRoiig26Msjhksei1MDD4qW6VkSrucjmOPxCqmrYkK2SFC-ybv2hQWOToxBZSw8HzuGRjiHGjAlFKS8iCPf6q1khEW4ojuLE9m28ywGn2-rZhkMIA5llbPmfHR_SX5YTvVGbH2dOtFaDrgs1yd6zjK4TjAfzbEpak1k_WDhOmvsQV6YusCX96J5AhdBrgu_lIw7_r1AXBcvQTYsATlldInvYl0M3TK7piV2X5RraHzWN56V6txkgE5tp2qWE_T2oLSW_3TXWNA-90RqYNTkW3Xw6_EE5YC-MSzyT0DZpRb4FhlvUFZhRlDTBE-9vjreP6Q62-Y2ye3txFaEZgsELDjG49GV5S9qDrL4q3ff_1Cx6UOhLHXJ3WyxcASTUdlacspQUnpHoT7aNjpuyWkbYqMM6D7PtSTf_1eC-ot1ToOtpIzyroP_9KzmXPXz5y3dK3ZYXMq_sasXsRijO5fRNysSU0EC-waxPt9HwdccYLoOKk1hF50ANVz7BxxMqdAqPXCgGJCjBNJUI7KPehYsUHDxBN--yYPrl82r50"
 }'</code></pre>
 </div>
 </div>
@@ -1204,11 +1222,11 @@ Content-Length: 80
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/refresh HTTP/1.1
 Content-Type: application/json
-Content-Length: 863
+Content-Length: 861
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIyOCIsImlhdCI6MTY1OTE0NjE3MywiZXhwIjoxNjkwNjgyMTczfQ.S_IRd0uglpA3axM7bCaZ7HRI_HmPpgg923NDM8BvFihwKfxvuYP7mxJZuoYm_-PN6CtqSjr8CZd5WNmDPZdvXBmIJB7Qq7oWazRz8yVAo_3H8tC-Y68Ka38tE-MWmjmf5KOKjxTn8IiItfeId845X4FpnGHt7ZPG2bxt-fuENBFKSc49eElG0dwe_IW_3-Prdi9wQJ77N1HnaemYuzxRgwsnKuBigXDWnVIBhg4ljox1YBro5GZGewKCuYK1f_asi1UTTAfBzaGI4s6sO9qx2C5D1EnPy7esbo3ZnwQZ5A7-bRgbUurB_M55IRuoLCo15qnGymDYUxyHxcvZRacCnmQtRmx2OZHapfne-XfFCfAOoPmWeML2o8EKKElo3TWS-zFt1k1MdpDsBTyFZd1SawIlqrSJ6jDD-cTLCm2o8qUopUmXmFC90l9y0168MnPlAonVXwFmgxsjKHP8rsSbfDaRCDl0wJC5xmWkHSzJnxkjm1_1NQoq98ixfBwUFoSaKqU5Zhs1ozseapKXbmXJWq1BMvAUoWeWc3top45emjMAc5RzD8x_Wrl6a1VIlXSAdoxDNuDnXDfUBtsDxPwMz3fNHvhZvEyG1Khcl45YQMBRnA5X_kTgG2RycorFwqaHx5X0JzASMyoA6IfeIRr14Bh8LUESTnnuCeUScQlicc0"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiI0IiwiaWF0IjoxNjYwOTY1ODMzLCJleHAiOjE2OTI1MDE4MzN9.nWI2yzTpT1fAUTaRt8y9TFZtUMcLJtYRN7jcoIA7uxce2MY8V5FtSRw0OmfZ39rPgjwI4FVbxNUK7z4MwmmNnz_ClsEj8EfvWpN7JxKKKD-3mtIm0MjIZyYB5txR3GuBIGMxTUKRoiig26Msjhksei1MDD4qW6VkSrucjmOPxCqmrYkK2SFC-ybv2hQWOToxBZSw8HzuGRjiHGjAlFKS8iCPf6q1khEW4ojuLE9m28ywGn2-rZhkMIA5llbPmfHR_SX5YTvVGbH2dOtFaDrgs1yd6zjK4TjAfzbEpak1k_WDhOmvsQV6YusCX96J5AhdBrgu_lIw7_r1AXBcvQTYsATlldInvYl0M3TK7piV2X5RraHzWN56V6txkgE5tp2qWE_T2oLSW_3TXWNA-90RqYNTkW3Xw6_EE5YC-MSzyT0DZpRb4FhlvUFZhRlDTBE-9vjreP6Q62-Y2ye3txFaEZgsELDjG49GV5S9qDrL4q3ff_1Cx6UOhLHXJ3WyxcASTUdlacspQUnpHoT7aNjpuyWkbYqMM6D7PtSTf_1eC-ot1ToOtpIzyroP_9KzmXPXz5y3dK3ZYXMq_sasXsRijO5fRNysSU0EC-waxPt9HwdccYLoOKk1hF50ANVz7BxxMqdAqPXCgGJCjBNJUI7KPehYsUHDxBN--yYPrl82r50"
 }</code></pre>
 </div>
 </div>
@@ -1238,7 +1256,7 @@ Content-Length: 80
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2022-07-30 10:49:24 +0900
+Last updated 2022-08-20 12:05:34 +0900
 </div>
 </div>
 </body>
