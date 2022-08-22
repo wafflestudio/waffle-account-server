@@ -1,6 +1,6 @@
 package com.wafflestudio.account.api.client
 
-import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
+import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 import com.wafflestudio.account.api.interfaces.oauth2.GoogleOAuth2UserResponse
 import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserResponse
 import kotlinx.coroutines.reactor.awaitSingleOrNull
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.core.publisher.Mono
 
-@Component
+@Component("GOOGLE")
 class GoogleClient(
     webClientHelper: WebClientHelper,
     clientRegistrationRepository: ReactiveClientRegistrationRepository,
@@ -17,7 +17,7 @@ class GoogleClient(
 
     private val webClient = webClientHelper.buildWebClient()
     private val clientRegistration = clientRegistrationRepository.findByRegistrationId(
-        SocialProvider.GOOGLE.registrationId
+        SocialProvider.GOOGLE.value
     ).block()!!
 
     override suspend fun getMe(

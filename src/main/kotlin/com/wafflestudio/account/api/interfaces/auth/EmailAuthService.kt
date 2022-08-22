@@ -2,7 +2,7 @@ package com.wafflestudio.account.api.interfaces.auth
 
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
-import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
+import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 import com.wafflestudio.account.api.error.EmailAlreadyExistsException
 import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.WrongPasswordException

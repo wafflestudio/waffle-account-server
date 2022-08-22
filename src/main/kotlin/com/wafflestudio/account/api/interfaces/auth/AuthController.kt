@@ -1,5 +1,6 @@
 package com.wafflestudio.account.api.interfaces.auth
 
+import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -31,13 +32,13 @@ class AuthController(
         return emailAuthService.emailLogin(emailLoginRequest)
     }
 
-    @PostMapping("/v1/users/login/{provider}")
+    @PostMapping("/v1/users/login/{socialProvider}")
     suspend fun socialLogin(
-        @PathVariable provider: String,
+        @PathVariable socialProvider: SocialProvider,
         @RequestBody oAuth2Request: OAuth2Request,
     ): TokenResponse {
         return socialAuthService.socialLogin(
-            provider,
+            socialProvider,
             oAuth2Request
         )
     }
