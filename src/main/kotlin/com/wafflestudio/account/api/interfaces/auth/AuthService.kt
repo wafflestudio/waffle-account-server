@@ -83,7 +83,7 @@ class AuthService(
         }
     }
 
-    suspend fun buildAccessToken(user: User, now: LocalDateTime): String {
+    fun buildAccessToken(user: User, now: LocalDateTime): String {
         return buildJwtToken(user, accessPrivateKeyGenerated, now, now.plusDays(1))
     }
 
@@ -103,7 +103,7 @@ class AuthService(
         return refreshToken
     }
 
-    private suspend fun buildJwtToken(
+    private fun buildJwtToken(
         user: User,
         key: PrivateKey,
         issuedAt: LocalDateTime,
