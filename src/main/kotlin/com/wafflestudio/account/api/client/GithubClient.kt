@@ -36,8 +36,8 @@ class GithubClient(
                 WebClientHelper.logger.error(it.message, it)
                 Mono.empty()
             }
-            .flatMap {
-                Mono.just(GithubOAuth2UserResponse(it.email, it.socialId.toString()))
+            .map {
+                GithubOAuth2UserResponse(it.email, it.socialId.toString())
             }.awaitSingleOrNull()
     }
 }

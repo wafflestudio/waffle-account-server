@@ -36,8 +36,8 @@ class KakaoClient(
                 WebClientHelper.logger.error(it.message, it)
                 Mono.empty()
             }
-            .flatMap {
-                Mono.just(KakaoOAuth2UserResponse(it.email, it.socialId.toString()))
+            .map {
+                KakaoOAuth2UserResponse(it.email, it.socialId.toString())
             }.awaitSingleOrNull()
     }
 }
