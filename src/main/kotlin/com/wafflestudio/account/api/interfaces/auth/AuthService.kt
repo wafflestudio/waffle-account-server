@@ -4,23 +4,14 @@ import com.wafflestudio.account.api.domain.account.RefreshToken
 import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
-import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
-import com.wafflestudio.account.api.error.EmailAlreadyExistsException
-import com.wafflestudio.account.api.error.SocialProviderInvalidException
 import com.wafflestudio.account.api.error.TokenInvalidException
 import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.UserInactiveException
-import com.wafflestudio.account.api.error.WrongPasswordException
-import com.wafflestudio.account.api.error.WrongProviderException
 import com.wafflestudio.account.api.extension.sha256
-import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserServiceFactory
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import kotlinx.coroutines.reactor.awaitSingle
-import kotlinx.coroutines.reactor.mono
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.security.KeyFactory
 import java.security.PrivateKey
@@ -36,8 +27,6 @@ import java.util.Base64.Decoder
 class AuthService(
     private val userRepository: UserRepository,
     private val refreshTokenRepository: RefreshTokenRepository,
-    private val passwordEncoder: PasswordEncoder,
-    private val oAuth2UserServiceFactory: OAuth2UserServiceFactory,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
     @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
     @Value("\${auth.jwt.refresh.publicKey}") private val refreshPublicKey: String,
@@ -53,29 +42,6 @@ class AuthService(
     private final val accessPrivateKeyGenerated: PrivateKey = factory.generatePrivate(accessPrivateKeyEncoded)
     private final val refreshPublicKeyGenerated: PublicKey = factory.generatePublic(refreshPublicKeyEncoded)
     private final val refreshPrivateKeyGenerated: PrivateKey = factory.generatePrivate(refreshPrivateKeyEncoded)
-
-    suspend fun signup(signupRequest: LocalAuthRequest): TokenResponse {
-        if (userRepository.findByEmail(signupRequest.email) != null) {
-            throw EmailAlreadyExistsException
-        }
-
-        val user = userRepository.save(
-            User(
-                email = signupRequest.email,
-                password = passwordEncoder.encode(signupRequest.password),
-                provider = SocialProvider.LOCAL,
-            )
-        )
-
-        val now = LocalDateTime.now()
-        val accessToken = buildAccessToken(user, now)
-        val refreshToken = buildRefreshToken(user, now)
-
-        return TokenResponse(
-            accessToken = accessToken,
-            refreshToken = refreshToken,
-        )
-    }
 
     suspend fun getUser(userIDRequest: UserIDRequest): UserResponse {
         val userId = userIDRequest.userId
@@ -117,7 +83,7 @@ class AuthService(
         }
     }
 
-    private fun buildAccessToken(user: User, now: LocalDateTime): String {
+    fun buildAccessToken(user: User, now: LocalDateTime): String {
         return buildJwtToken(user, accessPrivateKeyGenerated, now, now.plusDays(1))
     }
 
@@ -137,7 +103,12 @@ class AuthService(
         return refreshToken
     }
 
-    private fun buildJwtToken(user: User, key: PrivateKey, issuedAt: LocalDateTime, expiration: LocalDateTime): String {
+    private fun buildJwtToken(
+        user: User,
+        key: PrivateKey,
+        issuedAt: LocalDateTime,
+        expiration: LocalDateTime,
+    ): String {
         if (!user.isActive) {
             throw UserInactiveException
         }
@@ -149,23 +120,6 @@ class AuthService(
             .setExpiration(Timestamp.valueOf(expiration))
             .signWith(key, SignatureAlgorithm.RS512)
             .compact()
-    }
-
-    suspend fun signin(signinRequest: LocalAuthRequest): TokenResponse {
-        val user = userRepository.findByEmail(signinRequest.email) ?: throw UserDoesNotExistsException
-
-        if (!passwordEncoder.matches(signinRequest.password, user.password)) {
-            throw WrongPasswordException
-        }
-
-        val now = LocalDateTime.now()
-        val accessToken = buildAccessToken(user, now)
-        val refreshToken = buildRefreshToken(user, now)
-
-        return TokenResponse(
-            accessToken = accessToken,
-            refreshToken = refreshToken,
-        )
     }
 
     suspend fun unregister(userId: Long): UnregisterResponse {
@@ -187,46 +141,7 @@ class AuthService(
     }
 
     private suspend fun checkUnregistrable(user: User): Boolean {
-        // ask to other services to check if the user is unregistrable
+        // ask other services to check if the user is unregistrable
         return true
-    }
-
-    suspend fun signup(provider: String, oAuth2Request: OAuth2Request): TokenResponse {
-
-        val socialProvider = enumValueOf<SocialProvider>(provider.uppercase())
-
-        val oAuth2UserService = oAuth2UserServiceFactory.getOAuth2UserService(socialProvider)
-            ?: throw SocialProviderInvalidException
-        val oAuth2Token = oAuth2Request.accessToken
-
-        return oAuth2UserService.getMe(oAuth2Token)
-            .flatMap { response ->
-                val email = response.email
-                mono {
-                    val user = userRepository.findByEmail(email) ?: userRepository.save(
-                        User(
-                            email = email,
-                            provider = socialProvider,
-                            password = "",
-                            socialId = response.socialId
-                        )
-                    )
-
-                    if (user.provider == SocialProvider.LOCAL) throw WrongProviderException
-                    return@mono user
-                }
-            }
-            .flatMap { user ->
-                val now = LocalDateTime.now()
-                val accessToken = buildAccessToken(user, now)
-
-                mono {
-                    val refreshToken = buildRefreshToken(user, now)
-                    return@mono TokenResponse(
-                        accessToken = accessToken,
-                        refreshToken = refreshToken,
-                    )
-                }
-            }.awaitSingle()
     }
 }

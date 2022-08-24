@@ -1,6 +1,6 @@
 package com.wafflestudio.account.api.domain.account
 
-import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
+import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
