@@ -14,13 +14,11 @@ import java.util.concurrent.ThreadLocalRandom
 class SMSService(
     private val smsCodeRepository: SMSCodeRepository,
 ) {
-    private val client = SnsClient {
-        region = "ap-northeast-1"
-    }
-
     suspend fun sendSMSCode(smsSendRequest: SMSSendRequest) {
         val number = ThreadLocalRandom.current().nextLong(100000, 1000000)
-        client.use { snsClient ->
+        SnsClient {
+            region = "ap-northeast-1"
+        }.use { snsClient ->
             snsClient.publish(
                 PublishRequest {
                     message = number.toString()

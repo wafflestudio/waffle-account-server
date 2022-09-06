@@ -7,5 +7,4 @@ data class SMSSendRequest(
 data class SMSCheckRequest(
     val phone: String,
     val code: Long,
-
 )

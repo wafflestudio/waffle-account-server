@@ -7,6 +7,8 @@ import java.time.LocalDateTime
 @Table("sms_code")
 class SMSCode(
     @Id
+    var id: Long? = null,
+
     val code: Long,
 
     val phoneNumber: String,
