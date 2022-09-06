@@ -564,7 +564,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h5 id="_curl_request">Curl request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/login/email' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
   "email" : "test@test.com",
@@ -577,7 +577,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h5 id="_http_request">HTTP request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/auth/signin HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/login/email HTTP/1.1
 Content-Type: application/json
 Content-Length: 65
 Host: localhost:8080
@@ -598,8 +598,8 @@ Content-Type: application/json
 Content-Length: 1718
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2NjEwNTIyMzJ9.4AJtjxAQewJAvU-LICO8WIgfoF99zbbWmTrTiiaw-PDPSsHCXq0MMB3f_Oqe6oi6z4_MdM9JW17DNwP5Rh7lXE7nUuWiAgiisYq5o0nuJI1a2rVUe0eyxCeUUVt1IAFJtA-cbTqHZMKISmpL5gWXAf27bsqv5NwL3VKjpANYgWtlr1GETBuLtOhGob_me0PpNtad0J6hVu67UoeL1aZ3qZ9mDvuBFRu52OlRYSTfF6hXgAUP-f4sM8bw9mHRHuj4p11x3LHXLXAhr023quO8OPpoZcklbIeu5M-EcqyrVTlFuCwfcwvFjrUYeRhO97Xc9zIrEqAtiqgwho4uMniVV6qtz88Qcnhn59OjQ4LWMSES2TeMtJpCD0prsMESlOLiuXJlJfN5OudcXd_j8gFDM6hZuR3hQ04Ei7sSE_lZ3nSiWudCATtyRpmVBGthYAJs916GhWPVW0A401nYpd5rRCcmcZPZQyycmLsezplvPd5cZwTZrtuYYzrp9EBMdjHbYZja0Wt26AXLtARO8t5Rq0CyIbYId1KsGPKu3EZXC5EAkHana0UjW6u5cCqKCpdhFASkv1zH6srz6NWmFfLn3C7UEhU2dc-DKTeLCSAUgxp8IqtzwLgsqcK3XpwZbpGFR-ypRPkrHiCR2DeclVLzKNTVjWQUPU1W6_jZjV5L1gM",
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2OTI1MDE4MzJ9.evEfzkIZ-7wfRmu3_3nEBQFfITPz0QHWszKCtwHbMVtSBUumKT8ALc2z96C1Z1B3quBTxnH9BDwehbHb-O99Dxif7kahzm61a8Q1Ja6bRS1cAi1iJ98nRejKA4WCoIe-9Yo8Qw21w--lmGjQLlavC7-GyGqFx1oJ80Y_D1cWkuxb8ajcljQckgReNTSaViCxq3fLneTA0BYx9shQR103oy3LTQksXm6DP5rmwePlS0GWotGgydXfuA6fInVC0y0TYo9W1WHg0OH38CVyWoJGVws3rAdJ4ri6AFV5wy8Xyb9M2Iz5-qBS-ul0jGDvniq_KyGaIN8Zl81oRZkVdihj8D05vytWNTAQpdQPq6mAelp02q1d2nGcUxmk8GbJN4SHUzffIZYAZMzItplxAbYaXaFMUUsLylZVfHiPuoHC6gEXB-Y_43hd0NVq8rZ5aCPo3UEXjgUoc4GBQxydnFvo6OYfjwgGYbudtNie0tKaiE26_Ml--IGz8_vR00zShAmI1Ef5IlIW59xXfLlMfyOGxSM9DKluBKMsBoNjQb3_Cyca_ik2HMVxLbSZzq-I_MyO58FoQjl3iAE7TaifbnNTqtw7hNgflqpemcYj25ftS4Y26BpiNE5xX6Ir4TX972X4fv7hyLWDGb_CalVJ920QqHRj_zGer1SmiPTgERXPB00"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYyNDg1NTc0LCJleHAiOjE2NjI1NzE5NzR9.qv1SMzqz-MijWej71FhZBMm72pVLqk9mLii8E_MCl_DkghLmjzDpqJ5Ekui1TzILLigdVV4fyuT4LE2KzEqyhhccEeJrHqVbNjb-NH-tcLQf5o6z_QBpDgSJm1bdHh-cz09D0slj192OxgaLBpFj62iixGEQYxfgGwO2WkDzGa_N2UPsrokQcF87B88DSIdkbCr_NBv5A0fXeqR5R6lqdMgZMSSTbQSkxDrB4Wqh6jelGodmtM20pYqULvl5FnHONLNw3M0RRJodfShHDFhT5y5WGqt23mWA00iDcEmx-ESrfMTh8ljuMk8rmzFYjwFMJy-w_lnOR8YipniqSUhfC_vkMTb8fs7gJMzz7wAuLZZbNnueRafkgVfu0PrW616lBd18adX1d78pvBiNzJmh5yIW9o-awxspdEu1tc9C_Xi7gVr5q6IKIhZLeHwTdZWWkF7EClhDRavcBg2tNQjO_AExWwF1iQST1p9AU4U4mKuDEyMriYrBen5qVfxfOadH_WSBY0VZ7EIuRFArV3igkITsOlGTIxf735GufdDX3LkON4DMTWKfWCB-q29_qDFfgtI8Q76d15RXe6fVo4ni-BkAsI4fIAlRPwvs1NIzS06A6bkCNjvH-2P0YjJNjuIDQxO3mOjZR2jt4j8B9y6cDuDi68umbD-35EAiWtAUZr0",
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYyNDg1NTc0LCJleHAiOjE2OTQwMjE1NzR9.BEvBc41BUlYBZF83gizPEX8uGHjlx0CgwGFDLfDkr_0qftLc6O_bIV_jn2v8rCw708u-CRSpk5murTnOjyRAhivpsdQHxVUOG6eBoUwqX6dpFP07USfNJJKFPk_Tvuf076BnqJArRuVMIiizIQxB-v7KTHS06CXZCGs4kIzy5brVEgfd3GB6sjX2iIA2RdhpGmp8BjWMdOhr8JSZb5u9HAYJnJMXmHqQ7zher2ukYp5YnTaUOemF8-TzGc1LE8WBVYKDDFXhf2QAwfbWfAi97kxnyRoKjb3IVzF9nJUrRrLHmEe2ZBf4EZb7QU3Wvf9W9aVWy51YUC2ZdRBSwtztcm21ikrMIPUbTh9WryGcZ1qwdRB2lBaFEddO4kn7pXIBQFGwY2A5THZfLtRWs_0WBVyHWdiRDvg6AsUpyR38f8GOz-GCzk7hCfTseEpcTWyT7qpfBN7NdCkIv25oIsUK53s1wI28c0gwBDkL5lnqbue6zqTR6132rccR6Leges0MejdTCnaZhj-xqnvUb1Oxckn-0LcAMy8JzdlWdQH4Lly98AvPo7Ot-k7yBQqBLiBiXGOEadUFqAo900riZiPqHHRgIdxaE1WhGvlfklJVHgZUgfA0ehzms8Bj30_yv0MRBOinyXjgSMoj4uuAu77BpjnLjlc30TOtaKOCqpptJGk"
 }</code></pre>
 </div>
 </div>
@@ -613,7 +613,7 @@ Content-Length: 1718
 <h5 id="_curl_request">Curl request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/login/email' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{ }'</code></pre>
 </div>
@@ -623,7 +623,7 @@ Content-Length: 1718
 <h5 id="_http_request">HTTP request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/auth/signin HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/login/email HTTP/1.1
 Content-Type: application/json
 Content-Length: 3
 Host: localhost:8080
@@ -649,7 +649,7 @@ Host: localhost:8080
 <h5 id="_curl_request">Curl request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/login/email' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
   "email" : "test@test.com",
@@ -662,7 +662,7 @@ Host: localhost:8080
 <h5 id="_http_request">HTTP request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/auth/signin HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/login/email HTTP/1.1
 Content-Type: application/json
 Content-Length: 66
 Host: localhost:8080
@@ -700,7 +700,7 @@ Content-Length: 81
 <h5 id="_curl_request">Curl request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/login/email' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
   "email" : "unregistered@test.com",
@@ -713,7 +713,7 @@ Content-Length: 81
 <h5 id="_http_request">HTTP request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/auth/signin HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/login/email HTTP/1.1
 Content-Type: application/json
 Content-Length: 73
 Host: localhost:8080
@@ -751,7 +751,7 @@ Content-Length: 80
 <h5 id="_curl_request">Curl request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/auth/signin' -i -X PUT \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/users/login/email' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
   "email" : "wrong@test.com",
@@ -764,7 +764,7 @@ Content-Length: 80
 <h5 id="_http_request">HTTP request</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/auth/signin HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /v1/users/login/email HTTP/1.1
 Content-Type: application/json
 Content-Length: 67
 Host: localhost:8080
@@ -910,7 +910,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/validate' -i -X PUT \
-    -H 'Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2NjEwNTIyMzJ9.4AJtjxAQewJAvU-LICO8WIgfoF99zbbWmTrTiiaw-PDPSsHCXq0MMB3f_Oqe6oi6z4_MdM9JW17DNwP5Rh7lXE7nUuWiAgiisYq5o0nuJI1a2rVUe0eyxCeUUVt1IAFJtA-cbTqHZMKISmpL5gWXAf27bsqv5NwL3VKjpANYgWtlr1GETBuLtOhGob_me0PpNtad0J6hVu67UoeL1aZ3qZ9mDvuBFRu52OlRYSTfF6hXgAUP-f4sM8bw9mHRHuj4p11x3LHXLXAhr023quO8OPpoZcklbIeu5M-EcqyrVTlFuCwfcwvFjrUYeRhO97Xc9zIrEqAtiqgwho4uMniVV6qtz88Qcnhn59OjQ4LWMSES2TeMtJpCD0prsMESlOLiuXJlJfN5OudcXd_j8gFDM6hZuR3hQ04Ei7sSE_lZ3nSiWudCATtyRpmVBGthYAJs916GhWPVW0A401nYpd5rRCcmcZPZQyycmLsezplvPd5cZwTZrtuYYzrp9EBMdjHbYZja0Wt26AXLtARO8t5Rq0CyIbYId1KsGPKu3EZXC5EAkHana0UjW6u5cCqKCpdhFASkv1zH6srz6NWmFfLn3C7UEhU2dc-DKTeLCSAUgxp8IqtzwLgsqcK3XpwZbpGFR-ypRPkrHiCR2DeclVLzKNTVjWQUPU1W6_jZjV5L1gM'</code></pre>
+    -H 'Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYyNDg1NTc0LCJleHAiOjE2NjI1NzE5NzR9.qv1SMzqz-MijWej71FhZBMm72pVLqk9mLii8E_MCl_DkghLmjzDpqJ5Ekui1TzILLigdVV4fyuT4LE2KzEqyhhccEeJrHqVbNjb-NH-tcLQf5o6z_QBpDgSJm1bdHh-cz09D0slj192OxgaLBpFj62iixGEQYxfgGwO2WkDzGa_N2UPsrokQcF87B88DSIdkbCr_NBv5A0fXeqR5R6lqdMgZMSSTbQSkxDrB4Wqh6jelGodmtM20pYqULvl5FnHONLNw3M0RRJodfShHDFhT5y5WGqt23mWA00iDcEmx-ESrfMTh8ljuMk8rmzFYjwFMJy-w_lnOR8YipniqSUhfC_vkMTb8fs7gJMzz7wAuLZZbNnueRafkgVfu0PrW616lBd18adX1d78pvBiNzJmh5yIW9o-awxspdEu1tc9C_Xi7gVr5q6IKIhZLeHwTdZWWkF7EClhDRavcBg2tNQjO_AExWwF1iQST1p9AU4U4mKuDEyMriYrBen5qVfxfOadH_WSBY0VZ7EIuRFArV3igkITsOlGTIxf735GufdDX3LkON4DMTWKfWCB-q29_qDFfgtI8Q76d15RXe6fVo4ni-BkAsI4fIAlRPwvs1NIzS06A6bkCNjvH-2P0YjJNjuIDQxO3mOjZR2jt4j8B9y6cDuDi68umbD-35EAiWtAUZr0'</code></pre>
 </div>
 </div>
 </div>
@@ -919,7 +919,7 @@ Content-Length: 81
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /v1/validate HTTP/1.1
-Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2NjEwNTIyMzJ9.4AJtjxAQewJAvU-LICO8WIgfoF99zbbWmTrTiiaw-PDPSsHCXq0MMB3f_Oqe6oi6z4_MdM9JW17DNwP5Rh7lXE7nUuWiAgiisYq5o0nuJI1a2rVUe0eyxCeUUVt1IAFJtA-cbTqHZMKISmpL5gWXAf27bsqv5NwL3VKjpANYgWtlr1GETBuLtOhGob_me0PpNtad0J6hVu67UoeL1aZ3qZ9mDvuBFRu52OlRYSTfF6hXgAUP-f4sM8bw9mHRHuj4p11x3LHXLXAhr023quO8OPpoZcklbIeu5M-EcqyrVTlFuCwfcwvFjrUYeRhO97Xc9zIrEqAtiqgwho4uMniVV6qtz88Qcnhn59OjQ4LWMSES2TeMtJpCD0prsMESlOLiuXJlJfN5OudcXd_j8gFDM6hZuR3hQ04Ei7sSE_lZ3nSiWudCATtyRpmVBGthYAJs916GhWPVW0A401nYpd5rRCcmcZPZQyycmLsezplvPd5cZwTZrtuYYzrp9EBMdjHbYZja0Wt26AXLtARO8t5Rq0CyIbYId1KsGPKu3EZXC5EAkHana0UjW6u5cCqKCpdhFASkv1zH6srz6NWmFfLn3C7UEhU2dc-DKTeLCSAUgxp8IqtzwLgsqcK3XpwZbpGFR-ypRPkrHiCR2DeclVLzKNTVjWQUPU1W6_jZjV5L1gM
+Authorization: eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYyNDg1NTc0LCJleHAiOjE2NjI1NzE5NzR9.qv1SMzqz-MijWej71FhZBMm72pVLqk9mLii8E_MCl_DkghLmjzDpqJ5Ekui1TzILLigdVV4fyuT4LE2KzEqyhhccEeJrHqVbNjb-NH-tcLQf5o6z_QBpDgSJm1bdHh-cz09D0slj192OxgaLBpFj62iixGEQYxfgGwO2WkDzGa_N2UPsrokQcF87B88DSIdkbCr_NBv5A0fXeqR5R6lqdMgZMSSTbQSkxDrB4Wqh6jelGodmtM20pYqULvl5FnHONLNw3M0RRJodfShHDFhT5y5WGqt23mWA00iDcEmx-ESrfMTh8ljuMk8rmzFYjwFMJy-w_lnOR8YipniqSUhfC_vkMTb8fs7gJMzz7wAuLZZbNnueRafkgVfu0PrW616lBd18adX1d78pvBiNzJmh5yIW9o-awxspdEu1tc9C_Xi7gVr5q6IKIhZLeHwTdZWWkF7EClhDRavcBg2tNQjO_AExWwF1iQST1p9AU4U4mKuDEyMriYrBen5qVfxfOadH_WSBY0VZ7EIuRFArV3igkITsOlGTIxf735GufdDX3LkON4DMTWKfWCB-q29_qDFfgtI8Q76d15RXe6fVo4ni-BkAsI4fIAlRPwvs1NIzS06A6bkCNjvH-2P0YjJNjuIDQxO3mOjZR2jt4j8B9y6cDuDi68umbD-35EAiWtAUZr0
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1080,7 +1080,7 @@ Host: localhost:8080</code></pre>
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2OTI1MDE4MzJ9.evEfzkIZ-7wfRmu3_3nEBQFfITPz0QHWszKCtwHbMVtSBUumKT8ALc2z96C1Z1B3quBTxnH9BDwehbHb-O99Dxif7kahzm61a8Q1Ja6bRS1cAi1iJ98nRejKA4WCoIe-9Yo8Qw21w--lmGjQLlavC7-GyGqFx1oJ80Y_D1cWkuxb8ajcljQckgReNTSaViCxq3fLneTA0BYx9shQR103oy3LTQksXm6DP5rmwePlS0GWotGgydXfuA6fInVC0y0TYo9W1WHg0OH38CVyWoJGVws3rAdJ4ri6AFV5wy8Xyb9M2Iz5-qBS-ul0jGDvniq_KyGaIN8Zl81oRZkVdihj8D05vytWNTAQpdQPq6mAelp02q1d2nGcUxmk8GbJN4SHUzffIZYAZMzItplxAbYaXaFMUUsLylZVfHiPuoHC6gEXB-Y_43hd0NVq8rZ5aCPo3UEXjgUoc4GBQxydnFvo6OYfjwgGYbudtNie0tKaiE26_Ml--IGz8_vR00zShAmI1Ef5IlIW59xXfLlMfyOGxSM9DKluBKMsBoNjQb3_Cyca_ik2HMVxLbSZzq-I_MyO58FoQjl3iAE7TaifbnNTqtw7hNgflqpemcYj25ftS4Y26BpiNE5xX6Ir4TX972X4fv7hyLWDGb_CalVJ920QqHRj_zGer1SmiPTgERXPB00"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYyNDg1NTc0LCJleHAiOjE2OTQwMjE1NzR9.BEvBc41BUlYBZF83gizPEX8uGHjlx0CgwGFDLfDkr_0qftLc6O_bIV_jn2v8rCw708u-CRSpk5murTnOjyRAhivpsdQHxVUOG6eBoUwqX6dpFP07USfNJJKFPk_Tvuf076BnqJArRuVMIiizIQxB-v7KTHS06CXZCGs4kIzy5brVEgfd3GB6sjX2iIA2RdhpGmp8BjWMdOhr8JSZb5u9HAYJnJMXmHqQ7zher2ukYp5YnTaUOemF8-TzGc1LE8WBVYKDDFXhf2QAwfbWfAi97kxnyRoKjb3IVzF9nJUrRrLHmEe2ZBf4EZb7QU3Wvf9W9aVWy51YUC2ZdRBSwtztcm21ikrMIPUbTh9WryGcZ1qwdRB2lBaFEddO4kn7pXIBQFGwY2A5THZfLtRWs_0WBVyHWdiRDvg6AsUpyR38f8GOz-GCzk7hCfTseEpcTWyT7qpfBN7NdCkIv25oIsUK53s1wI28c0gwBDkL5lnqbue6zqTR6132rccR6Leges0MejdTCnaZhj-xqnvUb1Oxckn-0LcAMy8JzdlWdQH4Lly98AvPo7Ot-k7yBQqBLiBiXGOEadUFqAo900riZiPqHHRgIdxaE1WhGvlfklJVHgZUgfA0ehzms8Bj30_yv0MRBOinyXjgSMoj4uuAu77BpjnLjlc30TOtaKOCqpptJGk"
 }'</code></pre>
 </div>
 </div>
@@ -1095,7 +1095,7 @@ Content-Length: 861
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMyLCJleHAiOjE2OTI1MDE4MzJ9.evEfzkIZ-7wfRmu3_3nEBQFfITPz0QHWszKCtwHbMVtSBUumKT8ALc2z96C1Z1B3quBTxnH9BDwehbHb-O99Dxif7kahzm61a8Q1Ja6bRS1cAi1iJ98nRejKA4WCoIe-9Yo8Qw21w--lmGjQLlavC7-GyGqFx1oJ80Y_D1cWkuxb8ajcljQckgReNTSaViCxq3fLneTA0BYx9shQR103oy3LTQksXm6DP5rmwePlS0GWotGgydXfuA6fInVC0y0TYo9W1WHg0OH38CVyWoJGVws3rAdJ4ri6AFV5wy8Xyb9M2Iz5-qBS-ul0jGDvniq_KyGaIN8Zl81oRZkVdihj8D05vytWNTAQpdQPq6mAelp02q1d2nGcUxmk8GbJN4SHUzffIZYAZMzItplxAbYaXaFMUUsLylZVfHiPuoHC6gEXB-Y_43hd0NVq8rZ5aCPo3UEXjgUoc4GBQxydnFvo6OYfjwgGYbudtNie0tKaiE26_Ml--IGz8_vR00zShAmI1Ef5IlIW59xXfLlMfyOGxSM9DKluBKMsBoNjQb3_Cyca_ik2HMVxLbSZzq-I_MyO58FoQjl3iAE7TaifbnNTqtw7hNgflqpemcYj25ftS4Y26BpiNE5xX6Ir4TX972X4fv7hyLWDGb_CalVJ920QqHRj_zGer1SmiPTgERXPB00"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYyNDg1NTc0LCJleHAiOjE2OTQwMjE1NzR9.BEvBc41BUlYBZF83gizPEX8uGHjlx0CgwGFDLfDkr_0qftLc6O_bIV_jn2v8rCw708u-CRSpk5murTnOjyRAhivpsdQHxVUOG6eBoUwqX6dpFP07USfNJJKFPk_Tvuf076BnqJArRuVMIiizIQxB-v7KTHS06CXZCGs4kIzy5brVEgfd3GB6sjX2iIA2RdhpGmp8BjWMdOhr8JSZb5u9HAYJnJMXmHqQ7zher2ukYp5YnTaUOemF8-TzGc1LE8WBVYKDDFXhf2QAwfbWfAi97kxnyRoKjb3IVzF9nJUrRrLHmEe2ZBf4EZb7QU3Wvf9W9aVWy51YUC2ZdRBSwtztcm21ikrMIPUbTh9WryGcZ1qwdRB2lBaFEddO4kn7pXIBQFGwY2A5THZfLtRWs_0WBVyHWdiRDvg6AsUpyR38f8GOz-GCzk7hCfTseEpcTWyT7qpfBN7NdCkIv25oIsUK53s1wI28c0gwBDkL5lnqbue6zqTR6132rccR6Leges0MejdTCnaZhj-xqnvUb1Oxckn-0LcAMy8JzdlWdQH4Lly98AvPo7Ot-k7yBQqBLiBiXGOEadUFqAo900riZiPqHHRgIdxaE1WhGvlfklJVHgZUgfA0ehzms8Bj30_yv0MRBOinyXjgSMoj4uuAu77BpjnLjlc30TOtaKOCqpptJGk"
 }</code></pre>
 </div>
 </div>
@@ -1109,7 +1109,7 @@ Content-Type: application/json
 Content-Length: 860
 
 {
-  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYwOTY1ODMzLCJleHAiOjE2NjEwNTIyMzN9.NT75yHQXe_lWRqZkGYAO3j2VkFSoniVrTfA862Vp-ICZbvCOE9yodSHuHMXgTvPLbaKZ7kMGXNILeps0i2R0Dx_i7sMedXRjLHz9DuAjjmBbsP2YAIiqGuk1MX8undS1GbHFyD4PGIGme5zxrNjRaDOA_JfRjD0TzS-wyI9_nqFj_YzS6dMBQFjq3pHCwhQaxWixuvjsxK0rE2TcVqzvtm1fknqTbgtz9DQV6zOFYrg2a2SCHWu1tOTYsFUHDwuBe_hVIZ52XoqPa63liMPalj3xUKLbI_C86vpLQ72BQ_DEvC3W0BUdK2HAh_VQjfI1wl4B6OzHPynxLNqtK7j2iB5bCww8Spg24NifxsVT9jFxLsTpasWf1-ZMRbcnk7kli44zoFHgedS1iIhaC2uHSOsS0ClnQXk31K4Ww5mc4YOURCo8U1mtIok8Zlv4_NwWnLzEAFq-vKuE1vWx5aVBy1cE0CF4h-qBURCEzZ08fiDLILy2VwG7H3WfWwQghrVo5-vN7TTDDIBDE0SD0ngy1z7ZWxd8wjTaTnbsiJ5tIma3Y_YfdtQf-lyBJVII1N9SwPn_ngMn-gcf_ZXVLJqUualw8lR85VPpP6byZ5poVn36lZ2JvxGDYeYHPEohWGdG5X-9U1fJvfHO88P1lQgdT5s0A7XqdXHM-ohUALOsVmI"
+  "access_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiIxIiwiaWF0IjoxNjYyNDg1NTc2LCJleHAiOjE2NjI1NzE5NzZ9.Dvlr2QA7DrW-Vur53PgPYN_jyO_Hs71QYxUTu_I_z24H6u2NQdTk5tjGJ4w0Ysu3XvDF7eL3_S6j2k71N4Ca-uEScWpEOa8DbYfQLFyHqOkJ0WTFHK03JyDa1COLEOOpZa4bbdXx-NpaT1zp-6yVqjhkWp6gBiWkCdJ_oc_wyhZ7rSNkzuzGgAOzFjTLcLy65N_8ajAvUizWUa7xXobHfk1WbAcS1SF-_CHWCN20EqOzjNZoWudCipdyZvL6RJRiE_2Q1C4TbBf__aj1LZjiziNfmMKytKKo32xWuR1pBanvPf4ZAiESJYLXucCi35xFtynJvfVg3fU1tzMJmCb4aU_HzEFXvM8RFw7ZvEa5pi51GIuaxqEJEC0GkDIB6gaYwmTn2MJL87o-OTt9vpyoCLEmcpIwPU3cscn7jRMuFQxL5qusilcWkv4WXrMBRb7b5Ms5m2B2z0_FW0fuosZOpJfpvrPqMDQn3abbcHYuA95uhYrzMJL0bp93jt4K03VJ86fSrUq3MswV09hruwWiTyMHhIQtFr0miPPIrMVl8tyvAZuiZsKUhsslKipQTc7qA49UBPfru8jAeoXQMo2MN_ZokcvSUV6eYZqvz5hMVTsQBY3VzHMhRTbrMnhrrALBPBWXGA1KdaVlJyzXgtetxJzT2-43qeXH9VjqBTBxP5o"
 }</code></pre>
 </div>
 </div>
@@ -1211,7 +1211,7 @@ Content-Length: 80
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/v1/refresh' -i -X PUT \
     -H 'Content-Type: application/json' \
     -d '{
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiI0IiwiaWF0IjoxNjYwOTY1ODMzLCJleHAiOjE2OTI1MDE4MzN9.nWI2yzTpT1fAUTaRt8y9TFZtUMcLJtYRN7jcoIA7uxce2MY8V5FtSRw0OmfZ39rPgjwI4FVbxNUK7z4MwmmNnz_ClsEj8EfvWpN7JxKKKD-3mtIm0MjIZyYB5txR3GuBIGMxTUKRoiig26Msjhksei1MDD4qW6VkSrucjmOPxCqmrYkK2SFC-ybv2hQWOToxBZSw8HzuGRjiHGjAlFKS8iCPf6q1khEW4ojuLE9m28ywGn2-rZhkMIA5llbPmfHR_SX5YTvVGbH2dOtFaDrgs1yd6zjK4TjAfzbEpak1k_WDhOmvsQV6YusCX96J5AhdBrgu_lIw7_r1AXBcvQTYsATlldInvYl0M3TK7piV2X5RraHzWN56V6txkgE5tp2qWE_T2oLSW_3TXWNA-90RqYNTkW3Xw6_EE5YC-MSzyT0DZpRb4FhlvUFZhRlDTBE-9vjreP6Q62-Y2ye3txFaEZgsELDjG49GV5S9qDrL4q3ff_1Cx6UOhLHXJ3WyxcASTUdlacspQUnpHoT7aNjpuyWkbYqMM6D7PtSTf_1eC-ot1ToOtpIzyroP_9KzmXPXz5y3dK3ZYXMq_sasXsRijO5fRNysSU0EC-waxPt9HwdccYLoOKk1hF50ANVz7BxxMqdAqPXCgGJCjBNJUI7KPehYsUHDxBN--yYPrl82r50"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiI0IiwiaWF0IjoxNjYyNDg1NTc3LCJleHAiOjE2OTQwMjE1Nzd9.ZT7n9yhl0gX4PReTcfxZvx4Sg40WX3On5eUYThtpMGRPfX1crlnlGjlgIHukWMdGXzJFjASuZuEWhqwdrWzwt-Lwf_7yu1tqf0TFGW1xZFWGBWw4QCT-bDWusKoJR0HuTFh6K0aotU0fIWr0niK_UGoEM0ZEb4hXRZ6YAdzFmVXNO8FwlIGTVTxXec4xO-YXbYjH77z7uxBWHPtFdaQtFjmGT4HVMA_Y3D-PZcIYCz6Br-ci6EU4zIXUcZG80-lXb8PPVkksCzc6HvniOmGO-eX8rakOGoCMGyI-HGzpzJHaGaNzkgY3M7ZZnsWhj5wH53_AietJ_YC1s9tq06aZsKDcMnaeEjFDUCyK_KmHAdc7xtUkFdZQpV89rgS-0cYi6t-Qd_5i-U8cQLOfSnsAEVMtOBhpANwRI01OYUOxYUngRpdTHP6IlTjFGuxv7YqirxAdoacSOqRiim8mITjW0M8gBFcWhB129GwwJrpehnbmzk8Y_ZIh8Xsa0QS3TA5JBbXst5o4QSSFGUiS2185V-oTt0RlbJifpDwoJU-_lXdafLYNl-u-rc3tfZJfzjNZ-mfrTG19qjZkH7gsaWgZl8GSdrFyx_clhwaEshzKPp_de-Nqw0teKns0djjYri6le6KajvvizCPpSppyT0KRgIJdzsQlbj561oxL4ZkeC_E"
 }'</code></pre>
 </div>
 </div>
@@ -1226,7 +1226,7 @@ Content-Length: 861
 Host: localhost:8080
 
 {
-  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiI0IiwiaWF0IjoxNjYwOTY1ODMzLCJleHAiOjE2OTI1MDE4MzN9.nWI2yzTpT1fAUTaRt8y9TFZtUMcLJtYRN7jcoIA7uxce2MY8V5FtSRw0OmfZ39rPgjwI4FVbxNUK7z4MwmmNnz_ClsEj8EfvWpN7JxKKKD-3mtIm0MjIZyYB5txR3GuBIGMxTUKRoiig26Msjhksei1MDD4qW6VkSrucjmOPxCqmrYkK2SFC-ybv2hQWOToxBZSw8HzuGRjiHGjAlFKS8iCPf6q1khEW4ojuLE9m28ywGn2-rZhkMIA5llbPmfHR_SX5YTvVGbH2dOtFaDrgs1yd6zjK4TjAfzbEpak1k_WDhOmvsQV6YusCX96J5AhdBrgu_lIw7_r1AXBcvQTYsATlldInvYl0M3TK7piV2X5RraHzWN56V6txkgE5tp2qWE_T2oLSW_3TXWNA-90RqYNTkW3Xw6_EE5YC-MSzyT0DZpRb4FhlvUFZhRlDTBE-9vjreP6Q62-Y2ye3txFaEZgsELDjG49GV5S9qDrL4q3ff_1Cx6UOhLHXJ3WyxcASTUdlacspQUnpHoT7aNjpuyWkbYqMM6D7PtSTf_1eC-ot1ToOtpIzyroP_9KzmXPXz5y3dK3ZYXMq_sasXsRijO5fRNysSU0EC-waxPt9HwdccYLoOKk1hF50ANVz7BxxMqdAqPXCgGJCjBNJUI7KPehYsUHDxBN--yYPrl82r50"
+  "refresh_token" : "eyJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQtYXBpLWxvY2FsLndhZmZsZXN0dWRpby5jb20iLCJzdWIiOiI0IiwiaWF0IjoxNjYyNDg1NTc3LCJleHAiOjE2OTQwMjE1Nzd9.ZT7n9yhl0gX4PReTcfxZvx4Sg40WX3On5eUYThtpMGRPfX1crlnlGjlgIHukWMdGXzJFjASuZuEWhqwdrWzwt-Lwf_7yu1tqf0TFGW1xZFWGBWw4QCT-bDWusKoJR0HuTFh6K0aotU0fIWr0niK_UGoEM0ZEb4hXRZ6YAdzFmVXNO8FwlIGTVTxXec4xO-YXbYjH77z7uxBWHPtFdaQtFjmGT4HVMA_Y3D-PZcIYCz6Br-ci6EU4zIXUcZG80-lXb8PPVkksCzc6HvniOmGO-eX8rakOGoCMGyI-HGzpzJHaGaNzkgY3M7ZZnsWhj5wH53_AietJ_YC1s9tq06aZsKDcMnaeEjFDUCyK_KmHAdc7xtUkFdZQpV89rgS-0cYi6t-Qd_5i-U8cQLOfSnsAEVMtOBhpANwRI01OYUOxYUngRpdTHP6IlTjFGuxv7YqirxAdoacSOqRiim8mITjW0M8gBFcWhB129GwwJrpehnbmzk8Y_ZIh8Xsa0QS3TA5JBbXst5o4QSSFGUiS2185V-oTt0RlbJifpDwoJU-_lXdafLYNl-u-rc3tfZJfzjNZ-mfrTG19qjZkH7gsaWgZl8GSdrFyx_clhwaEshzKPp_de-Nqw0teKns0djjYri6le6KajvvizCPpSppyT0KRgIJdzsQlbj561oxL4ZkeC_E"
 }</code></pre>
 </div>
 </div>
@@ -1255,8 +1255,8 @@ Content-Length: 80
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.0.1<br>
-Last updated 2022-08-20 12:05:34 +0900
+Version 1.0.0<br>
+Last updated 2022-09-07 01:08:00 +0900
 </div>
 </div>
 </body>
