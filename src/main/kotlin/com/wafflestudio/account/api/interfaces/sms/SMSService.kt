@@ -21,10 +21,12 @@ class SMSService(
     suspend fun sendSMSCode(smsSendRequest: SMSSendRequest) {
         val number = ThreadLocalRandom.current().nextLong(100000, 1000000)
         client.use { snsClient ->
-            snsClient.publish(PublishRequest {
-                message = number.toString()
-                phoneNumber = smsSendRequest.phone
-            })
+            snsClient.publish(
+                PublishRequest {
+                    message = number.toString()
+                    phoneNumber = smsSendRequest.phone
+                }
+            )
         }
         smsCodeRepository.save(
             SMSCode(
@@ -39,6 +41,6 @@ class SMSService(
         val smsCode = smsCodeRepository.findByCodeAndPhoneNumber(smsCheckRequest.code, smsCheckRequest.phone)
             ?: throw SMSCodeDoesNotExistsException
         smsCodeRepository.delete(smsCode)
-        if(smsCode.expireAt.isBefore(LocalDateTime.now())) throw SMSCodeExpiredException
+        if (smsCode.expireAt.isBefore(LocalDateTime.now())) throw SMSCodeExpiredException
     }
 }
