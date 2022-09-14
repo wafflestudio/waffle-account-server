@@ -60,7 +60,7 @@ class UsersTest(val authController: AuthController) : WordSpec({
 
     "request post v1/users" should {
         fun getRequest(body: Any): StatusAssertions {
-            return webTestClient.post().uri("/v1/users").bodyValue(body).exchange().expectStatus()
+            return webTestClient.post().uri("/v1/users/signup/email").bodyValue(body).exchange().expectStatus()
         }
 
         "users post ok" {
