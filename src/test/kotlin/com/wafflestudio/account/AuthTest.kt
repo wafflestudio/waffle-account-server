@@ -6,9 +6,17 @@ import com.wafflestudio.account.api.interfaces.auth.LocalAuthRequest
 import com.wafflestudio.account.api.interfaces.auth.RefreshRequest
 import com.wafflestudio.account.api.interfaces.auth.TokenResponse
 import io.kotest.core.spec.style.WordSpec
+import org.json.JSONObject
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.restdocs.ManualRestDocumentation
+import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
+import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.operation.preprocess.Preprocessors
+import org.springframework.restdocs.payload.JsonFieldType
+import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
+import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
+import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
+import org.springframework.restdocs.snippet.Snippet
 import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation
 import org.springframework.test.web.reactive.server.StatusAssertions
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -16,6 +24,7 @@ import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpe
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.reactive.server.expectBody
 import java.time.Duration
+import java.util.Base64
 
 @SpringBootTest
 class AuthTest(val authController: AuthController) : WordSpec({
@@ -45,8 +54,33 @@ class AuthTest(val authController: AuthController) : WordSpec({
         restDocumentation.afterTest()
     }
 
-    fun consume(req: ResponseSpec, identifier: String): BodyContentSpec {
-        return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier))
+    fun consume(req: ResponseSpec, identifier: String, vararg snippet: Snippet): BodyContentSpec {
+        return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier, *snippet))
+    }
+
+    "precondition" should {
+        "test" {
+            webTestClient.post().uri("/v1/users")
+                .bodyValue(LocalAuthRequest(email = "test@test.com", password = "testpassword"))
+                .exchange().expectStatus().isOk
+        }
+
+        "unregistered" {
+            val request = webTestClient.post().uri("/v1/users")
+                .bodyValue(LocalAuthRequest(email = "unregistered@test.com", password = "testpassword"))
+                .exchange().expectStatus().isOk
+            val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
+            val payload = response.accessToken.split('.')[1]
+            val userId = JSONObject(String(Base64.getDecoder().decode(payload)))["sub"].toString()
+            webTestClient.delete().uri("/v1/users/me").header("userId", userId)
+                .header("Authorization", response.accessToken).exchange().expectStatus().isOk
+        }
+
+        "exists" {
+            webTestClient.post().uri("/v1/users")
+                .bodyValue(LocalAuthRequest(email = "exists@test.com", password = "testpassword"))
+                .exchange().expectStatus().isOk
+        }
     }
 
     "request v1/auth/signin" should {
@@ -59,7 +93,21 @@ class AuthTest(val authController: AuthController) : WordSpec({
             val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
             accessToken = response.accessToken
             refreshToken = response.refreshToken
-            consume(request, "signin-200")
+            consume(
+                request, "signin-200",
+                requestFields(
+                    fieldWithPath("email").type(JsonFieldType.STRING)
+                        .description("사용자의 이메일입니다."),
+                    fieldWithPath("password").type(JsonFieldType.STRING)
+                        .description("사용자의 비밀번호입니다."),
+                ),
+                responseFields(
+                    fieldWithPath("access_token").type(JsonFieldType.STRING)
+                        .description("사용자의 access token입니다."),
+                    fieldWithPath("refresh_token").type(JsonFieldType.STRING)
+                        .description("사용자의 refresh token입니다."),
+                )
+            )
         }
 
         "signin badrequest" {
@@ -96,7 +144,13 @@ class AuthTest(val authController: AuthController) : WordSpec({
             consume(
                 webTestClient.put().uri("/v1/validate").header("userId", "1")
                     .header("Authorization", accessToken).exchange().expectStatus().isOk,
-                "validate-200"
+                "validate-200",
+                requestHeaders(
+                    headerWithName("Authorization").description("사용자의 access token입니다."),
+                ),
+                responseFields(
+                    fieldWithPath("user_id").type(JsonFieldType.NUMBER).description("사용자의 고유 ID입니다."),
+                )
             )
         }
 
@@ -116,7 +170,15 @@ class AuthTest(val authController: AuthController) : WordSpec({
         "refresh ok" {
             consume(
                 getRequest(RefreshRequest(refreshToken = refreshToken)).isOk,
-                "refresh-200"
+                "refresh-200",
+                requestFields(
+                    fieldWithPath("refresh_token").type(JsonFieldType.STRING)
+                        .description("사용자의 refresh token입니다."),
+                ),
+                responseFields(
+                    fieldWithPath("access_token").type(JsonFieldType.STRING)
+                        .description("사용자의 access token입니다."),
+                )
             )
         }
 

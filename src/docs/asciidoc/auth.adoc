@@ -4,18 +4,12 @@ OAuth가 아닌, 이메일과 비밀번호로 로그인하는 API입니다.
 
 ==== Request
 
-.Body
-|===
-|Name |Type |Required |Description
-|email |String |O |사용자의 이메일 주소입니다.
-|password |String |O |사용자의 비밀번호입니다.
-|===
+operation::signin-200[snippets='request-fields']
 
 ==== Response
 
 다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
 
-.Possible Responses
 |===
 |HTTP Status Code |Description
 |200 OK |로그인이 정상적으로 완료되었습니다.
@@ -27,12 +21,7 @@ OAuth가 아닌, 이메일과 비밀번호로 로그인하는 API입니다.
 
 다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
 
-.Body
-|===
-|Name |Type |Required |Description
-|access_token |String |O |사용자의 access token입니다.
-|refresh_token |String |O |사용자의 refresh token입니다.
-|===
+operation::signin-200[snippets='response-fields']
 
 ==== Examples
 .200 OK
@@ -75,17 +64,12 @@ TBD
 
 ==== Request
 
-.Header
-|===
-|Name |Type |Required |Description
-|Authorization |String |O |사용자의 access token입니다.
-|===
+operation::validate-200[snippets='request-headers']
 
 ==== Response
 
 다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
 
-.Possible Responses
 |===
 |HTTP Status Code |Description
 |200 OK |요청이 정상적으로 처리되었습니다.
@@ -94,11 +78,7 @@ TBD
 
 다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
 
-.Body
-|===
-|Name |Type |Required |Description
-|user_id |Integer |O |사용자의 고유 ID입니다.
-|===
+operation::validate-200[snippets='response-fields']
 
 ==== Examples
 .200 OK
@@ -116,17 +96,12 @@ operation::validate-400[snippets='curl-request,http-request,http-response']
 
 ==== Request
 
-.Body
-|===
-|Name |Type |Required |Description
-|refresh_token |String |O |사용자의 refresh token입니다.
-|===
+operation::refresh-200[snippets='request-fields']
 
 ==== Response
 
 다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
 
-.Possible Responses
 |===
 |HTTP Status Code |Description
 |200 OK |새로운 access token 발급이 정상적으로 완료되었습니다.
@@ -137,11 +112,7 @@ operation::validate-400[snippets='curl-request,http-request,http-response']
 
 다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
 
-.Body
-|===
-|Name |Type |Required |Description
-|access_token |String |O |사용자의 access token입니다.
-|===
+operation::refresh-200[snippets='response-fields']
 
 ==== Examples
 .200 OK

@@ -12,4 +12,4 @@ object TooManyUserIdsException : AccountException(ErrorType.TOO_MANY_USER_IDS)
 
 // OAuth2
 object SocialProviderInvalidException : AccountException(ErrorType.INVALID_SOCIAL_PROVIDER)
-object WrongProviderException : AccountException(ErrorType.WRONG_PROVIDER)
+object SocialConnectFailException : AccountException(ErrorType.SOCIAL_CONNECT_FAIL)

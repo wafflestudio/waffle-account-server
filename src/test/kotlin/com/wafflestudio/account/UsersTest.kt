@@ -9,7 +9,14 @@ import io.kotest.core.spec.style.WordSpec
 import org.json.JSONObject
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.restdocs.ManualRestDocumentation
+import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
+import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.operation.preprocess.Preprocessors
+import org.springframework.restdocs.payload.JsonFieldType
+import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
+import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
+import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
+import org.springframework.restdocs.snippet.Snippet
 import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation
 import org.springframework.test.web.reactive.server.StatusAssertions
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -17,7 +24,6 @@ import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpe
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.reactive.server.expectBody
 import java.util.Base64
-import java.util.concurrent.ThreadLocalRandom
 
 @SpringBootTest
 class UsersTest(val authController: AuthController) : WordSpec({
@@ -38,7 +44,7 @@ class UsersTest(val authController: AuthController) : WordSpec({
     var userId = "WRONG_USER_ID"
     var accessToken = "WRONG_ACCESS_TOKEN"
     var refreshToken = "WRONG_REFRESH_TOKEN"
-    val email = ThreadLocalRandom.current().nextInt(100000, 1000000).toString() + "@test.com"
+    val email = "new@test.com"
 
     beforeEach {
         restDocumentation.beforeTest(javaClass, "UsersTest")
@@ -48,8 +54,8 @@ class UsersTest(val authController: AuthController) : WordSpec({
         restDocumentation.afterTest()
     }
 
-    fun consume(req: ResponseSpec, identifier: String): BodyContentSpec {
-        return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier))
+    fun consume(req: ResponseSpec, identifier: String, vararg snippet: Snippet): BodyContentSpec {
+        return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier, *snippet))
     }
 
     "request post v1/users" should {
@@ -64,7 +70,17 @@ class UsersTest(val authController: AuthController) : WordSpec({
             userId = JSONObject(String(Base64.getDecoder().decode(payload)))["sub"].toString()
             accessToken = response.accessToken
             refreshToken = response.refreshToken
-            consume(request, "users-post-200")
+            consume(
+                request, "users-post-200",
+                requestFields(
+                    fieldWithPath("email").type(JsonFieldType.STRING).description("사용자의 이메일 주소입니다."),
+                    fieldWithPath("password").type(JsonFieldType.STRING).description("사용자의 비밀번호입니다."),
+                ),
+                responseFields(
+                    fieldWithPath("access_token").type(JsonFieldType.STRING).description("사용자의 access token입니다."),
+                    fieldWithPath("refresh_token").type(JsonFieldType.STRING).description("사용자의 refresh token입니다.")
+                )
+            )
         }
 
         "users post badrequest" {
@@ -75,9 +91,10 @@ class UsersTest(val authController: AuthController) : WordSpec({
         }
 
         "users post conflict" {
-            consume( // NO isConflict
+            consume(
+                // NO isConflict
                 getRequest(LocalAuthRequest(email = "exists@test.com", password = "existing-email")).is4xxClientError,
-                "users-post-409"
+                "users-post-409",
             )
         }
     }
@@ -87,7 +104,19 @@ class UsersTest(val authController: AuthController) : WordSpec({
             consume(
                 webTestClient.get().uri("/v1/users/me").header("userId", userId)
                     .header("Authorization", accessToken).exchange().expectStatus().isOk,
-                "users-me-get-200"
+                "users-me-get-200",
+                requestHeaders(
+                    headerWithName("Authorization").description("사용자의 access token입니다.")
+                ),
+                responseFields(
+                    fieldWithPath("user_id").type(JsonFieldType.NUMBER).description("사용자의 고유 ID입니다."),
+                    fieldWithPath("username").type(JsonFieldType.STRING)
+                        .description("사용자의 이름 또는 닉네임입니다. 만약 존재하지 않을 경우 null을 반환합니다.").optional(),
+                    fieldWithPath("email").type(JsonFieldType.STRING).description("사용자의 이메일입니다."),
+                    fieldWithPath("is_active").type(JsonFieldType.BOOLEAN).description("사용자의 활성 상태 여부입니다."),
+                    fieldWithPath("is_banned").type(JsonFieldType.BOOLEAN).description("사용자의 제재 상태 여부입니다."),
+                    fieldWithPath("provider").type(JsonFieldType.STRING).description("사용자의 로그인 방법을 나타냅니다."),
+                )
             )
         }
 
@@ -108,7 +137,14 @@ class UsersTest(val authController: AuthController) : WordSpec({
         "users me delete ok true" {
             consume(
                 getRequest(userId, accessToken).isOk,
-                "users-me-delete-200-true"
+                "users-me-delete-200-true",
+                requestHeaders(
+                    headerWithName("Authorization").description("사용자의 access token입니다.")
+                ),
+                responseFields(
+                    fieldWithPath("unregistered").type(JsonFieldType.BOOLEAN)
+                        .description("회원 탈퇴가 성공적으로 처리되었는지 여부를 나타냅니다."),
+                )
             )
         }
 

@@ -5,17 +5,12 @@ OAuth가 아닌, 이메일과 비밀번호로 회원가입하는 API입니다.
 ==== Request
 
 .Body
-|===
-|Name |Type |Required |Description
-|email |String |O |사용자의 이메일 주소입니다.
-|password |String |O |사용자의 비밀번호입니다.
-|===
+operation::users-post-200[snippets='request-fields']
 
 ==== Response
 
 다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
 
-.Possible Responses
 |===
 |HTTP Status Code |Description
 |200 OK |회원가입이 정상적으로 완료되었습니다.
@@ -26,11 +21,7 @@ OAuth가 아닌, 이메일과 비밀번호로 회원가입하는 API입니다.
 다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
 
 .Body
-|===
-|Name |Type |Required |Description
-|access_token |String |O |사용자의 access token입니다.
-|refresh_token |String |O |사용자의 refresh token입니다.
-|===
+operation::users-post-200[snippets='response-fields']
 
 ==== Examples
 .200 OK
@@ -54,16 +45,12 @@ operation::users-post-409[snippets='curl-request,http-request,http-response']
 ==== Request
 
 .Header
-|===
-|Name |Type |Required |Description
-|Authorization |String |O |사용자의 access token입니다.
-|===
+operation::users-me-get-200[snippets='request-headers']
 
 ==== Response
 
 다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
 
-.Possible Responses
 |===
 |HTTP Status Code |Description
 |200 OK |회원가입이 정상적으로 완료되었습니다.
@@ -73,15 +60,7 @@ operation::users-post-409[snippets='curl-request,http-request,http-response']
 다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
 
 .Body
-|===
-|Name |Type |Required |Description
-|user_id |Integer |O |사용자의 고유 ID입니다.
-|username |String |X |사용자의 이름 또는 닉네임입니다. 만약 존재하지 않을 경우 null을 반환합니다.
-|email |String |O |사용자의 이메일입니다.
-|is_active |Boolean |O |사용자의 활성 상태 여부입니다.
-|is_banned |Boolean |O |사용자의 제재 상태 여부입니다.
-|provider |String |O |사용자의 로그인 방법을 나타냅니다.
-|===
+operation::users-me-get-200[snippets='response-fields']
 
 ==== Examples
 .200 OK
@@ -99,17 +78,12 @@ operation::users-me-get-400[snippets='curl-request,http-request,http-response']
 
 ==== Request
 
-.Header
-|===
-|Name |Type |Required |Description
-|Authorization |String |O |사용자의 access token입니다.
-|===
+operation::users-me-delete-200-true[snippets='request-headers']
 
 ==== Response
 
 다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
 
-.Possible Responses
 |===
 |HTTP Status Code |Description
 |200 OK |회원 탈퇴가 성공적으로 요청되었습니다. 단, 정상적으로 처리되었는지는 응답의 `unregistered` 필드에 나타납니다.
@@ -120,11 +94,7 @@ operation::users-me-get-400[snippets='curl-request,http-request,http-response']
 
 이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, `unregistered` 필드의 값이 `false` 가 됩니다.
 
-.Body
-|===
-|Name |Type |Required |Description
-|unregistered |Boolean |O |회원 탈퇴가 성공적으로 처리되었는지 여부를 나타냅니다.
-|===
+operation::users-me-delete-200-true[snippets='response-fields']
 
 ==== Examples
 .200 OK TRUE

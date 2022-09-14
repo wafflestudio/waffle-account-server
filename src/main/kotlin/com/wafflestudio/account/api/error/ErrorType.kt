@@ -14,6 +14,7 @@ enum class ErrorType(
     // 401
     INVALID_TOKEN(1401001, HttpStatus.UNAUTHORIZED),
     WRONG_PASSWORD(1401002, HttpStatus.UNAUTHORIZED),
+    SOCIAL_CONNECT_FAIL(1401003, HttpStatus.UNAUTHORIZED),
 
     // 403
     USER_INACTIVE(1403001, HttpStatus.FORBIDDEN),
@@ -23,5 +24,4 @@ enum class ErrorType(
 
     // 409
     EMAIL_ALREADY_EXISTS(1409001, HttpStatus.CONFLICT),
-    WRONG_PROVIDER(1409002, HttpStatus.CONFLICT),
 }
