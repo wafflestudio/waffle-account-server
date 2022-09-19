@@ -24,7 +24,7 @@ class VerificationService(
         var number: Long
         do {
             number = random.nextLong(100000, 1000000)
-        } while(verificationCodeRepository.findByCode(number) != null)
+        } while (verificationCodeRepository.findByCode(number) != null)
 
         verificationMethod.sendCode(verificationSendRequest.target, number.toString())
 
