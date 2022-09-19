@@ -1,17 +1,20 @@
 package com.wafflestudio.account.api.domain.account
 
+import com.wafflestudio.account.api.domain.account.enum.VerificationMethod
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
-@Table("sms_code")
-class SMSCode(
+@Table("verification_code")
+class VerificationCode(
     @Id
     var id: Long? = null,
 
     val code: Long,
 
-    val phoneNumber: String,
+    val target: String,
 
     val expireAt: LocalDateTime,
+
+    val method: VerificationMethod,
 )

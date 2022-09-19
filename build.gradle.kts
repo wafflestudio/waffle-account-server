@@ -40,6 +40,7 @@ dependencies {
 
     implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.272")
     implementation("aws.sdk.kotlin:sns:0.16.0")
+    implementation("aws.sdk.kotlin:ses:0.16.0")
 
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
