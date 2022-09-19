@@ -17,7 +17,7 @@ class VerificationController(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationSendRequest: VerificationSendRequest,
     ) {
-        verificationService.sendVerificationCode(verificationSendRequest, VerificationMethod.SMS)
+        verificationService.sendVerificationCode(userId, verificationSendRequest, VerificationMethod.SMS)
     }
 
     @PostMapping("/v1/verification/email")
@@ -25,7 +25,7 @@ class VerificationController(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationSendRequest: VerificationSendRequest,
     ) {
-        verificationService.sendVerificationCode(verificationSendRequest, VerificationMethod.EMAIL)
+        verificationService.sendVerificationCode(userId, verificationSendRequest, VerificationMethod.EMAIL)
     }
 
     @DeleteMapping("/v1/verification/sms")
@@ -33,7 +33,7 @@ class VerificationController(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
     ) {
-        verificationService.checkVerificationCode(verificationCheckRequest, VerificationMethod.SMS)
+        verificationService.checkVerificationCode(userId, verificationCheckRequest, VerificationMethod.SMS)
     }
 
     @DeleteMapping("/v1/verification/email")
@@ -41,6 +41,6 @@ class VerificationController(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
     ) {
-        verificationService.checkVerificationCode(verificationCheckRequest, VerificationMethod.EMAIL)
+        verificationService.checkVerificationCode(userId, verificationCheckRequest, VerificationMethod.EMAIL)
     }
 }

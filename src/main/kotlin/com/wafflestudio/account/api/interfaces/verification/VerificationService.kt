@@ -4,6 +4,7 @@ import com.wafflestudio.account.api.domain.account.UserRepository
 import com.wafflestudio.account.api.domain.account.VerificationCode
 import com.wafflestudio.account.api.domain.account.VerificationCodeRepository
 import com.wafflestudio.account.api.domain.account.enum.VerificationMethod
+import com.wafflestudio.account.api.error.UserDoesNotExistsException
 import com.wafflestudio.account.api.error.VerificationCodeDoesNotExistsException
 import com.wafflestudio.account.api.error.VerificationCodeExpiredException
 import org.springframework.stereotype.Service
@@ -18,9 +19,11 @@ class VerificationService(
     private val random = ThreadLocalRandom.current()
 
     suspend fun sendVerificationCode(
+        userId: Long,
         verificationSendRequest: VerificationSendRequest,
         verificationMethod: VerificationMethod,
     ) {
+        if(!userRepository.existsById(userId)) throw UserDoesNotExistsException
         var number: Long
         do {
             number = random.nextLong(100000, 1000000)
@@ -34,19 +37,25 @@ class VerificationService(
                 target = verificationSendRequest.target,
                 expireAt = LocalDateTime.now().plusMinutes(3),
                 method = verificationMethod,
+                userId = userId,
             )
         )
     }
 
     suspend fun checkVerificationCode(
+        userId: Long,
         verificationCheckRequest: VerificationCheckRequest,
-        verificationMethod: VerificationMethod
+        verificationMethod: VerificationMethod,
     ) {
-        val smsCode = verificationCodeRepository.findByCodeAndTargetAndMethod(
-            verificationCheckRequest.code, verificationCheckRequest.target, verificationMethod
+        val user = userRepository.findById(userId) ?: throw UserDoesNotExistsException
+        val smsCode = verificationCodeRepository.findByCodeAndTargetAndMethodAndUserId(
+            verificationCheckRequest.code, verificationCheckRequest.target, verificationMethod, userId
         ) ?: throw VerificationCodeDoesNotExistsException
+
         verificationCodeRepository.delete(smsCode)
         if (smsCode.expireAt.isBefore(LocalDateTime.now())) throw VerificationCodeExpiredException
-        smsCode.method.saveUserInfo(userRepository, smsCode.target)
+
+        val modifiedUser = smsCode.method.changeUserInfo(user, smsCode.target)
+        userRepository.save(modifiedUser)
     }
 }

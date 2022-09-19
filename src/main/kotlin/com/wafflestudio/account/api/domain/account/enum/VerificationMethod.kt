@@ -8,7 +8,7 @@ import aws.sdk.kotlin.services.ses.model.Message
 import aws.sdk.kotlin.services.ses.model.SendEmailRequest
 import aws.sdk.kotlin.services.sns.SnsClient
 import aws.sdk.kotlin.services.sns.model.PublishRequest
-import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.domain.account.User
 
 enum class VerificationMethod(val value: String) {
     SMS("sms") {
@@ -25,8 +25,10 @@ enum class VerificationMethod(val value: String) {
             }
         }
 
-        override suspend fun saveUserInfo(userRepository: UserRepository, target: String) {
-            TODO("Not yet implemented")
+        override suspend fun changeUserInfo(user: User, target: String): User {
+            user.phone = target
+            user.isPhoneVerified = true
+            return user
         }
     },
     EMAIL("email") {
@@ -55,12 +57,14 @@ enum class VerificationMethod(val value: String) {
             }
         }
 
-        override suspend fun saveUserInfo(userRepository: UserRepository, target: String) {
-            TODO("Not yet implemented")
+        override suspend fun changeUserInfo(user: User, target: String): User {
+            user.email = target
+            user.isEmailVerified = true
+            return user
         }
     },
     ;
 
     abstract suspend fun sendCode(target: String, code: String)
-    abstract suspend fun saveUserInfo(userRepository: UserRepository, target: String)
+    abstract suspend fun changeUserInfo(user: User, target: String): User
 }

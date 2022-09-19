@@ -17,4 +17,6 @@ class VerificationCode(
     val expireAt: LocalDateTime,
 
     val method: VerificationMethod,
+
+    val userId: Long,
 )
