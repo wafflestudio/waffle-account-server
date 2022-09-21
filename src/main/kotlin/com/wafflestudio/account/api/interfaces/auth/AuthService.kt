@@ -92,7 +92,11 @@ class AuthService(
         val refreshToken = buildJwtToken(user, refreshPrivateKeyGenerated, now, expire)
 
         refreshTokenRepository.save(
-            RefreshToken(
+            refreshTokenRepository.findByUserId(user.id!!)?.apply {
+                token = refreshToken
+                tokenHash = refreshToken.sha256()
+                expireAt = expire
+            } ?: RefreshToken(
                 userId = user.id!!,
                 token = refreshToken,
                 tokenHash = refreshToken.sha256(),

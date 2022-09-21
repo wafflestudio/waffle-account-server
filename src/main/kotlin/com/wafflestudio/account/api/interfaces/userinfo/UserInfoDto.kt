@@ -1,7 +1,7 @@
 package com.wafflestudio.account.api.interfaces.userinfo
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.wafflestudio.account.api.domain.account.oauth2.SocialProvider
+import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 
 data class UserInfosResponse(
     val userInfos: List<UserInfo>

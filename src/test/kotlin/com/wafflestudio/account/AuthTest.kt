@@ -60,13 +60,13 @@ class AuthTest(val authController: AuthController) : WordSpec({
 
     "precondition" should {
         "test" {
-            webTestClient.post().uri("/v1/users")
+            webTestClient.post().uri("/v1/users/signup/email")
                 .bodyValue(LocalAuthRequest(email = "test@test.com", password = "testpassword"))
                 .exchange().expectStatus().isOk
         }
 
         "unregistered" {
-            val request = webTestClient.post().uri("/v1/users")
+            val request = webTestClient.post().uri("/v1/users/signup/email")
                 .bodyValue(LocalAuthRequest(email = "unregistered@test.com", password = "testpassword"))
                 .exchange().expectStatus().isOk
             val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
@@ -77,15 +77,15 @@ class AuthTest(val authController: AuthController) : WordSpec({
         }
 
         "exists" {
-            webTestClient.post().uri("/v1/users")
+            webTestClient.post().uri("/v1/users/signup/email")
                 .bodyValue(LocalAuthRequest(email = "exists@test.com", password = "testpassword"))
                 .exchange().expectStatus().isOk
         }
     }
 
-    "request v1/auth/signin" should {
+    "request POST v1/users/login/email" should {
         fun getRequest(body: Any): StatusAssertions {
-            return webTestClient.put().uri("/v1/auth/signin").bodyValue(body).exchange().expectStatus()
+            return webTestClient.post().uri("/v1/users/login/email").bodyValue(body).exchange().expectStatus()
         }
 
         "signin ok" {

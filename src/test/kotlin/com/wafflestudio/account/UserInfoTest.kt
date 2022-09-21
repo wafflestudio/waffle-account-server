@@ -90,14 +90,11 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
             consume(
                 webTestClient.get().uri { urlBuilder ->
                     urlBuilder
-                        .path("v1/users/infos")
+                        .path("/v1/papi/users")
                         .queryParam("userIds", savedUsers.map { it.id }.joinToString(","))
                         .build()
                 }.exchange().expectStatus().isOk,
                 "users-info-get-200",
-                pathParameters(
-                    parameterWithName("userIds").description("조회할 유저의 아이디 리스트 (, 로 구분)"),
-                ),
                 responseFields(
                     fieldWithPath("userInfos[].username").type(JsonFieldType.STRING).description("유저 닉네임"),
                     fieldWithPath("userInfos[].email").type(JsonFieldType.STRING).description("이메일"),
@@ -107,6 +104,10 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
                         .description("생성시간 (yyyy-MM-dd HH:mm:ss)"),
                     fieldWithPath("userInfos[].updated_at").type(JsonFieldType.STRING)
                         .description("최종변경시간 (yyyy-MM-dd HH:mm:ss)"),
+                    fieldWithPath("userInfos[].provider").type(JsonFieldType.STRING)
+                        .description("소셜로그인 제공자"),
+                    fieldWithPath("userInfos[].socialId").type(JsonFieldType.STRING).optional()
+                        .description("소셜로그인 계정 아이디"),
                 )
             )
         }
@@ -116,7 +117,7 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
         "return user info" {
             consume(
                 webTestClient.get().uri { urlBuilder ->
-                    urlBuilder.path("v1/users/${savedUsers.first().id}/infos").build()
+                    urlBuilder.path("/v1/papi/users/${savedUsers.first().id}").build()
                 }.exchange().expectStatus().isOk,
                 "user-info-get-200",
                 responseFields(
@@ -128,6 +129,10 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
                         .description("생성시간 (yyyy-MM-dd HH:mm:ss)"),
                     fieldWithPath("updated_at").type(JsonFieldType.STRING)
                         .description("최종변경시간 (yyyy-MM-dd HH:mm:ss)"),
+                    fieldWithPath("provider").type(JsonFieldType.STRING)
+                        .description("소셜로그인 제공자"),
+                    fieldWithPath("socialId").type(JsonFieldType.STRING).optional()
+                        .description("소셜로그인 계정 아이디"),
                 )
             )
         }
