@@ -54,9 +54,6 @@ auth:
 
 http:
   responseTimeout: 3s
-logging:
-    level:
-        root: debug
 
 ---
 
