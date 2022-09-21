@@ -31,7 +31,7 @@ enum class VerificationMethod(val value: String) {
             val client = AmazonSimpleEmailServiceClient.builder().withRegion("ap-northeast-2").build()
             client.sendEmail(
                 SendEmailRequest(
-                    "snutt@wafflestudio.com",
+                    "sso@wafflestudio.com",
                     Destination(listOf(target)),
                     Message(
                         Content("WaffleStudio SSO Verification Code"),
