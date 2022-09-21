@@ -1,28 +1,23 @@
 package com.wafflestudio.account.api.domain.account.enum
 
-import aws.sdk.kotlin.services.ses.SesClient
-import aws.sdk.kotlin.services.ses.model.Body
-import aws.sdk.kotlin.services.ses.model.Content
-import aws.sdk.kotlin.services.ses.model.Destination
-import aws.sdk.kotlin.services.ses.model.Message
-import aws.sdk.kotlin.services.ses.model.SendEmailRequest
-import aws.sdk.kotlin.services.sns.SnsClient
-import aws.sdk.kotlin.services.sns.model.PublishRequest
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient
+import com.amazonaws.services.simpleemail.model.Body
+import com.amazonaws.services.simpleemail.model.Content
+import com.amazonaws.services.simpleemail.model.Destination
+import com.amazonaws.services.simpleemail.model.Message
+import com.amazonaws.services.simpleemail.model.SendEmailRequest
+import com.amazonaws.services.sns.AmazonSNSClientBuilder
+import com.amazonaws.services.sns.model.PublishRequest
 import com.wafflestudio.account.api.domain.account.User
 
 enum class VerificationMethod(val value: String) {
     SMS("sms") {
         override suspend fun sendCode(target: String, code: String) {
-            SnsClient {
-                region = "ap-northeast-1"
-            }.use {
-                it.publish(
-                    PublishRequest {
-                        message = code
-                        phoneNumber = target
-                    }
-                )
-            }
+            val client = AmazonSNSClientBuilder.standard().withRegion("ap-northeast-1").build()
+            val publishRequest = PublishRequest()
+            publishRequest.phoneNumber = target
+            publishRequest.message = code
+            client.publish(publishRequest)
         }
 
         override suspend fun changeUserInfo(user: User, target: String): User {
@@ -33,28 +28,17 @@ enum class VerificationMethod(val value: String) {
     },
     EMAIL("email") {
         override suspend fun sendCode(target: String, code: String) {
-            SesClient {
-                region = "ap-northeast-2"
-            }.use {
-                it.sendEmail(
-                    SendEmailRequest {
-                        destination = Destination {
-                            toAddresses = listOf(target)
-                        }
-                        message = Message {
-                            subject = Content {
-                                data = "WaffleStudio SSO Verification Code"
-                            }
-                            body = Body {
-                                text = Content {
-                                    data = code
-                                }
-                            }
-                        }
-                        source = "snutt@wafflestudio.com"
-                    }
+            val client = AmazonSimpleEmailServiceClient.builder().withRegion("ap-northeast-2").build()
+            client.sendEmail(
+                SendEmailRequest(
+                    "snutt@wafflestudio.com",
+                    Destination(listOf(target)),
+                    Message(
+                        Content("WaffleStudio SSO Verification Code"),
+                        Body(Content(code))
+                    )
                 )
-            }
+            )
         }
 
         override suspend fun changeUserInfo(user: User, target: String): User {
@@ -67,4 +51,10 @@ enum class VerificationMethod(val value: String) {
 
     abstract suspend fun sendCode(target: String, code: String)
     abstract suspend fun changeUserInfo(user: User, target: String): User
+
+    companion object {
+        private val mapping = VerificationMethod.values().associateBy { e -> e.value }
+
+        fun customValueOf(value: String): VerificationMethod? = mapping[value]
+    }
 }
