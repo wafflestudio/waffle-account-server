@@ -3,11 +3,9 @@ package com.wafflestudio.account.api.config
 import org.flywaydb.core.Flyway
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Profile
 import org.springframework.core.env.Environment
 
 @Configuration
-@Profile("!test")
 class FlywayConfig(private val env: Environment) {
     @Bean(initMethod = "migrate")
     fun flyway(): Flyway {
