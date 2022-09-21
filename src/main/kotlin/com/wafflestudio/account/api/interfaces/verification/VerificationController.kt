@@ -2,6 +2,7 @@ package com.wafflestudio.account.api.interfaces.verification
 
 import com.wafflestudio.account.api.domain.account.enum.VerificationMethod
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
@@ -12,35 +13,21 @@ import javax.validation.Valid
 class VerificationController(
     private val verificationService: VerificationService,
 ) {
-    @PostMapping("/v1/verification/sms")
+    @PostMapping("/v1/verification/{method}")
     suspend fun sendSMSCode(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationSendRequest: VerificationSendRequest,
+        @PathVariable @Valid method: VerificationMethod,
     ) {
-        verificationService.sendVerificationCode(userId, verificationSendRequest, VerificationMethod.SMS)
+        verificationService.sendVerificationCode(userId, verificationSendRequest, method)
     }
 
-    @PostMapping("/v1/verification/email")
-    suspend fun sendEmailCode(
-        @RequestHeader @Valid userId: Long,
-        @RequestBody @Valid verificationSendRequest: VerificationSendRequest,
-    ) {
-        verificationService.sendVerificationCode(userId, verificationSendRequest, VerificationMethod.EMAIL)
-    }
-
-    @DeleteMapping("/v1/verification/sms")
+    @DeleteMapping("/v1/verification/{method}")
     suspend fun checkSMSCode(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
-    ) {
-        verificationService.checkVerificationCode(userId, verificationCheckRequest, VerificationMethod.SMS)
-    }
-
-    @DeleteMapping("/v1/verification/email")
-    suspend fun checkEmailCode(
-        @RequestHeader @Valid userId: Long,
-        @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
-    ) {
-        verificationService.checkVerificationCode(userId, verificationCheckRequest, VerificationMethod.EMAIL)
+        @PathVariable @Valid method: VerificationMethod,
+        ) {
+        verificationService.checkVerificationCode(userId, verificationCheckRequest, method)
     }
 }
