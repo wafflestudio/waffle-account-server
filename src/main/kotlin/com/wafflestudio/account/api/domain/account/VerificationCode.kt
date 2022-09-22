@@ -10,7 +10,7 @@ class VerificationCode(
     @Id
     var id: Long? = null,
 
-    val code: Long,
+    val code: String,
 
     val target: String,
 
@@ -19,4 +19,6 @@ class VerificationCode(
     val method: VerificationMethod,
 
     val userId: Long,
+
+    var isValid: Boolean,
 )
