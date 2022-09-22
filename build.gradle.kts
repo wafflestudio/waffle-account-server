@@ -36,9 +36,11 @@ dependencies {
 
     runtimeOnly("mysql:mysql-connector-java")
     runtimeOnly("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
-    implementation("org.flywaydb:flyway-core:8.2.0")
 
-    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.272")
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-mysql")
+
+    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.300")
 
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
@@ -50,6 +52,9 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:5.4.1")
     testImplementation("io.kotest:kotest-assertions-core:5.4.1")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
+
+    testImplementation("io.r2dbc:r2dbc-h2")
+    testImplementation("com.h2database:h2")
 
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")

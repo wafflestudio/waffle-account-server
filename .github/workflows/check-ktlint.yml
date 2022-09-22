@@ -2,11 +2,9 @@ name: CI
 
 on:
   push:
-    branches:
-      - 'develop'
+    branches: [develop]
   pull_request:
-    branches:
-      - 'develop'
+    branches: [develop]
 
 permissions:
   contents: read
@@ -25,16 +23,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Grant permission to gradlew
-      run: chmod +x ./gradlew
-
     - name: Check ktlint
       run: ./gradlew ktlintCheck
-
-    - name: test
-      run: ./gradlew test
 
     - if: ${{ failure() }}
       name: Print ktlint report
       run: cat ./build/reports/ktlint/**/*.txt
-
