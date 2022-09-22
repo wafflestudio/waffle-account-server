@@ -27,7 +27,7 @@ class VerificationController(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
         @PathVariable @Valid method: VerificationMethod,
-        ) {
+    ) {
         verificationService.checkVerificationCode(userId, verificationCheckRequest, method)
     }
 }

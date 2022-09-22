@@ -5,6 +5,5 @@ data class VerificationSendRequest(
 )
 
 data class VerificationCheckRequest(
-    val target: String,
-    val code: Long,
+    val code: String,
 )
