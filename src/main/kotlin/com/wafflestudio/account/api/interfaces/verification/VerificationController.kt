@@ -13,7 +13,7 @@ class VerificationController(
     private val verificationService: VerificationService,
 ) {
     @PostMapping("/v1/verification/send/{method}")
-    suspend fun sendSMSCode(
+    suspend fun sendVerificationCode(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationSendRequest: VerificationSendRequest,
         @PathVariable @Valid method: VerificationMethod,
@@ -22,7 +22,7 @@ class VerificationController(
     }
 
     @PostMapping("/v1/verification/check/{method}")
-    suspend fun checkSMSCode(
+    suspend fun checkVerificationCode(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
         @PathVariable @Valid method: VerificationMethod,

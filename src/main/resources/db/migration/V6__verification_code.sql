@@ -6,7 +6,9 @@ create table `verification_code` (
     `method` varchar(10) not null,
     `user_id` bigint not null,
     `is_valid` boolean not null,
-    primary key (`id`)
+    primary key (`id`),
+    key `ix_code` (`code`),
+    unique key `ux_target` (`target`)
 );
 
 ALTER TABLE `account_user` ADD COLUMN `phone` varchar(30);

@@ -35,8 +35,10 @@ class VerificationService(
 
         sender.sendCode(verificationSendRequest.target, code)
 
+        val existingCode = verificationCodeRepository.findByTarget(verificationSendRequest.target)
         verificationCodeRepository.save(
             VerificationCode(
+                id = existingCode?.id,
                 code = code,
                 target = verificationSendRequest.target,
                 expireAt = LocalDateTime.now().plusMinutes(3),
@@ -59,11 +61,9 @@ class VerificationService(
         ) ?: throw VerificationCodeDoesNotExistsException
 
         if (!verificationCode.isValid) throw VerificationCodeExpiredException
-        if (verificationCode.expireAt.isBefore(LocalDateTime.now())) {
-            verificationCode.isValid = false
-            verificationCodeRepository.save(verificationCode)
-            throw VerificationCodeExpiredException
-        }
+        verificationCode.isValid = false
+        verificationCodeRepository.save(verificationCode)
+        if (verificationCode.expireAt.isBefore(LocalDateTime.now())) throw VerificationCodeExpiredException
 
         val modifiedUser = sender.changeUserInfo(user, verificationCode.target)
         userRepository.save(modifiedUser)
