@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class EmailSender : VerificationSender {
+
+    private val regex = Regex("^[a-zA-Z0-9]+@[a-zA-Z0-9]+\$")
+
     override suspend fun sendCode(target: String, code: String) {
         val client = AmazonSimpleEmailServiceClient.builder().withRegion("ap-northeast-2").build()
         client.sendEmail(
@@ -32,6 +35,6 @@ class EmailSender : VerificationSender {
     }
 
     override suspend fun checkTarget(target: String): Boolean {
-        TODO("Not yet implemented")
+        return regex.matches(target)
     }
 }

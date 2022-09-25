@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class SMSSender : VerificationSender {
+
+    private val regex = Regex("^\\+(?:\\d|\\d{2}|\\d{3})01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}\$")
+
     override suspend fun sendCode(target: String, code: String) {
         val client = AmazonSNSClientBuilder.standard().withRegion("ap-northeast-1").build()
         val publishRequest = PublishRequest()
@@ -22,6 +25,6 @@ class SMSSender : VerificationSender {
     }
 
     override suspend fun checkTarget(target: String): Boolean {
-        TODO("Not yet implemented")
+        return regex.matches(target)
     }
 }
