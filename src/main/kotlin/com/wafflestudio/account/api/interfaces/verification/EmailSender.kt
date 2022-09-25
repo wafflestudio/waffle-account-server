@@ -8,7 +8,6 @@ import com.amazonaws.services.simpleemail.model.Message
 import com.amazonaws.services.simpleemail.model.SendEmailRequest
 import com.wafflestudio.account.api.domain.account.User
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
 
 @Component
 class EmailSender : VerificationSender {
@@ -31,7 +30,7 @@ class EmailSender : VerificationSender {
 
     override suspend fun changeUserInfo(user: User, target: String): User {
         user.verifiedEmail = target
-        if(target.endsWith("@snu.ac.kr")) user.verifiedSnuEmail = target
+        if (target.endsWith("@snu.ac.kr")) user.verifiedSnuEmail = target
         return user
     }
 

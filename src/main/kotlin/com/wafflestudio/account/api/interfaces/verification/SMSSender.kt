@@ -4,7 +4,6 @@ import com.amazonaws.services.sns.AmazonSNSClientBuilder
 import com.amazonaws.services.sns.model.PublishRequest
 import com.wafflestudio.account.api.domain.account.User
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
 
 @Component
 class SMSSender : VerificationSender {
