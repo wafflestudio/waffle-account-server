@@ -1,7 +1,6 @@
 package com.wafflestudio.account.api.interfaces.verification
 
 import com.wafflestudio.account.api.domain.account.enum.VerificationMethod
-import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -13,7 +12,7 @@ import javax.validation.Valid
 class VerificationController(
     private val verificationService: VerificationService,
 ) {
-    @PostMapping("/v1/verification/{method}")
+    @PostMapping("/v1/verification/send/{method}")
     suspend fun sendSMSCode(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationSendRequest: VerificationSendRequest,
@@ -22,7 +21,7 @@ class VerificationController(
         verificationService.sendVerificationCode(userId, verificationSendRequest, method)
     }
 
-    @DeleteMapping("/v1/verification/{method}")
+    @PostMapping("/v1/verification/check/{method}")
     suspend fun checkSMSCode(
         @RequestHeader @Valid userId: Long,
         @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
