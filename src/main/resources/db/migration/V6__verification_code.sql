@@ -12,5 +12,5 @@ create table `verification_code` (
 );
 
 ALTER TABLE `account_user` ADD COLUMN `phone` varchar(30);
-ALTER TABLE `account_user` ADD COLUMN `is_email_verified` boolean not null default false;
-ALTER TABLE `account_user` ADD COLUMN `is_phone_verified` boolean not null default false;
+ALTER TABLE `account_user` ADD COLUMN `verified_email` varchar(100);
+ALTER TABLE `account_user` ADD COLUMN `verified_snu_email` varchar(100);

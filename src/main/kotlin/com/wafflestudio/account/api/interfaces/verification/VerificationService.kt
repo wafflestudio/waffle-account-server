@@ -66,6 +66,7 @@ class VerificationService(
         if (verificationCode.expireAt.isBefore(LocalDateTime.now())) throw VerificationCodeExpiredException
 
         val modifiedUser = sender.changeUserInfo(user, verificationCode.target)
+        modifiedUser.updatedAt = LocalDateTime.now()
         userRepository.save(modifiedUser)
     }
 }

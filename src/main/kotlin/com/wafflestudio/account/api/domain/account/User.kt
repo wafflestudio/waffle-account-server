@@ -12,13 +12,13 @@ class User(
 
     val username: String? = null,
 
-    var email: String? = null,
+    val email: String? = null,
+
+    var verifiedEmail: String? = null,
+
+    var verifiedSnuEmail: String? = null,
 
     var phone: String? = null,
-
-    var isEmailVerified: Boolean = false,
-
-    var isPhoneVerified: Boolean = false,
 
     val password: String? = null,
 
