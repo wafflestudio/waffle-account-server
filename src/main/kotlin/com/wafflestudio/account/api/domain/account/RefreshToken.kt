@@ -11,13 +11,13 @@ class RefreshToken(
 
     val userId: Long,
 
-    val token: String,
+    var token: String,
 
-    val tokenHash: String,
+    var tokenHash: String,
 
     val usedTokenId: Long? = null,
 
-    val expireAt: LocalDateTime,
+    var expireAt: LocalDateTime,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
 

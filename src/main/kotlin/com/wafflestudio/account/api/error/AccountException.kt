@@ -7,6 +7,10 @@ object EmailAlreadyExistsException : AccountException(ErrorType.EMAIL_ALREADY_EX
 object UserDoesNotExistsException : AccountException(ErrorType.USER_NOT_FOUND)
 object WrongPasswordException : AccountException(ErrorType.WRONG_PASSWORD)
 object TokenInvalidException : AccountException(ErrorType.INVALID_TOKEN)
+
+object TooManyUserIdsException : AccountException(ErrorType.TOO_MANY_USER_IDS)
+
+// OAuth2
 object SocialProviderInvalidException : AccountException(ErrorType.INVALID_SOCIAL_PROVIDER)
 object SocialConnectFailException : AccountException(ErrorType.SOCIAL_CONNECT_FAIL)
 object VerificationTargetInvalidException : AccountException(ErrorType.VERIFICATION_TARGET_INVALID)

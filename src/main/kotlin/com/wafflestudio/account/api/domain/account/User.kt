@@ -10,9 +10,9 @@ class User(
     @Id
     var id: Long? = null,
 
-    val username: String? = null,
+    var username: String? = null,
 
-    val email: String? = null,
+    var email: String? = null,
 
     var verifiedEmail: String? = null,
 
@@ -20,7 +20,7 @@ class User(
 
     var phone: String? = null,
 
-    val password: String? = null,
+    var password: String? = null,
 
     var isActive: Boolean = true,
 
