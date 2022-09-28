@@ -10,7 +10,7 @@ create table `verification_code` (
     `is_valid` boolean not null,
     primary key (`id`),
     key `ix_code` (`code`),
-    key `ix_target` (`target`, `is_valid`)
+    key `ix_target` (`target`)
 );
 
 ALTER TABLE `account_user` ADD COLUMN `phone` varchar(30);
