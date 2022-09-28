@@ -14,6 +14,10 @@ class VerificationCode(
 
     val target: String,
 
+    val sentAt: LocalDateTime,
+
+    var verifiedAt: LocalDateTime? = null,
+
     val expireAt: LocalDateTime,
 
     val method: VerificationMethod,

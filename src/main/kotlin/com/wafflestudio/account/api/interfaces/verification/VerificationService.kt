@@ -19,7 +19,7 @@ class VerificationService(
     private val smsSender: SMSSender,
     private val emailSender: EmailSender,
 ) {
-    private val senders: Map<VerificationMethod, VerificationSender> = hashMapOf(
+    private val senders: Map<VerificationMethod, VerificationSender> = mapOf(
         VerificationMethod.SMS to smsSender,
         VerificationMethod.EMAIL to emailSender,
     )
@@ -31,16 +31,20 @@ class VerificationService(
         val sender = senders[verificationMethod]!!
         if (!sender.checkTarget(verificationSendRequest.target)) throw VerificationTargetInvalidException
         if (!userRepository.existsById(userId)) throw UserDoesNotExistsException
-        val code = ThreadLocalRandom.current().nextLong(100000, 1000000).toString()
+        val existingCode = verificationCodeRepository.findByTargetAndIsValid(verificationSendRequest.target, true)
+        if (existingCode != null) {
+            existingCode.isValid = false
+            verificationCodeRepository.save(existingCode)
+        }
 
+        val code = ThreadLocalRandom.current().nextLong(100000, 1000000).toString()
         sender.sendCode(verificationSendRequest.target, code)
 
-        val existingCode = verificationCodeRepository.findByTarget(verificationSendRequest.target)
         verificationCodeRepository.save(
             VerificationCode(
-                id = existingCode?.id,
                 code = code,
                 target = verificationSendRequest.target,
+                sentAt = LocalDateTime.now(),
                 expireAt = LocalDateTime.now().plusMinutes(3),
                 method = verificationMethod,
                 userId = userId,
@@ -62,8 +66,13 @@ class VerificationService(
 
         if (!verificationCode.isValid) throw VerificationCodeExpiredException
         verificationCode.isValid = false
-        verificationCodeRepository.save(verificationCode)
-        if (verificationCode.expireAt.isBefore(LocalDateTime.now())) throw VerificationCodeExpiredException
+        if (verificationCode.expireAt.isBefore(LocalDateTime.now())) {
+            verificationCodeRepository.save(verificationCode)
+            throw VerificationCodeExpiredException
+        } else {
+            verificationCode.verifiedAt = LocalDateTime.now()
+            verificationCodeRepository.save(verificationCode)
+        }
 
         val modifiedUser = sender.changeUserInfo(user, verificationCode.target)
         modifiedUser.updatedAt = LocalDateTime.now()
