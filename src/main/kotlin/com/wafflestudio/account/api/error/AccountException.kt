@@ -13,3 +13,6 @@ object TooManyUserIdsException : AccountException(ErrorType.TOO_MANY_USER_IDS)
 // OAuth2
 object SocialProviderInvalidException : AccountException(ErrorType.INVALID_SOCIAL_PROVIDER)
 object SocialConnectFailException : AccountException(ErrorType.SOCIAL_CONNECT_FAIL)
+object VerificationTargetInvalidException : AccountException(ErrorType.VERIFICATION_TARGET_INVALID)
+object VerificationCodeExpiredException : AccountException(ErrorType.VERIFICATION_CODE_EXPIRED)
+object VerificationCodeDoesNotExistsException : AccountException(ErrorType.VERIFICATION_CODE_NOT_FOUND)

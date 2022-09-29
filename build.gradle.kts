@@ -37,10 +37,12 @@ dependencies {
     runtimeOnly("mysql:mysql-connector-java")
     runtimeOnly("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
 
+    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.300")
+    implementation("com.amazonaws:aws-java-sdk-sns:1.12.305")
+    implementation("com.amazonaws:aws-java-sdk-ses:1.12.305")
+
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-mysql")
-
-    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.300")
 
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.5")

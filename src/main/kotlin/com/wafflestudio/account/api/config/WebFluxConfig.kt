@@ -1,6 +1,7 @@
 package com.wafflestudio.account.api.config
 
 import com.wafflestudio.account.api.domain.account.enum.SocialProvider
+import com.wafflestudio.account.api.domain.account.enum.VerificationMethod
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter
 import org.springframework.format.FormatterRegistry
@@ -15,7 +16,14 @@ class WebFluxConfig : WebFluxConfigurer {
         }
     }
 
+    class StringToVerificationMethodConverter : Converter<String, VerificationMethod> {
+        override fun convert(source: String): VerificationMethod {
+            return VerificationMethod.customValueOf(source)!!
+        }
+    }
+
     override fun addFormatters(registry: FormatterRegistry) {
         registry.addConverter(StringToSocialProviderConverter())
+        registry.addConverter(StringToVerificationMethodConverter())
     }
 }

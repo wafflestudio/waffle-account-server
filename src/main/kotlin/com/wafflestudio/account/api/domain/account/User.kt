@@ -14,6 +14,12 @@ class User(
 
     var email: String? = null,
 
+    var verifiedEmail: String? = null,
+
+    var verifiedSnuEmail: String? = null,
+
+    var phone: String? = null,
+
     var password: String? = null,
 
     var isActive: Boolean = true,
