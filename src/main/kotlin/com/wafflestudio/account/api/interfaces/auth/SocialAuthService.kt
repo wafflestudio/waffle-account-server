@@ -18,17 +18,6 @@ class SocialAuthService(
 ) {
     private val clients = clients.mapKeys { SocialProvider.valueOf(it.key) }
 
-    suspend fun socialLoginWithAccessToken(
-        socialProvider: SocialProvider,
-        oAuth2Request: OAuth2RequestWithAccessToken,
-    ): WaffleTokenResponse {
-        val oAuth2Client = clients[socialProvider]!!
-
-        val userResponse = oAuth2Client.getMe(oAuth2Request.accessToken) ?: throw SocialConnectFailException
-
-        return socialSignupOrLogin(socialProvider, userResponse)
-    }
-
     suspend fun socialLoginWithAuthCode(
         socialProvider: SocialProvider,
         oAuth2Request: OAuth2RequestWithAuthCode,
@@ -38,6 +27,17 @@ class SocialAuthService(
         val userResponse = oAuth2Client.getMeWithAuthCode(
             oAuth2Request.authorizationCode, oAuth2Request.redirectUri,
         ) ?: throw SocialConnectFailException
+
+        return socialSignupOrLogin(socialProvider, userResponse)
+    }
+
+    suspend fun socialLoginWithAccessToken(
+        socialProvider: SocialProvider,
+        oAuth2Request: OAuth2RequestWithAccessToken,
+    ): WaffleTokenResponse {
+        val oAuth2Client = clients[socialProvider]!!
+
+        val userResponse = oAuth2Client.getMe(oAuth2Request.accessToken) ?: throw SocialConnectFailException
 
         return socialSignupOrLogin(socialProvider, userResponse)
     }

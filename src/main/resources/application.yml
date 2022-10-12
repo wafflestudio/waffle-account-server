@@ -71,6 +71,23 @@ spring:
   flyway:
     url: jdbc:h2:mem:testdb;MODE=Mysql;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: fake-client-id
+            client-secret: fake-client-secret
+          kakao:
+            client-id: fake-client-id
+            client-secret: fake-client-secret
+          naver:
+            client-id: fake-client-id
+            client-secret: fake-client-secret
+          github:
+            client-id: fake-client-id
+            client-secret: fake-client-secret
+
 ---
 
 spring.config.activate.on-profile: dev
