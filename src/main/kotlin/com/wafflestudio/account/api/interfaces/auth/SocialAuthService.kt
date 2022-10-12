@@ -69,8 +69,8 @@ class SocialAuthService(
                 provider = socialProvider,
                 socialId = userResponse.socialId,
                 email = email,
-                username = null,
                 password = null,
+                username = null,
             )
         )
     }

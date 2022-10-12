@@ -61,6 +61,18 @@ http:
 
 ---
 
+spring.config.activate.on-profile: test
+
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb?options=MODE=Mysql;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+    username: wath
+    password: teamsso
+  flyway:
+    url: jdbc:h2:mem:testdb;MODE=Mysql;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+
+---
+
 spring.config.activate.on-profile: dev
 
 spring:

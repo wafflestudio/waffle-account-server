@@ -27,8 +27,8 @@ class EmailAuthService(
                 provider = SocialProvider.LOCAL,
                 socialId = null,
                 email = signupRequest.email,
-                username = null,
                 password = passwordEncoder.encode(signupRequest.password),
+                username = null,
             )
         )
 

@@ -16,9 +16,9 @@ class User(
 
     val email: String?,
 
-    var username: String?,
-
     var password: String?,
+
+    var username: String?,
 
     var phone: String? = null,
 
