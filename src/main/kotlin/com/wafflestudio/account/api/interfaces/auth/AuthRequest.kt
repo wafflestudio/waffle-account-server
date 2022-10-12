@@ -26,8 +26,17 @@ data class UserIDRequest(
     val userId: Long,
 )
 
-data class OAuth2Request(
+data class OAuth2RequestWithAccessToken(
     @field:NotBlank
     @JsonProperty("access_token")
     val accessToken: String,
+)
+
+data class OAuth2RequestWithAuthCode(
+    @field:NotBlank
+    @JsonProperty("authorization_code")
+    val authorizationCode: String,
+    @field:NotBlank
+    @JsonProperty("redirect_uri")
+    val redirectUri: String,
 )

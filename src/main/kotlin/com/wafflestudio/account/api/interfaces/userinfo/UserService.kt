@@ -28,7 +28,6 @@ class UserService(
         return userRepository.save(
             user.apply {
                 username = userInfoRequest.username ?: username
-                email = userInfoRequest.email ?: email
                 isActive = userInfoRequest.isActive ?: isActive
                 isBanned = userInfoRequest.isBanned ?: isBanned
             }

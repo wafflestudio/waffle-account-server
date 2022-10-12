@@ -2,7 +2,7 @@ package com.wafflestudio.account.api.interfaces.auth
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class TokenResponse(
+data class WaffleTokenResponse(
     @JsonProperty("access_token")
     val accessToken: String,
 

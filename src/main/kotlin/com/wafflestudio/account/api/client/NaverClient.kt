@@ -1,8 +1,6 @@
 package com.wafflestudio.account.api.client
 
 import com.wafflestudio.account.api.domain.account.enum.SocialProvider
-import com.wafflestudio.account.api.interfaces.oauth2.NaverOAuth2UserResponse
-import com.wafflestudio.account.api.interfaces.oauth2.OAuth2UserResponse
 import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
 import org.springframework.stereotype.Component
@@ -35,6 +33,19 @@ class NaverClient(
                 WebClientHelper.logger.error(it.message, it)
                 Mono.empty()
             }
+            .map {
+                OAuth2UserResponse(
+                    socialId = it.id,
+                    email = it.email,
+                )
+            }
             .awaitSingleOrNull()
+    }
+
+    override suspend fun getMeWithAuthCode(
+        authorizationCode: String,
+        redirectUri: String,
+    ): OAuth2UserResponse? {
+        throw NotImplementedError()
     }
 }

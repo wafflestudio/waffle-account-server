@@ -1,3 +1,7 @@
+spring.profiles.default: local
+
+secret-names: dev/waffle-account
+
 spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/waffle_account?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
@@ -17,14 +21,14 @@ spring:
             client-secret:
             client-name: kakao
             scope: account_email
-            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            redirect-uri: https://sso-dev.wafflestudio.com/oauth/callback/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
           naver:
             client-id:
             client-secret:
             client-name: naver
-            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            redirect-uri: https://sso-dev.wafflestudio.com/oauth/callback/naver
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
           github:
@@ -59,31 +63,11 @@ http:
 
 spring.config.activate.on-profile: dev
 
-secret-names: dev/waffle-account
-
 spring:
   r2dbc:
     url:
     username:
     password:
-
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id:
-            client-secret:
-            scope: email
-          naver:
-            client-id:
-            client-secret:
-          kakao:
-            client-id:
-            client-secret:
-          github:
-            client-id:
-            client-secret:
 
 auth:
   jwt:
@@ -97,24 +81,6 @@ auth:
 
 ---
 
-spring.config.activate.on-profile: local
+spring.config.activate.on-profile: prod
 
-secret-names: local/waffle-account
-
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id:
-            client-secret:
-          naver:
-            client-id:
-            client-secret:
-          kakao:
-            client-id:
-            client-secret:
-          github:
-            client-id:
-            client-secret:
+secret-names: prod/waffle-account

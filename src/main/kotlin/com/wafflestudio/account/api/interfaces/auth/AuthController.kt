@@ -21,25 +21,36 @@ class AuthController(
     @PostMapping("/v1/users/signup/email")
     suspend fun emailSignup(
         @RequestBody @Valid emailSignupRequest: LocalAuthRequest,
-    ): TokenResponse {
+    ): WaffleTokenResponse {
         return emailAuthService.emailSignup(emailSignupRequest)
     }
 
     @PostMapping("/v1/users/login/email")
     suspend fun emailLogin(
         @RequestBody @Valid emailLoginRequest: LocalAuthRequest
-    ): TokenResponse {
+    ): WaffleTokenResponse {
         return emailAuthService.emailLogin(emailLoginRequest)
     }
 
-    @PostMapping("/v1/users/login/{socialProvider}")
-    suspend fun socialLogin(
+    @PostMapping("/v1/users/login/{socialProvider}/token")
+    suspend fun socialLoginWithAccessToken(
         @PathVariable socialProvider: SocialProvider,
-        @RequestBody oAuth2Request: OAuth2Request,
-    ): TokenResponse {
-        return socialAuthService.socialLogin(
+        @RequestBody @Valid oAuth2RequestWithAccessToken: OAuth2RequestWithAccessToken,
+    ): WaffleTokenResponse {
+        return socialAuthService.socialLoginWithAccessToken(
             socialProvider,
-            oAuth2Request
+            oAuth2RequestWithAccessToken,
+        )
+    }
+
+    @PostMapping("/v1/users/login/{socialProvider}/code")
+    suspend fun socialLoginWithAuthCode(
+        @PathVariable socialProvider: SocialProvider,
+        @RequestBody @Valid oAuth2RequestWithAuthCode: OAuth2RequestWithAuthCode,
+    ): WaffleTokenResponse {
+        return socialAuthService.socialLoginWithAuthCode(
+            socialProvider,
+            oAuth2RequestWithAuthCode,
         )
     }
 

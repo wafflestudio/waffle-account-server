@@ -17,16 +17,18 @@ class EmailAuthService(
     private val passwordEncoder: PasswordEncoder,
 ) {
 
-    suspend fun emailSignup(signupRequest: LocalAuthRequest): TokenResponse {
+    suspend fun emailSignup(signupRequest: LocalAuthRequest): WaffleTokenResponse {
         if (userRepository.findByEmail(signupRequest.email) != null) {
             throw EmailAlreadyExistsException
         }
 
         val user = userRepository.save(
             User(
-                email = signupRequest.email,
-                password = passwordEncoder.encode(signupRequest.password),
                 provider = SocialProvider.LOCAL,
+                socialId = null,
+                email = signupRequest.email,
+                username = null,
+                password = passwordEncoder.encode(signupRequest.password),
             )
         )
 
@@ -34,13 +36,13 @@ class EmailAuthService(
         val accessToken = authService.buildAccessToken(user, now)
         val refreshToken = authService.buildRefreshToken(user, now)
 
-        return TokenResponse(
+        return WaffleTokenResponse(
             accessToken = accessToken,
             refreshToken = refreshToken,
         )
     }
 
-    suspend fun emailLogin(loginRequest: LocalAuthRequest): TokenResponse {
+    suspend fun emailLogin(loginRequest: LocalAuthRequest): WaffleTokenResponse {
         val user = userRepository.findByEmail(loginRequest.email) ?: throw UserDoesNotExistsException
 
         if (!passwordEncoder.matches(loginRequest.password, user.password)) {
@@ -51,7 +53,7 @@ class EmailAuthService(
         val accessToken = authService.buildAccessToken(user, now)
         val refreshToken = authService.buildRefreshToken(user, now)
 
-        return TokenResponse(
+        return WaffleTokenResponse(
             accessToken = accessToken,
             refreshToken = refreshToken,
         )
