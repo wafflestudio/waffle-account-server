@@ -24,7 +24,6 @@ data class UserInfo(
 
 data class UserInfoRequest(
     val username: String?,
-    val email: String?,
     val isActive: Boolean?,
     val isBanned: Boolean?,
 )

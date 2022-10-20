@@ -4,7 +4,7 @@ import com.wafflestudio.account.api.error.ErrorHandler
 import com.wafflestudio.account.api.interfaces.auth.AuthController
 import com.wafflestudio.account.api.interfaces.auth.LocalAuthRequest
 import com.wafflestudio.account.api.interfaces.auth.RefreshRequest
-import com.wafflestudio.account.api.interfaces.auth.TokenResponse
+import com.wafflestudio.account.api.interfaces.auth.WaffleTokenResponse
 import io.kotest.core.spec.style.WordSpec
 import org.json.JSONObject
 import org.springframework.boot.test.context.SpringBootTest
@@ -69,7 +69,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
             val request = webTestClient.post().uri("/v1/users/signup/email")
                 .bodyValue(LocalAuthRequest(email = "unregistered@test.com", password = "testpassword"))
                 .exchange().expectStatus().isOk
-            val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
+            val response = request.expectBody<WaffleTokenResponse>().returnResult().responseBody!!
             val payload = response.accessToken.split('.')[1]
             val userId = JSONObject(String(Base64.getDecoder().decode(payload)))["sub"].toString()
             webTestClient.delete().uri("/v1/users/me").header("userId", userId)
@@ -90,7 +90,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
 
         "signin ok" {
             val request = getRequest(LocalAuthRequest(email = "test@test.com", password = "testpassword")).isOk
-            val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
+            val response = request.expectBody<WaffleTokenResponse>().returnResult().responseBody!!
             accessToken = response.accessToken
             refreshToken = response.refreshToken
             consume(

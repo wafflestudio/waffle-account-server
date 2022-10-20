@@ -2,6 +2,7 @@ package com.wafflestudio.account
 
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
+import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 import com.wafflestudio.account.api.error.ErrorHandler
 import com.wafflestudio.account.api.interfaces.userinfo.UserInfoController
 import io.kotest.core.spec.style.WordSpec
@@ -37,29 +38,39 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
 
     val users = listOf(
         User(
-            username = "test1",
+            provider = SocialProvider.LOCAL,
+            socialId = null,
             email = "test1@test.com",
             password = "password",
+            username = "test1",
         ),
         User(
-            username = "test2",
+            provider = SocialProvider.LOCAL,
+            socialId = null,
             email = "test2@test.com",
             password = "password",
+            username = "test2",
         ),
         User(
-            username = "test3",
+            provider = SocialProvider.LOCAL,
+            socialId = null,
             email = "test3@test.com",
             password = "password",
+            username = "test3",
         ),
         User(
-            username = "test4",
+            provider = SocialProvider.LOCAL,
+            socialId = null,
             email = "test4@test.com",
             password = "password",
+            username = "test4",
         ),
         User(
-            username = "test5",
+            provider = SocialProvider.LOCAL,
+            socialId = null,
             email = "test5@test.com",
             password = "password",
+            username = "test5",
         ),
     )
 

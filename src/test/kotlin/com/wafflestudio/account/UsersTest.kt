@@ -4,7 +4,7 @@ import com.wafflestudio.account.api.error.ErrorHandler
 import com.wafflestudio.account.api.interfaces.auth.AuthController
 import com.wafflestudio.account.api.interfaces.auth.LocalAuthRequest
 import com.wafflestudio.account.api.interfaces.auth.RefreshRequest
-import com.wafflestudio.account.api.interfaces.auth.TokenResponse
+import com.wafflestudio.account.api.interfaces.auth.WaffleTokenResponse
 import io.kotest.core.spec.style.WordSpec
 import org.json.JSONObject
 import org.springframework.boot.test.context.SpringBootTest
@@ -65,7 +65,7 @@ class UsersTest(val authController: AuthController) : WordSpec({
 
         "users post ok" {
             val request = getRequest(LocalAuthRequest(email = email, password = "testpassword")).isOk
-            val response = request.expectBody<TokenResponse>().returnResult().responseBody!!
+            val response = request.expectBody<WaffleTokenResponse>().returnResult().responseBody!!
             val payload = response.accessToken.split('.')[1]
             userId = JSONObject(String(Base64.getDecoder().decode(payload)))["sub"].toString()
             accessToken = response.accessToken

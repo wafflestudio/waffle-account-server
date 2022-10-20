@@ -10,17 +10,21 @@ class User(
     @Id
     var id: Long? = null,
 
-    var username: String? = null,
+    val provider: SocialProvider,
 
-    var email: String? = null,
+    val socialId: String?,
+
+    val email: String?,
+
+    var password: String?,
+
+    var username: String?,
+
+    var phone: String? = null,
 
     var verifiedEmail: String? = null,
 
     var verifiedSnuEmail: String? = null,
-
-    var phone: String? = null,
-
-    var password: String? = null,
 
     var isActive: Boolean = true,
 
@@ -29,8 +33,4 @@ class User(
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
     var updatedAt: LocalDateTime = LocalDateTime.now(),
-
-    val provider: SocialProvider = SocialProvider.LOCAL,
-
-    val socialId: String? = null,
 )
