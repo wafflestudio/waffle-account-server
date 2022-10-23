@@ -72,7 +72,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
             val response = request.expectBody<WaffleTokenResponse>().returnResult().responseBody!!
             val payload = response.accessToken.split('.')[1]
             val userId = JSONObject(String(Base64.getDecoder().decode(payload)))["sub"].toString()
-            webTestClient.delete().uri("/v1/users/me").header("userId", userId)
+            webTestClient.delete().uri("/v1/users/me").header("waffle-user-id", userId)
                 .header("Authorization", response.accessToken).exchange().expectStatus().isOk
         }
 
@@ -142,7 +142,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
     "request v1/validate" should {
         "validate ok" {
             consume(
-                webTestClient.put().uri("/v1/validate").header("userId", "1")
+                webTestClient.put().uri("/v1/validate").header("waffle-user-id", "1")
                     .header("Authorization", accessToken).exchange().expectStatus().isOk,
                 "validate-200",
                 requestHeaders(

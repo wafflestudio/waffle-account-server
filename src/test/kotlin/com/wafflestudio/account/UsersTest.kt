@@ -102,7 +102,7 @@ class UsersTest(val authController: AuthController) : WordSpec({
     "request get v1/users/me" should {
         "users me get ok" {
             consume(
-                webTestClient.get().uri("/v1/users/me").header("userId", userId)
+                webTestClient.get().uri("/v1/users/me").header("waffle-user-id", userId)
                     .header("Authorization", accessToken).exchange().expectStatus().isOk,
                 "users-me-get-200",
                 requestHeaders(
@@ -130,7 +130,7 @@ class UsersTest(val authController: AuthController) : WordSpec({
 
     "request delete v1/users/me" should {
         fun getRequest(id: String, token: String): StatusAssertions {
-            return webTestClient.delete().uri("/v1/users/me").header("userId", id)
+            return webTestClient.delete().uri("/v1/users/me").header("waffle-user-id", id)
                 .header("Authorization", token).exchange().expectStatus()
         }
 
