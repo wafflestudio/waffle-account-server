@@ -37,7 +37,8 @@ dependencies {
     runtimeOnly("mysql:mysql-connector-java")
     runtimeOnly("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
 
-    implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.300")
+    implementation("software.amazon.awssdk:secretsmanager:2.17.276")
+    implementation("software.amazon.awssdk:sts:2.17.276")
     implementation("com.amazonaws:aws-java-sdk-sns:1.12.305")
     implementation("com.amazonaws:aws-java-sdk-ses:1.12.305")
 
