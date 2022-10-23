@@ -14,7 +14,7 @@ class VerificationController(
 ) {
     @PostMapping("/v1/verification/send/{method}")
     suspend fun sendVerificationCode(
-        @RequestHeader @Valid userId: Long,
+        @RequestHeader("waffle-user-id") @Valid userId: Long,
         @RequestBody @Valid verificationSendRequest: VerificationSendRequest,
         @PathVariable @Valid method: VerificationMethod,
     ) {
@@ -23,7 +23,7 @@ class VerificationController(
 
     @PostMapping("/v1/verification/check/{method}")
     suspend fun checkVerificationCode(
-        @RequestHeader @Valid userId: Long,
+        @RequestHeader("waffle-user-id") @Valid userId: Long,
         @RequestBody @Valid verificationCheckRequest: VerificationCheckRequest,
         @PathVariable @Valid method: VerificationMethod,
     ) {

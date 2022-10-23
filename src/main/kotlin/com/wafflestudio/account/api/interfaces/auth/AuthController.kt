@@ -56,7 +56,7 @@ class AuthController(
 
     @GetMapping("/v1/users/me")
     suspend fun getUserInformation(
-        @RequestHeader @Valid userId: Long,
+        @RequestHeader("waffle-user-id") @Valid userId: Long,
     ): UserResponse {
         return authService.getUser(
             UserIDRequest(
@@ -67,14 +67,14 @@ class AuthController(
 
     @DeleteMapping("/v1/users/me")
     suspend fun unregister(
-        @RequestHeader @Valid userId: Long,
+        @RequestHeader("waffle-user-id") @Valid userId: Long,
     ): UnregisterResponse {
         return authService.unregister(userId)
     }
 
     @PutMapping("/v1/validate")
     suspend fun tokenValidate(
-        @RequestHeader @Valid userId: Long,
+        @RequestHeader("waffle-user-id") @Valid userId: Long,
     ): UserIDResponse {
         return UserIDResponse(
             userId = userId,
