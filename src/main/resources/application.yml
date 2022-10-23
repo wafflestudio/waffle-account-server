@@ -1,6 +1,6 @@
 spring.profiles.default: local
 
-secret-names: dev/waffle-account
+secret-names: dev/account-server
 
 spring:
   r2dbc:
@@ -112,4 +112,4 @@ auth:
 
 spring.config.activate.on-profile: prod
 
-secret-names: prod/waffle-account
+secret-names: prod/account-server
