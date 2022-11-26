@@ -39,6 +39,4 @@ data class OAuth2RequestWithAuthCode(
     @field:NotBlank
     @JsonProperty("redirect_uri")
     val redirectUri: String,
-    @JsonProperty("state")
-    val state: String?,
 )

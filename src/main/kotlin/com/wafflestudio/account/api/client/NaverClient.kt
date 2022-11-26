@@ -59,7 +59,6 @@ class NaverClient(
                         "client_id" to clientRegistration.clientId,
                         "client_secret" to clientRegistration.clientSecret,
                         "code" to oAuth2RequestWithAuthCode.authorizationCode,
-                        "state" to oAuth2RequestWithAuthCode.state!!,
                     )
                 )
             )
