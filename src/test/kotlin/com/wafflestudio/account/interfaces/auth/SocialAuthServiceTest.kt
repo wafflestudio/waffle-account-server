@@ -57,7 +57,6 @@ class SocialAuthServiceTest(
                 oAuth2Request = OAuth2RequestWithAuthCode(
                     authorizationCode = "authorizationCode",
                     redirectUri = "redirectUri",
-                    state = null,
                 ),
             )
 
@@ -100,7 +99,6 @@ class SocialAuthServiceTest(
                 oAuth2Request = OAuth2RequestWithAuthCode(
                     authorizationCode = "authorizationCode",
                     redirectUri = "redirectUri",
-                    state = null,
                 ),
             )
 
@@ -153,7 +151,6 @@ class SocialAuthServiceTest(
                 oAuth2Request = OAuth2RequestWithAuthCode(
                     authorizationCode = "authorizationCode",
                     redirectUri = "redirectUri",
-                    state = null,
                 ),
             )
 
@@ -190,7 +187,6 @@ class SocialAuthServiceTest(
                         oAuth2Request = OAuth2RequestWithAuthCode(
                             authorizationCode = "authorizationCode",
                             redirectUri = "redirectUri",
-                            state = null,
                         ),
                     )
                 }
@@ -231,7 +227,6 @@ class SocialAuthServiceTest(
                         oAuth2Request = OAuth2RequestWithAuthCode(
                             authorizationCode = "authorizationCode",
                             redirectUri = "redirectUri",
-                            state = null,
                         ),
                     )
                 }
