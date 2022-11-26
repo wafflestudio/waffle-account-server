@@ -1,6 +1,7 @@
 package com.wafflestudio.account.api.client
 
 import com.wafflestudio.account.api.domain.account.enum.SocialProvider
+import com.wafflestudio.account.api.interfaces.auth.OAuth2RequestWithAuthCode
 import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
 import org.springframework.stereotype.Component
@@ -43,8 +44,7 @@ class GoogleClient(
     }
 
     override suspend fun getMeWithAuthCode(
-        authorizationCode: String,
-        redirectUri: String,
+        oAuth2RequestWithAuthCode: OAuth2RequestWithAuthCode
     ): OAuth2UserResponse? {
         throw NotImplementedError()
     }

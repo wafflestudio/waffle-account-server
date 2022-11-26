@@ -24,9 +24,7 @@ class SocialAuthService(
     ): WaffleTokenResponse {
         val oAuth2Client = clients[socialProvider]!!
 
-        val userResponse = oAuth2Client.getMeWithAuthCode(
-            oAuth2Request.authorizationCode, oAuth2Request.redirectUri,
-        ) ?: throw SocialConnectFailException
+        val userResponse = oAuth2Client.getMeWithAuthCode(oAuth2Request) ?: throw SocialConnectFailException
 
         return socialSignupOrLogin(socialProvider, userResponse)
     }
