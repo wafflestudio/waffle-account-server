@@ -13,9 +13,13 @@ data class GoogleOAuth2UserResponse(
 )
 
 data class NaverOAuth2UserResponse(
-    val id: String,
-    val email: String,
-)
+    val response: NaverOAuth2UserInfo,
+) {
+    data class NaverOAuth2UserInfo(
+        val id: String,
+        val email: String,
+    )
+}
 
 data class KakaoOAuth2UserResponse(
     val id: Long,

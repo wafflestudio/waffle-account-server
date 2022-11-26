@@ -44,7 +44,7 @@ class SocialAuthServiceTest(
     fun `test social signup using kakao with email`() {
         runBlocking {
             coEvery {
-                kakaoClient.getMeWithAuthCode(any(), any())
+                kakaoClient.getMeWithAuthCode(any())
             } returns OAuth2UserResponse(
                 socialId = "1234567890",
                 email = "test@test.com",
@@ -57,6 +57,7 @@ class SocialAuthServiceTest(
                 oAuth2Request = OAuth2RequestWithAuthCode(
                     authorizationCode = "authorizationCode",
                     redirectUri = "redirectUri",
+                    state = null,
                 ),
             )
 
@@ -86,7 +87,7 @@ class SocialAuthServiceTest(
     fun `test social signup using kakao without email`() {
         runBlocking {
             coEvery {
-                kakaoClient.getMeWithAuthCode(any(), any())
+                kakaoClient.getMeWithAuthCode(any())
             } returns OAuth2UserResponse(
                 socialId = "1234567890",
                 email = null,
@@ -99,6 +100,7 @@ class SocialAuthServiceTest(
                 oAuth2Request = OAuth2RequestWithAuthCode(
                     authorizationCode = "authorizationCode",
                     redirectUri = "redirectUri",
+                    state = null,
                 ),
             )
 
@@ -128,7 +130,7 @@ class SocialAuthServiceTest(
     fun `test social login using kakao`() {
         runBlocking {
             coEvery {
-                kakaoClient.getMeWithAuthCode(any(), any())
+                kakaoClient.getMeWithAuthCode(any())
             } returns OAuth2UserResponse(
                 socialId = "1234567890",
                 email = null,
@@ -151,6 +153,7 @@ class SocialAuthServiceTest(
                 oAuth2Request = OAuth2RequestWithAuthCode(
                     authorizationCode = "authorizationCode",
                     redirectUri = "redirectUri",
+                    state = null,
                 ),
             )
 
@@ -177,7 +180,7 @@ class SocialAuthServiceTest(
     fun `test social signup failure using kakao`() {
         runBlocking {
             coEvery {
-                kakaoClient.getMeWithAuthCode(any(), any())
+                kakaoClient.getMeWithAuthCode(any())
             } returns null
 
             assertThatThrownBy {
@@ -187,6 +190,7 @@ class SocialAuthServiceTest(
                         oAuth2Request = OAuth2RequestWithAuthCode(
                             authorizationCode = "authorizationCode",
                             redirectUri = "redirectUri",
+                            state = null,
                         ),
                     )
                 }
@@ -204,7 +208,7 @@ class SocialAuthServiceTest(
     fun `test social signup failure because of email duplication`() {
         runBlocking {
             coEvery {
-                kakaoClient.getMeWithAuthCode(any(), any())
+                kakaoClient.getMeWithAuthCode(any())
             } returns OAuth2UserResponse(
                 socialId = "1234567890",
                 email = "test@test.com",
@@ -227,6 +231,7 @@ class SocialAuthServiceTest(
                         oAuth2Request = OAuth2RequestWithAuthCode(
                             authorizationCode = "authorizationCode",
                             redirectUri = "redirectUri",
+                            state = null,
                         ),
                     )
                 }

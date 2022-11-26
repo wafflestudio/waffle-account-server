@@ -2,6 +2,7 @@ package com.wafflestudio.account.api.client
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.wafflestudio.account.api.domain.account.enum.SocialProvider
+import com.wafflestudio.account.api.interfaces.auth.OAuth2RequestWithAuthCode
 import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.http.MediaType
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository
@@ -44,8 +45,7 @@ class KakaoClient(
     }
 
     override suspend fun getMeWithAuthCode(
-        authorizationCode: String,
-        redirectUri: String,
+        oAuth2RequestWithAuthCode: OAuth2RequestWithAuthCode
     ): OAuth2UserResponse? {
         val tokenResponse = webClient
             .post()
@@ -56,8 +56,8 @@ class KakaoClient(
                     mapOf(
                         "grant_type" to "authorization_code",
                         "client_id" to clientRegistration.clientId,
-                        "redirect_uri" to redirectUri,
-                        "code" to authorizationCode,
+                        "redirect_uri" to oAuth2RequestWithAuthCode.redirectUri,
+                        "code" to oAuth2RequestWithAuthCode.authorizationCode,
                     )
                 )
             )
