@@ -6,6 +6,7 @@ enum class SocialProvider(val value: String) {
     NAVER("naver"),
     KAKAO("kakao"),
     GITHUB("github"),
+    APPLE("apple"),
     ;
 
     companion object {

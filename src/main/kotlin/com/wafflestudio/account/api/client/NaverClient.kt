@@ -21,14 +21,12 @@ class NaverClient(
         SocialProvider.NAVER.value
     ).block()!!
 
-    override suspend fun getMe(
-        accessToken: String
-    ): OAuth2UserResponse? {
+    override suspend fun getMe(token: String): OAuth2UserResponse? {
         return webClient
             .get()
             .uri(clientRegistration.providerDetails.userInfoEndpoint.uri)
             .headers {
-                it.setBearerAuth(accessToken)
+                it.setBearerAuth(token)
             }
             .retrieve()
             .bodyToMono<NaverOAuth2UserResponse>()
