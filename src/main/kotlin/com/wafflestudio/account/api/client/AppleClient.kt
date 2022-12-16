@@ -38,7 +38,7 @@ class AppleClient(
     private final val privateKey = factory.generatePrivate(PKCS8EncodedKeySpec(decoder.decode(privateKeyString)))
 
     private fun buildJwt(): String {
-        val jwt = Jwts.builder()
+        return Jwts.builder()
             .setHeaderParam("kid", keyId)
             .setIssuer(teamId)
             .setSubject(clientRegistration.clientId)
@@ -47,9 +47,6 @@ class AppleClient(
             .setExpiration(Timestamp.valueOf(LocalDateTime.now().plusDays(1)))
             .signWith(privateKey, SignatureAlgorithm.ES256)
             .compact()
-
-        println("jwt: $jwt")
-        return jwt
     }
 
     override suspend fun getMe(token: String): OAuth2UserResponse? {
