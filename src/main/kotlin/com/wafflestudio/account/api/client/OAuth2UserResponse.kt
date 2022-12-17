@@ -37,3 +37,8 @@ data class GithubOAuth2UserResponse(
     val id: Long,
     val email: String,
 )
+
+data class AppleOAuth2UserResponse(
+    val sub: String,
+    val email: String,
+)
