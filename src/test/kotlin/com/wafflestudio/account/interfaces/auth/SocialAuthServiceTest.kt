@@ -2,6 +2,7 @@ package com.wafflestudio.account.interfaces.auth
 
 import com.ninjasquad.springmockk.MockkBean
 import com.wafflestudio.account.TestHelper
+import com.wafflestudio.account.api.client.AppleClient
 import com.wafflestudio.account.api.client.KakaoClient
 import com.wafflestudio.account.api.client.OAuth2UserResponse
 import com.wafflestudio.account.api.domain.account.RefreshTokenRepository
@@ -32,6 +33,8 @@ class SocialAuthServiceTest(
 ) {
     @MockkBean
     private lateinit var kakaoClient: KakaoClient
+    @MockkBean
+    private lateinit var appleClient: AppleClient
 
     @AfterEach
     fun afterEach() {

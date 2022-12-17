@@ -1,5 +1,7 @@
 package com.wafflestudio.account
 
+import com.ninjasquad.springmockk.MockkBean
+import com.wafflestudio.account.api.client.AppleClient
 import com.wafflestudio.account.api.domain.account.User
 import com.wafflestudio.account.api.domain.account.UserRepository
 import com.wafflestudio.account.api.domain.account.enum.SocialProvider
@@ -146,4 +148,7 @@ class UserInfoTest(val userInfoController: UserInfoController, val userRepositor
             )
         }
     }
-})
+}) {
+    @MockkBean
+    private lateinit var appleClient: AppleClient
+}

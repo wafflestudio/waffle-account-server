@@ -1,5 +1,7 @@
 package com.wafflestudio.account
 
+import com.ninjasquad.springmockk.MockkBean
+import com.wafflestudio.account.api.client.AppleClient
 import com.wafflestudio.account.api.error.ErrorHandler
 import com.wafflestudio.account.api.interfaces.auth.AuthController
 import com.wafflestudio.account.api.interfaces.auth.LocalAuthRequest
@@ -196,4 +198,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
             )
         }
     }
-})
+}) {
+    @MockkBean
+    private lateinit var appleClient: AppleClient
+}

@@ -1,5 +1,7 @@
 package com.wafflestudio.account
 
+import com.ninjasquad.springmockk.MockkBean
+import com.wafflestudio.account.api.client.AppleClient
 import com.wafflestudio.account.api.interfaces.health.HealthCheckController
 import io.kotest.core.spec.style.WordSpec
 import org.springframework.boot.test.context.SpringBootTest
@@ -38,4 +40,7 @@ class SampleTest(val healthCheckController: HealthCheckController) : WordSpec({
             )
         }
     }
-})
+}) {
+    @MockkBean
+    private lateinit var appleClient: AppleClient
+}

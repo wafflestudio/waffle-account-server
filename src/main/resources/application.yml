@@ -54,9 +54,6 @@ spring:
             token-uri: https://appleid.apple.com/auth/token
             user-info-uri: https://appleid.apple.com/auth/authorize
             user-name-attribute: sub
-            key-id:
-            private-key:
-            team-id:
 auth:
   jwt:
     issuer: https://account-api-local.wafflestudio.com
