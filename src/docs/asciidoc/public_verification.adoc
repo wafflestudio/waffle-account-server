@@ -1,0 +1,19 @@
+=== POST /v1/verification/send/{method}
+
+TBD
+
+==== Request
+
+==== Response
+
+==== Examples
+
+=== POST /v1/verification/check/{method}
+
+TBD
+
+==== Request
+
+==== Response
+
+==== Examples
