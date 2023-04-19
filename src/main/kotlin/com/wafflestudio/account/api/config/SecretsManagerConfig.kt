@@ -25,14 +25,14 @@ class SecretsManagerConfig : EnvironmentAware, BeanFactoryPostProcessor {
         val secretNames = env.getProperty("secret-names", "").split(",")
         val region = Region.AP_NORTHEAST_2
         val objectMapper = jacksonObjectMapper()
-        val isLocal = env.getProperty("spring.profiles.active", "local") != "local"
+        val isNotLocal = env.getProperty("spring.profiles.active", "local") != "local"
 
         secretNames.forEach { secretName ->
             val secretString = getSecretString(secretName, region)
             val map = objectMapper.readValue<Map<String, String>>(secretString)
             map.forEach { (key, value) ->
                 run {
-                    if (isLocal || env.getProperty(key, "") == "") System.setProperty(key, value)
+                    if (isNotLocal || env.getProperty(key, "") == "") System.setProperty(key, value)
                 }
             }
         }
