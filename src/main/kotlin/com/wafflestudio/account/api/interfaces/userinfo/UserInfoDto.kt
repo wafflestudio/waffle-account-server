@@ -8,6 +8,7 @@ data class UserInfosResponse(
 )
 
 data class UserInfo(
+    val id: Long? = null,
     val username: String? = null,
     val email: String? = null,
     @JsonProperty("is_active")
@@ -23,7 +24,10 @@ data class UserInfo(
 )
 
 data class UserInfoRequest(
-    val username: String?,
-    val isActive: Boolean?,
-    val isBanned: Boolean?,
+    @JsonProperty("username")
+    val username: String? = null,
+    @JsonProperty("is_active")
+    val isActive: Boolean? = null,
+    @JsonProperty("is_banned")
+    val isBanned: Boolean? = null,
 )
