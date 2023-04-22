@@ -1,19 +1,100 @@
 === POST /v1/verification/send/{method}
 
-TBD
+사용자의 인증 주소를 받아 6자리의 인증 코드를 발송하는 API입니다. 현재 지원하는 `method` 는 `sms`, `email` 입니다. API는 regex를 이용하여 인증 주소의 유효성을 검증합니다.
+
+`sms` 의 경우 `^\+(?:\d|\d{2}|\d{3})01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$` 의 regex를 사용합니다.
+
+`email` 의 경우 `^[-\_.0-9a-zA-Z]+@[-_.0-9a-zA-Z]+$` 의 regex를 사용합니다.
 
 ==== Request
 
+.Header
+operation::verification-send-200[snippets='request-headers']
+.Body
+operation::verification-send-200[snippets='request-fields']
+
 ==== Response
 
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |인증 메시지 또는 메일이 정상적으로 전송되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었거나 잘못된 인증 주소입니다.
+|404 Not Found |존재하지 않는 사용자입니다.
+|===
+
+응답이 `200 OK` 일 때 API는 별도의 값을 반환하지 않습니다.
+
 ==== Examples
+.200 OK
+[%collapsible]
+====
+operation::verification-send-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Wrong Form
+[%collapsible]
+====
+operation::verification-send-400-form[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Wrong Target
+[%collapsible]
+====
+operation::verification-send-400-target[snippets='curl-request,http-request,http-response']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::verification-send-404[snippets='curl-request,http-request,http-response']
+====
 
 === POST /v1/verification/check/{method}
 
-TBD
+사용자의 인증 코드가 유효한지 검사하고, 유효하다면 사용자의 정보를 변경하는 API입니다. 현재 지원하는 `method` 는 `sms`, `email` 입니다.
 
 ==== Request
 
+.Header
+operation::verification-check-200[snippets='request-headers']
+.Body
+operation::verification-check-200[snippets='request-fields']
+
 ==== Response
 
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |인증 메시지 또는 메일이 정상적으로 전송되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었거나 존재하지 않거나 이미 만료된 인증 코드입니다.
+|404 Not Found |존재하지 않는 사용자입니다.
+|===
+
+응답이 `200 OK` 일 때 API는 별도의 값을 반환하지 않습니다.
+
 ==== Examples
+.200 OK
+[%collapsible]
+====
+operation::verification-check-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Wrong Form
+[%collapsible]
+====
+operation::verification-check-400-form[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Wrong Code
+[%collapsible]
+====
+operation::verification-check-400-code[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Expired Code
+[%collapsible]
+====
+operation::verification-check-400-expire[snippets='curl-request,http-request,http-response']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::verification-check-404[snippets='curl-request,http-request,http-response']
+====

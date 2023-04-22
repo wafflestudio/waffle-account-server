@@ -94,17 +94,60 @@ operation::signin-404[snippets='curl-request,http-request,http-response']
 
 === POST /v1/users/login/{socialProvider}/code
 
-TBD
+OAuth 서비스에서 제공하는 `authorization_code` 를 활용해 회원가입 및 로그인을 처리하는 API입니다. 현재 지원하는 `socialProvider` 는 `apple`, `github`, `google`, `kakao`, `naver` 입니다.
 
 ==== Request
 
+.Body
+operation::oauth-code-200[snippets='request-fields']
+
 ==== Response
 
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입 또 로그인이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|401 Unauthorized |비정상적인 Auth Code입니다.
+|409 Conflict |이미 존재하는 이메일 주소입니다는.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::oauth-code-200[snippets='response-fields']
+
 ==== Examples
+.200 OK
+[%collapsible]
+====
+operation::oauth-code-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Body
+[%collapsible]
+====
+operation::oauth-code-400-body[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Provider
+[%collapsible]
+====
+operation::oauth-code-400-provider[snippets='curl-request,http-request,http-response']
+====
+.401 Unauthorized
+[%collapsible]
+====
+operation::oauth-code-401[snippets='curl-request,http-request,http-response']
+====
+.409 Conflict
+[%collapsible]
+====
+operation::oauth-code-409[snippets='curl-request,http-request,http-response']
+====
 
 === POST /v1/users/login/{socialProvider}/token
 
-TBD
+Deprecated. Please Do NOT Use.
 
 ==== Request
 
