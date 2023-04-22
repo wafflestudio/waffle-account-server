@@ -25,7 +25,7 @@ class SocialAuthTest(
     @MockkBean val kakaoClient: KakaoClient,
     @MockkBean val appleClient: AppleClient,
     val authController: AuthController,
-): WordSpec({
+) : WordSpec({
     val restDocumentation = ManualRestDocumentation()
 
     val webTestClient = WebTestClient.bindToController(authController)
@@ -49,7 +49,8 @@ class SocialAuthTest(
         restDocumentation.afterTest()
     }
 
-    fun consume(req: WebTestClient.ResponseSpec, identifier: String, vararg snippet: Snippet): WebTestClient.BodyContentSpec {
+    fun consume(req: WebTestClient.ResponseSpec, identifier: String, vararg snippet: Snippet):
+        WebTestClient.BodyContentSpec {
         return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier, *snippet))
     }
 
@@ -67,9 +68,13 @@ class SocialAuthTest(
 
         "code ok" {
             consume(
-                getRequest(OAuth2RequestWithAuthCode(
-                    authorizationCode = "authorizationCode", redirectUri = "redirectUri")).isOk
-                , "oauth-code-200",
+                getRequest(
+                    OAuth2RequestWithAuthCode(
+                        authorizationCode = "authorizationCode",
+                        redirectUri = "redirectUri"
+                    )
+                ).isOk,
+                "oauth-code-200",
                 PayloadDocumentation.requestFields(
                     PayloadDocumentation.fieldWithPath("authorization_code").type(JsonFieldType.STRING)
                         .description("OAuth 서비스에서 받은 auth code입니다."),
@@ -94,8 +99,11 @@ class SocialAuthTest(
 
         "code badrequest provider" {
             consume(
-                webTestClient.post().uri("/v1/users/login/wrong-provider/code").bodyValue(OAuth2RequestWithAuthCode(
-                    authorizationCode = "authorizationCode", redirectUri = "redirectUri")
+                webTestClient.post().uri("/v1/users/login/wrong-provider/code").bodyValue(
+                    OAuth2RequestWithAuthCode(
+                        authorizationCode = "authorizationCode",
+                        redirectUri = "redirectUri"
+                    )
                 ).exchange().expectStatus().isBadRequest,
                 "oauth-code-400-provider"
             )
@@ -128,8 +136,11 @@ class SocialAuthTest(
 
         "code conflict" {
             consume(
-                webTestClient.post().uri("/v1/users/login/APPLE/code").bodyValue(OAuth2RequestWithAuthCode(
-                    authorizationCode = "authorizationCode", redirectUri = "redirectUri")
+                webTestClient.post().uri("/v1/users/login/APPLE/code").bodyValue(
+                    OAuth2RequestWithAuthCode(
+                        authorizationCode = "authorizationCode",
+                        redirectUri = "redirectUri"
+                    )
                 ).exchange().expectStatus().is4xxClientError,
                 "oauth-code-409"
             )
