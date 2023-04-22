@@ -38,7 +38,7 @@ class UsersTest(val authController: AuthController) : WordSpec({
             WebTestClientRestDocumentation
                 .documentationConfiguration(restDocumentation)
                 .operationPreprocessors()
-                .withRequestDefaults(Preprocessors.removeHeaders("userId"), Preprocessors.prettyPrint())
+                .withRequestDefaults(Preprocessors.removeHeaders("waffle-user-id"), Preprocessors.prettyPrint())
                 .withResponseDefaults(Preprocessors.prettyPrint())
         )
         .build()
