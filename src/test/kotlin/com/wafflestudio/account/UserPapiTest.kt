@@ -24,7 +24,7 @@ import org.springframework.test.web.reactive.server.WebTestClient.BodyContentSpe
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 
 @SpringBootTest
-class UserInfoTest(val userInfoController: UserInfoController, val userRepository: UserRepository) : WordSpec({
+class UserPapiTest(val userInfoController: UserInfoController, val userRepository: UserRepository) : WordSpec({
     val restDocumentation = ManualRestDocumentation()
 
     val webTestClient = WebTestClient.bindToController(userInfoController)

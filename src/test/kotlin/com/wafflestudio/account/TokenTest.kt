@@ -29,7 +29,7 @@ import java.time.Duration
 import java.util.Base64
 
 @SpringBootTest
-class AuthTest(val authController: AuthController) : WordSpec({
+class TokenTest(val authController: AuthController) : WordSpec({
     val restDocumentation = ManualRestDocumentation()
 
     val webTestClient = WebTestClient.bindToController(authController)
@@ -39,7 +39,7 @@ class AuthTest(val authController: AuthController) : WordSpec({
             WebTestClientRestDocumentation
                 .documentationConfiguration(restDocumentation)
                 .operationPreprocessors()
-                .withRequestDefaults(Preprocessors.removeHeaders("userId"), Preprocessors.prettyPrint())
+                .withRequestDefaults(Preprocessors.removeHeaders("waffle-user-id"), Preprocessors.prettyPrint())
                 .withResponseDefaults(Preprocessors.prettyPrint())
         )
         .responseTimeout(Duration.ofMillis(30000))

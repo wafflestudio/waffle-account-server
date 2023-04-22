@@ -14,7 +14,7 @@ import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation
 import org.springframework.test.web.reactive.server.WebTestClient
 
 @SpringBootTest
-class SampleTest(val healthCheckController: HealthCheckController) : WordSpec({
+class HealthTest(val healthCheckController: HealthCheckController) : WordSpec({
     val restDocumentation = ManualRestDocumentation()
 
     val webTestClient = WebTestClient.bindToController(healthCheckController)
