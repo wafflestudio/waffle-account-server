@@ -9,7 +9,10 @@ import com.wafflestudio.account.api.domain.account.VerificationCodeRepository
 import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 import com.wafflestudio.account.api.domain.account.enum.VerificationMethod
 import com.wafflestudio.account.api.error.ErrorHandler
-import com.wafflestudio.account.api.interfaces.verification.*
+import com.wafflestudio.account.api.interfaces.verification.SMSSender
+import com.wafflestudio.account.api.interfaces.verification.VerificationCheckRequest
+import com.wafflestudio.account.api.interfaces.verification.VerificationController
+import com.wafflestudio.account.api.interfaces.verification.VerificationSendRequest
 import io.kotest.core.spec.style.WordSpec
 import io.mockk.coEvery
 import org.springframework.boot.test.context.SpringBootTest
@@ -31,7 +34,7 @@ class VerificationTest(
     val verificationCodeRepository: VerificationCodeRepository,
     val verificationController: VerificationController,
     val userRepository: UserRepository,
-): WordSpec({
+) : WordSpec({
     val restDocumentation = ManualRestDocumentation()
 
     val webTestClient = WebTestClient.bindToController(verificationController)
@@ -56,34 +59,40 @@ class VerificationTest(
     lateinit var expiredCode: VerificationCode
 
     beforeSpec {
-        user = userRepository.save(User(
-            provider = SocialProvider.LOCAL,
-            socialId = null,
-            email = "verification-test@test.com",
-            password = "password",
-            username = null,
-        ))
+        user = userRepository.save(
+            User(
+                provider = SocialProvider.LOCAL,
+                socialId = null,
+                email = "verification-test@test.com",
+                password = "password",
+                username = null,
+            )
+        )
         modifiedUser = user
         modifiedUser.phone = checkNumber
 
-        validCode = verificationCodeRepository.save(VerificationCode(
-            code = "val-code",
-            expireAt = LocalDateTime.now().plusMinutes(3),
-            isValid = true,
-            method = VerificationMethod.SMS,
-            sentAt = LocalDateTime.now(),
-            target = checkNumber,
-            userId = user.id!!
-        ))
-        expiredCode = verificationCodeRepository.save(VerificationCode(
-            code = "exp-code",
-            expireAt = LocalDateTime.now().minusSeconds(1),
-            isValid = true,
-            method = VerificationMethod.SMS,
-            sentAt = LocalDateTime.now().minusMinutes(3),
-            target = "exp-target",
-            userId = user.id!!
-        ))
+        validCode = verificationCodeRepository.save(
+            VerificationCode(
+                code = "val-code",
+                expireAt = LocalDateTime.now().plusMinutes(3),
+                isValid = true,
+                method = VerificationMethod.SMS,
+                sentAt = LocalDateTime.now(),
+                target = checkNumber,
+                userId = user.id!!
+            )
+        )
+        expiredCode = verificationCodeRepository.save(
+            VerificationCode(
+                code = "exp-code",
+                expireAt = LocalDateTime.now().minusSeconds(1),
+                isValid = true,
+                method = VerificationMethod.SMS,
+                sentAt = LocalDateTime.now().minusMinutes(3),
+                target = "exp-target",
+                userId = user.id!!
+            )
+        )
     }
 
     afterSpec {
@@ -100,7 +109,8 @@ class VerificationTest(
         restDocumentation.afterTest()
     }
 
-    fun consume(req: WebTestClient.ResponseSpec, identifier: String, vararg snippet: Snippet): WebTestClient.BodyContentSpec {
+    fun consume(req: WebTestClient.ResponseSpec, identifier: String, vararg snippet: Snippet):
+        WebTestClient.BodyContentSpec {
         return req.expectBody().consumeWith(WebTestClientRestDocumentation.document(identifier, *snippet))
     }
 
@@ -123,7 +133,7 @@ class VerificationTest(
 
         "send ok" {
             consume(
-                getRequest(VerificationSendRequest(target=sendNumber), user.id!!).isOk,
+                getRequest(VerificationSendRequest(target = sendNumber), user.id!!).isOk,
                 "verification-send-200",
                 HeaderDocumentation.requestHeaders(
                     HeaderDocumentation.headerWithName("Authorization").description("사용자의 access token입니다."),
@@ -147,14 +157,14 @@ class VerificationTest(
 
         "send badrequest target" {
             consume(
-                getRequest(VerificationSendRequest(target=wrongNumber), user.id!!).isBadRequest,
+                getRequest(VerificationSendRequest(target = wrongNumber), user.id!!).isBadRequest,
                 "verification-send-400-target"
             )
         }
 
         "send notfound" {
             consume(
-                getRequest(VerificationSendRequest(target=sendNumber), 0).isNotFound,
+                getRequest(VerificationSendRequest(target = sendNumber), 0).isNotFound,
                 "verification-send-404"
             )
         }
@@ -173,7 +183,7 @@ class VerificationTest(
 
         "check ok" {
             consume(
-                getRequest(VerificationCheckRequest(code=validCode.code), user.id!!).isOk,
+                getRequest(VerificationCheckRequest(code = validCode.code), user.id!!).isOk,
                 "verification-check-200",
                 HeaderDocumentation.requestHeaders(
                     HeaderDocumentation.headerWithName("Authorization").description("사용자의 access token입니다."),
@@ -197,21 +207,21 @@ class VerificationTest(
 
         "check badrequest code" {
             consume(
-                getRequest(VerificationCheckRequest(code="wrong-code"), user.id!!).isBadRequest,
+                getRequest(VerificationCheckRequest(code = "wrong-code"), user.id!!).isBadRequest,
                 "verification-check-400-code"
             )
         }
 
         "check badrequest expire" {
             consume(
-                getRequest(VerificationCheckRequest(code=expiredCode.code), user.id!!).isBadRequest,
+                getRequest(VerificationCheckRequest(code = expiredCode.code), user.id!!).isBadRequest,
                 "verification-check-400-expire"
             )
         }
 
         "check notfound" {
             consume(
-                getRequest(VerificationCheckRequest(code=validCode.code), 0).isNotFound,
+                getRequest(VerificationCheckRequest(code = validCode.code), 0).isNotFound,
                 "verification-check-404"
             )
         }
