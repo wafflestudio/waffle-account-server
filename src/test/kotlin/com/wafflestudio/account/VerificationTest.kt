@@ -47,8 +47,8 @@ class VerificationTest(
         .responseTimeout(Duration.ofMillis(30000))
         .build()
 
-    val sendNumber = "+821012345678"
-    val checkNumber = "+821087654321"
+    val sendNumber = "+8201012345678"
+    val checkNumber = "+8201087654321"
     val wrongNumber = "wrong-number"
     lateinit var user: User
     lateinit var modifiedUser: User
