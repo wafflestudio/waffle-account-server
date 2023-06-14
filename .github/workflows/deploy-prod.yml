@@ -1,18 +1,18 @@
-name: Deploy-dev
+name: Deploy-prod
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   deploy:
-    name: Deploy-dev
+    name: Deploy-prod
     runs-on: ubuntu-latest
     env:
       IMAGE_TAG: ${{ github.run_number }}
       BUILD_NUMBER: ${{ github.run_number }}
       ECR_REGISTRY: 405906814034.dkr.ecr.ap-northeast-2.amazonaws.com
-      ECR_REPOSITORY: sso-dev/account-server
+      ECR_REPOSITORY: sso-prod/account-server
 
     steps:
       - name: Checkout
@@ -35,3 +35,14 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Slack Notify
+        uses: rtCamp/action-slack-notify@v2.1.2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: team-sso
+          SLACK_TITLE: NEW RELEASE
+          SLACK_USERNAME: waffle-account-server
+          SLACK_ICON: https://user-images.githubusercontent.com/35535636/158051666-322decf3-c7d9-414d-a9bd-ec172054ab96.png
+          SLACK_MESSAGE: Check <https://argocd.wafflestudio.com|Argo CD> for updated environment
+          SLACK_FOOTER: https://account-api.wafflestudio.com/docs/index.html
