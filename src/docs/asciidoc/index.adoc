@@ -1,0 +1,17 @@
+= API Reference For Waffle Account Server
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:icons: font
+:table-caption!:
+
+== Health API
+include::health.adoc[]
+
+== Users API
+include::users.adoc[]
+
+== Auth API
+include::auth.adoc[]

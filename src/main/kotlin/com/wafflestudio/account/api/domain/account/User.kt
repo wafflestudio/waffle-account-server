@@ -1,25 +1,36 @@
 package com.wafflestudio.account.api.domain.account
 
+import com.wafflestudio.account.api.domain.account.enum.SocialProvider
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
 @Table("account_user")
-class User (
+class User(
     @Id
     var id: Long? = null,
 
-    val username: String? = null,
+    val provider: SocialProvider,
 
-    val email: String? = null,
+    val socialId: String?,
 
-    val password: String? = null,
+    val email: String?,
 
-    val isActive: Boolean = true,
+    var password: String?,
 
-    val isBanned: Boolean = false,
+    var username: String?,
+
+    var phone: String? = null,
+
+    var verifiedEmail: String? = null,
+
+    var verifiedSnuEmail: String? = null,
+
+    var isActive: Boolean = true,
+
+    var isBanned: Boolean = false,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
-    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
 )

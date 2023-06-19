@@ -1,7 +1,5 @@
 package com.wafflestudio.account.api.config
 
-import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder
-import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor
@@ -10,9 +8,12 @@ import org.springframework.context.EnvironmentAware
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import org.springframework.core.env.Environment
+import software.amazon.awssdk.regions.Region
+import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient
+import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest
 
 @Configuration
-@Profile("dev | prod")
+@Profile("!test")
 class SecretsManagerConfig : EnvironmentAware, BeanFactoryPostProcessor {
     private lateinit var env: Environment
 
@@ -22,7 +23,7 @@ class SecretsManagerConfig : EnvironmentAware, BeanFactoryPostProcessor {
 
     override fun postProcessBeanFactory(beanFactory: ConfigurableListableBeanFactory) {
         val secretNames = env.getProperty("secret-names", "").split(",")
-        val region = "ap-northeast-2"
+        val region = Region.AP_NORTHEAST_2
         val objectMapper = jacksonObjectMapper()
 
         secretNames.forEach { secretName ->
@@ -32,9 +33,9 @@ class SecretsManagerConfig : EnvironmentAware, BeanFactoryPostProcessor {
         }
     }
 
-    fun getSecretString(secretName: String, region: String): String {
-        val client = AWSSecretsManagerClientBuilder.standard().withRegion(region).build()
-        val request = GetSecretValueRequest().withSecretId(secretName)
-        return client.getSecretValue(request).secretString
+    fun getSecretString(secretName: String, region: Region): String {
+        val client = SecretsManagerClient.builder().region(region).build()
+        val request = GetSecretValueRequest.builder().secretId(secretName).build()
+        return client.getSecretValue(request).secretString()
     }
 }

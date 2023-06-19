@@ -1,0 +1,114 @@
+=== POST /v1/users
+
+OAuth가 아닌, 이메일과 비밀번호로 회원가입하는 API입니다.
+
+==== Request
+
+.Body
+operation::users-post-200[snippets='request-fields']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|409 Conflict |이미 존재하는 이메일 주소입니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::users-post-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::users-post-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-post-400[snippets='curl-request,http-request,http-response']
+====
+.409 Conflict
+[%collapsible]
+====
+operation::users-post-409[snippets='curl-request,http-request,http-response']
+====
+
+=== GET /v1/users/me
+
+==== Request
+
+.Header
+operation::users-me-get-200[snippets='request-headers']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::users-me-get-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::users-me-get-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-me-get-400[snippets='curl-request,http-request,http-response']
+====
+
+=== DELETE /v1/users/me
+
+==== Request
+
+operation::users-me-delete-200-true[snippets='request-headers']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원 탈퇴가 성공적으로 요청되었습니다. 단, 정상적으로 처리되었는지는 응답의 `unregistered` 필드에 나타납니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, `unregistered` 필드의 값이 `false` 가 됩니다.
+
+operation::users-me-delete-200-true[snippets='response-fields']
+
+==== Examples
+.200 OK TRUE
+[%collapsible]
+====
+operation::users-me-delete-200-true[snippets='curl-request,http-request,http-response']
+====
+.200 OK FALSE
+[%collapsible]
+====
+operation::users-me-delete-200-false[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-me-delete-400[snippets='curl-request,http-request,http-response']
+====

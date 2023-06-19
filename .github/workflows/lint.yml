@@ -1,0 +1,31 @@
+name: Lint CI
+
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+permissions:
+  contents: read
+
+jobs:
+  ktlint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Check ktlint
+      run: ./gradlew clean ktlintCheck
+
+    - if: ${{ failure() }}
+      name: Print ktlint report
+      run: cat ./build/reports/ktlint/**/*.txt

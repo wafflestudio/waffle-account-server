@@ -1,0 +1,20 @@
+=== GET /health_check
+
+==== Request
+None
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |API가 정상적으로 동작 중입니다.
+|===
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::health[snippets='curl-request,http-request,http-response']
+====
