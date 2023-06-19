@@ -28,9 +28,9 @@ class AuthService(
     private val userRepository: UserRepository,
     private val refreshTokenRepository: RefreshTokenRepository,
     @Value("\${auth.jwt.issuer}") private val issuer: String,
-    @Value("\${auth.jwt.access.privateKey}") private val accessPrivateKey: String,
-    @Value("\${auth.jwt.refresh.publicKey}") private val refreshPublicKey: String,
-    @Value("\${auth.jwt.refresh.privateKey}") private val refreshPrivateKey: String,
+    @Value("\${auth.jwt.access.private-key}") private val accessPrivateKey: String,
+    @Value("\${auth.jwt.refresh.public-key}") private val refreshPublicKey: String,
+    @Value("\${auth.jwt.refresh.private-key}") private val refreshPrivateKey: String,
 ) {
     private final val decoder: Decoder = Base64.getDecoder()
     private final val factory: KeyFactory = KeyFactory.getInstance("RSA")
