@@ -9,7 +9,7 @@ None
 
 |===
 |HTTP Status Code |Description
-|200 OK |API가 정상적으로 동작 중입니다.
+|200 OK |API 서버가 정상적으로 동작 중입니다.
 |===
 
 ==== Examples

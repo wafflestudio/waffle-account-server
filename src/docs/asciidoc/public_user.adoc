@@ -1,0 +1,229 @@
+=== POST /v1/users/signup/email
+
+OAuth가 아닌, 이메일과 비밀번호로 회원가입하는 API입니다.
+
+==== Request
+
+.Body
+operation::users-post-200[snippets='request-fields']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|409 Conflict |이미 존재하는 이메일 주소입니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::users-post-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::users-post-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-post-400[snippets='curl-request,http-request,http-response']
+====
+.409 Conflict
+[%collapsible]
+====
+operation::users-post-409[snippets='curl-request,http-request,http-response']
+====
+
+=== POST /v1/users/login/email
+
+OAuth가 아닌, 이메일과 비밀번호로 로그인하는 API입니다.
+
+==== Request
+
+operation::signin-200[snippets='request-fields']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |로그인이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|401 Unauthorized |잘못된 비밀번호입니다.
+|403 Forbidden |탈퇴 등의 사유로 비활성 상태인 사용자입니다.
+|404 Not Found |존재하지 않는 사용자입니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+operation::signin-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::signin-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::signin-400[snippets='curl-request,http-request,http-response']
+====
+.401 Unauthorized
+[%collapsible]
+====
+operation::signin-401[snippets='curl-request,http-request,http-response']
+====
+.403 Forbidden
+[%collapsible]
+====
+operation::signin-403[snippets='curl-request,http-request,http-response']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::signin-404[snippets='curl-request,http-request,http-response']
+====
+
+=== POST /v1/users/login/{socialProvider}/code
+
+OAuth 서비스에서 제공하는 `authorization_code` 를 활용해 회원가입 및 로그인을 처리하는 API입니다. 현재 지원하는 `socialProvider` 는 `apple`, `github`, `google`, `kakao`, `naver` 입니다.
+
+==== Request
+
+.Body
+operation::oauth-code-200[snippets='request-fields']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입 또 로그인이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|401 Unauthorized |비정상적인 Auth Code입니다.
+|409 Conflict |이미 존재하는 이메일 주소입니다는.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::oauth-code-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::oauth-code-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Body
+[%collapsible]
+====
+operation::oauth-code-400-body[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Provider
+[%collapsible]
+====
+operation::oauth-code-400-provider[snippets='curl-request,http-request,http-response']
+====
+.401 Unauthorized
+[%collapsible]
+====
+operation::oauth-code-401[snippets='curl-request,http-request,http-response']
+====
+.409 Conflict
+[%collapsible]
+====
+operation::oauth-code-409[snippets='curl-request,http-request,http-response']
+====
+
+=== POST /v1/users/login/{socialProvider}/token
+
+Deprecated. Please Do NOT Use.
+
+==== Request
+
+==== Response
+
+==== Examples
+
+=== GET /v1/users/me
+
+==== Request
+
+.Header
+operation::users-me-get-200[snippets='request-headers']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::users-me-get-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::users-me-get-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-me-get-400[snippets='curl-request,http-request,http-response']
+====
+
+=== DELETE /v1/users/me
+
+==== Request
+
+operation::users-me-delete-200-true[snippets='request-headers']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원 탈퇴가 성공적으로 요청되었습니다. 단, 정상적으로 처리되었는지는 응답의 `unregistered` 필드에 나타납니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+이미 탈퇴되었거나 탈퇴가 불가능한 사용자에 대한 요청은 200 OK를 반환하지만, `unregistered` 필드의 값이 `false` 가 됩니다.
+
+operation::users-me-delete-200-true[snippets='response-fields']
+
+==== Examples
+.200 OK TRUE
+[%collapsible]
+====
+operation::users-me-delete-200-true[snippets='curl-request,http-request,http-response']
+====
+.200 OK FALSE
+[%collapsible]
+====
+operation::users-me-delete-200-false[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::users-me-delete-400[snippets='curl-request,http-request,http-response']
+====

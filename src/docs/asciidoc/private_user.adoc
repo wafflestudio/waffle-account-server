@@ -1,0 +1,122 @@
+=== GET /v1/papi/users?userIds={userIds}
+
+`userIds` 배열 내에 있는 사용자들에 대한 정보를 반환하는 API입니다. `userIds` 내부의 중복과 배열 순서를 모두 고려하지 않습니다. 단, `userIds` 의 길이는 최대 1000입니다.
+
+==== Request
+
+None
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었거나 목록이 너무 깁니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::users-info-get-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::users-info-get-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Not Exists
+[%collapsible]
+====
+operation::users-info-get-400-none[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request Too Many User Ids
+[%collapsible]
+====
+operation::users-info-get-400-toolong[snippets='curl-request,http-request,http-response']
+====
+
+=== GET /v1/papi/users/{userId}
+
+ID가 `userId` 인 사용자에 대한 정보를 반환하는 API입니다.
+
+==== Request
+
+None
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|404 Not Found |존재하지 않는 사용자입니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::user-info-get-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::user-info-get-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::user-info-get-400[snippets='curl-request,http-request,http-response']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::user-info-get-404[snippets='curl-request,http-request,http-response']
+====
+
+=== PATCH /v1/papi/users/{userId}
+
+ID가 `userId` 인 사용자에 대한 정보를 수정한 후 반환하는 API입니다.
+
+==== Request
+
+.Body
+operation::user-info-patch-200[snippets='request-fields']
+
+==== Response
+
+다음은 가능한 HTTP 응답 코드와 각각의 의미를 나타냅니다.
+
+|===
+|HTTP Status Code |Description
+|200 OK |회원가입이 정상적으로 완료되었습니다.
+|400 Bad Request |요청의 형식이 잘못되었습니다.
+|404 Not Found |존재하지 않는 사용자입니다.
+|===
+
+다음은 응답이 `200 OK` 일 때 API가 반환하는 값들입니다.
+
+.Body
+operation::user-info-patch-200[snippets='response-fields']
+
+==== Examples
+.200 OK
+[%collapsible]
+====
+operation::user-info-patch-200[snippets='curl-request,http-request,http-response']
+====
+.400 Bad Request
+[%collapsible]
+====
+operation::user-info-patch-400[snippets='curl-request,http-request,http-response']
+====
+.404 Not Found
+[%collapsible]
+====
+operation::user-info-patch-404[snippets='curl-request,http-request,http-response']
+====

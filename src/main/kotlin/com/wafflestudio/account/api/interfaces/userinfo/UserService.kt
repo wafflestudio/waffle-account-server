@@ -36,6 +36,7 @@ class UserService(
 
     private fun User.toUserInfo(): UserInfo = run {
         UserInfo(
+            id = id,
             username = username,
             email = email,
             isActive = isActive,
